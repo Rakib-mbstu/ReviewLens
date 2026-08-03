@@ -155,3 +155,16 @@ def test_auth_error_vs_rate_limit_are_distinguishable():
     rate_limit_client = make_client(rate_limit_transport)
     with pytest.raises(RateLimitError, match="rate limit"):
         rate_limit_client.get_pull("org", "repo", 42)
+
+
+def test_repo_rename_redirect_is_followed():
+    # GitHub 301-redirects when a repo was renamed (junit5 -> junit-framework);
+    # the client must follow it instead of failing the request.
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "/repos/old/name/" in request.url.path:
+            new_url = str(request.url).replace("/old/name/", "/new/name/")
+            return httpx.Response(301, headers={"Location": new_url})
+        return httpx.Response(200, json=PULL)
+
+    client = make_client(httpx.MockTransport(handler))
+    assert client.get_pull("old", "name", 42)["number"] == 42

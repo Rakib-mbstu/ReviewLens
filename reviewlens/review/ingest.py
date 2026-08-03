@@ -119,6 +119,10 @@ class GitHubClient:
             },
             timeout=timeout,
             transport=transport,
+            # GitHub 301-redirects API calls when a repo is renamed (e.g.
+            # junit-team/junit5 -> junit-team/junit-framework); without this,
+            # every mined PR under an old name would fail unnecessarily.
+            follow_redirects=True,
         )
 
     def get_pull(self, owner: str, repo: str, number: int) -> dict:
