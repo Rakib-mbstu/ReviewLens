@@ -1,0 +1,18 @@
+# LLM response cache and run outputs (reproducible from scripts; may contain raw responses)
+cache/
+runs/
+
+# Raw mined corpus — commit the mining script + pinned PR list instead
+data/corpus/
+
+# Local planning notes (tickets live as GitHub issues)
+BACKLOG.md
+
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
