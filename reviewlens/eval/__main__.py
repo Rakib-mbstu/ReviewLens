@@ -22,7 +22,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.parse_args(argv)
     sys.exit(
         "reviewlens.eval is not implemented yet — "
-        "tracked in https://github.com/Rakib-mbstu/ReviewLens/issues/9"
+        "tracked in https://github.com/Rakib-mbstu/ReviewLens/issues/10"
     )
 
 
