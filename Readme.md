@@ -4,7 +4,7 @@
 
 ReviewLens is both a working tool and an empirical study. Instead of demonstrating cherry-picked examples, it measures — on PRs that real maintainers reviewed — what fraction of human-flagged issues an LLM catches, what it systematically misses, and how often it hallucinates problems that aren't there.
 
-> **Status (Aug 3, 2026):** the review pipeline is implemented — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, and the review engine with a cached OpenRouter client; prompt v1 is drafted but not yet frozen. PR mining (`reviewlens.mine`) and the evaluation harness (`reviewlens.eval`) are not implemented yet — their CLIs exist but exit with a pointer to the tracking issue. The results table lands in this README when the evaluation completes; it stays empty until real numbers exist.
+> **Status (Aug 5, 2026):** the review pipeline is implemented — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, and the review engine with a cached OpenRouter client; prompt v1 is drafted but not yet frozen. PR mining (`reviewlens.mine`) is implemented: it writes one JSON file per PR plus a manifest recording the selection criteria, per-project skip tallies, and the pinned PR list. The evaluation harness is only partly built — comment matching (same file, ±3 lines, LLM-judged semantic equivalence) is implemented and tested, but metric computation and the `reviewlens.eval` CLI are not, so that CLI still exits with a pointer to its tracking issue. No evaluation has been run yet. The results table lands in this README when it has been; it stays empty until real numbers exist.
 
 ## Motivation
 

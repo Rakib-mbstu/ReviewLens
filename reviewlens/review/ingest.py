@@ -141,6 +141,28 @@ class GitHubClient:
             f"/repos/{owner}/{repo}/pulls/{number}/reviews", {"per_page": 100}
         )
 
+    def list_pulls(
+        self,
+        owner: str,
+        repo: str,
+        state: str = "closed",
+        sort: str = "created",
+        direction: str = "desc",
+        max_items: int | None = None,
+    ) -> list[dict]:
+        """List pull requests newest-first (paginated), used by mining to page
+        through a project's history looking for corpus candidates.
+
+        `max_items` bounds how many pages are actually fetched (mining's
+        --scan-limit exists to cap API cost on large repos), unlike
+        get_review_comments/get_reviews which always want every item.
+        """
+        return self._paginated_get(
+            f"/repos/{owner}/{repo}/pulls",
+            {"state": state, "sort": sort, "direction": direction, "per_page": 100},
+            max_items=max_items,
+        )
+
     def compare(self, owner: str, repo: str, base: str, head: str) -> httpx.Response:
         """Compare two commits. 404/422 are returned (not raised) so callers
         can distinguish "commit unreachable" (force-push) from other errors.
@@ -167,17 +189,21 @@ class GitHubClient:
             )
         return base64.b64decode(content).decode("utf-8")
 
-    def _paginated_get(self, path: str, params: dict) -> list[dict]:
+    def _paginated_get(
+        self, path: str, params: dict, max_items: int | None = None
+    ) -> list[dict]:
         items: list[dict] = []
         next_path: str | None = path
         next_params: dict | None = dict(params)
         while next_path:
             resp = self._request("GET", next_path, params=next_params)
             items.extend(resp.json())
+            if max_items is not None and len(items) >= max_items:
+                break
             next_link = resp.links.get("next") if resp.links else None
             next_path = next_link["url"] if next_link else None
             next_params = None
-        return items
+        return items[:max_items] if max_items is not None else items
 
     def _request(
         self,
