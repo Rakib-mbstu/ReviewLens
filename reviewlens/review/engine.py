@@ -77,6 +77,18 @@ def parse_review_response(response: dict) -> tuple[list[dict], list[dict]]:
             }
         ]
 
+    # Reasoning models return content=None whenever the reasoning budget
+    # consumes the whole completion (finish_reason="length"), so this is a
+    # routine response, not a broken one — it must degrade to a recorded
+    # parse error like any other, never an AttributeError that aborts the run.
+    if not isinstance(content, str):
+        return [], [
+            {
+                "error": f"response content was {type(content).__name__}, not a string",
+                "raw_content": json.dumps(response, ensure_ascii=True),
+            }
+        ]
+
     unfenced = _strip_code_fence(content)
     try:
         parsed = json.loads(unfenced)

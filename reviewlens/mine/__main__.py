@@ -59,8 +59,13 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument(
         "--scan-limit",
         type=int,
-        default=400,
-        help="Max PRs examined per project, bounding API cost (default: 400).",
+        default=1500,
+        help=(
+            "Max PRs examined per project, bounding API cost (default: 1500). "
+            "Sized from measured yield: ~15%% of junit5/mockito and ~5%% of "
+            "checkstyle human-authored merged PRs carry >=2 substantive "
+            "comments, so smaller limits cannot reach --per-project 30."
+        ),
     )
     args = parser.parse_args(argv)
 

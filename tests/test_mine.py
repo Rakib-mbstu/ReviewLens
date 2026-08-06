@@ -36,6 +36,7 @@ def _comment(**overrides):
         "line": 10,
         "original_line": 10,
         "original_commit_id": None,
+        "in_reply_to_id": None,
         "side": "RIGHT",
         "user": {"login": "bob", "type": "User"},
         "created_at": "2024-01-01T00:00:00Z",
@@ -44,6 +45,39 @@ def _comment(**overrides):
     }
     base.update(overrides)
     return base
+
+
+def test_thread_reply_is_rejected_from_the_rq1_denominator():
+    # One review thread is one human finding. A reply is discussion, not a new
+    # issue, and is unmatchable by any model comment — counting it would
+    # depress RQ1 recall (measured: 35% of a 90-PR corpus's raw comments).
+    reply = _comment(in_reply_to_id=99)
+    assert not comment_qualifies(reply, pr_author_login="alice")
+
+
+def test_thread_opening_comment_is_kept():
+    assert comment_qualifies(_comment(in_reply_to_id=None), pr_author_login="alice")
+
+
+def test_pr_qualifying_only_via_thread_replies_is_skipped():
+    # Two comments on the PR, but they are one thread: opener + reply. That is
+    # a single finding, so the PR must fall below the >=2 bar.
+    pulls = [_pr(600)]
+    thread = [_comment(id=1), _comment(id=2, in_reply_to_id=1)]
+    handler = make_handler(
+        OWNER,
+        REPO,
+        pulls,
+        comments_by_number={600: thread},
+        reviews_by_number={600: [_review(600)]},
+        compare_by_key={"base-600...pre-600": _default_compare()},
+    )
+    client = make_client(httpx.MockTransport(handler))
+
+    records, entry = mine_project(client, "junit5", per_project=30, scan_limit=400)
+
+    assert records == []
+    assert entry["skipped"]["too_few_comments"] == 1
 
 
 def test_bot_by_user_type_is_rejected():
@@ -257,6 +291,7 @@ def test_end_to_end_run_produces_correct_corpus_and_manifest_tallies(tmp_path):
     assert entry["hit_scan_limit"] is False
     assert entry["skipped"] == {
         "not_merged": 1,
+        "bot_author": 0,
         "no_java_files": 1,
         "too_large": 1,
         "too_few_comments": 1,
@@ -288,7 +323,7 @@ def test_end_to_end_run_produces_correct_corpus_and_manifest_tallies(tmp_path):
     comment = data["human_comments"][0]
     assert set(comment) == {
         "id", "path", "line", "raw_line", "original_line", "original_commit_id",
-        "side", "author", "created_at", "body", "url",
+        "in_reply_to_id", "side", "author", "created_at", "body", "url",
     }
 
     with open(os.path.join(out_dir, "manifest.json"), encoding="utf-8") as f:
@@ -346,6 +381,39 @@ def test_too_few_comments_pr_never_triggers_the_expensive_snapshot_fetch():
     assert any(p.endswith("/pulls/400/comments") for p in paths_requested)
     assert not any("/compare/" in p for p in paths_requested)
     assert not any(p.endswith("/pulls/400/reviews") for p in paths_requested)
+
+
+def test_bot_authored_pr_is_skipped_without_any_api_call():
+    # The bot check reads the list payload, so it must cost zero extra requests.
+    # Measured on live data, 82% of junit5's merged PRs are renovate bumps; one
+    # comment fetch each would be ~460 wasted calls per 600 PRs scanned.
+    paths_requested = []
+    pulls = [_pr(500, author="renovate[bot]")]
+    inner = make_handler(OWNER, REPO, pulls, comments_by_number={500: _qualifying_comments(3)})
+
+    def recording_handler(request: httpx.Request) -> httpx.Response:
+        paths_requested.append(request.url.path)
+        return inner(request)
+
+    client = make_client(httpx.MockTransport(recording_handler))
+
+    records, entry = mine_project(client, "junit5", per_project=30, scan_limit=400)
+
+    assert records == []
+    assert entry["skipped"]["bot_author"] == 1
+    assert not any(p.endswith("/pulls/500/comments") for p in paths_requested)
+
+
+def test_bot_detection_by_user_type_not_only_login_suffix():
+    pulls = [_pr(501, author="somebot")]
+    pulls[0]["user"]["type"] = "Bot"
+    handler = make_handler(OWNER, REPO, pulls, comments_by_number={501: _qualifying_comments(3)})
+    client = make_client(httpx.MockTransport(handler))
+
+    records, entry = mine_project(client, "junit5", per_project=30, scan_limit=400)
+
+    assert records == []
+    assert entry["skipped"]["bot_author"] == 1
 
 
 def test_qualifying_comment_count_boundary_one_rejects_two_accepts():

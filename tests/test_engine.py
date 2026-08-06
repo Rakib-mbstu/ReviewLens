@@ -240,3 +240,12 @@ def test_parse_review_response_non_array_json_records_error():
     comments, errors = parse_review_response(_response('{"file": "Foo.java"}'))
     assert comments == []
     assert len(errors) == 1
+
+
+def test_parse_review_response_null_content_records_error_and_does_not_raise():
+    """Reasoning models return content=None when the reasoning budget eats the
+    whole completion. One such chunk must cost one parse error, not abort the run."""
+    comments, errors = parse_review_response(_response(None))
+    assert comments == []
+    assert len(errors) == 1
+    assert "NoneType" in errors[0]["error"]

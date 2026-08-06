@@ -96,6 +96,11 @@ def _parse_judge_reply(response: dict) -> tuple[bool, str]:
     except (KeyError, IndexError, TypeError) as exc:
         return False, f"malformed judge response structure ({exc})"
 
+    # Reasoning models return content=None when the reasoning budget consumes
+    # the whole completion; that must read as "not equivalent", never crash.
+    if not isinstance(content, str):
+        return False, f"judge reply content was {type(content).__name__}, not a string"
+
     unfenced = _strip_code_fence(content)
     try:
         parsed = json.loads(unfenced)

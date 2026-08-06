@@ -21,6 +21,7 @@ from reviewlens.mine.select import (
     MIN_QUALIFYING_COMMENTS,
     changed_java_files,
     comment_qualifies,
+    is_bot_author,
     pr_is_merged,
     pr_size_ok,
     resolve_canonical_line,
@@ -41,12 +42,14 @@ PROJECT_REGISTRY = {
 # PRExcluded reasons are reused from ingest.py's REASON_* constants so a
 # skip is always tallied under the exact reason the exclusion happened for.
 REASON_NOT_MERGED = "not_merged"
+REASON_BOT_AUTHOR = "bot_author"
 REASON_NO_JAVA_FILES = "no_java_files"
 REASON_TOO_LARGE = "too_large"
 REASON_TOO_FEW_COMMENTS = "too_few_comments"
 
 _SKIP_REASONS = (
     REASON_NOT_MERGED,
+    REASON_BOT_AUTHOR,
     REASON_NO_JAVA_FILES,
     REASON_TOO_LARGE,
     REASON_TOO_FEW_COMMENTS,
@@ -75,6 +78,7 @@ def _build_pr_record(pr: dict, snapshot: PRSnapshot, qualifying_comments: list[d
             "raw_line": c.get("line"),
             "original_line": c.get("original_line"),
             "original_commit_id": c.get("original_commit_id"),
+            "in_reply_to_id": c.get("in_reply_to_id"),
             "side": c.get("side"),
             "author": c["user"]["login"],
             "created_at": c["created_at"],
@@ -126,12 +130,23 @@ def mine_project(
                 skipped[REASON_NOT_MERGED] += 1
                 continue
 
-            # Comment filter first, deliberately: it costs one API call and
+            # Bot-authored PRs are rejected from the list payload alone, at
+            # zero API cost. Measured on 600 PRs per project: 82% of junit5's
+            # and 63% of mockito's merged PRs are renovate/dependabot bumps,
+            # which never carry substantive review comments. Letting them
+            # reach the comment fetch below would spend one call each — ~460
+            # wasted calls per 600 junit5 PRs scanned.
+            author = pr.get("user") or {}
+            if is_bot_author(author):
+                skipped[REASON_BOT_AUTHOR] += 1
+                continue
+
+            # Comment filter next, deliberately: it costs one API call and
             # rejects the large majority of PRs, whereas fetch_pr_snapshot
             # costs four. Ordering it after the snapshot fetch would spend
             # ~5 calls on every scanned PR and blow GitHub's 5000/hour limit
             # long before three projects finish mining.
-            author_login = (pr.get("user") or {}).get("login", "")
+            author_login = author.get("login", "")
             raw_comments = client.get_review_comments(owner, name, pr["number"])
             for comment in raw_comments:
                 if resolve_canonical_line(comment) is None:

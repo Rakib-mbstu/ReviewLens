@@ -36,7 +36,8 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 
 ## Evaluation methodology
 
-- **Corpus:** ~50–100 merged PRs that received substantive human review comments, mined from mid-size Java projects with an active review culture (candidates: JUnit 5, Mockito, Checkstyle).
+- **Corpus:** ~50–100 merged PRs that received substantive human review comments, mined from mid-size Java projects with an active review culture (JUnit 5, Mockito, Checkstyle). A PR qualifies when it is merged, is not bot-authored, touches Java files, stays under the size cap (≤50 changed files and ≤2000 changed lines), and carries **≥2 substantive human review comments** — where "substantive" means ≥30 characters after quoted text and code fences are stripped, excluding bots and the PR author's own comments.
+- **One review thread counts as one human finding.** Only thread-opening comments enter RQ1's denominator; replies (`in_reply_to_id` set) continue a discussion rather than raise a new issue and are not independently matchable. On a first 90-PR mining run, replies were 35% of raw qualifying comments, so counting them would have depressed measured recall by up to a third.
 - **Procedure:** ReviewLens runs on the *pre-review* state of each PR — the code as it existed when human reviewers saw it. Model comments are then matched against the historical human comments.
 - **Matching rule:** a model comment matches a human comment if it targets the same file within ±3 lines *and* addresses the same underlying issue (semantic match, LLM-judged with a written rubric).
 - **Manual verification:** ≥ 20% of automated matches are manually verified; inter-check agreement is reported.

@@ -284,6 +284,18 @@ def test_llm_judge_reply_missing_equivalent_key_is_not_equivalent_and_does_not_r
     assert "equivalent" in reason
 
 
+def test_llm_judge_null_content_is_not_equivalent_and_does_not_raise(tmp_path):
+    """A reasoning judge that spends its whole completion on reasoning returns
+    content=None; that must read as "not equivalent", never inflate recall."""
+    client = make_llm_client(tmp_path, llm_transport(None))
+    judge = LlmJudge(client, "test/model-x", MATCH_PROMPT)
+
+    equivalent, reason = judge(comment("F.java", 10, "H"), comment("F.java", 11, "M"))
+
+    assert equivalent is False
+    assert "NoneType" in reason
+
+
 # --- prompts/match_v1.md loads cleanly and all six tokens substitute ---
 
 

@@ -67,11 +67,27 @@ def resolve_canonical_line(comment: dict) -> int | None:
     return comment.get("line")
 
 
+def is_reply(comment: dict) -> bool:
+    """True for a comment posted inside an existing review thread.
+
+    GitHub sets `in_reply_to_id` only on replies, so its absence identifies
+    the comment that opened a thread.
+    """
+    return comment.get("in_reply_to_id") is not None
+
+
 def comment_qualifies(comment: dict, pr_author_login: str) -> bool:
     """Whether one raw GitHub review comment counts as ground-truth review
     activity for RQ1's recall denominator."""
     path = comment.get("path") or ""
     if not path.endswith(".java"):
+        return False
+    # One review thread is one human finding: replies continue a discussion
+    # ("Alright, that extra test is good to have") rather than raise a new
+    # issue, and no model comment could ever match them. Measured on the
+    # first 90-PR corpus, replies were 35% of the denominator, so counting
+    # them would depress RQ1 recall by up to a third.
+    if is_reply(comment):
         return False
     if is_bot_author(comment.get("user") or {}):
         return False
