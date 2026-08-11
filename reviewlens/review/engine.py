@@ -27,6 +27,7 @@ DEFAULT_CONTEXT_LINES = 10
 _VALID_CATEGORIES = {"bug", "design", "style", "question"}
 _VALID_SEVERITIES = {"high", "medium", "low"}
 _CODE_FENCE_RE = re.compile(r"^```(?:json)?\s*\n(.*?)\n```$", re.DOTALL)
+_LINE_MARKER_RE = re.compile(r"^[-+] ?")
 
 
 def _strip_code_fence(content: str) -> str:
@@ -34,6 +35,51 @@ def _strip_code_fence(content: str) -> str:
     despite the prompt asking for a bare JSON array."""
     match = _CODE_FENCE_RE.match(content.strip())
     return match.group(1).strip() if match else content.strip()
+
+
+def _strip_line_markers(content: str) -> str | None:
+    """Strip a uniform `- `/`+ ` diff marker some models prefix onto every reply line.
+
+    Observed with google/gemini-2.5-flash-lite: the chunk is presented as
+    marker-prefixed lines, and weaker models carry that format into their
+    answer, emitting otherwise-valid JSON as `- [`, `-   {`, ... Left
+    unhandled this costs a whole chunk's comments, which depresses measured
+    recall (RQ1) for reasons that have nothing to do with review ability.
+
+    Returns None unless *every* non-empty line carries the same marker —
+    well-formed JSON never does, so a uniform marker is unambiguous evidence
+    of format bleed rather than content that merely starts with a hyphen.
+    """
+    lines = content.strip().splitlines()
+    non_empty = [line for line in lines if line.strip()]
+    if not non_empty or len({line[0] for line in non_empty}) != 1:
+        return None
+    if non_empty[0][0] not in "-+":
+        return None
+    return "\n".join(_LINE_MARKER_RE.sub("", line, count=1) if line.strip() else line for line in lines)
+
+
+def _decode_content(content: str) -> "tuple[Any, str | None]":
+    """Decode a reply to JSON, returning (parsed, None) or (None, error_message).
+
+    Tries the reply as sent first, so a well-formed response takes exactly the
+    path it always did; only on failure does it retry with diff markers
+    stripped. A failure of that fallback reports the *original* decode error —
+    the marker-stripped variant is an internal recovery attempt, and surfacing
+    its error instead would misdescribe what the model actually returned.
+    """
+    try:
+        return json.loads(_strip_code_fence(content)), None
+    except json.JSONDecodeError as exc:
+        original_error = str(exc)
+
+    demarked = _strip_line_markers(content)
+    if demarked is None:
+        return None, original_error
+    try:
+        return json.loads(_strip_code_fence(demarked)), None
+    except json.JSONDecodeError:
+        return None, original_error
 
 
 def _validate_comment(element: Any) -> str | None:
@@ -89,11 +135,9 @@ def parse_review_response(response: dict) -> tuple[list[dict], list[dict]]:
             }
         ]
 
-    unfenced = _strip_code_fence(content)
-    try:
-        parsed = json.loads(unfenced)
-    except json.JSONDecodeError as exc:
-        return [], [{"error": f"invalid JSON ({exc})", "raw_content": content}]
+    parsed, decode_error = _decode_content(content)
+    if decode_error is not None:
+        return [], [{"error": f"invalid JSON ({decode_error})", "raw_content": content}]
 
     if not isinstance(parsed, list):
         return [], [

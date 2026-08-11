@@ -208,6 +208,52 @@ def test_parse_review_response_strips_markdown_json_fence():
     assert errors == []
 
 
+def test_parse_review_response_strips_diff_markers_bled_into_the_reply():
+    """Reproduces a real google/gemini-2.5-flash-lite reply from the first smoke
+    run: the model copied the chunk's `- ` line markers onto its own output,
+    fence included, which cost that chunk's comments before this was handled."""
+    body = [
+        {
+            "file": "Foo.java",
+            "line": 1124,
+            "category": "style",
+            "severity": "low",
+            "comment": "This pattern is used multiple times, consider making it a constant.",
+        }
+    ]
+    fenced = "```json\n" + json.dumps(body, indent=2) + "\n```"
+    content = "\n".join("- " + line for line in fenced.splitlines())
+    comments, errors = parse_review_response(_response(content))
+    assert comments == body
+    assert errors == []
+
+
+def test_parse_review_response_strips_added_line_markers_too():
+    body = [{"file": "Foo.java", "line": 3, "category": "bug", "severity": "high", "comment": "npe"}]
+    content = "\n".join("+ " + line for line in json.dumps(body, indent=2).splitlines())
+    comments, errors = parse_review_response(_response(content))
+    assert comments == body
+    assert errors == []
+
+
+def test_parse_review_response_does_not_mistake_a_bullet_list_for_marked_json():
+    """Every line starts with `- `, but stripping the markers still yields
+    prose — the fallback must not manufacture a parse out of a non-JSON reply."""
+    comments, errors = parse_review_response(
+        _response("- the constructor may leak\n- the field should be final")
+    )
+    assert comments == []
+    assert len(errors) == 1
+
+
+def test_parse_review_response_leaves_mixed_marker_lines_alone():
+    """Markers are only format bleed when uniform; a reply whose lines start
+    with different characters is just malformed and must be reported as such."""
+    comments, errors = parse_review_response(_response("- [\n+ {}\n]"))
+    assert comments == []
+    assert len(errors) == 1
+
+
 def test_parse_review_response_non_json_reply_records_error_and_does_not_raise():
     comments, errors = parse_review_response(_response("I refuse to output JSON today."))
     assert comments == []
