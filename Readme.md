@@ -4,7 +4,7 @@
 
 ReviewLens is both a working tool and an empirical study. Instead of demonstrating cherry-picked examples, it measures — on PRs that real maintainers reviewed — what fraction of human-flagged issues an LLM catches, what it systematically misses, and how often it hallucinates problems that aren't there.
 
-> **Status (Aug 12, 2026):** the review pipeline is implemented — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, and the review engine with a cached OpenRouter client; **prompt v1 is frozen** as of Aug 12 (`prompts/review_v1.md`, sha256 `3cf6f21e…`) and is never edited in place — a prompt change means a new versioned file. **The corpus is mined:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, which form RQ1's recall denominator. The mining manifest records the selection criteria, per-project skip tallies, and the pinned PR list with pre-review SHAs. The evaluation harness is only partly built — comment matching (same file, ±3 lines, LLM-judged semantic equivalence) is implemented and tested, but metric computation and the `reviewlens.eval` CLI are not, so that CLI still exits with a pointer to its tracking issue. **No review or evaluation run has been executed yet, so there are no results.** The table below stays empty until real numbers exist.
+> **Status (Aug 12, 2026):** the review pipeline is implemented — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, and the review engine with a cached OpenRouter client; **prompt v1 is frozen** as of Aug 12 (`prompts/review_v1.md`, sha256 `3cf6f21e…`) and is never edited in place — a prompt change means a new versioned file. **The corpus is mined:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, which form RQ1's recall denominator. The mining manifest records the selection criteria, per-project skip tallies, and the pinned PR list with pre-review SHAs. The evaluation harness is only partly built — comment matching (same file, ±3 lines, LLM-judged semantic equivalence) is implemented and tested, but metric computation and the `reviewlens.eval` CLI are not, so that CLI still exits with a pointer to its tracking issue. The first review run — the small capability tier, `qwen/qwen3-coder-30b-a3b-instruct` — is executing now; **no evaluation has been run, so there are no results yet.** The table below stays empty until real numbers exist.
 
 ## Motivation
 
@@ -61,6 +61,7 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 - **Java only, mid-size OSS projects only.** Results may not transfer to other languages, proprietary codebases, or very large monorepos.
 - **Pre-review snapshot reconstruction is approximate** for PRs with force-pushed histories; such PRs are excluded.
 - **No multi-turn review.** Human review is conversational; ReviewLens evaluates only first-pass comments.
+- **Unparseable model replies are counted, not hidden.** Weaker models sometimes return something other than the requested JSON — one observed failure mode is copying the diff's `+`/`-` line markers into the reply. The parser recovers what it safely can; whatever remains unparseable is written to the run's `errors.json` and reported as a per-model parse-failure rate, because a lost chunk depresses measured recall for reasons that have nothing to do with review ability.
 
 ## Scope
 
@@ -90,6 +91,7 @@ python -m reviewlens.mine --projects junit5 mockito checkstyle --out data/corpus
 
 # 2. Run the reviewer on the pre-review state of each PR
 python -m reviewlens.review --corpus data/corpus/ --model <model-id> --out runs/<model-id>/
+#    add --no-cache to force fresh API calls instead of reusing cached responses
 
 # 3. Match model comments to human comments and compute metrics
 python -m reviewlens.eval --run runs/<model-id>/ --report reports/<model-id>.md
