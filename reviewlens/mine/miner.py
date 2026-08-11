@@ -41,6 +41,11 @@ PROJECT_REGISTRY = {
 # Skip-reason tally keys. The four PR-selection reasons are ours; the two
 # PRExcluded reasons are reused from ingest.py's REASON_* constants so a
 # skip is always tallied under the exact reason the exclusion happened for.
+# The corpus sidecar written next to the per-PR files. Named here because the
+# mine -> review contract depends on it: everything else in a corpus directory
+# is a PR entry, and reviewlens.review skips this one file by name.
+MANIFEST_FILENAME = "manifest.json"
+
 REASON_NOT_MERGED = "not_merged"
 REASON_BOT_AUTHOR = "bot_author"
 REASON_NO_JAVA_FILES = "no_java_files"
@@ -249,5 +254,5 @@ def write_corpus(out_dir: str, pr_records: list[dict], manifest: dict) -> None:
         path = os.path.join(out_dir, f"{owner}__{name}__{record['number']}.json")
         with open(path, "w", encoding="utf-8") as f:
             json.dump(record, f, indent=2, ensure_ascii=True)
-    with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(out_dir, MANIFEST_FILENAME), "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=True)
