@@ -4,7 +4,9 @@
 
 ReviewLens is both a working tool and an empirical study. Instead of demonstrating cherry-picked examples, it measures — on PRs that real maintainers reviewed — what fraction of human-flagged issues an LLM catches, what it systematically misses, and how often it hallucinates problems that aren't there.
 
-> **Status (Aug 12, 2026):** the review pipeline is implemented — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, and the review engine with a cached OpenRouter client; **prompt v1 is frozen** as of Aug 12 (`prompts/review_v1.md`, sha256 `3cf6f21e…`) and is never edited in place — a prompt change means a new versioned file. **The corpus is mined:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, which form RQ1's recall denominator. The mining manifest records the selection criteria, per-project skip tallies, and the pinned PR list with pre-review SHAs. The evaluation harness is only partly built — comment matching (same file, ±3 lines, LLM-judged semantic equivalence) is implemented and tested, but metric computation and the `reviewlens.eval` CLI are not, so that CLI still exits with a pointer to its tracking issue. The first review run — the small capability tier, `qwen/qwen3-coder-30b-a3b-instruct` — is executing now; **no evaluation has been run, so there are no results yet.** The table below stays empty until real numbers exist.
+> **Status (Aug 19, 2026):** the review pipeline is implemented — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, and the review engine with a cached OpenRouter client; **prompt v1 is frozen** as of Aug 12 (`prompts/review_v1.md`, sha256 `3cf6f21e…`) and is never edited in place — a prompt change means a new versioned file. **The corpus is mined:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, which form RQ1's recall denominator. The mining manifest records the selection criteria, per-project skip tallies, and the pinned PR list with pre-review SHAs. **The evaluation harness is now complete end to end:** comment matching (same file, ±3 lines, LLM-judged semantic equivalence), metric computation, and the `reviewlens.eval` CLI, which emits a markdown report plus an auditable per-comment match record. Still outstanding: human-comment categorization (so per-category recall is reported as unavailable rather than as zeros), the manual-verification export, and the manual pass itself.
+>
+> **No evaluation has been run, so there are no results yet.** The first review run — the small capability tier, `qwen/qwen3-coder-30b-a3b-instruct` — aborted on Aug 12 after two PRs when the API budget ran out, and its output is not a usable pass. The table below stays empty until real numbers exist.
 
 ## Motivation
 
@@ -43,7 +45,7 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 - **Manual verification:** ≥ 20% of automated matches are manually verified; inter-check agreement is reported.
 - **Metrics:**
   - *Recall* of human comments, overall and per category (bug / design / style / question)
-  - *Hallucination rate* — model comments judged invalid or useless on manual inspection
+  - *Hallucination rate* — model comments judged invalid or useless on manual inspection. The automated pipeline reports only the **unmatched rate**, which is an upper bound: a model comment matching no human comment may be a real issue the reviewers never raised. The two are separated by the manual pass, never by the matcher.
   - *Usefulness score* — a manually-rated sample of model comments
 
 ## Results
@@ -95,7 +97,11 @@ python -m reviewlens.review --corpus data/corpus/ --model <model-id> --out runs/
 #    add --no-cache to force fresh API calls instead of reusing cached responses
 
 # 3. Match model comments to human comments and compute metrics
-python -m reviewlens.eval --run runs/<model-id>/ --report reports/<model-id>.md
+python -m reviewlens.eval --run runs/<model-id>/ --judge-model <model-id> --report reports/<model-id>.md
+#    --judge-model is the model that judges semantic equivalence; like every
+#    other model ID it is a parameter, never hardcoded. The corpus directory is
+#    read from the run's run_meta.json, so a report is always tied to the corpus
+#    the run actually used (override with --corpus if it has moved).
 ```
 
 All LLM responses are cached under `cache/`; a full re-run with a warm cache costs $0.
