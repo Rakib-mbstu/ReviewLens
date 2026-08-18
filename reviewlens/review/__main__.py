@@ -112,6 +112,44 @@ def main(argv: list[str] | None = None) -> None:
     pr_summaries: list[dict] = []
     exclusions: list[dict] = []
     started = datetime.now(timezone.utc).isoformat()
+
+    def write_run_meta(finished: str | None) -> None:
+        """Persist run metadata for the PRs completed so far.
+
+        Called after every PR rather than once at the end: the first corpus
+        run died partway through and left a run directory with outputs but no
+        metadata at all, which CLAUDE.md's "reproducible from the run
+        directory alone" rule does not survive. `finished` is None while the
+        run is still in progress, so a partial run is self-describing instead
+        of merely looking like a complete one that reviewed fewer PRs.
+        """
+        run_meta = {
+            "model": args.model,
+            "prompt": {
+                "name": prompt.name,
+                "version": prompt.version,
+                "sha256": prompt.sha256,
+                "params": prompt.params,
+            },
+            "context_lines": DEFAULT_CONTEXT_LINES,
+            # Recorded so `reviewlens.eval` can tie a report to the corpus the
+            # run actually used, rather than whatever happens to be on disk
+            # when the report is generated.
+            "corpus": args.corpus,
+            "corpus_pr_count": len(entries),
+            "started": started,
+            "finished": finished,
+            "complete": finished is not None,
+            "pr_summaries": pr_summaries,
+            "exclusions": exclusions,
+        }
+        path = os.path.join(args.out, "run_meta.json")
+        tmp_path = f"{path}.tmp"
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            json.dump(run_meta, f, indent=2, ensure_ascii=True)
+        os.replace(tmp_path, path)
+
+    write_run_meta(None)
     try:
         for entry in entries:
             repo = entry["repo"]
@@ -121,6 +159,7 @@ def main(argv: list[str] | None = None) -> None:
                 snapshot = fetch_pr_snapshot(github_client, owner, name, number)
             except PRExcluded as exc:
                 exclusions.append({"repo": repo, "number": number, "reason": exc.reason})
+                write_run_meta(None)
                 print(f"{repo}#{number}: excluded ({exc.reason})")
                 continue
 
@@ -134,32 +173,17 @@ def main(argv: list[str] | None = None) -> None:
                 context_lines=DEFAULT_CONTEXT_LINES,
             )
             pr_summaries.append(summary)
+            write_run_meta(None)
             print(
                 f"{repo}#{number}: {summary['chunk_count']} chunks, "
                 f"{summary['comment_count']} comments, "
                 f"{summary['parse_error_count']} parse errors"
             )
     finally:
-        finished = datetime.now(timezone.utc).isoformat()
         github_client.close()
         llm_client.close()
 
-    run_meta = {
-        "model": args.model,
-        "prompt": {
-            "name": prompt.name,
-            "version": prompt.version,
-            "sha256": prompt.sha256,
-            "params": prompt.params,
-        },
-        "context_lines": DEFAULT_CONTEXT_LINES,
-        "started": started,
-        "finished": finished,
-        "pr_summaries": pr_summaries,
-        "exclusions": exclusions,
-    }
-    with open(os.path.join(args.out, "run_meta.json"), "w", encoding="utf-8") as f:
-        json.dump(run_meta, f, indent=2, ensure_ascii=True)
+    write_run_meta(datetime.now(timezone.utc).isoformat())
 
     total_comments = sum(s["comment_count"] for s in pr_summaries)
     total_errors = sum(s["parse_error_count"] for s in pr_summaries)
