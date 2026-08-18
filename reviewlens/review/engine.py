@@ -18,6 +18,7 @@ import os
 import re
 from typing import Any
 
+from reviewlens.openrouter import response_provider
 from reviewlens.review.chunking import chunk_file_diff
 from reviewlens.review.ingest import GitHubClient, PRSnapshot
 from reviewlens.review.prompt import Prompt, render_user
@@ -187,6 +188,7 @@ def review_pr(
 
     comments: list[dict] = []
     errors: list[dict] = []
+    providers: dict[str, int] = {}
     chunk_index = 0
 
     for pr_file in snapshot.files:
@@ -209,6 +211,10 @@ def review_pr(
                 {"role": "user", "content": user_content},
             ]
             response = llm_client.complete(model, messages, **prompt.params)
+
+            provider = response_provider(response)
+            if provider is not None:
+                providers[provider] = providers.get(provider, 0) + 1
 
             with open(os.path.join(raw_dir, f"chunk_{chunk_index}.json"), "w", encoding="utf-8") as f:
                 json.dump(
@@ -242,4 +248,7 @@ def review_pr(
         "chunk_count": chunk_index,
         "comment_count": len(comments),
         "parse_error_count": len(errors),
+        # Which upstream actually answered: a model ID alone does not pin
+        # this down, and providers differ in ways the results can see.
+        "providers": providers,
     }

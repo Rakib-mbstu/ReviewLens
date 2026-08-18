@@ -80,7 +80,10 @@ def llm_route(request: httpx.Request) -> httpx.Response:
     body = [{"file": file, "line": 1, "category": "style", "severity": "low", "comment": f"nit in {file}"}]
     return httpx.Response(
         200,
-        json={"choices": [{"message": {"role": "assistant", "content": json.dumps(body)}}]},
+        json={
+            "provider": "TestProvider",
+            "choices": [{"message": {"role": "assistant", "content": json.dumps(body)}}],
+        },
     )
 
 
@@ -122,6 +125,9 @@ def test_review_pr_writes_full_run_directory(tmp_path):
         "chunk_count": 3,
         "comment_count": 3,
         "parse_error_count": 0,
+        # Which upstream answered is recorded per run: the same model ID can
+        # be served by providers that differ in ways the results can see.
+        "providers": {"TestProvider": 3},
     }
     assert llm_transport.requests == 3
     # Content is fetched for the modified file exactly once per chunk that

@@ -61,6 +61,7 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 - **Java only, mid-size OSS projects only.** Results may not transfer to other languages, proprietary codebases, or very large monorepos.
 - **Pre-review snapshot reconstruction is approximate** for PRs with force-pushed histories; such PRs are excluded.
 - **No multi-turn review.** Human review is conversational; ReviewLens evaluates only first-pass comments.
+- **A model ID does not pin down who served the request.** OpenRouter routes a model to one of several upstream providers, and they are not interchangeable: two providers were observed returning a billed completion with `content: null` (`finish_reason: "stop"`), which the pipeline would otherwise have recorded as that *model* failing to produce parseable output. Such replies are now retried instead of cached, and every run records which providers answered, so a provider-side defect cannot be read as a model-capability difference in RQ3.
 - **Unparseable model replies are counted, not hidden.** Weaker models sometimes return something other than the requested JSON — one observed failure mode is copying the diff's `+`/`-` line markers into the reply. The parser recovers what it safely can; whatever remains unparseable is written to the run's `errors.json` and reported as a per-model parse-failure rate, because a lost chunk depresses measured recall for reasons that have nothing to do with review ability.
 
 ## Scope

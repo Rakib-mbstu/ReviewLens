@@ -119,3 +119,65 @@ def test_missing_api_key_fails_loudly(tmp_path, monkeypatch):
     monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
     with pytest.raises(AuthError, match="OPENROUTER_API_KEY"):
         OpenRouterClient(cache_dir=str(tmp_path / "cache"))
+
+
+# --- billed-but-empty responses (provider-side serialization bug) ---
+
+EMPTY_RESPONSE = {
+    "provider": "BrokenProvider",
+    "choices": [
+        {"finish_reason": "stop", "message": {"role": "assistant", "content": None}}
+    ],
+}
+LENGTH_CAPPED_RESPONSE = {
+    "provider": "SomeProvider",
+    "choices": [
+        {"finish_reason": "length", "message": {"role": "assistant", "content": None}}
+    ],
+}
+
+
+def test_empty_content_is_retried_and_recovers(tmp_path):
+    """A null-content reply is retried; a later attempt may land on a working
+    upstream, and only that good response is what the caller sees."""
+    responses = [EMPTY_RESPONSE, FAKE_RESPONSE]
+    transport = CountingTransport(
+        lambda request: httpx.Response(200, json=responses[min(transport.requests - 1, 1)])
+    )
+    client = make_client(tmp_path, transport)
+
+    result = client.complete("some/model", MESSAGES)
+
+    assert transport.requests == 2
+    assert result == FAKE_RESPONSE
+
+
+def test_persistently_empty_content_is_returned_but_never_cached(tmp_path):
+    """After retries are exhausted the empty reply is still returned — the
+    engine records it as a parse error — but caching it would replay a
+    provider bug forever as if it were a real model answer."""
+    transport = CountingTransport(lambda request: httpx.Response(200, json=EMPTY_RESPONSE))
+    client = make_client(tmp_path, transport, max_retries=3)
+
+    result = client.complete("some/model", MESSAGES)
+    assert result == EMPTY_RESPONSE
+    assert transport.requests == 3
+
+    # A re-run must go back to the network rather than serve the bad reply.
+    client.complete("some/model", MESSAGES)
+    assert transport.requests == 6
+
+
+def test_length_capped_empty_content_is_not_retried(tmp_path):
+    """A completion cut short by its token budget is a real model outcome,
+    not the provider bug, so it is cached and reported like any other reply."""
+    transport = CountingTransport(
+        lambda request: httpx.Response(200, json=LENGTH_CAPPED_RESPONSE)
+    )
+    client = make_client(tmp_path, transport)
+
+    assert client.complete("some/model", MESSAGES) == LENGTH_CAPPED_RESPONSE
+    assert transport.requests == 1
+
+    client.complete("some/model", MESSAGES)
+    assert transport.requests == 1

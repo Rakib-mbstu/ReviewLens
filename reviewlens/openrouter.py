@@ -36,6 +36,43 @@ class TransientError(OpenRouterError):
     """Server or network error and retries exhausted."""
 
 
+def response_provider(response: dict) -> str | None:
+    """The upstream provider that served a response, if OpenRouter reported one.
+
+    Recorded in run metadata because the model ID alone does not determine
+    who actually answered, and providers differ in ways the study can see
+    (see `content_is_missing`).
+    """
+    provider = response.get("provider")
+    return provider if isinstance(provider, str) else None
+
+
+def content_is_missing(response: dict) -> bool:
+    """True when a response carries no assistant text despite being billed.
+
+    Observed from more than one upstream (Novita serving qwen3-coder-30b,
+    Phala serving gpt-oss-120b): `finish_reason` is "stop", completion
+    tokens are billed, and `message.content` is null. Caching that would
+    bake a provider-side serialization bug into every later run as a parse
+    failure, and RQ3 would read it as a difference between *models* when it
+    is a difference between providers.
+
+    A completion stopped by its token budget (`finish_reason` "length") is a
+    real model outcome rather than this bug, so it is deliberately excluded
+    here and left for the engine to record as an ordinary parse error.
+    """
+    try:
+        choice = response["choices"][0]
+    except (KeyError, IndexError, TypeError):
+        return False
+    if not isinstance(choice, dict) or choice.get("finish_reason") == "length":
+        return False
+    message = choice.get("message")
+    if not isinstance(message, dict):
+        return False
+    return not message.get("content")
+
+
 def cache_key(model: str, messages: list[dict], params: dict) -> str:
     """Deterministic cache key for one completion request.
 
@@ -89,6 +126,13 @@ class OpenRouterClient:
         """Request a chat completion, returning the raw response JSON.
 
         Cache hits return the stored response without any HTTP request.
+
+        A billed-but-empty response (see `content_is_missing`) is retried
+        rather than accepted, because OpenRouter may route the retry to a
+        different upstream. If every attempt comes back empty the response is
+        returned anyway — the engine records it as a parse error, exactly as
+        before — but it is never written to the cache, so the failure is not
+        replayed for free forever as if it were a real model answer.
         """
         key = cache_key(model, messages, params)
         cache_path = os.path.join(self._cache_dir, f"{key}.json")
@@ -97,9 +141,13 @@ class OpenRouterClient:
             with open(cache_path, encoding="utf-8") as f:
                 return json.load(f)
 
-        response = self._post_with_retries(
-            "/chat/completions", {"model": model, "messages": messages, **params}
-        )
+        payload = {"model": model, "messages": messages, **params}
+        for _ in range(max(1, self._max_retries)):
+            response = self._post_with_retries("/chat/completions", payload)
+            if not content_is_missing(response):
+                break
+        else:
+            return response
 
         os.makedirs(self._cache_dir, exist_ok=True)
         tmp_path = f"{cache_path}.tmp"
