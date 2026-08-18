@@ -1,8 +1,9 @@
 ---
 version: 1
 name: match_v1
-status: draft   # rubric for T9; not yet frozen — matching pipeline is still in development
+status: frozen  # never edit this file; a rubric change means a new prompts/match_v2.md
 created: 2026-08-05
+frozen: 2026-08-19
 params:
   temperature: 0.0
 ---
