@@ -42,6 +42,7 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 - **One review thread counts as one human finding.** Only thread-opening comments enter RQ1's denominator; replies (`in_reply_to_id` set) continue a discussion rather than raise a new issue and are not independently matchable. On a first 90-PR mining run, replies were 35% of raw qualifying comments, so counting them would have depressed measured recall by up to a third.
 - **Procedure:** ReviewLens runs on the *pre-review* state of each PR — the code as it existed when human reviewers saw it. Model comments are then matched against the historical human comments.
 - **Matching rule:** a model comment matches a human comment if it targets the same file within ±3 lines *and* addresses the same underlying issue (semantic match, LLM-judged with a written rubric).
+- **Category assignment:** each human comment's category (bug / design / style / question) is assigned LLM-assisted, one call per comment, against a frozen versioned rubric (`prompts/categorize_v1.md`) that forces a choice among exactly those four — a comment fitting none is recorded at low confidence rather than given a fifth category. A reproducible ≥20% sample of the assignments (66 of 328, fixed seed) is exported for hand-checking at `reports/categorization-spotcheck.csv`; the checked agreement rate is reported once that pass is complete. Category assignment is rubric-sensitive: two versions of the rubric disagreed on 16% of labels (51 of 328), and the residual disagreement concentrates on the design/style boundary for small local edits (removing an `else`, dropping a temporary variable), so per-category recall carries more uncertainty than overall recall.
 - **Manual verification:** ≥ 20% of automated matches are manually verified; inter-check agreement is reported.
 - **Metrics:**
   - *Recall* of human comments, overall and per category (bug / design / style / question)
@@ -94,7 +95,10 @@ python -m reviewlens.mine --projects junit5 mockito checkstyle --out data/corpus
 
 # 1b. Categorize each human comment (bug/design/style/question) for RQ1's
 #     per-category recall — LLM-assisted, spot-checked by hand, never hardcoded
-python -m reviewlens.eval.categorize --corpus data/corpus/ --model <model-id>
+python -m reviewlens.eval.categorize --corpus data/corpus/ --model <model-id> \
+    --spotcheck-out reports/categorization-spotcheck.csv
+#    --spotcheck-out writes a reproducible >=20% sample of the assignments for
+#    hand-checking; the sample is determined by --seed, so it can be re-derived.
 
 # 2. Run the reviewer on the pre-review state of each PR
 python -m reviewlens.review --corpus data/corpus/ --model <model-id> --out runs/<model-id>/

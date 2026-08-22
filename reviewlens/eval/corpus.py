@@ -41,6 +41,28 @@ class EvalPR:
 
 
 @dataclass
+class CategorizationMeta:
+    """Provenance and coverage stats for `categories.json` (T8).
+
+    The per-comment category verdicts already flow through
+    `EvalPR.human_comments` via `normalize_human_comment`; this dataclass
+    carries what the report needs to state additionally: *how* those
+    verdicts were produced (which model, which rubric version) and *how
+    completely* (how many comments, failures, low-confidence calls), so the
+    report can document the method instead of leaving a reader to guess
+    whether categories were hand-labeled or LLM-assigned.
+    """
+
+    model: str
+    prompt_name: str
+    prompt_version: int
+    prompt_sha256: str
+    categorized_count: int
+    low_confidence_count: int
+    failure_count: int
+
+
+@dataclass
 class EvalInputs:
     """Everything the metrics and report stages need from disk."""
 
@@ -52,6 +74,10 @@ class EvalInputs:
     # disagree about what was evaluated, which invalidates the denominator.
     missing_from_corpus: list[str] = field(default_factory=list)
     missing_from_run: list[str] = field(default_factory=list)
+    # None when the corpus has no categories.json — categorization is a
+    # separate stage (T8) that may not have run, and that absence must stay
+    # visible rather than being papered over with a fabricated stub.
+    categorization: CategorizationMeta | None = None
 
 
 def normalize_human_comment(raw: dict, categories: dict | None = None) -> dict:
@@ -110,6 +136,17 @@ def load_corpus(corpus_dir: str) -> dict[str, dict]:
     return records
 
 
+def _read_categories_file(corpus_dir: str) -> dict | None:
+    """Read `categories.json` raw, or None if the corpus has not been
+    categorized. Shared by `load_categories` and `load_categorization_meta`
+    so both agree on what "missing" means."""
+    path = os.path.join(corpus_dir, CATEGORIES_FILENAME)
+    if not os.path.isfile(path):
+        return None
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_categories(corpus_dir: str) -> dict:
     """Read `categories.json` from a corpus directory, keyed by comment id.
 
@@ -118,11 +155,37 @@ def load_categories(corpus_dir: str) -> dict:
     (metrics.compute_metrics's existing behavior) rather than this module
     treating a missing file as a setup mistake.
     """
-    path = os.path.join(corpus_dir, CATEGORIES_FILENAME)
-    if not os.path.isfile(path):
-        return {}
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)["categories"]
+    raw = _read_categories_file(corpus_dir)
+    return {} if raw is None else raw["categories"]
+
+
+def load_categorization_meta(corpus_dir: str) -> CategorizationMeta | None:
+    """Read `categories.json`'s provenance and coverage stats, or None.
+
+    `load_categories` throws away everything but the id -> verdict map,
+    which is enough to annotate model comments but not enough for the
+    report to say *how* those verdicts were produced. This reads the same
+    file and derives the counts the report needs (categorized / failed /
+    low-confidence) from the data itself, so nothing here is hardcoded.
+    Mirrors `load_categories`'s "missing file is not an error" behavior.
+    """
+    raw = _read_categories_file(corpus_dir)
+    if raw is None:
+        return None
+    prompt = raw.get("prompt", {})
+    categories = raw.get("categories", {})
+    low_confidence_count = sum(
+        1 for entry in categories.values() if entry.get("confidence") == "low"
+    )
+    return CategorizationMeta(
+        model=raw.get("model", "?"),
+        prompt_name=prompt.get("name", "?"),
+        prompt_version=prompt.get("version", "?"),
+        prompt_sha256=prompt.get("sha256", "?"),
+        categorized_count=len(categories),
+        low_confidence_count=low_confidence_count,
+        failure_count=len(raw.get("failures", [])),
+    )
 
 
 def load_run_meta(run_dir: str) -> dict:
@@ -174,6 +237,7 @@ def load_eval_inputs(run_dir: str, corpus_dir: str | None = None) -> EvalInputs:
 
     corpus = load_corpus(resolved_corpus)
     categories = load_categories(resolved_corpus)
+    categorization = load_categorization_meta(resolved_corpus)
     prs: list[EvalPR] = []
     missing_from_corpus: list[str] = []
     reviewed_keys = set()
@@ -205,4 +269,5 @@ def load_eval_inputs(run_dir: str, corpus_dir: str | None = None) -> EvalInputs:
         corpus_dir=resolved_corpus,
         missing_from_corpus=missing_from_corpus,
         missing_from_run=sorted(set(corpus) - reviewed_keys),
+        categorization=categorization,
     )

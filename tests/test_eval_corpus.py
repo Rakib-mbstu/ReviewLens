@@ -3,6 +3,7 @@ import json
 import pytest
 
 from reviewlens.eval.corpus import (
+    load_categorization_meta,
     load_corpus,
     load_eval_inputs,
     load_run_meta,
@@ -211,3 +212,76 @@ def test_corpus_pr_the_run_skipped_is_reported(tmp_path):
 
 def test_pr_key_matches_the_run_directory_naming():
     assert pr_key("junit-team/junit5", 4629) == "junit-team__junit5__4629"
+
+
+# --- categorization metadata (T8): provenance + coverage for the report ---
+
+
+def _categories_json(corpus_dir, categorized, low_confidence, failures):
+    """Write a categories.json fixture with distinctive, deliberately chosen
+    counts so tests can tell "computed from data" apart from "hardcoded"."""
+    categories = {}
+    for i in range(categorized - low_confidence):
+        categories[str(1000 + i)] = {"category": "bug", "confidence": "high", "reason": "r"}
+    for i in range(low_confidence):
+        categories[str(2000 + i)] = {"category": "design", "confidence": "low", "reason": "r"}
+    payload = {
+        "categorized_at": "2026-08-22T19:19:28+00:00",
+        "model": "test/categorizer",
+        "prompt": {"name": "categorize_v1", "version": 1, "sha256": "c" * 64},
+        "categories": categories,
+        "failures": [{"id": 3000 + i, "error": "parse"} for i in range(failures)],
+    }
+    _write(corpus_dir / "categories.json", payload)
+
+
+def test_load_categorization_meta_is_none_without_categories_json(tmp_path):
+    """No categorization run yet must keep reporting as unavailable, not
+    raise and not fabricate a stub."""
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+
+    assert load_categorization_meta(str(corpus)) is None
+
+
+def test_load_categorization_meta_computes_counts_from_the_file(tmp_path):
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+    _categories_json(corpus, categorized=13, low_confidence=5, failures=2)
+
+    meta = load_categorization_meta(str(corpus))
+
+    assert meta.model == "test/categorizer"
+    assert meta.prompt_name == "categorize_v1"
+    assert meta.prompt_version == 1
+    assert meta.prompt_sha256 == "c" * 64
+    assert meta.categorized_count == 13
+    assert meta.low_confidence_count == 5
+    assert meta.failure_count == 2
+
+
+def test_load_eval_inputs_carries_categorization_metadata(tmp_path):
+    corpus = tmp_path / "corpus"
+    _write(corpus / "org__repo__1.json", _corpus_record(1, []))
+    _categories_json(corpus, categorized=4, low_confidence=1, failures=0)
+    run = tmp_path / "run"
+    _write(run / "run_meta.json", _run_meta([_summary(1)], corpus))
+
+    inputs = load_eval_inputs(str(run))
+
+    assert inputs.categorization is not None
+    assert inputs.categorization.categorized_count == 4
+    assert inputs.categorization.low_confidence_count == 1
+
+
+def test_load_eval_inputs_categorization_is_none_without_categories_json(tmp_path):
+    """Regression guard: a corpus with no categories.json must keep loading
+    and reporting categorization as unavailable, exactly as before T8."""
+    corpus = tmp_path / "corpus"
+    _write(corpus / "org__repo__1.json", _corpus_record(1, []))
+    run = tmp_path / "run"
+    _write(run / "run_meta.json", _run_meta([_summary(1)], corpus))
+
+    inputs = load_eval_inputs(str(run))
+
+    assert inputs.categorization is None

@@ -8,6 +8,7 @@ stylistic preference: this report is the artifact a reader would cite.
 
 from __future__ import annotations
 
+from reviewlens.eval.corpus import CategorizationMeta
 from reviewlens.eval.metrics import Metrics
 
 NOT_MEASURED = "not measured"
@@ -21,8 +22,22 @@ def _fraction(numerator: int, denominator: int) -> str:
     return f"{numerator}/{denominator}" if denominator else NOT_MEASURED
 
 
-def render_report(metrics: Metrics, run_meta: dict, judge_model: str, judge_prompt) -> str:
-    """Build the full markdown report for one model's run."""
+def render_report(
+    metrics: Metrics,
+    run_meta: dict,
+    judge_model: str,
+    judge_prompt,
+    *,
+    categorization: CategorizationMeta | None = None,
+) -> str:
+    """Build the full markdown report for one model's run.
+
+    `categorization` is None whenever the corpus has no `categories.json`
+    (categorization is a separate stage, T8, that may not have run) — the
+    provenance rows and per-category method note it feeds are simply
+    omitted in that case, matching the existing "absent, not fabricated"
+    treatment of per-category recall itself.
+    """
     prompt_meta = run_meta.get("prompt", {})
     lines: list[str] = []
 
@@ -47,6 +62,12 @@ def render_report(metrics: Metrics, run_meta: dict, judge_model: str, judge_prom
     lines.append(f"| Judge model | `{judge_model}` |")
     lines.append(f"| Match rubric | `{judge_prompt.name}` v{judge_prompt.version} |")
     lines.append(f"| Match rubric sha256 | `{judge_prompt.sha256[:16]}…` |")
+    if categorization is not None:
+        lines.append(f"| Comment categorizer | `{categorization.model}` |")
+        lines.append(
+            f"| Category rubric | `{categorization.prompt_name}` v{categorization.prompt_version} |"
+        )
+        lines.append(f"| Category rubric sha256 | `{categorization.prompt_sha256[:16]}…` |")
     lines.append(f"| Corpus | `{run_meta.get('corpus', '?')}` |")
     lines.append(f"| Run started | {run_meta.get('started', '?')} |")
     lines.append(f"| Run finished | {run_meta.get('finished') or 'did not finish'} |")
@@ -81,6 +102,22 @@ def render_report(metrics: Metrics, run_meta: dict, judge_model: str, judge_prom
             lines.append(
                 f"| {category.category} | {category.matched} | {category.total} | "
                 f"{_pct(category.recall)} |"
+            )
+        lines.append("")
+        if categorization is not None:
+            lines.append(
+                "Categories were assigned LLM-assisted, one call per comment — "
+                "not by hand and not by keyword rules. "
+                f"{categorization.categorized_count} comments carry a category, "
+                f"with {categorization.failure_count} categorization failures and "
+                f"{categorization.low_confidence_count} assigned at low confidence. "
+                "The rubric forces a choice among exactly four categories, so a "
+                "comment that fits none is recorded at low confidence rather than "
+                "given a fifth category. Category assignment is rubric-sensitive: "
+                "a revision of the rubric changed a substantial share of labels, "
+                "so per-category recall carries more uncertainty than overall "
+                "recall. Assignments are spot-checked by hand against a reproducible "
+                "sample, written by `reviewlens.eval.categorize --spotcheck-out`."
             )
     else:
         lines.append(

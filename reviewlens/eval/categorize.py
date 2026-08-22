@@ -16,12 +16,14 @@ carries a real category).
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import os
 import sys
 from datetime import datetime, timezone
 
 from reviewlens.eval.corpus import CATEGORIES_FILENAME, load_corpus
+from reviewlens.eval.export_verification import sample_ids
 from reviewlens.openrouter import OpenRouterClient
 from reviewlens.review.prompt import Prompt, load_prompt
 
@@ -116,6 +118,69 @@ def categorize_comment(
     return _parse_categorize_reply(response)
 
 
+SPOTCHECK_FIELDNAMES = [
+    "comment_id",
+    "repo",
+    "pr_number",
+    "pr_url",
+    "file",
+    "line",
+    "comment",
+    "comment_url",
+    "assigned_category",
+    "confidence",
+    "rubric_reason",
+    "human_category",
+    "human_agrees",
+    "notes",
+]
+
+
+def write_spotcheck_sample(
+    path: str, categories: dict, sources: dict, rate: float, seed: int
+) -> int:
+    """Write a reproducible sample of assignments for a human to check by hand.
+
+    T8's done-when requires the categorization method to be spot-checked, and
+    a spot check nobody can reproduce is not evidence. Sampling reuses
+    `export_verification.sample_ids`, so this sample obeys the same discipline
+    as the match/hallucination sample: sorted before drawing, ceil rather than
+    round, and determined entirely by (data, rate, seed).
+
+    `human_category`, `human_agrees`, and `notes` are always written empty —
+    they are the columns the checker fills in, and pre-filling them would put
+    the tool's own answer where a human judgment belongs.
+    """
+    drawn = sorted(sample_ids(sorted(categories), rate, seed))
+    out_dir = os.path.dirname(os.path.abspath(path))
+    os.makedirs(out_dir, exist_ok=True)
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=SPOTCHECK_FIELDNAMES)
+        writer.writeheader()
+        for comment_id in drawn:
+            verdict = categories[comment_id]
+            source = sources[comment_id]
+            writer.writerow(
+                {
+                    "comment_id": comment_id,
+                    "repo": source["repo"],
+                    "pr_number": source["number"],
+                    "pr_url": f"https://github.com/{source['repo']}/pull/{source['number']}",
+                    "file": source["path"],
+                    "line": source["line"],
+                    "comment": source["body"],
+                    "comment_url": source.get("url") or "",
+                    "assigned_category": verdict["category"],
+                    "confidence": verdict["confidence"],
+                    "rubric_reason": verdict["reason"],
+                    "human_category": "",
+                    "human_agrees": "",
+                    "notes": "",
+                }
+            )
+    return len(drawn)
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="python -m reviewlens.eval.categorize",
@@ -141,6 +206,23 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="Bypass the LLM response cache and force fresh calls.",
     )
+    parser.add_argument(
+        "--spotcheck-out",
+        default=None,
+        help="Also write a reproducible sample of assignments to this CSV for hand-checking.",
+    )
+    parser.add_argument(
+        "--spotcheck-rate",
+        type=float,
+        default=0.20,
+        help="Fraction of assignments to sample for the spot check (default: 0.20).",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=20260823,
+        help="Seed making the spot-check sample reproducible (default: 20260823).",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -153,6 +235,9 @@ def main(argv: list[str] | None = None) -> None:
     llm_client = OpenRouterClient(use_cache=not args.no_cache)
 
     categories: dict[str, dict] = {}
+    # Where each categorized comment came from, so the spot-check sample can
+    # link a judgment back to the PR and comment a human actually wrote.
+    sources: dict[str, dict] = {}
     failures: list[dict] = []
     seen_ids: set = set()
 
@@ -186,6 +271,14 @@ def main(argv: list[str] | None = None) -> None:
                     print(f"{repo}#{number} comment {comment_id}: FAILED ({error})")
                     continue
                 categories[str(comment_id)] = verdict
+                sources[str(comment_id)] = {
+                    "repo": repo,
+                    "number": number,
+                    "path": comment["path"],
+                    "line": comment["line"],
+                    "body": comment["body"],
+                    "url": comment.get("url"),
+                }
                 print(f"{repo}#{number} comment {comment_id}: {verdict['category']} ({verdict['confidence']})")
     finally:
         llm_client.close()
@@ -206,6 +299,16 @@ def main(argv: list[str] | None = None) -> None:
 
     total = len(categories) + len(failures)
     print(f"Categorized {len(categories)}/{total} comments, {len(failures)} failures. Wrote {out_path}.")
+
+    if args.spotcheck_out:
+        drawn = write_spotcheck_sample(
+            args.spotcheck_out, categories, sources, args.spotcheck_rate, args.seed
+        )
+        pct = (drawn / len(categories) * 100) if categories else 0.0
+        print(
+            f"Spot-check sample: {drawn}/{len(categories)} ({pct:.1f}%) "
+            f"at seed {args.seed}. Wrote {args.spotcheck_out}."
+        )
 
 
 if __name__ == "__main__":

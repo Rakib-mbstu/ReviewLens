@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 
 import pytest
@@ -76,12 +77,19 @@ def _setup_corpus(tmp_path, comments):
     return corpus
 
 
-def _run_cli(monkeypatch, corpus, out=None, replies=None, default_category="bug"):
+def _run_cli(monkeypatch, corpus, out=None, replies=None, default_category="bug",
+             spotcheck_out=None, spotcheck_rate=None, seed=None):
     client = FakeCategorizeClient(replies=replies, default_category=default_category)
     monkeypatch.setattr(cli, "OpenRouterClient", lambda **kwargs: client)
     args = ["--corpus", str(corpus), "--model", "test/categorizer"]
     if out is not None:
         args += ["--out", str(out)]
+    if spotcheck_out is not None:
+        args += ["--spotcheck-out", str(spotcheck_out)]
+    if spotcheck_rate is not None:
+        args += ["--spotcheck-rate", str(spotcheck_rate)]
+    if seed is not None:
+        args += ["--seed", str(seed)]
     cli.main(args)
     return client
 
@@ -259,3 +267,88 @@ def test_load_corpus_does_not_treat_categories_json_as_a_pr_record(tmp_path, mon
     records = load_corpus(str(corpus))
 
     assert list(records) == ["org__repo__1"]
+
+
+# --- spot-check sample (T8's "spot check" half) ---
+
+
+def _read_spotcheck(path):
+    with open(path, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def test_spotcheck_sample_is_not_written_unless_asked(tmp_path, monkeypatch):
+    corpus = _setup_corpus(tmp_path, [_mined_comment(1, 10, "this can NPE")])
+    _run_cli(monkeypatch, corpus)
+    assert not (tmp_path / "sample.csv").exists()
+
+
+def test_spotcheck_sample_covers_at_least_the_requested_rate(tmp_path, monkeypatch):
+    """ceil, not round: 11 assignments at 0.20 must yield 3, never 2."""
+    comments = [_mined_comment(i, i * 10, f"comment {i}") for i in range(1, 12)]
+    corpus = _setup_corpus(tmp_path, comments)
+    out = tmp_path / "sample.csv"
+
+    _run_cli(monkeypatch, corpus, spotcheck_out=out)
+
+    rows = _read_spotcheck(out)
+    assert len(rows) == 3
+    assert len(rows) / len(comments) >= 0.20
+
+
+def test_spotcheck_sample_is_reproducible_from_the_seed(tmp_path, monkeypatch):
+    """A spot check nobody can reproduce is not evidence."""
+    comments = [_mined_comment(i, i * 10, f"comment {i}") for i in range(1, 21)]
+    corpus = _setup_corpus(tmp_path, comments)
+    first, second, other = tmp_path / "a.csv", tmp_path / "b.csv", tmp_path / "c.csv"
+
+    _run_cli(monkeypatch, corpus, spotcheck_out=first, seed=7)
+    _run_cli(monkeypatch, corpus, spotcheck_out=second, seed=7)
+    _run_cli(monkeypatch, corpus, spotcheck_out=other, seed=8)
+
+    assert first.read_bytes() == second.read_bytes()
+    ids = lambda p: [r["comment_id"] for r in _read_spotcheck(p)]
+    assert ids(first) != ids(other)
+
+
+def test_spotcheck_columns_for_the_human_are_always_blank(tmp_path, monkeypatch):
+    """Pre-filling these would put the tool's answer where a human judgment goes."""
+    comments = [_mined_comment(i, i * 10, f"comment {i}") for i in range(1, 6)]
+    corpus = _setup_corpus(tmp_path, comments)
+    out = tmp_path / "sample.csv"
+
+    _run_cli(monkeypatch, corpus, spotcheck_out=out)
+
+    rows = _read_spotcheck(out)
+    assert rows
+    for row in rows:
+        assert row["human_category"] == ""
+        assert row["human_agrees"] == ""
+        assert row["notes"] == ""
+        assert row["assigned_category"] == "bug"
+
+
+def test_spotcheck_row_links_back_to_the_real_comment(tmp_path, monkeypatch):
+    """The checker has to be able to open the PR and read the original."""
+    corpus = _setup_corpus(tmp_path, [_mined_comment(1, 10, "this can NPE")])
+    out = tmp_path / "sample.csv"
+
+    _run_cli(monkeypatch, corpus, spotcheck_out=out)
+
+    row = _read_spotcheck(out)[0]
+    assert row["repo"] == "org/repo"
+    assert row["pr_url"] == "https://github.com/org/repo/pull/1"
+    assert row["comment_url"].endswith("#discussion_r1")
+    assert row["comment"] == "this can NPE"
+    assert row["file"] == "src/Main.java"
+    assert row["line"] == "10"
+
+
+def test_spotcheck_sample_preserves_a_comment_body_with_a_newline_and_comma(tmp_path, monkeypatch):
+    body = "first line, with a comma\nsecond line"
+    corpus = _setup_corpus(tmp_path, [_mined_comment(1, 10, body)])
+    out = tmp_path / "sample.csv"
+
+    _run_cli(monkeypatch, corpus, spotcheck_out=out)
+
+    assert _read_spotcheck(out)[0]["comment"] == body

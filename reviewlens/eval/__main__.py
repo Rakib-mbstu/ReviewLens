@@ -123,7 +123,15 @@ def main(argv: list[str] | None = None) -> None:
     report_dir = os.path.dirname(os.path.abspath(args.report))
     os.makedirs(report_dir, exist_ok=True)
     with open(args.report, "w", encoding="utf-8") as f:
-        f.write(render_report(metrics, inputs.run_meta, args.judge_model, judge_prompt))
+        f.write(
+            render_report(
+                metrics,
+                inputs.run_meta,
+                args.judge_model,
+                judge_prompt,
+                categorization=inputs.categorization,
+            )
+        )
 
     if inputs.missing_from_run:
         print(

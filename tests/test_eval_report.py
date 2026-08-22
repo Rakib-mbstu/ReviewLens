@@ -5,7 +5,7 @@ import os
 
 import pytest
 
-from reviewlens.eval.corpus import EvalPR
+from reviewlens.eval.corpus import CategorizationMeta, EvalPR
 from reviewlens.eval.matching import match_comments
 from reviewlens.eval.metrics import compute_metrics
 from reviewlens.eval.report import render_report
@@ -146,6 +146,98 @@ def test_parse_failure_rate_is_reported_beside_recall():
 
 
 # --- the shipped rubric file must actually load ---
+
+
+def _categorization(categorized_count=17, low_confidence_count=3, failure_count=2):
+    """A CategorizationMeta fixture with deliberately distinctive counts, so
+    a test can tell "computed from the fixture" apart from "hardcoded"."""
+    return CategorizationMeta(
+        model="test/categorizer",
+        prompt_name="categorize_v1",
+        prompt_version=1,
+        prompt_sha256="d" * 64,
+        categorized_count=categorized_count,
+        low_confidence_count=low_confidence_count,
+        failure_count=failure_count,
+    )
+
+
+# --- categorization provenance and method note (T8) ---
+
+
+def test_categorization_provenance_rows_appear_when_metadata_is_present():
+    metrics = _metrics([_human(10, "a", category="bug")], [_model(10, "a")])
+
+    report = render_report(
+        metrics, _run_meta(), "test/judge", JUDGE_PROMPT, categorization=_categorization()
+    )
+
+    assert "| Comment categorizer | `test/categorizer` |" in report
+    assert "| Category rubric | `categorize_v1` v1 |" in report
+    assert "| Category rubric sha256 | `" + ("d" * 16) + "…` |" in report
+
+
+def test_categorization_provenance_rows_absent_without_metadata():
+    metrics = _metrics([_human(10, "a")], [_model(10, "a")])
+
+    report = render_report(metrics, _run_meta(), "test/judge", JUDGE_PROMPT)
+
+    assert "Comment categorizer" not in report
+    assert "Category rubric" not in report
+
+
+def test_method_note_states_llm_assisted_and_uses_computed_counts():
+    metrics = _metrics([_human(10, "a", category="bug")], [_model(10, "a")])
+    categorization = _categorization(categorized_count=41, low_confidence_count=9, failure_count=6)
+
+    report = render_report(
+        metrics, _run_meta(), "test/judge", JUDGE_PROMPT, categorization=categorization
+    )
+
+    assert "LLM-assisted" in report
+    assert "not by hand and not by keyword rules" in report
+    assert "41 comments carry a category" in report
+    assert "6 categorization failures" in report
+    assert "9 assigned at low confidence" in report
+    assert "exactly four categories" in report
+    assert "rubric-sensitive" in report
+    # The categorization spot check is produced by the categorize CLI, not by
+    # export_verification, which samples match/hallucination judgments instead.
+    assert "reviewlens.eval.categorize --spotcheck-out" in report
+    assert "export_verification" not in report
+    # The rubric-revision figure is not derivable from a run directory, so
+    # it must never appear here — only in the README, where it is measured.
+    assert "16%" not in report
+
+
+def test_method_note_absent_when_categorization_metadata_missing():
+    """categories_available can in principle be true without categorization
+    metadata (e.g. older fixtures); the method note must not fabricate
+    counts it cannot compute in that case."""
+    metrics = _metrics([_human(10, "a", category="bug")], [_model(10, "a")])
+
+    report = render_report(metrics, _run_meta(), "test/judge", JUDGE_PROMPT)
+
+    assert "LLM-assisted" not in report
+
+
+def test_not_available_branch_unchanged_when_categories_missing():
+    metrics = _metrics([_human(10, "a")], [_model(80, "b")])
+
+    report = render_report(
+        metrics, _run_meta(), "test/judge", JUDGE_PROMPT, categorization=_categorization()
+    )
+
+    assert "Not available" in report
+    assert "LLM-assisted" not in report
+
+
+def test_render_report_still_works_without_the_new_argument():
+    metrics = _metrics([_human(10, "a")], [_model(10, "a")])
+
+    report = render_report(metrics, _run_meta(), "test/judge", JUDGE_PROMPT)
+
+    assert "ReviewLens evaluation" in report
 
 
 def test_match_v1_rubric_loads_and_exposes_its_placeholders():
