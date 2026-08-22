@@ -3,7 +3,8 @@ cache/
 runs/
 
 # Raw mined corpus — commit the mining script + pinned PR list instead
-data/corpus/
+data/corpus/*
+!data/corpus/manifest.json
 
 # Local planning notes (tickets live as GitHub issues)
 BACKLOG.md

@@ -1,0 +1,517 @@
+{
+  "mined_at": "2026-08-06T04:02:59.948182+00:00",
+  "criteria": {
+    "min_comments": 2,
+    "min_comment_chars": 30,
+    "max_changed_files": 50,
+    "max_changed_lines": 2000,
+    "per_project": 30,
+    "max_total": 100,
+    "scan_limit": 1500
+  },
+  "projects": [
+    {
+      "slug": "junit5",
+      "repo": "junit-team/junit5",
+      "scanned": 967,
+      "selected": 30,
+      "hit_scan_limit": false,
+      "skipped": {
+        "not_merged": 89,
+        "bot_author": 649,
+        "no_java_files": 0,
+        "too_large": 2,
+        "too_few_comments": 197,
+        "no_review_activity": 0,
+        "pre_review_commit_unreachable": 0
+      },
+      "unanchored_comments": 0
+    },
+    {
+      "slug": "mockito",
+      "repo": "mockito/mockito",
+      "scanned": 814,
+      "selected": 30,
+      "hit_scan_limit": false,
+      "skipped": {
+        "not_merged": 137,
+        "bot_author": 426,
+        "no_java_files": 1,
+        "too_large": 0,
+        "too_few_comments": 220,
+        "no_review_activity": 0,
+        "pre_review_commit_unreachable": 0
+      },
+      "unanchored_comments": 0
+    },
+    {
+      "slug": "checkstyle",
+      "repo": "checkstyle/checkstyle",
+      "scanned": 534,
+      "selected": 30,
+      "hit_scan_limit": false,
+      "skipped": {
+        "not_merged": 59,
+        "bot_author": 30,
+        "no_java_files": 0,
+        "too_large": 2,
+        "too_few_comments": 413,
+        "no_review_activity": 0,
+        "pre_review_commit_unreachable": 0
+      },
+      "unanchored_comments": 0
+    }
+  ],
+  "prs": [
+    {
+      "repo": "junit-team/junit5",
+      "number": 5930,
+      "pre_review_sha": "81e9854123ddbf33f5fbd7f1703dc97d1552daa8"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5812,
+      "pre_review_sha": "de09650a8859ee8ca144e3788c86e18d5ca5be1f"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5765,
+      "pre_review_sha": "191a3743e261d2f64cfe9e695fcdd6bd7605c8c8"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5708,
+      "pre_review_sha": "b9cd9a1754e7761dcb5c931f837c355623d273ae"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5701,
+      "pre_review_sha": "07ed5770b30e6a8defea4751ea6da772b1c2994d"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5588,
+      "pre_review_sha": "41b9bb5f1b9c71a893c571735be3a25d0d0518d2"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5441,
+      "pre_review_sha": "4a197fead41c8600d0ae8bf17c71d9a043219066"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5424,
+      "pre_review_sha": "96f450589ca924120651a2fdff613d129b782ef2"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5379,
+      "pre_review_sha": "8149c006f76a0eb20f249c8e105a75c46a61feb5"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5281,
+      "pre_review_sha": "4d008573ba9fc01d7639e2c06377e86b62ce48a2"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5258,
+      "pre_review_sha": "51157882606362e29e13889a1cf73c4b0e627545"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5135,
+      "pre_review_sha": "cafaaa6372a6915d9e4db1c0c496eb22a38b801f"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5100,
+      "pre_review_sha": "b2c6c302f408afc949c6d6eac785b1727d5f96e5"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5096,
+      "pre_review_sha": "465536676b80e7363b8f21435a77166564049630"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5078,
+      "pre_review_sha": "82fa0c6b53281f3ccbc0954db010489a0ae40ac5"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5060,
+      "pre_review_sha": "9d77839067a612c571c7448fc9c74e8d0e5d78d9"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5042,
+      "pre_review_sha": "a170306616a28dfcba28fa25e8ba9e8eaad08611"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4985,
+      "pre_review_sha": "6049112af0711d995ba2948d77108f0c6ecf002f"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4916,
+      "pre_review_sha": "ef2e5db21822888dffa9dbcc92e8911f3193c355"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4913,
+      "pre_review_sha": "b4956d693c8ca690306c524d1cb9dd5f415f95b9"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4842,
+      "pre_review_sha": "76bce75728baa531eaf6f0314f163ed1607dc8ca"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4823,
+      "pre_review_sha": "cb782d962bb6778c520fbcd15f8366c4e0848555"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4822,
+      "pre_review_sha": "66bb647407c8f06e0c03f3f746f8fdad7ff396da"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4761,
+      "pre_review_sha": "e123ed61987508e76d717cf9c8865e6520a6ba8c"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4751,
+      "pre_review_sha": "92599463eefe8c51461e928bfbad21e8ad4ea512"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4718,
+      "pre_review_sha": "4d860ceb525d75f4467f19f62edff8b33d22a799"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4696,
+      "pre_review_sha": "ed5aba62d5a261f066cb338a5d1aefd9dbd6373d"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4629,
+      "pre_review_sha": "a29e93e459f43cb6364d9438da84cfacba860daa"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4609,
+      "pre_review_sha": "ae2df7c4f7f074a96da730cd16c44168d45d143a"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4606,
+      "pre_review_sha": "cd3cc0ecc4b6d62d591730ba0bdfa301a3d3cfa2"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3844,
+      "pre_review_sha": "8f625536e662cef5c858658c6892bff618724f79"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3840,
+      "pre_review_sha": "29dae5dce38f1b6cb9615e5355fab839fb4c8bcf"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3815,
+      "pre_review_sha": "849076f286b234eb9d680dfd7319c96c58fde471"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3784,
+      "pre_review_sha": "0a4f3fd276f75c2ba15f3935e5b21f250966181a"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3711,
+      "pre_review_sha": "4e9b6a2a7ddb03e44d508d77076d672144922cf0"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3551,
+      "pre_review_sha": "048ddd71484469a550e234faeffcdc4348c0dbc2"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3506,
+      "pre_review_sha": "3ea566eba5258e12f5dbe0a4a2dd218cebb011ca"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3459,
+      "pre_review_sha": "e720ceed49db61394ebb5eef043404a4c064a6e0"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3437,
+      "pre_review_sha": "13de20302127b49ea3862e99177e2bb55463a410"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3424,
+      "pre_review_sha": "3f2a9011afaec9f86c16ab96f1189eac1501d8d6"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3220,
+      "pre_review_sha": "3b9bc547ace4d5015434bc2f4392a998575145a5"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3167,
+      "pre_review_sha": "10f8b9db503311419256456bbc8554840862e040"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3129,
+      "pre_review_sha": "35345e1132f193ac05a1b5477805c54cd396b8a4"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3097,
+      "pre_review_sha": "3118cc4a890b55709ff721b1bc24cbb3fddbaf8b"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2923,
+      "pre_review_sha": "c9363cbb35fb65b0f81ba4a9feedd339eec3cfac"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2883,
+      "pre_review_sha": "7677df31f4ab1a98b52daec138fbc1e7cff0f0cd"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2842,
+      "pre_review_sha": "37bca564dbc6d0a76502c8376c7b8987afd0c350"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2807,
+      "pre_review_sha": "0ddedaa57ff1b9a4a278d0339debdb4f08ef8b77"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2779,
+      "pre_review_sha": "ac2c9f3d3629e07b02d88e237db5db49e12e5b1e"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2723,
+      "pre_review_sha": "a5c573f914fa8531c7f4d51e12e35af01c171914"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2701,
+      "pre_review_sha": "f58affad44ed514569c6f2d65f141d780f767887"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2659,
+      "pre_review_sha": "d0bf836510a44ddeb65d6492f2fa3d35f3c3caf3"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2650,
+      "pre_review_sha": "ff8a4eee87213e964525263d384bcf5a9ddfceaa"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2613,
+      "pre_review_sha": "c0d7443405a9083a01424e2af4d759ad94069623"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2603,
+      "pre_review_sha": "04bda90cdd1bef035884cde8f7e6fd28c77870f8"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2593,
+      "pre_review_sha": "4d957e4eb00dcbad5da46f138a0bccee36cb2fb9"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2549,
+      "pre_review_sha": "f15b5668c36f937cdf747799d8c1d21583450cbd"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2442,
+      "pre_review_sha": "8cbfbd760ee2a8a0e385686b20eb945629733a67"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2410,
+      "pre_review_sha": "e55f49a413b2eb04b6931500320abf667d7a8f95"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2402,
+      "pre_review_sha": "3ed0655d99ab38bdb80233550139b4113776dc91"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 21086,
+      "pre_review_sha": "6b69c2be83b7a12a7efba3b500e176e66ad79404"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 21076,
+      "pre_review_sha": "3fc7bc0c29d29e6288277e8f3148e421c02b2f6f"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 21008,
+      "pre_review_sha": "14d9a77c0b3da60d63a9eb5ebfdd9f550e7f2e58"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20990,
+      "pre_review_sha": "97b5ee6e2a7f11cb592957eb5a6c966c91669d32"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20957,
+      "pre_review_sha": "fa0119688086da6b6767720beb0e52d3d5c8a092"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20842,
+      "pre_review_sha": "d83cd909b50a32158ce6b4d673b722b122aacaab"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20839,
+      "pre_review_sha": "29c47c7c389cbc33de4dfcf44abf7ce94ba94857"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20810,
+      "pre_review_sha": "af6c8ea87d7324d98974b41fbfddfb35776041c4"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20752,
+      "pre_review_sha": "48081e473e296688e8ba784b355109695448ae73"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20727,
+      "pre_review_sha": "771ba74fe2c672425a4712cafa0949b9b75d751e"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20725,
+      "pre_review_sha": "0f49357cf0275eba1dd02e3c9fea06b1295acdd4"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20717,
+      "pre_review_sha": "2a5b853c0dbf4e839a807287745f4eae059323e5"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20666,
+      "pre_review_sha": "0e1eba3a817c28125abd7f066486e572d1cd7834"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20642,
+      "pre_review_sha": "ef405791329c1c0d34c2a0a50a1ec8436972aee0"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20604,
+      "pre_review_sha": "4a847c1034cddb3ecb79459334b734999848fff5"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20600,
+      "pre_review_sha": "da6d55a4bff6d8ee015ca92935481ae71d352cab"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20599,
+      "pre_review_sha": "37a45759b478b3362d1442d647f1bfe6678deb2f"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20554,
+      "pre_review_sha": "f6ff3da46e917b93ac02bdbc4888bc21c4e5df47"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20550,
+      "pre_review_sha": "bd62700cd5103b5aedd24dd28bee0fdf42eb4538"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20537,
+      "pre_review_sha": "657dfd7bddd604cd264f4627a1ba5b6a219e6588"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20528,
+      "pre_review_sha": "a438b709e5a769dde4c11ea16e4dc8b2088088f1"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20493,
+      "pre_review_sha": "ca3f5852404b9b12d26a17c0b8b0bf19db73381a"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20491,
+      "pre_review_sha": "477830f2ddbe16bc37b00f4028fd77159fdcba2b"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20469,
+      "pre_review_sha": "a56c5e5741e8a7862619b921e367c0aa4b634eaf"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20435,
+      "pre_review_sha": "8dbdd690e651243e591c3f92a108249fc8cb5ded"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20432,
+      "pre_review_sha": "bf1329b396ee421116b3a8296f4451843ebc7727"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20407,
+      "pre_review_sha": "caa9bdbfe9f57ebe2760e69628db28afcdc78334"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20378,
+      "pre_review_sha": "ac4a4ae9c48e3cef8694d7e9c7190c052c8c8f59"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20362,
+      "pre_review_sha": "294c595f640b54d5aa663ea45b2a720c1ea9b746"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20351,
+      "pre_review_sha": "ad3fb05fdd5b0cf2a1969a459d2de12fd85847b3"
+    }
+  ]
+}
