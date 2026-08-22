@@ -1,0 +1,1652 @@
+{
+  "categorized_at": "2026-08-22T19:19:28.704063+00:00",
+  "model": "google/gemini-2.5-flash-lite",
+  "prompt": {
+    "name": "categorize_v1",
+    "version": 1,
+    "sha256": "bd5e4f74bd473858073e63899ab62827ccbe5fc3984933afdd2892a7ee8a5657"
+  },
+  "categories": {
+    "3464406084": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a different approach to handling apostrophes and mentions a 'hacky' use of '+ SPACE', indicating a desire for a cleaner and more robust solution, which falls under design improvements."
+    },
+    "3572958448": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests renaming a message constant and implies a change in how messages are formatted, which affects the API of the check and how it's configured, thus changing the code's structure."
+    },
+    "3445406528": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests significant structural changes to the code, including reusing existing logic, modifying token registration, and altering how AST nodes are processed, all of which impact the code's architecture and maintainability."
+    },
+    "3460940777": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment asks to improve the wording of a violation message, which is a stylistic concern related to the clarity and quality of the output, not the underlying logic or structure of the code."
+    },
+    "3461043539": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the method signature by adding a @Nullable annotation, which alters the API and structure of the code."
+    },
+    "3435497523": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on the scope and behavior of a configuration property, indicating uncertainty about whether it applies to all relevant code locations."
+    },
+    "3449141966": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on terminology, not suggesting a change to the code's behavior or structure."
+    },
+    "3449156761": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on how the code will handle a specific Java feature (record patterns) and if any changes are needed, rather than asserting a bug or suggesting a design/style change."
+    },
+    "3449158152": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification or additional information regarding examples for record patterns."
+    },
+    "3452195512": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion proposes changing the starting point of an iteration by directly accessing the parent AST node, which alters the structure and logic of how the code traverses the AST."
+    },
+    "3452215537": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting to extract a condition into a new boolean variable to improve readability, which changes the structure of the code."
+    },
+    "3449225027": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing 'ok' comments, which are purely about the appearance and wording of the code, not its structure or logic."
+    },
+    "3449226247": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment asserts that a build is not breaking when it should, indicating a potential defect in the build or test system's logic."
+    },
+    "3487251863": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about an XPath expression and whether it's causing a violation, indicating they are seeking information rather than asserting a change."
+    },
+    "3517547211": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "The comment is a directive about how to manage changes in the pull request, specifically regarding the scope of the commit and not the code itself. It's closest to 'style' as it relates to the presentation and organization of the code changes, but it's not a direct code suggestion."
+    },
+    "3473246247": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing an empty line after annotations, which is purely a formatting change and does not alter the code's structure or behavior."
+    },
+    "3474973171": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the placement of code relative to a marker comment for visibility, which is a stylistic concern about the presentation of the code rather than its logic or structure."
+    },
+    "3487958429": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a minor change to the code's appearance by adding a specific method call, which does not alter the code's structure or logic but rather its formatting and conciseness."
+    },
+    "3540346589": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The reviewer is pointing out a correctness issue where a rule is being flagged incorrectly, and they are providing a fix to resolve the bug."
+    },
+    "3592535907": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the visibility of methods from private to public, which alters the API and structure of the `AbstractFrame` class and its nested classes, thus falling under design."
+    },
+    "3592540839": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests keeping the access modifier 'protected' as is, which is a stylistic choice related to code appearance and convention rather than a change in code structure or logic."
+    },
+    "3592545468": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment explains a design constraint (protected access from an API) that prevents a potential change to the code's structure or visibility."
+    },
+    "3592553800": {
+      "category": "question",
+      "confidence": "low",
+      "reason": "The comment expresses a hope for future removal of the test due to ongoing reimplementation, implying a question about the test's current necessity or future relevance."
+    },
+    "3537667730": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests rephrasing a Javadoc comment for clarity, which is a stylistic change to the wording without altering the code's structure or behavior."
+    },
+    "3537683828": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding a new field or attribute ('Since X.XX' label) to existing entries, which changes the structure and data model of the entries."
+    },
+    "3537693974": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests extracting a method call into a variable for consistency, which is a change in appearance and wording without altering the code's structure or location."
+    },
+    "3548185874": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests restructuring an existing input file into two separate methods and proposes a new naming convention for input files across multiple chapters, which fundamentally changes the organization and structure of the code and tests."
+    },
+    "3549037791": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the usage of something in the code, indicating a lack of understanding rather than a defect or design flaw."
+    },
+    "3525661333": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is asking for additional code to be added to the test file to demonstrate a preferred approach, which would change the structure and content of the test code."
+    },
+    "3541438945": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving code to a different method and renaming a variable, which changes the structure and organization of the code."
+    },
+    "3549688112": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests creating separate test snippets for different configurations, which implies changing the structure of the test code by introducing new test methods or variations."
+    },
+    "3549691077": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment suggests that the test case is not correctly configured, leading to an incorrect violation, and proposes changes to the test configuration to fix this."
+    },
+    "3643476847": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a change in how the code handles Javadoc tags, specifically differentiating between inline and block tags, which implies a modification to the code's structure and logic for parsing and rendering Javadoc."
+    },
+    "3676643125": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving the explanation from a code comment to Javadoc for a new method, which changes the structure and location of the documentation, thus altering the code's shape."
+    },
+    "3523268392": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving code snippets to a different location (Example3) to avoid polluting other areas, which is a structural change to the codebase."
+    },
+    "3523271967": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving a line of code to a different location, which changes the structure and organization of the code, fitting the definition of a design change."
+    },
+    "3549721278": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the correctness of a Javadoc tag, indicating a need for information rather than asserting a change."
+    },
+    "3553995942": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the necessity of a while loop, indicating a need for more information rather than suggesting a specific change."
+    },
+    "3564187763": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion proposes simplifying the code by removing an outer condition, which changes the structure and logic of how the 'currentType' variable is processed, thus impacting the code's design."
+    },
+    "3541030394": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests reverting changes related to a specific style ('Google style') and suppressing violations, indicating a preference for appearance and convention over functional correctness or structural changes."
+    },
+    "3649015898": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment questions the reliance on the parser and suggests operating directly on the AST instead of raw text, which implies a change in the code's structure and how it processes information."
+    },
+    "3554520938": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment requests reverting formatting changes, which are purely stylistic and do not alter the code's functionality or structure."
+    },
+    "3554575842": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment requests a change in the logic to skip a specific property, which involves modifying the code's behavior and structure."
+    },
+    "3560731097": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving a test input file to a different directory, which changes the structure and organization of the test resources, fitting the definition of a design change."
+    },
+    "3560925645": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on how the code will behave in a specific scenario, indicating a need for more information rather than asserting a defect or design flaw."
+    },
+    "3562061442": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment identifies a potential issue where certain files are not being suppressed, which could lead to failing CI builds in the future, indicating a correctness concern."
+    },
+    "3588669574": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the wording and placement of a comment within the code, which is a stylistic improvement without altering the code's structure or functionality."
+    },
+    "3588685271": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a specific comment ('violation') to a file to avoid making 'noisy blocks', which is a stylistic choice about how to document code rather than a change to its logic or structure."
+    },
+    "3605309890": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a hint comment to explain a mismatch, which is a change to the wording and appearance of the code without altering its structure or logic."
+    },
+    "3605318241": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the wording of a message to avoid using regular expression symbols, which is a stylistic choice related to presentation and readability without altering the code's structure or functionality."
+    },
+    "3584804981": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer suggests removing a state field and evaluating a condition each time, which would change the structure and state management of the class, making it stateless."
+    },
+    "3591256127": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the annotation on the class, which implies modifying the structure or attributes of the class itself, fitting the 'design' category."
+    },
+    "3591265668": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on why a file is not compilable and provides a link for comparison, indicating a need for information rather than suggesting a code change."
+    },
+    "3572732324": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether an empty statement outside of a method is allowed and expresses uncertainty, indicating a need for information rather than asserting a change."
+    },
+    "3573359822": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "The comment suggests creating an issue and adding a comment to the code, which implies a change in how the code is documented and managed, fitting best under design."
+    },
+    "3573074623": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment refers to a style guide about brace usage, which is a matter of code appearance and convention rather than correctness or structure."
+    },
+    "3573140202": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding the 'public' keyword to test methods, which is a stylistic convention and does not change the structure or behavior of the code."
+    },
+    "3591860859": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about a change in logic, specifically why a condition was changed and what the implications are."
+    },
+    "3599066941": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting to add a new enum constant to an existing enum, which changes the structure and content of the code to improve clarity for testing."
+    },
+    "3604528235": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests increasing indentation to provide more space for future violation comments, which is purely an aesthetic and formatting change without altering the code's structure or logic."
+    },
+    "3605758022": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing a comment from the file, which is a change to the wording and appearance of the code without altering its structure or functionality."
+    },
+    "3605760784": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the formatting of messages, specifically wrapping them in single quotes, which is a stylistic preference and does not alter the code's structure or logic."
+    },
+    "3619775257": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests changing the appearance of a comment from `/**` to `/***` for consistency with a convention, which is a stylistic change without altering the code's structure or behavior."
+    },
+    "3619783288": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding a new code snippet to the input files, which changes the structure and content of the test suite."
+    },
+    "3610801191": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out that the test is not covering all necessary cases (UseCase files), which means the current test logic is incorrect and doesn't fully validate the intended functionality."
+    },
+    "3610989364": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is explicitly asking for clarification about why a violation is no longer present, indicating a need for more information."
+    },
+    "3646289239": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment requests adding a violation message, which is a matter of wording and content within the existing code structure, not a change in the code's shape or logic."
+    },
+    "3646376350": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is explicitly asking for clarification and expressing confusion about the root cause and solution, indicating a need for more information rather than suggesting a specific change."
+    },
+    "3646947117": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether the code can be refactored to a single line, indicating a desire for a simpler or more readable format."
+    },
+    "3678124720": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a fundamental change in how tests are structured, advocating for input file-based testing over unit tests, which impacts the overall design of the test suite."
+    },
+    "3693617372": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the structure and approach of the tests, advocating for 'Input based testing' over 'pure unit testing', which implies modifying how tests are written and organized."
+    },
+    "3677709334": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing how a file extension is extracted and used, implying a modification to the logic and potentially the data structures involved, which alters the code's shape."
+    },
+    "3677731064": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the exception handling strategy, which involves altering the method's behavior and how exceptions are propagated and caught, thus changing the code's structure and responsibilities."
+    },
+    "3681508883": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding new functionality (highlighting for .sql and .properties files) to the existing `writeSnippet` method, which involves changing the code's behavior and potentially its structure to accommodate new file types."
+    },
+    "3681696923": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a discrepancy between a design decision and the actual implementation, suggesting that the code is not behaving as intended due to a missing delimiter for `.properties` files."
+    },
+    "3683144467": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment requests a change in the formatting of a record declaration, specifically placing each field on its own line for readability, which is a stylistic preference and does not alter the code's structure or behavior."
+    },
+    "3696780586": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting a significant change in implementation from using regular expressions to XML parsing, which would alter the structure and approach of the code."
+    },
+    "3699129381": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a minor change to the way a method call is chained, which affects only the appearance and wording of the code, not its structure or logic."
+    },
+    "3700909165": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about whether the message key is reused, indicating a need for more information rather than proposing a change."
+    },
+    "3714331739": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests changing the prefix of a message key, which is a wording change that does not alter the code's structure or behavior."
+    },
+    "2120207590": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing code that is no longer necessary due to a change in how a dependency is handled (shadowing), which implies a change in the structure or necessity of the code."
+    },
+    "2120219673": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for information about the FastCSV API and whether a different approach is possible, rather than asserting a defect or suggesting a structural change."
+    },
+    "2131473159": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests explicitly setting a default value for clarity, which is a stylistic improvement rather than a change in code structure or behavior."
+    },
+    "2131473211": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests explicitly setting a default value for clarity, which is a stylistic improvement rather than a change in code structure or behavior."
+    },
+    "2131478766": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment identifies a potential defect where duplicate header names are allowed, which could lead to incorrect behavior or data interpretation, and suggests a fix to maintain compatibility."
+    },
+    "2131527692": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the way fields are accessed, either by caching the result of `getFields()` or by using different methods, which alters the structure and implementation of the code."
+    },
+    "2131533545": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment describes a change in behavior where header field names are no longer trimmed, implying a potential defect or regression in how CSV headers are processed."
+    },
+    "2134399830": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on the behavior of the code and pointing out a potential inconsistency with other parts of the system, without asserting that a change is strictly necessary."
+    },
+    "2134410699": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a change in how `getHeaders` is called to avoid repeated object creation, which implies a change in the structure or efficiency of the code, fitting the design category."
+    },
+    "2136313094": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment suggests adding validation to prevent incorrect input, which directly addresses a potential defect or correctness issue."
+    },
+    "2121172243": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a Javadoc tag, which is a change to the wording and appearance of the documentation without altering the code's structure or behavior."
+    },
+    "2121181569": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment questions the API status of the code and suggests an alternative approach, which relates to the design and maintainability of the API."
+    },
+    "2131911579": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion involves refactoring the code by extracting a method and moving logic, which changes the structure and organization of the code."
+    },
+    "2131912504": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing redundant code by inlining a method call, which changes the structure of the code."
+    },
+    "2131924761": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding an annotation to a method, which is a change to the appearance and wording of the code without altering its structure or behavior."
+    },
+    "2132341186": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the placement of the `@Nullable` annotation, which affects only the appearance and wording of the code without altering its structure or behavior."
+    },
+    "2344243706": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests reverting existing code and introducing a new constructor, which changes the structure and API of the class."
+    },
+    "2174651096": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment questions the placement of an import, suggesting a change in the package structure or organization of the code, which falls under design."
+    },
+    "2174662808": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests replacing a stream-based approach with `System.arraycopy()`, which is a change in the implementation strategy and potentially performance, thus affecting the code's design."
+    },
+    "2174668181": {
+      "category": "question",
+      "confidence": "low",
+      "reason": "The reviewer is expressing a concern about potential failure in a specific environment (Eclipse) and indicating a future plan to revise the tests, but they are not explicitly requesting a change in the current PR, nor are they asking a direct question. It leans towards a question about how to proceed or a heads-up about future work."
+    },
+    "2182261957": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The suggestion is to use text blocks for string formatting, which is purely an aesthetic change to the code's appearance without altering its structure or behavior."
+    },
+    "2182356053": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The suggestion is to use a text block for a string literal, which is a stylistic change to the appearance of the code without altering its structure or behavior."
+    },
+    "2198796397": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment asks about changing the instantiation strategy of the class from a non-singleton to a singleton, which is a design decision about how the code is structured and managed."
+    },
+    "2198805002": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the location and implementation of locale handling, which affects the structure and maintainability of the code."
+    },
+    "2198814517": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether to omit printing a configuration parameter value, indicating a need for more information before a change is made."
+    },
+    "2200663863": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment questions the value of a specific test case given a change in the underlying logic, suggesting its removal or modification, which impacts the structure and maintainability of the tests."
+    },
+    "2202949384": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a potential runtime error (NPE or exception from a 3rd party toString) that could occur due to an implicit method call, suggesting a need for error handling."
+    },
+    "2202967176": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The reviewer suggests adding a method call to handle potential exceptions, implying that the current code might not be correctly handling unrecoverable issues, which is a correctness concern."
+    },
+    "2263218719": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change to the format of an existing Javadoc tag, which is a matter of appearance and wording rather than code structure or correctness."
+    },
+    "2266331443": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer suggests changing the implementation of an existing method (`getSuiteDisplayName`) to improve maintainability by centralizing logic, which alters the code's structure."
+    },
+    "2276062841": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the existing behavior of the code, not suggesting a change."
+    },
+    "2276065756": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding a new test case, which implies changing the structure of the test suite by introducing a new method or test, thus altering the 'shape' of the code."
+    },
+    "2276070975": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the purpose of newly added code, indicating a need for more information rather than asserting a problem or suggesting a change."
+    },
+    "2276741699": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests changing the naming convention of a test method, which is purely an aesthetic change without altering the code's structure or functionality."
+    },
+    "2279117428": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving the call to `validateAndLogInvalidRoots` to a different method (`createClasspathRootSelectors`) to ensure it's called once and in all cases, which changes the structure and flow of the code."
+    },
+    "2285495961": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the structure of the Javadoc by adding an item to a list and removing redundant explanations, which affects the organization and content of the documentation."
+    },
+    "2285497803": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the structure of the code by adding an existing implementation to a list, which alters the code's organization and API."
+    },
+    "2285517362": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests introducing a new method variant to an existing interface, which is a change to the API and structure of the code."
+    },
+    "2285546121": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding more test methods and annotating existing ones to improve test coverage and ensure specific behavior, which alters the structure and scope of the tests."
+    },
+    "2285550171": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing `@DisplayName` annotations to improve readability, which is a change to the appearance and wording of the code without altering its structure or behavior."
+    },
+    "2328669607": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a test and a corresponding file, which changes the structure and content of the codebase."
+    },
+    "2329282330": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the `serialVersionUID` to ensure serialization compatibility, which is a design decision related to the class's structure and how it interacts with the Java serialization mechanism."
+    },
+    "2329301541": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing an outdated comment and changing the syntax of a field declaration from `/* final */` to `final`, which only affects the appearance and wording of the code without changing its structure or behavior."
+    },
+    "2329304615": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment requests reverting a change to a method, which directly impacts the API and structure of the code by restoring a specific method."
+    },
+    "2329308339": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the structure of the test by parameterizing it to cover more cases, which would alter the number and nature of the test methods."
+    },
+    "2329323981": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting a change to the language features used (sealed types) which would alter the structure and implementation of the class, indicating a design consideration."
+    },
+    "2332293445": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the import statements to prepare for a future deletion of a type, which affects the structure and organization of the code."
+    },
+    "2371562574": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The reviewer is questioning whether the code correctly handles a case where a module is not set, suggesting it should behave like another selector that loads a module, implying a potential defect in the current logic."
+    },
+    "2410083015": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment requests adding a new test case, which would change the structure of the test suite by introducing a new test method."
+    },
+    "2410083281": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment requests adding a new test case, which implies adding new code and potentially new methods or logic to the test suite, thus changing the structure of the tests."
+    },
+    "2448328743": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests refactoring code to a single location and introducing a new variant, which changes the structure and organization of the code."
+    },
+    "2448408714": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a functional defect where the code does not respect the `NO_COLOR` environment variable, which is a correctness issue. It also raises a platform compatibility concern."
+    },
+    "2504639090": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a potential issue with GraalVM's native-build-tools, which could lead to a runtime failure or incorrect behavior, thus falling under the 'bug' category."
+    },
+    "2426324156": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests rewording a double negative for clarity, which is a change to the wording of the code or comments without altering its structure or behavior."
+    },
+    "2426657001": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion to make the worker lease auto-closable and use try-with-resources changes the structure of the code by introducing a new resource management pattern and potentially removing an explicit method call."
+    },
+    "2426805446": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding documentation to explain the prioritization of low-level items, which is a change to the wording and content of comments/javadoc, not the code's structure or behavior."
+    },
+    "2426817518": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the allocation strategy of tasks to threads, which affects the structure and behavior of the executor service."
+    },
+    "2429023943": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests renaming a variable to better reflect its meaning, which impacts the clarity and maintainability of the code without changing its functionality."
+    },
+    "2433388735": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment describes a race condition where the `isLeaseAvailable` check is insufficient, leading to a `RejectedExecutionException`."
+    },
+    "2436506651": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment identifies a potential loss of efficiency and a race condition where work might not be picked up correctly due to how entries are managed and tracked, indicating a correctness issue."
+    },
+    "2436662494": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment describes a scenario where a task (AC) is repeatedly added to the front of a queue with an incremented attempt counter, preventing other tasks (like ABB) from being picked up, which indicates a potential deadlock or livelock scenario."
+    },
+    "2440463836": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment identifies a potential issue where the insertion order of elements in a queue is not preserved, which could lead to unpredictable test execution order and instability."
+    },
+    "2440557042": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a fundamental change in how threads interact with locks and tasks, altering the core logic and behavior of the executor service, which falls under design."
+    },
+    "2443329137": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking a question about the choice of data structure, seeking clarification rather than asserting a change is needed."
+    },
+    "2443365686": {
+      "category": "bug",
+      "confidence": "low",
+      "reason": "The reviewer is expressing concern about a potential race condition and suggesting a change to blocking behavior, which implies a correctness issue."
+    },
+    "2486891293": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests rephrasing the existing documentation comment for better clarity and structure, which is a stylistic improvement to the wording and presentation of the text, not a change to the code's structure or behavior."
+    },
+    "2486987625": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment expresses concerns about the choice of data structure, suggesting an alternative that might be more appropriate for resource management, which falls under design considerations."
+    },
+    "2498893085": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment describes a potential issue with the logic of the thread pool, where entries might be stolen and the scanning restarts too early, indicating a correctness problem."
+    },
+    "2460831225": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment indicates a missed requirement (using a custom comparator) which implies a defect in the current implementation's behavior."
+    },
+    "2460889323": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is explicitly asking for clarification and justification for a design choice, not asserting a problem or suggesting a change."
+    },
+    "2465357466": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion changes the way the ServerSocket is created by explicitly binding to the loopback address, which is a structural change to the code's behavior and resource management."
+    },
+    "2465371974": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether a specific mechanism (`latch`) is necessary or if an alternative approach (`thread.join`) could be used, indicating a need for more information rather than a direct assertion of a problem or a stylistic preference."
+    },
+    "2465380397": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving the instantiation of a StringBuilder to a different scope, which would change the structure and lifetime of the object, thus altering the code's shape."
+    },
+    "2465389749": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on why a specific piece of code is necessary and if an alternative approach (rethrowing the exception) would suffice."
+    },
+    "2468670213": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests reordering methods within the same class for better readability, which is a stylistic change without altering the code's functionality or structure."
+    },
+    "2469886912": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a potential defect where the equality of an object depends on a side effect, which is likely unintended and could lead to incorrect behavior."
+    },
+    "2471506524": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding a new field (`declaringClassName`) to the `MethodSelector` class, which would change the structure and API of the class."
+    },
+    "2471513534": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the correctness of the logic and whether a specific implementation detail was intentional, rather than asserting a change is needed."
+    },
+    "2492318743": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the expected behavior of awaiting futures, indicating they are seeking information rather than asserting a change is needed."
+    },
+    "2495651836": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a conditional branch, which would alter the control flow and logic of the code, thus impacting its design."
+    },
+    "2658463751": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving a method to a different utility class for potential reuse and refactoring other parts of the codebase to handle duplicates, which are structural and maintainability concerns."
+    },
+    "2658470782": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests inlining a method or changing its usage to a different utility method, which alters the structure and flow of the code."
+    },
+    "2659760593": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for confirmation about a potential simplification, indicating they are seeking clarification rather than asserting a change is needed."
+    },
+    "2690649822": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change in wording for null checks to follow a general pattern, which affects only the appearance and wording of the code without altering its structure or logic."
+    },
+    "2690659720": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting adding null checks to vararg parameters, which involves changing the method signature and adding new code, thus altering the structure of the code."
+    },
+    "2690684896": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment requests a change to the annotation's placement, which affects the appearance and wording of the code without altering its structure or behavior."
+    },
+    "2690718003": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a `Supplier` which would change the structure and implementation of the code, indicating a design concern."
+    },
+    "2690743210": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests restructuring the tests by splitting a single test method into multiple methods and using parameterized tests, which changes the structure and organization of the code."
+    },
+    "2690747911": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a minor change in syntax for readability without altering the code's structure or behavior."
+    },
+    "2690758326": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests replacing concrete stub implementations with mocks, which changes the structure and dependencies of the test code by introducing a mocking framework."
+    },
+    "2690766129": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing how an object is instantiated, which alters the structure and dependencies of the test code, fitting the definition of a design change."
+    },
+    "2690786694": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the way a parameter is used (from being defined but unused to using named arguments), which alters the structure and API of the test method."
+    },
+    "2695759880": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a change to the casing of a variable name within a message string, which is purely an aesthetic and convention-based change without altering the code's structure or behavior."
+    },
+    "2695794328": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests reusing existing methods from another class, which would change the structure and implementation of the current code."
+    },
+    "2695798874": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a comment to prevent code formatting changes, which is a stylistic concern related to code appearance."
+    },
+    "2708285100": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests inlining a string literal and potentially extracting a method, which changes the structure and organization of the code, fitting the definition of a design change."
+    },
+    "2708291879": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests renaming method parameters for consistency, which is a change to the appearance and wording of the code without altering its structure or behavior."
+    },
+    "2708958738": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment explicitly states that the wording of a precondition could be more accurate, which falls under the category of style as it pertains to the phrasing of comments or documentation without altering the code's structure or behavior."
+    },
+    "2708963848": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment is a personal note about the naming of parameters, suggesting a stylistic improvement rather than a change in code structure or correctness."
+    },
+    "2708990720": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking if a specific method was considered, indicating a need for clarification rather than suggesting a change."
+    },
+    "2708999153": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the structure of the test class by using a parameterized class, which alters how tests are defined and organized."
+    },
+    "2809329876": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests reorganizing constants within the source code, which changes the structure and organization of the code, fitting the definition of design."
+    },
+    "2809330889": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment expresses an opinion about the length of a string constant but does not suggest any change to the code's logic, structure, or behavior."
+    },
+    "2811299776": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests deleting a class, which fundamentally changes the structure and existence of code, fitting the definition of a design change."
+    },
+    "2947610128": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting a change in the API's semantics and implementation to align with expected optional-like behavior, which involves altering the structure of the code."
+    },
+    "2947774963": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the reasoning behind a specific code implementation (sorting suppressed exceptions) and suggesting an alternative behavior based on their understanding of expected order."
+    },
+    "2947812880": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether adding more information to a log message would be beneficial, rather than stating a problem or suggesting a specific change."
+    },
+    "2948022904": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a potential correctness issue where `path.toString()` could result in an empty string even if `path` is not empty, due to differences in file systems. This could lead to incorrect behavior if an empty string is not handled properly."
+    },
+    "3021707729": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether to include specific details about symlinks and junctions in the documentation, indicating a need for more information rather than asserting a change."
+    },
+    "2902118982": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a redundant `Optional` wrapping, which changes the way the code handles the return value and thus alters the code's structure and API."
+    },
+    "2902136288": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about a design decision (why a method is final when others are not) without asserting that a change is needed."
+    },
+    "3044390964": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment suggests adding a check to prevent potential issues (like NPEs or incorrect behavior) when processing stream-based logic on an empty set of descendants, which is a correctness concern."
+    },
+    "3048465931": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment describes a potential memory leak due to incorrect logic in handling unique IDs, which would lead to incorrect behavior and resource exhaustion."
+    },
+    "3050546162": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving the description from one class to another, which changes the structure and organization of the code."
+    },
+    "3309674783": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests using a ternary operator, which is a stylistic choice for code formatting and readability, not a change in logic or structure."
+    },
+    "3309680144": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for the motivation behind a code change, specifically whether it was done to address a static analysis tool's warning."
+    },
+    "3325485013": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding Javadoc content and formatting to improve readability and prominence, which falls under the 'style' category as it does not alter the code's structure or behavior."
+    },
+    "3325573830": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the exception hierarchy by extending JUnitException instead of RuntimeException, which affects the structure and extensibility of the code."
+    },
+    "3325595769": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests making the class extensible, which involves changing its design and API by potentially adding constructors or other methods to support extension, and also suggests specific Javadoc wording to document this design choice."
+    },
+    "3325607256": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a Javadoc header for stylistic and documentation purposes, which does not alter the code's structure or behavior."
+    },
+    "3407585339": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a header to improve the readability and organization of the Javadoc, which is a change to the appearance and wording of the documentation without altering the code's structure or behavior."
+    },
+    "3407595741": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding documentation to an existing method, which is a change to the wording and presentation of the code rather than its structure or behavior."
+    },
+    "3407600924": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding wording to existing Javadoc for consistency, which is a change to the appearance and wording of the code without altering its structure or behavior."
+    },
+    "3407623532": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding documentation to an existing method, which is a change to the wording and appearance of the code, not its structure or behavior."
+    },
+    "3436469297": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a minor wording change to a Javadoc comment, which falls under the 'style' category as it does not alter the code's structure or behavior."
+    },
+    "3458719492": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on how a specific design choice (public class with private constructor) should be categorized, rather than asserting a bug, design change, or style preference."
+    },
+    "3458769563": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about a design decision regarding class visibility and constructor access."
+    },
+    "3458786988": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking a question about the visibility of the constructor, seeking clarification rather than asserting a change."
+    },
+    "3495440417": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests changing the wording of a check and its accompanying message to match existing conventions in the codebase, which is a stylistic concern."
+    },
+    "3495473477": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the testing strategy from mocking to integration testing and moving the test, which alters the structure and location of the code."
+    },
+    "3682273475": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The reviewer points out a potential correctness issue where the loop condition might not accurately handle all cases, suggesting a more robust condition to prevent potential errors."
+    },
+    "3682399489": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests restructuring the code to use streams for generating and adding test descriptors, which changes the shape and organization of the code."
+    },
+    "3683060813": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a fundamental change in how time is handled within the tests, moving from `Thread.sleep` to using a mockable `Clock` and storing `Instant` objects, which alters the structure and testability of the code."
+    },
+    "3683121435": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a constant, which implies changing the structure of the code by removing a variable declaration and its usage, thus altering the shape of the code."
+    },
+    "3683218554": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment suggests that discarding test output is incorrect behavior and that tests should be updated to include it, indicating a potential defect in how test results are handled."
+    },
+    "3683237739": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the structure of the tests by moving the state-changing logic from a helper method into individual test methods to improve clarity and reduce unexpected side effects, which alters the shape of the code."
+    },
+    "694915202": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about whether to keep the tests, indicating a need for discussion rather than asserting a change to the code itself."
+    },
+    "694931396": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "The comment suggests removing a specific line of code to reinstate a test, which implies a change in the test's structure or logic, fitting the 'design' category."
+    },
+    "696538253": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is questioning the design decision to support mocking 'Object' and suggesting an alternative approach, which impacts the overall structure and feature set of the code."
+    },
+    "696539065": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests extracting a common piece of code (a ClassLoader) into a shared testing package to reduce duplication and improve maintainability, which is a design concern."
+    },
+    "723368248": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment is about adding a missing license header, which is a formatting and convention issue that does not change the code's structure or behavior."
+    },
+    "723555538": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving the test file to a different location, which changes the structure and organization of the codebase."
+    },
+    "807038227": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer suggests extracting the try-catch block from an inlined method into separate methods for better readability and clarity, which changes the structure of the test code."
+    },
+    "807040206": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion to use `assertThatThrownBy` changes the structure of the test code by introducing a new assertion method and potentially altering how the exception is caught and verified, which is a design change."
+    },
+    "807041482": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the way tests are written by replacing `@Test(expected)` with `assertThatThrownBy`, which alters the structure and implementation of the test methods."
+    },
+    "807045878": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting a test case to verify that using `inOrder` with a different class than the mocked object leads to an illegal state, implying a potential correctness issue if this scenario is not handled properly."
+    },
+    "827454303": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests refactoring the return type of a method to use a different collection type, which changes the structure and API of the code."
+    },
+    "827455167": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a class if it's no longer used, which is a change to the structure and maintainability of the codebase."
+    },
+    "852910156": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking a question about the feasibility of keeping a behavior while also addressing an issue, indicating they are seeking clarification rather than asserting a change."
+    },
+    "1226423360": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests changing the assertion library, which affects the appearance and wording of the code but not its structure or logic. It's a stylistic change to conform to a project convention."
+    },
+    "851675292": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the data structure from a list to a set to improve efficiency, which alters the code's structure and implementation."
+    },
+    "851675348": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about a design decision, specifically why a change is limited to Graal and if it should be applied more broadly for consistency."
+    },
+    "851675403": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a test class that is no longer relevant, which changes the structure of the test suite."
+    },
+    "882650859": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a minor change to the Javadoc tag `@since` which only affects the wording and not the structure or behavior of the code."
+    },
+    "882652186": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests rephrasing a sentence in the Javadoc for clarity and better convention, which is a stylistic change without altering the code's structure or behavior."
+    },
+    "882653603": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests refactoring code to use a different method and deprecating the current one, which involves changing the structure and API of the code."
+    },
+    "882655294": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a missing test case for a specific scenario (setting strictness to null) which implies a potential defect if that scenario is not handled correctly, and requests a test to verify exception throwing."
+    },
+    "882655834": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the API by deprecating a method and directing users to a different one, which alters the structure and usability of the code."
+    },
+    "882655945": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Deprecating a method changes its API and how it will be used in the future, which falls under design considerations."
+    },
+    "882657358": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests rewording and omitting a part of the documentation for stylistic reasons, without changing the code's structure or behavior."
+    },
+    "882658376": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests extracting separate test methods, which changes the structure of the test code by creating new methods."
+    },
+    "882658824": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests using a lambda expression for conciseness, which is a stylistic improvement without changing the code's structure or functionality."
+    },
+    "882659012": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests splitting a single test method into three separate test methods, which changes the structure of the test code."
+    },
+    "884447378": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the intended behavior change regarding mock strictness, not asserting a bug or proposing a design/style change."
+    },
+    "886354285": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting a change to the code's structure and implementation by proposing the use of a different Java construct (enum valueOf) instead of the current approach, which would alter how the code functions and is organized."
+    },
+    "886354675": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests renaming a constant for better readability, which is a change to wording and appearance without altering the code's structure or behavior."
+    },
+    "886356153": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether additional tests should be added, rather than asserting a defect or suggesting a specific code change."
+    },
+    "915144785": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests inlining a method and removing another, which changes the structure and organization of the code."
+    },
+    "915145345": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing an 'else' block to simplify the control flow, which is a purely stylistic change that does not alter the code's structure or behavior."
+    },
+    "915148308": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests renaming a method for better clarity, which is a change to wording and appearance without altering the code's structure or functionality."
+    },
+    "915149639": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding new functionality (`@Mock` support) and corresponding tests, which involves changing the code's structure and capabilities."
+    },
+    "923669159": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment discusses the API design for exposing custom MockMaker functionality to users, suggesting changes to how these internal classes are made available and managed, which directly impacts the structure and usability of the library."
+    },
+    "956771861": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests significant changes to how mockmakers are loaded, including dynamic loading via reflection, storing a field, making a method public, and adding integration tests, all of which alter the structure and maintainability of the code."
+    },
+    "956772061": {
+      "category": "question",
+      "confidence": "low",
+      "reason": "The comment is not about the code itself but about process and coordination, suggesting a separate issue be filed. It's closest to a question as it implies a need for further action outside the current PR."
+    },
+    "956772878": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests updating the Javadoc example to use String literals for the mockmaker class name, which is a change to the wording and appearance of the documentation without altering the code's structure or behavior."
+    },
+    "944845392": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests inlining a method, which would change the structure of the code by removing a method and potentially altering call sites, fitting the definition of a design change."
+    },
+    "944846203": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion is to change the structure of the code by modifying the `toString()` method to directly return a field, which alters the shape of the code."
+    },
+    "944847830": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing an intermediate variable and directly assigning to an existing variable, which is a change in wording and appearance without altering the code's structure or location."
+    },
+    "944849660": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving the test to a different location, which changes the structure and organization of the codebase."
+    },
+    "944851696": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting to remove a field declaration and inline the stream operation, which changes the structure of the code."
+    },
+    "944852751": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the type of exception thrown and improving the error message, which affects the API and maintainability of the code by providing better error handling and information to the user."
+    },
+    "944852973": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the type of exception thrown, which alters the API and error handling strategy of the code."
+    },
+    "944854932": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment expresses a preference against adding a feature (a toggle to disable debugging) and suggests an alternative approach (shipping without the toggle and considering it based on user feedback), which directly relates to the design and feature set of the code."
+    },
+    "945159167": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment identifies a potential runtime error (missing exception handling for `ExceptionInInitializerError`) that could lead to incorrect program behavior, thus falling under the 'bug' category."
+    },
+    "945160864": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing unused code (constructors), which is a change to the structure and maintainability of the code, fitting the 'design' category."
+    },
+    "1020583115": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a Javadoc tag, which is a change to the documentation's appearance and wording without altering the code's structure or behavior."
+    },
+    "1020584303": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for confirmation ('WDYT?') about adding a test case for a corner case, indicating they are seeking input rather than dictating a change."
+    },
+    "1050560005": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a minor change to the Javadoc, specifically the `@since` tag, which is a stylistic improvement to documentation rather than a functional or structural change to the code."
+    },
+    "1052577511": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment discusses potential changes to the structure of interfaces and how they are implemented, suggesting splitting interfaces and altering inheritance, which falls under design considerations."
+    },
+    "1054530605": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing an interface, which changes the structure and organization of the code, fitting the definition of a design change."
+    },
+    "1054533415": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the scope of the pull request and its relation to another issue."
+    },
+    "1054536136": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification on whether a test can be unignored, implying a need for information rather than suggesting a code change."
+    },
+    "1059064844": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing an interface and changing how a class is matched, which alters the structure and API of the code."
+    },
+    "1059065109": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The reviewer suggests changing the type from `Object` to `T` for consistency, which is a minor wording change that does not alter the code's structure or behavior."
+    },
+    "1083402617": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing an entire factory class and using the relevant location directly, which would change the structure and organization of the code."
+    },
+    "1083515211": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests refactoring by deleting an existing class and renaming another, which fundamentally changes the structure and organization of the code."
+    },
+    "1119361617": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment points out a lack of test coverage for a specific branch, which implies a potential defect or missing functionality that is not being tested."
+    },
+    "1119362299": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests restructuring the test code by creating separate test cases and inner classes, which changes the shape and organization of the code."
+    },
+    "1119362735": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing an assertion, which changes the structure of the test by removing a line of code, thus impacting the test's design."
+    },
+    "1297792859": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about why a specific code path is not being hit, indicating a need for more information rather than suggesting a change."
+    },
+    "1298579074": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the logic and structure of the code by introducing a conditional check and potentially removing an existing method call, which alters the shape of the code."
+    },
+    "1346899716": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests splitting a test case into a separate test method, which changes the structure of the test class by introducing a new method."
+    },
+    "1346900314": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests deprecating an existing method in favor of a new one, which is a change to the API and structure of the code."
+    },
+    "1346925228": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the interface by adding a default implementation and marking it as not extensible, which alters the structure and API of the code."
+    },
+    "1405377838": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the behavior of the method by always throwing an exception instead of swallowing it, which alters the core logic and expected outcome of the code."
+    },
+    "1408347949": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The suggestion is to change the specificity of an assertion, which affects only the wording and appearance of the test code without altering its structure or functionality."
+    },
+    "1408348742": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests duplicating an existing test method and applying a similar pattern to two other test methods, which implies creating new test methods and thus changing the structure of the test code."
+    },
+    "1439309689": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the data structure used to store mocks, which alters the code's organization and how data is managed."
+    },
+    "1439312225": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests refactoring the code by introducing an overload and an enum to avoid multiple boolean parameters, which changes the structure and API of the code."
+    },
+    "1439313561": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding a new test case, which changes the structure and content of the test suite."
+    },
+    "1444041518": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is questioning the architectural decision to move implementation logic into an interface and proposing a refactoring of interfaces and plugin loading mechanisms to better separate concerns."
+    },
+    "1462001933": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the method signature to use generics, which alters the structure and API of the code, and also proposes removing an annotation as a consequence of this design change."
+    },
+    "1462012417": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment is about adding a missing license header, which is a matter of file appearance and project convention, not code structure or correctness."
+    },
+    "1730306134": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the implementation of an existing API (`clearInlineMocks`) rather than introducing a new one, which directly impacts the code's structure and API surface."
+    },
+    "1743564170": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the potential impact of a merge on memory usage and the root cause of previous memory leaks."
+    },
+    "1743569117": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests restructuring the classes by making `DisabledMockException` an inner class and reversing the inheritance hierarchy, which changes the code's structure and organization."
+    },
+    "1748900641": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests moving an exception class to a different package and exposing it in the public API, which fundamentally changes the structure and accessibility of the code."
+    },
+    "1744361831": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding a new feature to the code: printing a message under specific JVM conditions, which would alter the code's behavior and structure."
+    },
+    "1744410975": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding more context to a comment, which is a wording and appearance change without altering the code's structure or functionality."
+    },
+    "1744531544": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The suggestion to use try-with-resources changes the structure of the code by introducing a new block and potentially altering resource management, which falls under design."
+    },
+    "1744532480": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests a minor change to improve consistency in handling an InputStream, which falls under appearance and wording rather than structural changes."
+    },
+    "1744537566": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment identifies a potential issue where a necessary component (temporary boot jar with dispatcher) is not set up, which could lead to a 'class not found' error later on, indicating a correctness concern."
+    },
+    "1745017481": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment identifies a typo in a Javadoc comment, which is a matter of wording and appearance rather than code structure or correctness."
+    },
+    "1745020965": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests removing a `finally` block, which is a minor code structure change related to resource management but doesn't fundamentally alter the logic or API, fitting the definition of style."
+    },
+    "1745091488": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a language attribute to an HTML tag within a Javadoc comment, which is purely a stylistic improvement to the documentation's appearance and does not alter the code's structure or behavior."
+    },
+    "1745092369": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests adding a language attribute to a code snippet within a Javadoc, which is a purely stylistic change to the documentation's appearance without altering the code's structure or behavior."
+    },
+    "1745100544": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests rewording and incorporating specific text into a Javadoc comment, which is a change to the appearance and wording of the code without altering its structure or functionality."
+    },
+    "1745545472": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment explicitly states 'typo' and the suggestion is to correct a minor formatting issue in a Javadoc comment, which does not change the code's structure or behavior."
+    },
+    "1788402491": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests replacing a direct call to `System.out.println` with a call to `Plugins.getMockitoLogger().log(...)`, which changes the abstraction and logging mechanism used in the code."
+    },
+    "1788402937": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting a change in the type of exception thrown, which alters the API and error handling strategy of the code."
+    },
+    "1869558645": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment suggests changing the exception type from `NullPointerException` to `MockitoException` to provide a more descriptive error message, which directly addresses a potential runtime issue and improves error handling."
+    },
+    "1871173611": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment suggests that the test is expecting the wrong exception, indicating a potential defect in the test's correctness."
+    },
+    "1888081857": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about existing tests and their location, not suggesting a code change."
+    },
+    "1888084617": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the necessity of using reflection, indicating a need for more information rather than proposing a specific change."
+    },
+    "2282835068": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing a method and using a different approach for its usages, which would change the structure and maintainability of the code."
+    },
+    "2283286944": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests reordering logic and potentially adding error handling, which changes the structure and flow of the test code."
+    },
+    "2722244464": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding similar functionality to another class, which implies a change in the structure and organization of the code, fitting the 'design' category."
+    },
+    "2731781624": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests changing the signature of a method to align with an interface, which alters the structure and API of the code."
+    },
+    "3225094600": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests updating documentation, which is a change to the wording and content of comments/javadocs, not the code structure itself."
+    },
+    "3225118739": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests adding a new test case, which would change the structure of the test suite by introducing new code."
+    },
+    "3225128346": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests changing a string literal to a valid Java package name, which is a minor wording change that does not affect the code's structure or behavior."
+    },
+    "3225159919": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "The comment suggests changing the wording of a log message for clarity and conciseness, which is a stylistic improvement without altering the code's structure or behavior."
+    },
+    "3537347858": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer is suggesting to extract duplicated logic into a separate JUnit5 compatible TestBase class, which changes the structure and organization of the code."
+    },
+    "3538181653": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests removing unused code, which is a change to the structure and maintainability of the codebase."
+    },
+    "3571617561": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests using an external library for a more robust implementation, which implies a change in the code's structure and dependencies, fitting the 'design' category."
+    },
+    "3571632610": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking for clarification about the necessity of sorting the declared fields, indicating a lack of understanding rather than a direct assertion of a problem or a suggestion for change."
+    },
+    "3571656886": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The comment suggests a change in the behavior of how differences are reported, implying a modification to the existing logic and output format, which falls under design."
+    },
+    "3581038624": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The comment raises a potential security concern where sensitive information could be exposed through reflective printing in tests, which is a correctness issue."
+    }
+  },
+  "failures": []
+}
