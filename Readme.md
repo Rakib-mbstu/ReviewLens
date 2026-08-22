@@ -106,6 +106,9 @@ python -m reviewlens.eval --run runs/<model-id>/ --judge-model <model-id> --repo
 #    other model ID it is a parameter, never hardcoded. The corpus directory is
 #    read from the run's run_meta.json, so a report is always tied to the corpus
 #    the run actually used (override with --corpus if it has moved).
+
+# 4. Export a reproducible sample of matches and unmatched-model comments for manual verification
+python -m reviewlens.eval.export_verification --run runs/<model-id>/ --out reports/<model-id>-verification.csv
 ```
 
 All LLM responses are cached under `cache/`; a full re-run with a warm cache costs $0.
