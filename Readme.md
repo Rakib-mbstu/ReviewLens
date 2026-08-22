@@ -92,6 +92,10 @@ export GITHUB_TOKEN=...          # read-only, for PR mining
 # 1. Mine the evaluation corpus
 python -m reviewlens.mine --projects junit5 mockito checkstyle --out data/corpus/
 
+# 1b. Categorize each human comment (bug/design/style/question) for RQ1's
+#     per-category recall — LLM-assisted, spot-checked by hand, never hardcoded
+python -m reviewlens.eval.categorize --corpus data/corpus/ --model <model-id>
+
 # 2. Run the reviewer on the pre-review state of each PR
 python -m reviewlens.review --corpus data/corpus/ --model <model-id> --out runs/<model-id>/
 #    add --no-cache to force fresh API calls instead of reusing cached responses

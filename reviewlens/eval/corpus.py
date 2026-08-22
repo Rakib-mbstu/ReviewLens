@@ -23,6 +23,9 @@ from dataclasses import dataclass, field
 from reviewlens.mine.miner import MANIFEST_FILENAME
 
 RUN_META_FILENAME = "run_meta.json"
+# Written by reviewlens.eval.categorize, keyed by human comment id. Not a PR
+# record, so load_corpus must skip it exactly like the mining manifest.
+CATEGORIES_FILENAME = "categories.json"
 
 
 @dataclass
@@ -51,14 +54,18 @@ class EvalInputs:
     missing_from_run: list[str] = field(default_factory=list)
 
 
-def normalize_human_comment(raw: dict) -> dict:
+def normalize_human_comment(raw: dict, categories: dict | None = None) -> dict:
     """Rewrite a mined human comment into matching's `{file, line, comment}`.
 
     Identity fields (`id`, `url`, `author`) are carried through unchanged so
     the manual-verification export can link a judgment back to the comment
-    a human actually wrote on GitHub.
+    a human actually wrote on GitHub. `category` is added only when
+    `categories` (keyed by comment id as a string, as `categorize.py` writes
+    it) has an entry for this comment — absence must stay absence, not a
+    fabricated category, so metrics.compute_metrics can tell "not yet
+    categorized" apart from every real category.
     """
-    return {
+    normalized = {
         "file": raw["path"],
         "line": raw["line"],
         "comment": raw["body"],
@@ -66,6 +73,11 @@ def normalize_human_comment(raw: dict) -> dict:
         "url": raw.get("url"),
         "author": raw.get("author"),
     }
+    if categories:
+        entry = categories.get(str(raw.get("id")))
+        if entry is not None:
+            normalized["category"] = entry["category"]
+    return normalized
 
 
 def pr_key(repo: str, number: int) -> str:
@@ -88,7 +100,7 @@ def load_corpus(corpus_dir: str) -> dict[str, dict]:
         )
     records: dict[str, dict] = {}
     for path in sorted(glob.glob(os.path.join(corpus_dir, "*.json"))):
-        if os.path.basename(path) == MANIFEST_FILENAME:
+        if os.path.basename(path) in (MANIFEST_FILENAME, CATEGORIES_FILENAME):
             continue
         with open(path, encoding="utf-8") as f:
             record = json.load(f)
@@ -96,6 +108,21 @@ def load_corpus(corpus_dir: str) -> dict[str, dict]:
     if not records:
         raise FileNotFoundError(f"Corpus directory holds no PR files: {corpus_dir}")
     return records
+
+
+def load_categories(corpus_dir: str) -> dict:
+    """Read `categories.json` from a corpus directory, keyed by comment id.
+
+    Its absence is not an error: categorization is a separate stage (T8) that
+    may not have run yet, and per-category recall simply stays unavailable
+    (metrics.compute_metrics's existing behavior) rather than this module
+    treating a missing file as a setup mistake.
+    """
+    path = os.path.join(corpus_dir, CATEGORIES_FILENAME)
+    if not os.path.isfile(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)["categories"]
 
 
 def load_run_meta(run_dir: str) -> dict:
@@ -146,6 +173,7 @@ def load_eval_inputs(run_dir: str, corpus_dir: str | None = None) -> EvalInputs:
         )
 
     corpus = load_corpus(resolved_corpus)
+    categories = load_categories(resolved_corpus)
     prs: list[EvalPR] = []
     missing_from_corpus: list[str] = []
     reviewed_keys = set()
@@ -162,7 +190,8 @@ def load_eval_inputs(run_dir: str, corpus_dir: str | None = None) -> EvalInputs:
                 repo=summary["repo"],
                 number=summary["number"],
                 human_comments=[
-                    normalize_human_comment(c) for c in record.get("human_comments", [])
+                    normalize_human_comment(c, categories)
+                    for c in record.get("human_comments", [])
                 ],
                 model_comments=load_model_comments(run_dir, key),
                 parse_error_count=summary.get("parse_error_count", 0),
