@@ -1,0 +1,21 @@
+{"key": "6cb6bbb7c128095022ab76ded3c7452fc12df62fd8d9be0575a0c4b02b3b02d4", "content": "[{\"file\": \"junit-vintage-engine/src/main/java/org/junit/vintage/engine/VintageTestEngine.java\", \"line\": 37, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"`@Deprecated(since = \\\"6.0\\\")` is declared without `forRemoval`. Is removal of the Vintage engine actually planned for a later release? If it is, setting `forRemoval = true` gives users a much stronger compiler signal to migrate; if it is not, it would help to say so, since the Javadoc wording (\\\"should only be used temporarily\\\") reads like removal is intended.\"}]"}
+{"key": "5713e8aa37c85e45a5e96167ea3822bbc5f6a1d31a5c704b8d5c52043c6bdf1b", "content": "[]"}
+{"key": "1a1dc9285733cbb652cd9910020301c0f425282b66e966079c23296b4e2a816a", "content": "[{\"file\": \"junit-vintage-engine/src/main/java/org/junit/vintage/engine/discovery/VintageDiscoverer.java\", \"line\": 50, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"Why `Severity.INFO` for a deprecation notice? Deprecations are usually surfaced as warnings so that they are visible in default build output; with INFO this message may be filtered out by the very users who need to act on it. Was INFO chosen deliberately to avoid failing builds configured to treat discovery warnings as errors?\"}]"}
+{"key": "ebd54eb665ab1bcc61164a8bca515d0e903be30bc33e57643af95966392ed66b", "content": "[]"}
+{"key": "ab17dd70f063e4b24f03bfcfd2c8571e2d7f93385af1d696d3e5e204a1f287d4", "content": "[]"}
+{"key": "2cac0dbc7f1ed1b36422df0411ab8d362ba2458841fb5f892ab024afdc97d6b1", "content": "[{\"file\": \"junit-vintage-engine/src/test/java/org/junit/vintage/engine/VintageTestEngineDiscoveryTests.java\", \"line\": 716, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Nit: `reportDiscoveryIssueWhenTestsAreFound` is inconsistent with the third-person naming used by the sibling test added just above (`reportsNoDiscoveryIssuesWhenNoTestsAreFound`). Suggest `reportsDiscoveryIssueWhenTestsAreFound`.\"}]"}
+{"key": "ad39677570c6ec6db22b28e6cff3c6c88b061ed181b4fc66a1659fe2be2155ac", "content": "[]"}
+{"key": "72d28f7fc8d6d996b0871e51ff961922bcc86cc38cb3717684c5abd59194bf4b", "content": "[]"}
+{"key": "d49ef0113d92dfd539946a5b0225500a265bcfd1b4145c9be6b9afa84fc52ebb", "content": "[]"}
+{"key": "e9c113012a7f40a286860bcb6ae7355ebb9ccf30f9ed605671679eec63595538", "content": "[]"}
+{"key": "6110d50a53ea05ade4b378b02b547d44cd40c0cc988bde38c0ebd5e74d5f9a74", "content": "[]"}
+{"key": "23f76777cbe343141d2060bc95769e37e6fe8ed5f2ebaf8ddafc6c120532a4b7", "content": "[]"}
+{"key": "7442a97c03de8f04ebd94bfb692b076aadfb1a549fad10f29592cfe8b2d1a67a", "content": "[]"}
+{"key": "0836419cb66f8f223423db31b9d7192d73bbf11b596ad02c5f3724adbec895c2", "content": "[]"}
+{"key": "6dfac756da46b5b2ef1039a02c327d6b92348e5f15f5e2447de98566480056bf", "content": "[]"}
+{"key": "cefca9c769f4bf40607244092ecff009ba760ba865ec290ee1275d842896100a", "content": "[]"}
+{"key": "f7196201dac723613363ade4990183d5812f9f06bf1ec84ecaccca7d0176ff32", "content": "[]"}
+{"key": "47ec1a8d831c2227332a24327823f6cedca6bddaaa54468b0ff331d71c963a08", "content": "[]"}
+{"key": "33d729b8fbf6cdad880751dbb52d3457082b9758528e26e9f746f3047292d960", "content": "[]"}
+{"key": "fc27a8e7f214d22cfbf218252b841e6e84bba881733e6094f599001baaf67c3a", "content": "[]"}
+{"key": "13e279827480275183943b42f2325b38ffa11c9bb31db8362db7e51783418fe7", "content": "[]"}

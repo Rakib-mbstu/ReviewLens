@@ -1,0 +1,21 @@
+{"key": "0ae95ec7cf1fcd8bf1e0bd4d318f3581f52339d9f9b7b30118b7e116a5eaee18", "content": "[]"}
+{"key": "a8c88444c03982c41ae2ab4ef940d51073b7cf7e22356e1264d2a242ae264e0d", "content": "[]"}
+{"key": "f96f61e18a35f9787fa72679af88549f18120f56788a7b6cd73cc69262281783", "content": "[]"}
+{"key": "dd89b6c723a73f548990ee8e099255228cfda8268cfecf8ecb3f40d1ccaaa948", "content": "[{\"file\": \"src/main/java/org/mockito/internal/matchers/InstanceOf.java\", \"line\": 14, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"clazz's visibility was widened from private to package-private, but VarArgAware is a static nested class of InstanceOf, so it already had access to the private field (its type() override reads clazz directly). The wider visibility looks unnecessary and slightly weakens encapsulation.\"}]"}
+{"key": "bd09c342255be93882eebda4936c2856e2247dedb660beb735a3124b36ef8d69", "content": "[]"}
+{"key": "3ce9a4726ab2d2657fd9cf312566836524459a27679b66313f4662b505b4abd9", "content": "[]"}
+{"key": "b048384e1d4598073426015c10d85a1b9b111c459d78859979029bcdaadc3271", "content": "[{\"file\": \"src/main/java/org/mockito/internal/matchers/VarargMatcher.java\", \"line\": 13, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Typo in the new @deprecated javadoc: \\\"compatability\\\" should be \\\"compatibility\\\".\"}]"}
+{"key": "a8feabae645f0b0806121acaf59a8efd56334df5e58a7f67aad1e3e140256016", "content": "[]"}
+{"key": "8b26e1b7245ea080b4d52bf3b4b6c315ad4d4e263d183d9e85eeaff6c85b1439", "content": "[]"}
+{"key": "e8a461e54ab2b59793910001b95d09a9cdc85cdd9b084c73f59f4bca1247d220", "content": "[]"}
+{"key": "3a02c6cc516b6ad969216e955ef2ae82ec8802c935832f545bc4e229cdfa4271", "content": "[]"}
+{"key": "2f20a7a6b334a66c74ba6b03e389461ad04a9048d21df9c98b2f819502681222", "content": "[]"}
+{"key": "57244fa6cc1491463816688f8314b732da89e073fcf5aa613b3a35d8265da8a3", "content": "[]"}
+{"key": "85537d9b354381025b0e6e907e7bd2632bfbfd9eefcab2d1adf0a000daddecda", "content": "[]"}
+{"key": "f7abd31f497eeaa5081e21d7e2ff994ddcfcd5166224f5dc8680d20d4c92e4d9", "content": "[]"}
+{"key": "783e095909d59159ba8fc1ce69a8491e916b4175f250ad627b4dc79a2f50d804", "content": "[]"}
+{"key": "ea8eda0189a2914f1bfccf4b883cb14ce70c8823cd7c8a095c14825794676e3a", "content": "[]"}
+{"key": "d64ee09d9098e9b7ac16910c72d0381341f3e0f75596d3d87b6d87fa33ae3ab9", "content": "[{\"file\": \"src/main/java/org/mockito/internal/matchers/CapturingMatcher.java\", \"line\": 79, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"captureFrom() now does an unchecked cast of the raw Object argument to T without validating it against clazz (which matches() does check). Because of generic erasure this won't throw here even if the value doesn't actually conform to clazz \\u2014 is it guaranteed callers only invoke captureFrom() after matches() has confirmed compatibility, or could this silently store a mismatched value?\"}]"}
+{"key": "74d19faf4d4464cc52323481e0782a5922c366eb228efac9bc26c2d324f99ae6", "content": "[]"}
+{"key": "344fd2b2be0b002b0de2aa7bcd7a39adcaf0d52ce89550caa1ae0d13b3cf85ab", "content": "[]"}
+{"key": "b3a84bf3d602f42dd5487de76a791bd0b6971ef475b56d56b9aea71d197ce38e", "content": "[]"}

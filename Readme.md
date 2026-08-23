@@ -54,9 +54,21 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 
 *Pending — evaluation runs scheduled for August 2026. This section will contain the recall/hallucination table per model, per comment category.*
 
-| Model | Recall (overall) | Recall (bug) | Recall (design) | Hallucination rate |
-|---|---|---|---|---|
-| — | — | — | — | — |
+**Preliminary — 30-PR subset, 102 human comments.** Not the full 90-PR corpus, and
+differences between arms are **not statistically significant** at this sample size.
+
+| Model | Via | Comments | Recall (overall) | Recall (bug) | Recall (design) | Hallucination rate |
+|---|---|---|---|---|---|---|
+| `qwen/qwen3-coder-30b-a3b-instruct` | OpenRouter | 816 | 1.0% (1/102) | 0/14 | 0/50 | not measured |
+| `anthropic/claude-sonnet-5` | subagent | 76 | 1.0% (1/102) | 0/14 | 1/50 | not measured |
+| `claude-code-subagent/opus` | subagent | 249 | 5.9% (6/102) | 0/14 | 3/50 | not measured |
+
+Fisher exact for the largest gap (6/102 vs 1/102) gives p = 0.119; the 95% intervals
+overlap. Treat the ordering as unconfirmed. The subagent arms were reached through an
+agent harness rather than the OpenRouter API — no temperature control, and the harness's
+own system prompt wrapped each call — so they are confounded with delivery channel.
+Hallucination rate stays *not measured* until the manual verification pass.
+See `reports/rq3-comparison-subset30.md`.
 
 ## Limitations (stated up front)
 

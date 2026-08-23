@@ -6,6 +6,9 @@ runs/
 data/corpus/*
 !data/corpus/manifest.json
 !data/corpus/categories.json
+data/corpus-subset30/*
+!data/corpus-subset30/manifest.json
+!data/corpus-subset30/categories.json
 
 # Local planning notes (tickets live as GitHub issues)
 BACKLOG.md

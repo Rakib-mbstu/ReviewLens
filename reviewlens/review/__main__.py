@@ -19,6 +19,7 @@ from reviewlens.eval.corpus import CATEGORIES_FILENAME
 from reviewlens.mine.miner import MANIFEST_FILENAME
 from reviewlens.openrouter import OpenRouterClient
 from reviewlens.review.engine import DEFAULT_CONTEXT_LINES, review_pr
+from reviewlens.review.offline_client import OfflineClient
 from reviewlens.review.ingest import GitHubClient, PRExcluded, fetch_pr_snapshot
 from reviewlens.review.prompt import load_prompt
 
@@ -102,6 +103,20 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="Bypass the LLM response cache and force fresh API calls.",
     )
+    parser.add_argument(
+        "--offline-requests",
+        default=None,
+        help=(
+            "Drive the run with OfflineClient instead of OpenRouter, recording every "
+            "unanswered chunk request to this JSONL file. Used for RQ3 arms served by a "
+            "model reached outside the OpenRouter API."
+        ),
+    )
+    parser.add_argument(
+        "--offline-answers",
+        default=None,
+        help="JSONL of {key, content} answers to replay (requires --offline-requests).",
+    )
     args = parser.parse_args(argv)
 
     entries = _load_corpus_entries(args.corpus)
@@ -109,7 +124,13 @@ def main(argv: list[str] | None = None) -> None:
     os.makedirs(args.out, exist_ok=True)
 
     github_client = GitHubClient()
-    llm_client = OpenRouterClient(use_cache=not args.no_cache)
+    if args.offline_answers and not args.offline_requests:
+        sys.exit("--offline-answers requires --offline-requests.")
+    offline = args.offline_requests is not None
+    if offline:
+        llm_client = OfflineClient(args.offline_requests, args.offline_answers)
+    else:
+        llm_client = OpenRouterClient(use_cache=not args.no_cache)
 
     pr_summaries: list[dict] = []
     exclusions: list[dict] = []
@@ -134,6 +155,12 @@ def main(argv: list[str] | None = None) -> None:
                 "params": prompt.params,
             },
             "context_lines": DEFAULT_CONTEXT_LINES,
+            # How the model was reached. RQ3 arms served by a Claude Code
+            # subagent did not go through the OpenRouter API, so they have no
+            # temperature control and carry the agent harness's own system
+            # prompt — a delivery-channel difference that must travel with the
+            # numbers rather than sit in a footnote.
+            "via": "claude-code-subagent" if offline else "openrouter",
             # Recorded so `reviewlens.eval` can tie a report to the corpus the
             # run actually used, rather than whatever happens to be on disk
             # when the report is generated.

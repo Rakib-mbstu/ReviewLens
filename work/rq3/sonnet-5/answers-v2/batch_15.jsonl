@@ -1,0 +1,21 @@
+{"key": "ceecc2805302bf091b7321d798ba46f5babc983d940a5230c9480f364e35add0", "content": "[]"}
+{"key": "72c207bf041d281ae76988f0ec536728ee668d7aabe38bcc82701675c7970eb3", "content": "[{\"file\": \"junit-jupiter-api/src/main/java/org/junit/jupiter/api/io/TempDir.java\", \"line\": 154, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The new `deletionStrategy()` attribute has no Javadoc, unlike the sibling `cleanup()` attribute just above it which documents its default and includes an `@since` tag. Consider documenting the default behavior (delegating to the configured default strategy) and adding `@since 6.1`.\"}]"}
+{"key": "92aa6db7a121ab1b67716c4b8a0617e77de0adb2c6de14af3193a420cfb668da", "content": "[]"}
+{"key": "a0dddac2ea449733944c77f0855f0ce8fc907d3cf430e41bd5a1b78bf02e27ec", "content": "[]"}
+{"key": "b95172ea8edf616734a4d3bc1f1f6f5c6e93ac639e4763ae62c8dbb8f1fbcc89", "content": "[]"}
+{"key": "3ef7bfffd3a8c79388a5aca5d8d68d1e82fe81d2b34a4b90ac7db292f949a888", "content": "[]"}
+{"key": "7c35e8f8b6fcd2955e0df7e8329ed4132945ed6832e680576a1f68ec12c57d15", "content": "[]"}
+{"key": "7a4f6cd4724254d2f444f0e8f66cee94f880f786565f2b661a527cab565341d4", "content": "[]"}
+{"key": "d292aaaaa9c24bf7106cd84abb9ca1f061ccf32e9ab06b9e7fa26c42427d19fb", "content": "[]"}
+{"key": "2bf2ea989a3daea7c1f5afaea79643ebdcb91642ffdcaa9c4e2e90f485f656ff", "content": "[]"}
+{"key": "60315dde1953346a7c29fe7198e42368c265afde97851bac3a06028e302d614c", "content": "[]"}
+{"key": "1499975cc1178745cc2d7e163322f56818dfee3feab26410dac898e183fa85d2", "content": "[]"}
+{"key": "76b582f5f3b6b7f9e9aef667d6274f4106fd63f41af1516e8d7030186dbbc03e", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/extension/TempDirectory.java\", \"line\": 76, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"NAMESPACE was previously package-private with a comment noting it existed for testing purposes, alongside the now-removed FILE_OPERATIONS_KEY. It's now private. Was package-level test access to this field intentionally dropped, or could this break tests that relied on it?\"}]"}
+{"key": "f93032b479e7e18331713bccffd7e034909ba7850e561f77e20dce8b2a5fd5e7", "content": "[]"}
+{"key": "42ddbb3e3d39122c569c22d3c4fad707ff3a888ac29bc074c78085a42e954ff4", "content": "[]"}
+{"key": "38f4010eeb710a8db52b3252f284b3fe49c4fe3b6f64a0fbdffeec0b4e34d1a9", "content": "[{\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/api/io/TempDirDeletionStrategyTests.java\", \"line\": 44, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"`assertThat(result.isSuccessful())` never calls a terminal assertion like `.isTrue()`, so this line performs no actual verification \\u2014 the test would still pass even if `isSuccessful()` returned false.\"}]"}
+{"key": "554a53e3fa2d2ce47e2e9308009259bac9d6ccae9d19a40098a8bc6cd9958ccd", "content": "[]"}
+{"key": "7dab7fb83b7f7209d14ba66da18244237199b02d2976e92ab820d8d3d30a41e0", "content": "[]"}
+{"key": "8a156d4b2674c714dc28e3d248716c284676e2f10f873c2187fbbadace130548", "content": "[]"}
+{"key": "fad2796868fa44e0db32cb6fc830a91fcfca8d1cc48fa8ad1fe975abdeefcb3e", "content": "[]"}
+{"key": "7c021e3ed29c649cd9cee764954c44135759c8be5c60fdc85244f3a9ddb83218", "content": "[]"}

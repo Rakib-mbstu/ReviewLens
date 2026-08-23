@@ -1,0 +1,21 @@
+{"key": "aa664381dd271f8768ba79f7dc2d8deb56e9c3a131075711724ca6506b9c9609", "content": "[]"}
+{"key": "d48a40775e51edfa74fdf4e2f0305c1ad976ef6d2793cba04210a6f03b8d70c4", "content": "[]"}
+{"key": "445e394c74c496754e850174c9b88eb774cdecb2a70664ceb04b72eb169f5659", "content": "[]"}
+{"key": "401f9a81aba2aa54998aa895d5f4bb1ffc5e26ad99d3666508a5ab19abe7e64d", "content": "[]"}
+{"key": "78c5ca6c4b9a21fea6f06fea5c41d8f8faedefdb6c9327177e94744d96fe8f81", "content": "[]"}
+{"key": "c602ef5051a54bb3ecb997a5cd180c7a5c560a208e87a803a847202a11b67961", "content": "[]"}
+{"key": "cff2611ac8e228b9e61e395d1e793d635c3b9b0ac8fb01d49d5a07ff0e0c3424", "content": "[]"}
+{"key": "9f77b6e7be3bf186bb474095c9916cfb7127b3eee51d60651d70ed896b7ef910", "content": "[]"}
+{"key": "7f6daf17b8092c8ac6efec4cf90d6aa61474f2307c6825edb1fc60fae06092dd", "content": "[]"}
+{"key": "0c7f1999fe8df9995f6ada036d34e3443966d02c64f68f707052ec792d9ef303", "content": "[]"}
+{"key": "28e3e49dd44423c75ff023aa92cbaeb74b086ef6b43bef7a78c415893a930345", "content": "[]"}
+{"key": "055fc5b6b7864aa014db99af7e68c03f730d32d174c9c0667d263625927632d6", "content": "[]"}
+{"key": "d162080a01d2fb72ded55eb6de86343db9c81cad03bd2cbcf5af2b814ad31369", "content": "[]"}
+{"key": "e62f568630cbc55e368ac85b9c3188b3b564fc285dad301918a4f3eef08bad68", "content": "[]"}
+{"key": "5d36ffcfc309f2347d9c1f742eacb223018feb9cbe945a2e8e2b11fa46494e30", "content": "[]"}
+{"key": "79aa8b613d85ec9bebe7d6661cfe7fcad1c4547c02183df2209364260b3193a8", "content": "[]"}
+{"key": "a38a9323f2f58b2745f9d62f54ddc85cf059417b3a8e54410484d4abe42c046c", "content": "[]"}
+{"key": "ecb1b5030cab7282f1bcd18289e671af3f6fc28da4f3e6ab4a9e0212f357b954", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java\", \"line\": 198, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Mid-sentence capitalization of 'Destructuring' in \\\"instanceof record Destructuring\\\" looks like a typo; should be lowercase to match the surrounding sentence.\"}]"}
+{"key": "c997bb0663e1df7a304fda0a5f7687a51be951717be28077a59ab7d3b9b4eb66", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java\", \"line\": 233, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Mid-sentence capitalization of 'Destructuring' in \\\"instanceof record Destructuring\\\" looks like a typo; should be lowercase to match the surrounding sentence.\"}]"}
+{"key": "24072de4d63fcdc7b18a9e1e8b2f0a971f3cc900e881e0fb45e67fe5deb80f0a", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java\", \"line\": 452, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Javadoc wording is awkward: \\\"declared in a switch labels and instanceof\\\" has a singular/plural mismatch and doesn't clearly convey that record-pattern destructuring inside instanceof is also covered. Consider rewording, e.g. 'declared in a switch label or as part of instanceof record-pattern destructuring'.\"}]"}
+{"key": "71e5f535c5a9fc5f633dd9bf849a542ec29592a86f13fb360e5f2e622912501d", "content": "[]"}

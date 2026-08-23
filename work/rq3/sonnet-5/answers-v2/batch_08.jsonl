@@ -1,0 +1,21 @@
+{"key": "296e1e87cbd2573cbe71ecf916b505cf46cfbc6f0f685f73ff1b8fe837cab9bd", "content": "[]"}
+{"key": "ab2251d9ba2fa0b78b6f8b1bdb212e44362b0bb2fa086e6bb1820862149d8188", "content": "[]"}
+{"key": "84a5ab9b2349d2184997a05ccdf5ad82d8b575217a703af21a502228740c6f05", "content": "[]"}
+{"key": "a880dd3c91b325281c302755dd62bd7d80b3ff9723acbb299642ce14b2f6ddf7", "content": "[]"}
+{"key": "e5c529bf3640c29e0dee45f9043d98431efae97f092a606f5f232c4178913dcf", "content": "[]"}
+{"key": "bbdc76e6427605265249d933443df88e75c9c286c30ec381f81d0f503c2ac11c", "content": "[]"}
+{"key": "cba600d1bfed15b7195ccdacf10bcdf0ac59552895e8b81a78add28dcdefe44c", "content": "[]"}
+{"key": "71427b68900f20dc300d9ab5afea08fd52b6da69edbc0eeb5d8708aac0d9ce87", "content": "[]"}
+{"key": "e07cb4cc11cee2a55746cc02da0ef2fe28af291a88d41dd655ca98b334227d52", "content": "[]"}
+{"key": "aec488a7c9baba206db4ffee94445d13ed219aef5c71cfbebb3e7aacdcc3e1ad", "content": "[]"}
+{"key": "013fc53bc3d95cc63c6a827b4d5e1060a413020c1307a0de83267eeae65cb0a6", "content": "[]"}
+{"key": "f3dc19a046df769d182ca76631ec39e902ff86eac2601e3fae2ec85f1b9512f4", "content": "[]"}
+{"key": "e37b3257943c62ba321113ab2eed36c40ee238f9626bdda29be58282daa87237", "content": "[]"}
+{"key": "767e95faeb625a97932c84fa00c30dd90a80c9eec8eed53aece001d1ef898943", "content": "[{\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/params/aggregator/DefaultArgumentsAccessorTests.java\", \"line\": 172, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The local variable `context` (a mocked ExtensionContext) is now unused since DefaultArgumentsAccessor.create no longer takes a context argument; remove it.\"}]"}
+{"key": "57456da285df26f8f3afe9e5fa7f920206725b4c62c5252c68b774d39ccd4a48", "content": "[]"}
+{"key": "00a017a0e887aa3046f1517f32b0f2bc05359c39530d71e294db09105ddc3edb", "content": "[]"}
+{"key": "83c3ebf8994cd2d48b1b146f285a097aa281eda4a19e932a52ae2063f1c924f2", "content": "[{\"file\": \"jupiter-tests/src/test/kotlin/org/junit/jupiter/params/aggregator/ArgumentsAccessorKotlinTests.kt\", \"line\": 57, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The local `context` (a mocked ExtensionContext) is now unused since DefaultArgumentsAccessor.create no longer takes a context parameter; remove it.\"}]"}
+{"key": "1096a34ad0aa1acb61f7dcf645dc0e4dce282174bc34c99e05ca03a18f89283a", "content": "[]"}
+{"key": "38c3563a53344f55abe457304805b2ff1077e342f9f8dcea1245b005b46a0fee", "content": "[]"}
+{"key": "e8f1dd2ade5f1344ed16194ef4882a705fb15e6ea001b58a7a572370591b1c17", "content": "[]"}
+{"key": "a4a0701290f949882f0e1849580223f68a0e12c123f85740d4b0c756b76a8481", "content": "[{\"file\": \"junit-platform-launcher/src/main/java/org/junit/platform/launcher/core/DiscoveryIssueCollector.java\", \"line\": 91, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"toSource's visibility was narrowed from package-private to private as part of adding the toSourceSafely wrapper. Please confirm no other class in this package (e.g. a test) calls toSource directly, since that would no longer compile.\"}]"}

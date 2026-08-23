@@ -1,0 +1,21 @@
+{"key": "82f9ca6ec3be8dda61c41d938c8e1778da7f4807b8430c0ead942b3120ec1957", "content": "[]"}
+{"key": "31e47a6c766f3e76595bd8d33241a6587d4bfde85da8310582f19004bb9cfa59", "content": "[]"}
+{"key": "81fd507ec14d2afaa9d0c09385c763eed1b4cc3767720e1c712b6d4530b05c82", "content": "[{\"file\": \"src/site/xdoc/checks/javadoc/writetag.xml\", \"line\": 417, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"This renames the documented message keys type.missingTag -> javadoc.missingTag and type.tagFormat -> javadoc.tagFormat. Since this page states that all messages can be customized, users who override these keys or suppress by key will silently lose those overrides after upgrading. Is the key rename intended as a breaking change, and is it called out in the release notes?\"}]"}
+{"key": "506cad6f3f576f5af35c1c46ac5de86ea0d9a1fa5871fe4adb74d13ba6a565a2", "content": "[]"}
+{"key": "308c2e079a4695510aba1fb4af4f068da8551ebdd6a60a4b80c1af99da0305ec", "content": "[]"}
+{"key": "1d0ba1fb6e42b231f9b562f7362cd9156ce31674b072b03f759a38da1f387150", "content": "[]"}
+{"key": "3206db3bb0f29fcf7037d099ae82c9e9591f6bf6a3e8d8ec25bc3cfc51893bc8", "content": "[]"}
+{"key": "7c9829f22680b66340bb5936919b5539e34b73e8fe1575fcd1933a8aee692f99", "content": "[]"}
+{"key": "7fb574b025ff32d7b5e5a68cbd4b346693bf95e50129568330c2b06727cbb1a2", "content": "[]"}
+{"key": "61a0b2d7d89b0e0b493c6efbe3ad28e3b131939d46bef87854fea9c5dd8f2335", "content": "[]"}
+{"key": "4e1f6a664d2239243767952c0159fff2e245d4b6e62ab075d710cb90c37c7059", "content": "[]"}
+{"key": "a3a4b26ecc79d079d6dccadf2eb7e4d06c9c48d405b251d1fcd70c09d90eb744", "content": "[]"}
+{"key": "79d47ca342c89d8fb0a14d0d3bb34a183ba15fc1c9e886382f269317fc5c7b70", "content": "[]"}
+{"key": "6712fdb5b9ef9e44ed9d74dd51fe2403298750af3a12feced3c0b5b556da1e61", "content": "[]"}
+{"key": "7e4f025e4269bb34378fa2de9ac51ebc5e553f1932359fa413d9f43c3d845067", "content": "[]"}
+{"key": "24932eb2ed514b8e934842a2ce112ebea4b20b737321b4a1bd9e85e598ca5e11", "content": "[]"}
+{"key": "36723af3d18f032026be3e1f673f1ea4a178ee90e4a234eceac35e0bf50db157", "content": "[]"}
+{"key": "a8f152414951e3df44dd23e055cbef0f5fca75ad5084468b60c1166ce715a9b1", "content": "[]"}
+{"key": "e2638f1603a5b84fdfe7e3c5d7662f0b368d1cee05a9a9f3ae393a051d2f04db", "content": "[{\"file\": \"documentation/src/test/java/example/IgnoredTestsDemo.java\", \"line\": 19, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"@SuppressWarnings(\\\"removal\\\") is added inside the `tag::user_guide` region, so it will be rendered into the user guide snippet that readers copy verbatim. The suppression is a build-side concern for this demo, not something users should be told to add; consider placing it outside the tagged region.\"}]"}
+{"key": "16676150894c6ad173fe343220641f828cf71b71fd5503aee5ac5ab2830074cd", "content": "[]"}
+{"key": "935c54c805966edeee2b4464bfffa70bbf29f897ac677a96d95b246d74a63764", "content": "[{\"file\": \"junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/EnableJUnit4MigrationSupport.java\", \"line\": 55, \"category\": \"style\", \"severity\": \"medium\", \"comment\": \"The annotation is now @Deprecated(forRemoval = true) but the Javadoc above has no @deprecated tag. For a public API marked for removal, add a @deprecated paragraph naming the replacement (e.g. Jupiter's @Disabled and the native extension model) so the compiler warning points users somewhere.\"}]"}

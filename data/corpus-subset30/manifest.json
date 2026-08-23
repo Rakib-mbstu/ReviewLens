@@ -1,0 +1,219 @@
+{
+  "mined_at": "2026-08-06T04:02:59.948182+00:00",
+  "criteria": {
+    "min_comments": 2,
+    "min_comment_chars": 30,
+    "max_changed_files": 50,
+    "max_changed_lines": 2000,
+    "per_project": 30,
+    "max_total": 100,
+    "scan_limit": 1500
+  },
+  "projects": [
+    {
+      "slug": "junit5",
+      "repo": "junit-team/junit5",
+      "scanned": 967,
+      "selected": 30,
+      "hit_scan_limit": false,
+      "skipped": {
+        "not_merged": 89,
+        "bot_author": 649,
+        "no_java_files": 0,
+        "too_large": 2,
+        "too_few_comments": 197,
+        "no_review_activity": 0,
+        "pre_review_commit_unreachable": 0
+      },
+      "unanchored_comments": 0
+    },
+    {
+      "slug": "mockito",
+      "repo": "mockito/mockito",
+      "scanned": 814,
+      "selected": 30,
+      "hit_scan_limit": false,
+      "skipped": {
+        "not_merged": 137,
+        "bot_author": 426,
+        "no_java_files": 1,
+        "too_large": 0,
+        "too_few_comments": 220,
+        "no_review_activity": 0,
+        "pre_review_commit_unreachable": 0
+      },
+      "unanchored_comments": 0
+    },
+    {
+      "slug": "checkstyle",
+      "repo": "checkstyle/checkstyle",
+      "scanned": 534,
+      "selected": 30,
+      "hit_scan_limit": false,
+      "skipped": {
+        "not_merged": 59,
+        "bot_author": 30,
+        "no_java_files": 0,
+        "too_large": 2,
+        "too_few_comments": 413,
+        "no_review_activity": 0,
+        "pre_review_commit_unreachable": 0
+      },
+      "unanchored_comments": 0
+    }
+  ],
+  "prs": [
+    {
+      "repo": "junit-team/junit5",
+      "number": 5708,
+      "pre_review_sha": "b9cd9a1754e7761dcb5c931f837c355623d273ae"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5424,
+      "pre_review_sha": "96f450589ca924120651a2fdff613d129b782ef2"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5379,
+      "pre_review_sha": "8149c006f76a0eb20f249c8e105a75c46a61feb5"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5135,
+      "pre_review_sha": "cafaaa6372a6915d9e4db1c0c496eb22a38b801f"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5060,
+      "pre_review_sha": "9d77839067a612c571c7448fc9c74e8d0e5d78d9"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 5042,
+      "pre_review_sha": "a170306616a28dfcba28fa25e8ba9e8eaad08611"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4913,
+      "pre_review_sha": "b4956d693c8ca690306c524d1cb9dd5f415f95b9"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4761,
+      "pre_review_sha": "e123ed61987508e76d717cf9c8865e6520a6ba8c"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4751,
+      "pre_review_sha": "92599463eefe8c51461e928bfbad21e8ad4ea512"
+    },
+    {
+      "repo": "junit-team/junit5",
+      "number": 4609,
+      "pre_review_sha": "ae2df7c4f7f074a96da730cd16c44168d45d143a"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3551,
+      "pre_review_sha": "048ddd71484469a550e234faeffcdc4348c0dbc2"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3129,
+      "pre_review_sha": "35345e1132f193ac05a1b5477805c54cd396b8a4"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 3097,
+      "pre_review_sha": "3118cc4a890b55709ff721b1bc24cbb3fddbaf8b"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2883,
+      "pre_review_sha": "7677df31f4ab1a98b52daec138fbc1e7cff0f0cd"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2842,
+      "pre_review_sha": "37bca564dbc6d0a76502c8376c7b8987afd0c350"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2807,
+      "pre_review_sha": "0ddedaa57ff1b9a4a278d0339debdb4f08ef8b77"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2659,
+      "pre_review_sha": "d0bf836510a44ddeb65d6492f2fa3d35f3c3caf3"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2650,
+      "pre_review_sha": "ff8a4eee87213e964525263d384bcf5a9ddfceaa"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2603,
+      "pre_review_sha": "04bda90cdd1bef035884cde8f7e6fd28c77870f8"
+    },
+    {
+      "repo": "mockito/mockito",
+      "number": 2442,
+      "pre_review_sha": "8cbfbd760ee2a8a0e385686b20eb945629733a67"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 21086,
+      "pre_review_sha": "6b69c2be83b7a12a7efba3b500e176e66ad79404"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20752,
+      "pre_review_sha": "48081e473e296688e8ba784b355109695448ae73"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20717,
+      "pre_review_sha": "2a5b853c0dbf4e839a807287745f4eae059323e5"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20604,
+      "pre_review_sha": "4a847c1034cddb3ecb79459334b734999848fff5"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20600,
+      "pre_review_sha": "da6d55a4bff6d8ee015ca92935481ae71d352cab"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20554,
+      "pre_review_sha": "f6ff3da46e917b93ac02bdbc4888bc21c4e5df47"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20537,
+      "pre_review_sha": "657dfd7bddd604cd264f4627a1ba5b6a219e6588"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20407,
+      "pre_review_sha": "caa9bdbfe9f57ebe2760e69628db28afcdc78334"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20362,
+      "pre_review_sha": "294c595f640b54d5aa663ea45b2a720c1ea9b746"
+    },
+    {
+      "repo": "checkstyle/checkstyle",
+      "number": 20351,
+      "pre_review_sha": "ad3fb05fdd5b0cf2a1969a459d2de12fd85847b3"
+    }
+  ],
+  "subset_of": "data/corpus",
+  "subset_seed": 20260824
+}

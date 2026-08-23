@@ -1,0 +1,21 @@
+{"key": "8a6dc9078587e67cb4d4ca5369b2262a16979701a1689d74cb3e38574cf24d39", "content": "[]"}
+{"key": "4b3aa37ed442844de1a573fcae70ee8f75d9f60ae7eea66f2eb902320f6bb17c", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/utils/JavadocUtil.java\", \"line\": 205, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"The loop condition dropped the `child != null` guard that the old `isDeclarationBody(child)` check included. `child.getType()` is now called directly, so if `ast.getFirstChild()` is null, or `getNextSibling()` walks off the end without ever hitting an IDENT token, this throws a NullPointerException. Since this is a public static utility whose javadoc only says \\\"the declaration AST node\\\", worth re-adding a null check or documenting that ast must always have an IDENT child.\"}]"}
+{"key": "309de956f9bd5c9c1b5e3183669e78cc1cc0d85986e1c3b70a8ce9dac237d86f", "content": "[]"}
+{"key": "72968e166de486602f9321dc5dfa907d6842dbb59128eff5cd22357314a9e9ed", "content": "[]"}
+{"key": "781692295c9614ba94846c87a5b4e2280e6ccd205a183059b60fc0d956dacac2", "content": "[]"}
+{"key": "ccf21388807d63985acb40b72e1ce75e462f0ef638b014896f6faa3b2c16b55d", "content": "[]"}
+{"key": "9ff5bbd67d606cdc8eed625c4e571f6af5fae7affe6ea1397b4c53042aa05b84", "content": "[]"}
+{"key": "5de351a2838ddaddb3ecb500fdc7d5d9eae3e0e3cfea379e0c2da590cbe0c877", "content": "[]"}
+{"key": "e0b6c6ce45a6d8699071bd3cb1683f0c54d5f4fcec9ea6d4aa4b43992e67348b", "content": "[]"}
+{"key": "b2224fe42a5eb39a32e631443df136686543ec769f39f9d33be67376da318b5e", "content": "[]"}
+{"key": "6184f44be53fd434bee5c5d3dbd01d259771787ed0815f730834d7f9e7073e48", "content": "[]"}
+{"key": "97613e062ca97557e7d38e8460f41f52015dd0a2bfd03bed22b459ffcb4ccbf4", "content": "[]"}
+{"key": "335b7cb62e2dc7d5e862cb76aaf5f9fce97f13a6c61cf225c45827955f7600fe", "content": "[]"}
+{"key": "444dbbe1972deee21f024126b5e8012881e726a4bcb834023edfc4215d759f7f", "content": "[]"}
+{"key": "49db10179b676b899247b002828d0025937bcd58dcb17b6d58e79fcb4738617a", "content": "[{\"file\": \"src/main/resources/com/puppycrawl/tools/checkstyle/checks/javadoc/messages_pt.properties\", \"line\": 25, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This new translation is missing the trailing period that the English source (\\\"...pattern ''{1}''.\\\") and every other message in this file end with: \\\"...deveria condizer com o padr\\u00e3o ''{1}''\\\" has no closing \\\".\\\".\"}]"}
+{"key": "83b1e33789e2fdee091866b4d52c8d1a2992346e80e6af27daf05992c206b898", "content": "[]"}
+{"key": "5e681f6a31d816f6ca548c13f68e983722fb76b92c11767ecbb55f84a2fdf2fa", "content": "[]"}
+{"key": "d52a36297a6d2cc5e641ce8ed4139f937de58910fa3770bcadb01c94b7134bbe", "content": "[]"}
+{"key": "2a7ca0822d056c444a394bc0d5c90a4bcd752a575e5c54c297ccec0567876026", "content": "[]"}
+{"key": "e6982723864b36879d7f65fbc13d5a89b04dd2e37cce87825da21a50b546c910", "content": "[]"}
+{"key": "e8812befde8dd746de2a420140b6b884e4926b85596ad7c282d29a5cc32af21f", "content": "[]"}

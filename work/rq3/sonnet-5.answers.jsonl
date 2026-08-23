@@ -1,0 +1,414 @@
+{"key": "aa664381dd271f8768ba79f7dc2d8deb56e9c3a131075711724ca6506b9c9609", "content": "[]"}
+{"key": "d48a40775e51edfa74fdf4e2f0305c1ad976ef6d2793cba04210a6f03b8d70c4", "content": "[]"}
+{"key": "445e394c74c496754e850174c9b88eb774cdecb2a70664ceb04b72eb169f5659", "content": "[]"}
+{"key": "401f9a81aba2aa54998aa895d5f4bb1ffc5e26ad99d3666508a5ab19abe7e64d", "content": "[]"}
+{"key": "78c5ca6c4b9a21fea6f06fea5c41d8f8faedefdb6c9327177e94744d96fe8f81", "content": "[]"}
+{"key": "c602ef5051a54bb3ecb997a5cd180c7a5c560a208e87a803a847202a11b67961", "content": "[]"}
+{"key": "cff2611ac8e228b9e61e395d1e793d635c3b9b0ac8fb01d49d5a07ff0e0c3424", "content": "[]"}
+{"key": "9f77b6e7be3bf186bb474095c9916cfb7127b3eee51d60651d70ed896b7ef910", "content": "[]"}
+{"key": "7f6daf17b8092c8ac6efec4cf90d6aa61474f2307c6825edb1fc60fae06092dd", "content": "[]"}
+{"key": "0c7f1999fe8df9995f6ada036d34e3443966d02c64f68f707052ec792d9ef303", "content": "[]"}
+{"key": "28e3e49dd44423c75ff023aa92cbaeb74b086ef6b43bef7a78c415893a930345", "content": "[]"}
+{"key": "055fc5b6b7864aa014db99af7e68c03f730d32d174c9c0667d263625927632d6", "content": "[]"}
+{"key": "d162080a01d2fb72ded55eb6de86343db9c81cad03bd2cbcf5af2b814ad31369", "content": "[]"}
+{"key": "e62f568630cbc55e368ac85b9c3188b3b564fc285dad301918a4f3eef08bad68", "content": "[]"}
+{"key": "5d36ffcfc309f2347d9c1f742eacb223018feb9cbe945a2e8e2b11fa46494e30", "content": "[]"}
+{"key": "79aa8b613d85ec9bebe7d6661cfe7fcad1c4547c02183df2209364260b3193a8", "content": "[]"}
+{"key": "a38a9323f2f58b2745f9d62f54ddc85cf059417b3a8e54410484d4abe42c046c", "content": "[]"}
+{"key": "ecb1b5030cab7282f1bcd18289e671af3f6fc28da4f3e6ab4a9e0212f357b954", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java\", \"line\": 198, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Mid-sentence capitalization of 'Destructuring' in \\\"instanceof record Destructuring\\\" looks like a typo; should be lowercase to match the surrounding sentence.\"}]"}
+{"key": "c997bb0663e1df7a304fda0a5f7687a51be951717be28077a59ab7d3b9b4eb66", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java\", \"line\": 233, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Mid-sentence capitalization of 'Destructuring' in \\\"instanceof record Destructuring\\\" looks like a typo; should be lowercase to match the surrounding sentence.\"}]"}
+{"key": "24072de4d63fcdc7b18a9e1e8b2f0a971f3cc900e881e0fb45e67fe5deb80f0a", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java\", \"line\": 452, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Javadoc wording is awkward: \\\"declared in a switch labels and instanceof\\\" has a singular/plural mismatch and doesn't clearly convey that record-pattern destructuring inside instanceof is also covered. Consider rewording, e.g. 'declared in a switch label or as part of instanceof record-pattern destructuring'.\"}]"}
+{"key": "71e5f535c5a9fc5f633dd9bf849a542ec29592a86f13fb360e5f2e622912501d", "content": "[]"}
+{"key": "cfd2014cdb77a4ec600eba67a925e8865451d8ffb5aa455f8d070fec35a6693d", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java\", \"line\": 1104, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"\\\"Destructuring\\\" is capitalized mid-sentence here (\\\"instanceof record Destructuring\\\"), but it isn't a proper noun in this context. Should be lowercase to match the rest of the javadoc.\"}]"}
+{"key": "a72b33d3e7117f7c5315818510cad4e976ac19d310e255386595f1063ed1f432", "content": "[{\"file\": \"src/main/resources/com/puppycrawl/tools/checkstyle/meta/checks/coding/UnusedLocalVariableCheck.xml\", \"line\": 24, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"\\\"instanceof record Destructuring\\\" capitalizes \\\"Destructuring\\\" mid-sentence; it isn't a proper noun here and reads as a typo. (Likely generated from the check's javadoc, so the source javadoc comment is probably the place to fix it.)\"}]"}
+{"key": "653f02fa6013768744513b1ad69f92863207ba165c580bb238d1d038004c332b", "content": "[{\"file\": \"src/site/xdoc/checks/coding/unusedlocalvariable.xml\", \"line\": 45, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Same capitalization issue as elsewhere in this change: \\\"instanceof record Destructuring\\\" should be lowercase \\\"destructuring\\\" since it's not a proper noun.\"}]"}
+{"key": "8116354ac992160ba15f90a8b3b412577c88041a202484bebf47a2a337ab7c8b", "content": "[]"}
+{"key": "9e1679c9116c98551a368193d3ce69bb2f0ffb099bba6271c8d571c0511d84d1", "content": "[]"}
+{"key": "fcb10a4bbc34f0e528bc2b08fb7fc1eecb09c0c8948f43ff58bbae6b68b26eac", "content": "[]"}
+{"key": "f625fde4e42a257f4b66e6097e4b8159e29506abeb7eae573aec75dafb8558f8", "content": "[]"}
+{"key": "69460a988215a2e6ae1eba02f3cd50c19f5c506f2b6c938197694af490c53be0", "content": "[]"}
+{"key": "bd1a29f7316a6fc6d665cb3b2c5efba4a3cc661b8cc43404c7c94b5745a68a88", "content": "[]"}
+{"key": "390b396e55cd36728d78db1b19967c8eb8151913774ac9e99605621efd9a7960", "content": "[]"}
+{"key": "0c74b62e980c7b3ab9864a81b6e8173377e145f89044efb84be2f2cb1f8f5571", "content": "[]"}
+{"key": "33e097c3895098b0a60da64d0effdb2594d5da10da71d136274f9db0b1b5c11e", "content": "[]"}
+{"key": "638a34ad9138917a27897a24bcb1cdfb16d8e50e2bdd2a248b51b08c5ed53028", "content": "[]"}
+{"key": "954484389b389bea8005aa85e65928106e6c80565ebfba07f935ed56ed2823ad", "content": "[]"}
+{"key": "9b7284611fe95c7a042b30b31cb4adc22e52d97a91e034f0d29d8bad78c3c8ef", "content": "[{\"file\": \"config/checkstyle-non-main-files-suppressions.xml\", \"line\": 321, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The `files` attribute on this new `<suppress>` entry is indented further than the `files` attribute on every neighboring entry in this file, which all align it with fewer leading spaces. Please match the existing indentation.\"}]"}
+{"key": "b8a1dfa83f8a831bb6c6e56efee3312e34edc42e38295ea15dd62e7d76cc42fb", "content": "[]"}
+{"key": "04d6895361098c42fd4bf02ec09152098f8630c0fd64776ce271af50ca20be6e", "content": "[{\"file\": \"config/linkcheck-suppressions.txt\", \"line\": 543, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"This entry's href has no package subdirectory (`checks/MultilineCommentLeadingAsteriskPresenceCheck.html`), while every neighboring entry includes one (`checks/metrics/...`, `checks/modifier/...`, `checks/naming/...`). Is this check really generated directly under `checks/`, or is a package segment (e.g. `misc/`) missing so this suppression won't actually match the real broken link?\"}]"}
+{"key": "d049dba43e7bfb8129c2189628a6f745e24504ed830cc1371d272e2f16d1cf0d", "content": "[{\"file\": \"config/linkcheck-suppressions.txt\", \"line\": 1196, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"Same as the other new entry in this file: the href has no package subdirectory (`checks/MultilineCommentLeadingAsteriskPresenceCheck.html`) while all surrounding entries include one (`checks/modifier/...`, `checks/naming/...`). Please confirm this is the actual generated path, otherwise the suppression won't match the real link.\"}]"}
+{"key": "876f7ba4deea9c3bdb4e6011f7178a72da9a004c900b544c0b425dc8c10fe4e4", "content": "[]"}
+{"key": "3ba8200c18d61f9c3adbbcb498e9d688fcb16c521cf821693363e228dde69c1c", "content": "[]"}
+{"key": "c02183c47599728211ed276929aa7bd657753d65aba2784a3d652bceddff3b47", "content": "[]"}
+{"key": "672e0814e66c75260a538c5bd7f0d32e0c300fb38b4ae074e70b96b7b04cb963", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/MultilineCommentLeadingAsteriskPresenceCheck.java\", \"line\": 32, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Typo in Javadoc: \\\"bock comments\\\" should be \\\"block comments\\\".\"}]"}
+{"key": "e1a87123a623a6ce7d9d0d1841481600db8447daa8840cdd028c41d553dd9efe", "content": "[]"}
+{"key": "093c60eb4b8d1b6c9adc54c73ae7406a766b33b7a52562666e6f379e00ac6de9", "content": "[]"}
+{"key": "2bb838d430882b6894b3dbe90de858b9cf89f8d78648bb8ba26d603c6c06f7de", "content": "[]"}
+{"key": "374061472775561a5294b525155469ee6773a649503729520e0f5e38577e16c3", "content": "[]"}
+{"key": "bbff33a1c40a612bf6bf0ce28a80b70badb41899377462b93108f3585d42bc39", "content": "[]"}
+{"key": "0b3afbc0c5e615c7f0e9673fbd86a36e82072ad62adc1aed9579dbe38ffb5eda", "content": "[]"}
+{"key": "bb761bab5f866be21141d19271bbc5c938b79b747e8ff417450507517960b25f", "content": "[]"}
+{"key": "bbd5eea96edaae87b554cd42e788cd3b71921a2e62f9ac7d648c2ab6b52a6f2e", "content": "[]"}
+{"key": "59436ef0084aa72bd4a6715a3340f13b3679815c0ad4d04dfdecc950522d8468", "content": "[]"}
+{"key": "163d26d058eb2c51ced1c539f5f26351d25cf7be77b4afdc035133ddfd93b2c7", "content": "[]"}
+{"key": "9f77560e1d6d3f39f4cb6d5facdba8920eaaeeb9d019c4ca617a1357ea72863f", "content": "[{\"file\": \"src/main/resources/com/puppycrawl/tools/checkstyle/meta/checks/MultilineCommentLeadingAsteriskPresenceCheck.xml\", \"line\": 8, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Typo carried over from the Javadoc: \\\"bock comments\\\" should be \\\"block comments\\\".\"}]"}
+{"key": "fad11c451082afc4cbc8f87dd38fac3cefcad8d5c03ec504550b606af9a67c15", "content": "[]"}
+{"key": "1b43d0d44e95a2536b138c86c671efd915ed5978f06bb8eff82807e7972472d1", "content": "[{\"file\": \"src/site/xdoc/checks.xml\", \"line\": 1207, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Typo carried over from the Javadoc: \\\"bock comments\\\" should be \\\"block comments\\\".\"}]"}
+{"key": "202ffba17e79e5f4ff0093214c7dbb34ad471f2e512ba69c6fd5ccf2d444c6d5", "content": "[{\"file\": \"src/site/xdoc/checks/misc/index.xml\", \"line\": 102, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Typo carried over from the Javadoc: \\\"bock comments\\\" should be \\\"block comments\\\".\"}]"}
+{"key": "efd29ed1525c77f1e5da2a6d8d1165c2b7aaf57bcb046d88329e1d83a67cd138", "content": "[{\"file\": \"src/site/xdoc/checks/misc/multilinecommentleadingasteriskpresence.xml\", \"line\": 13, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Typo carried over from the Javadoc: \\\"bock comments\\\" should be \\\"block comments\\\".\"}, {\"file\": \"src/site/xdoc/checks/misc/multilinecommentleadingasteriskpresence.xml\", \"line\": 82, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The \\\"Fully Qualified Name\\\" subsection (lines 82-89) uses different indentation than the surrounding subsections (e.g. \\\"Example of Usage\\\", \\\"Parent Module\\\" use 6-space/8-space nesting) — this one is flush-left with a 4-space inner indent instead, breaking the consistent formatting of the page.\"}]"}
+{"key": "9b5e713e5ee9813e0b03cfac10493675d3a932dcf2a36dd7dbf5216de7024ffb", "content": "[{\"file\": \"src/site/xdoc/checks/misc/multilinecommentleadingasteriskpresence.xml.template\", \"line\": 32, \"category\": \"bug\", \"severity\": \"low\", \"comment\": \"Duplicate slash in the resource path: \\\".../multilinecommentleadingasteriskpresence//Example1.java\\\" (double `//` before the filename), while the \\\"config\\\" example macro just above (line 25) uses a single slash for the same directory. Looks like a copy-paste typo.\"}, {\"file\": \"src/site/xdoc/checks/misc/multilinecommentleadingasteriskpresence.xml.template\", \"line\": 60, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The \\\"Fully Qualified Name\\\" subsection (lines 60-67) uses different indentation than every other subsection in this file (flush-left tag, 4-space inner indent, vs the usual 6-space/8-space nesting).\"}]"}
+{"key": "e701344ea5adabcf2800f0b2df928aeeb0b40c5e7d60975578b464fd4551bd2e", "content": "[]"}
+{"key": "8a589043f43cdf5c0a2900c0341dc3bd0d19567049183fccf4a4e7ca0738b2b9", "content": "[]"}
+{"key": "a6f10e2eb25d0a04a28b0a122cc6dbd6bdb78887df778685259e0b4edf02e41e", "content": "[{\"file\": \"src/test/java/com/puppycrawl/tools/checkstyle/checks/MultilineCommentLeadingAsteriskPresenceCheckTest.java\", \"line\": 84, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"testInputMultilineCommentCorrect expects violations at lines 2 and 3 for \\\"InputMultilineCommentLeadingAsteriskPresenceCorrect.java\\\", and testNotMultilineComment right below expects the exact same two violations for a different, \\\"Javadoc\\\"-named input file. A file named \\\"...Correct.java\\\" would normally be expected to produce zero violations — can you confirm the input file really produces these, and that this expected array wasn't left over from copy-pasting another test?\"}]"}
+{"key": "7c484700c40f55bd7788a741eeef6291245f3d9f5ac68caee19916b2979f6c86", "content": "[]"}
+{"key": "53ed6d05da0ea0257eda622be57825229c6e5806c0804df2030f8eded8b6b5f2", "content": "[]"}
+{"key": "d1017bead76b144daf1be4869f3207554e13a60287e7f19f912f041ed6cc152d", "content": "[]"}
+{"key": "966c7114f5b6d687df8f080783227693c43b2dc7f54f9f01413d800e6ddbae1a", "content": "[]"}
+{"key": "34c49c65bcfab449606f4f15bd5549f8ef1a499866c1cb70889409295df20c25", "content": "[]"}
+{"key": "7bca01273b70884eb190c8beb411783fbb45c4f2511c40a69c6b67a3f79b52aa", "content": "[]"}
+{"key": "a97e033cc239a78d34144625db78d5d634b4c5488d9c36e77688ca9f1df022ae", "content": "[]"}
+{"key": "7419e69c2e69674196e29c4e87876a4c42c8f2127abe11652c90105aaf376b29", "content": "[]"}
+{"key": "585377983944632fab7f7096d58802b6156ef833c3e05ba1fd3a8cda2a37e3e9", "content": "[]"}
+{"key": "5ba307d7cc218a4715c920b42d50afc8c05ca569dfd910cea399de19d61d5899", "content": "[]"}
+{"key": "a735969d66d570a63fd58684dab2f47074d7687d203001adbf2e22f094870383", "content": "[]"}
+{"key": "37c74c922ef74952ae2fd0cf9b67c1c25f2730eee21826e92d3dd292bd338a2b", "content": "[]"}
+{"key": "c0e72e8466102ba6ee12595624d9ed4a76df6acbe4ba10d13e2d87553527caae", "content": "[]"}
+{"key": "e862914f80035a1b5803ca11fc034d372ae717076f444ecf5bd26eb926974e55", "content": "[]"}
+{"key": "f39c76bc0175dd2c743fac0ee0c3888ef95a9eca9f2c51bed626923645dbf86c", "content": "[]"}
+{"key": "07e2a8e9ffebbb0f4503c08e7b69fb19516cef11dde566890dbcb65d6deb62d3", "content": "[]"}
+{"key": "59cd189d1d0bd3d9c15a812ea10aa27be963abdb988d91cb493d8182579751ba", "content": "[]"}
+{"key": "542852c6575a6e3aeaf826480dc56656f385662b2d348c709569f3745925a1ee", "content": "[]"}
+{"key": "aab81c7489fbb7c6642e393f11c170a8efd37c7ed0d92021fccda1c4e010ff6f", "content": "[]"}
+{"key": "4e1ae1dfc530051af83d629c4c8d67321a7ecdfa8f5cf4a8755cc56d4cc99dfd", "content": "[]"}
+{"key": "99f807b363f9c7bbb6872d563f7a56d5d3a843aac9ca5c2278f92a134ba2c34d", "content": "[]"}
+{"key": "a7a38b1523bf7ae2dd168f3419c6c65749208ba38667e240c5a1a93b95c28614", "content": "[]"}
+{"key": "8a6dc9078587e67cb4d4ca5369b2262a16979701a1689d74cb3e38574cf24d39", "content": "[]"}
+{"key": "4b3aa37ed442844de1a573fcae70ee8f75d9f60ae7eea66f2eb902320f6bb17c", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/utils/JavadocUtil.java\", \"line\": 205, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"The loop condition dropped the `child != null` guard that the old `isDeclarationBody(child)` check included. `child.getType()` is now called directly, so if `ast.getFirstChild()` is null, or `getNextSibling()` walks off the end without ever hitting an IDENT token, this throws a NullPointerException. Since this is a public static utility whose javadoc only says \\\"the declaration AST node\\\", worth re-adding a null check or documenting that ast must always have an IDENT child.\"}]"}
+{"key": "309de956f9bd5c9c1b5e3183669e78cc1cc0d85986e1c3b70a8ce9dac237d86f", "content": "[]"}
+{"key": "72968e166de486602f9321dc5dfa907d6842dbb59128eff5cd22357314a9e9ed", "content": "[]"}
+{"key": "781692295c9614ba94846c87a5b4e2280e6ccd205a183059b60fc0d956dacac2", "content": "[]"}
+{"key": "ccf21388807d63985acb40b72e1ce75e462f0ef638b014896f6faa3b2c16b55d", "content": "[]"}
+{"key": "9ff5bbd67d606cdc8eed625c4e571f6af5fae7affe6ea1397b4c53042aa05b84", "content": "[]"}
+{"key": "5de351a2838ddaddb3ecb500fdc7d5d9eae3e0e3cfea379e0c2da590cbe0c877", "content": "[]"}
+{"key": "e0b6c6ce45a6d8699071bd3cb1683f0c54d5f4fcec9ea6d4aa4b43992e67348b", "content": "[]"}
+{"key": "b2224fe42a5eb39a32e631443df136686543ec769f39f9d33be67376da318b5e", "content": "[]"}
+{"key": "6184f44be53fd434bee5c5d3dbd01d259771787ed0815f730834d7f9e7073e48", "content": "[]"}
+{"key": "97613e062ca97557e7d38e8460f41f52015dd0a2bfd03bed22b459ffcb4ccbf4", "content": "[]"}
+{"key": "335b7cb62e2dc7d5e862cb76aaf5f9fce97f13a6c61cf225c45827955f7600fe", "content": "[]"}
+{"key": "444dbbe1972deee21f024126b5e8012881e726a4bcb834023edfc4215d759f7f", "content": "[]"}
+{"key": "49db10179b676b899247b002828d0025937bcd58dcb17b6d58e79fcb4738617a", "content": "[{\"file\": \"src/main/resources/com/puppycrawl/tools/checkstyle/checks/javadoc/messages_pt.properties\", \"line\": 25, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This new translation is missing the trailing period that the English source (\\\"...pattern ''{1}''.\\\") and every other message in this file end with: \\\"...deveria condizer com o padr\\u00e3o ''{1}''\\\" has no closing \\\".\\\".\"}]"}
+{"key": "83b1e33789e2fdee091866b4d52c8d1a2992346e80e6af27daf05992c206b898", "content": "[]"}
+{"key": "5e681f6a31d816f6ca548c13f68e983722fb76b92c11767ecbb55f84a2fdf2fa", "content": "[]"}
+{"key": "d52a36297a6d2cc5e641ce8ed4139f937de58910fa3770bcadb01c94b7134bbe", "content": "[]"}
+{"key": "2a7ca0822d056c444a394bc0d5c90a4bcd752a575e5c54c297ccec0567876026", "content": "[]"}
+{"key": "e6982723864b36879d7f65fbc13d5a89b04dd2e37cce87825da21a50b546c910", "content": "[]"}
+{"key": "e8812befde8dd746de2a420140b6b884e4926b85596ad7c282d29a5cc32af21f", "content": "[]"}
+{"key": "5609ab2b0caa63152f6490226121acdffd92438a777e47336ac414c2bd3f296e", "content": "[]"}
+{"key": "5256f3628f626ba5939bbd62f98f0181208b6eb83da0c50f0ab297806433df91", "content": "[]"}
+{"key": "c74a8239c6f77d00fedc9a9afcde0f35b50ea41744700264433716a6f964bf9e", "content": "[]"}
+{"key": "2fa77050827ce7a3fa39e456f0dc07fccc6556068f6781b596b4fb7a8472f79c", "content": "[]"}
+{"key": "11815021c699489a4a15314ab7d1c13aa0dc10827d402988540b45bdde43785f", "content": "[]"}
+{"key": "b1bb25b1ed59f1aa1272112759f15d5391449a3b776a410fa6afb1e4d388f9cf", "content": "[]"}
+{"key": "01b82c99feb139a5b8c1f627a0e9a1701af477a03794919a23b7e752d448d28c", "content": "[]"}
+{"key": "713d2b302b29c1b5bbff556171aaeb9706f98c1051d000d4d558ceeabe047b68", "content": "[]"}
+{"key": "dd99dd15e18db5d2158dad3aeb1272d3c40ac826df6b1e3cb8bfda235c1a50df", "content": "[]"}
+{"key": "46c51ab3706f779c190d1198915903cdd1870adf2c6f062cd212e090f7fbcd5a", "content": "[]"}
+{"key": "a3faa92b59918056436c22b7efc0997b0a1c3a7da60a8f5abc798e7add0b7fe0", "content": "[]"}
+{"key": "01b11cdf1024203c5fc4ef62139924af6d747234202e94017055995b98d8568a", "content": "[]"}
+{"key": "5cc98c3c6b0124f0e88dbc3c91f3abd59bc14f62be78c58655d191ccd8b77cca", "content": "[]"}
+{"key": "703a8a5ee5425e994130b644aab2b2947c4decbfdb62b0dfee800606fafe8494", "content": "[]"}
+{"key": "e1b919b6b9c9b7090aaced4484dc3b4a7aecdfdff9ee212a47a27a56de8cb507", "content": "[]"}
+{"key": "0844f7b75da8f5867fa7331e0bece5d152ccf541cb0b7672cfe60ebf97225897", "content": "[]"}
+{"key": "31f036eeb26c4fce482847a83091eb228bf633e20512aa8ba0079725ba860dff", "content": "[]"}
+{"key": "b44d57449238d58e42b70097787025d3c4266d0c194158ceedcd49a03d07a84f", "content": "[]"}
+{"key": "ac3200f9250109e857b4b71da8ad390b9eb7ee2041b74ca43ca0d66d2e8c96dc", "content": "[]"}
+{"key": "4c2196bd0bc35c12f765b98efc074eded877e73db3cfe3f10db3b15b6fd21df6", "content": "[]"}
+{"key": "488009e15fd702cf2624da606652acadc6d0ceb95fdf688f8e8e8c8b0c3804b1", "content": "[]"}
+{"key": "dc702cfe79bcaf8e9df193b94fb29845a779be23f0124be79553529c762690ed", "content": "[]"}
+{"key": "d8d03bd914ae3d29d0a48e7ed7e8ea264830b4eabf8875e26a3e4cc232218fe2", "content": "[{\"file\": \"junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/conditions/package-info.java\", \"line\": 2, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"This package's javadoc is now described as \\\"<em>Deprecated</em>\\\" in prose, but no @Deprecated annotation is added to the package declaration itself. Consider annotating the package with @Deprecated so the deprecation is picked up consistently by tooling (javadoc's deprecated-API index, IDE warnings on imports from this package), matching the classes inside it that are being marked @Deprecated.\"}]"}
+{"key": "94a14f21e625ab5a80611f9d252e99f8dc6b31044a4bd7081c0c7cab2c500f8e", "content": "[{\"file\": \"junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/package-info.java\", \"line\": 2, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"This package's javadoc is now described as \\\"<em>Deprecated</em>\\\" in prose, but no @Deprecated annotation is added to the package declaration itself. Consider annotating the package with @Deprecated so the deprecation is picked up consistently by tooling (javadoc's deprecated-API index, IDE warnings on imports from this package), matching the classes inside it that are being marked @Deprecated.\"}]"}
+{"key": "7c49f5b937e6cc7dbc5820a5eba5faf09f64bf61976a2b997c78181ed9cdf9c4", "content": "[]"}
+{"key": "c74aba1c04a3ba25d911fcfd7f8d42504f22757f1a91ad40852b8467a68a8cde", "content": "[]"}
+{"key": "870d694b30d9bfe2c426db7349f0eb51eb3f9c83be6129a86b5f57f02f1cc10b", "content": "[]"}
+{"key": "92e8b320b8a251b8f7f30c30b15105f4555dcbb086a506d0c5504f86486e213e", "content": "[]"}
+{"key": "52825e3725a0228bbf357cb64d9c9131369eecfa8e58d3b0b8f3ca819acd0bbb", "content": "[]"}
+{"key": "97a98fb3aa91e2faf451dfc8b8882183296fd36f18a3e5fceebab661b59fb8f1", "content": "[]"}
+{"key": "456d7790a21dc1584dfa9034c4b976b34e61dee5610471df8092702ec37ad547", "content": "[]"}
+{"key": "0863c72d5764676ec68bcdd300b566edaaf35f4b7588f36d5aca597f3a04ee0a", "content": "[]"}
+{"key": "5d71ad6cc2b72c1259e52e0771f2daab3587dbc4be08a4612a18598719b6a125", "content": "[]"}
+{"key": "5f44bec9f107c11d400fde9cb567bed3930753c0e1956e7dada77c4ab7e72672", "content": "[]"}
+{"key": "b2b5ac75163a1872733f6c5417dde4294dc3082ab3beb15e76bdd5f513ba56b3", "content": "[{\"file\": \"junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/rules/adapter/package-info.java\", \"line\": 2, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"This package's javadoc is now described as \\\"<em>Deprecated</em>\\\" in prose, but no @Deprecated annotation is added to the package declaration itself. Consider annotating the package with @Deprecated so the deprecation is picked up consistently by tooling (javadoc's deprecated-API index, IDE warnings on imports from this package), matching the classes inside it that are being marked @Deprecated.\"}]"}
+{"key": "458a987a9a89cbea6ca0b8de72531564c34be8b5c3a6cef97152bb7139132205", "content": "[]"}
+{"key": "b62320e025c1293a17f74bbbad2ab1f5bbdd1466dfe936b208279fd9f7deb0ae", "content": "[]"}
+{"key": "8e8e8c9ad25f8e213107a77d22d4a957ebbfbe00e158acbec126efe3915a1695", "content": "[]"}
+{"key": "90ad437a1b449bbb923d0c20e2eafdc422f0a0c7450cf6fcf5c3a0a969000854", "content": "[]"}
+{"key": "471bddd6c66fce5e3a838ba97a997fc2adc2843a3464ef649920d6d6b5961fc9", "content": "[{\"file\": \"junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/rules/member/package-info.java\", \"line\": 2, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"This package's javadoc is now described as \\\"<em>Deprecated</em>\\\" in prose, but no @Deprecated annotation is added to the package declaration itself. Consider annotating the package with @Deprecated so the deprecation is picked up consistently by tooling (javadoc's deprecated-API index, IDE warnings on imports from this package), matching the classes inside it that are being marked @Deprecated.\"}]"}
+{"key": "88477841e6b74d11f3664d893c31d506da82813f09bdd30a0bb586dbdbf19ea9", "content": "[{\"file\": \"junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/rules/package-info.java\", \"line\": 2, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"This package's javadoc is now described as \\\"<em>Deprecated</em>\\\" in prose, but no @Deprecated annotation is added to the package declaration itself. Consider annotating the package with @Deprecated so the deprecation is picked up consistently by tooling (javadoc's deprecated-API index, IDE warnings on imports from this package), matching the classes inside it that are being marked @Deprecated.\"}]"}
+{"key": "f9bc118502006f2397ab9b609608d918af627bf702ef48aaeafcbe3a28b7d443", "content": "[{\"file\": \"junit-vintage-engine/src/main/java/org/junit/vintage/engine/Constants.java\", \"line\": 21, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The @since 5.12 tag was dropped when adding @deprecated instead of being kept alongside it, so the javadoc loses the class's original introduction version.\"}]"}
+{"key": "89618e4ef605729e9a76d6587783fb9625ad7982db05b95a972bcbbf5eaa65b2", "content": "[]"}
+{"key": "deb751553b3503ac14412e471a17b0921154c2075af997aa7f1acc292f0064f7", "content": "[]"}
+{"key": "f1ca2a267e870cabf48c682a833d9d5039a6b7182bfcfe75d198603c798df108", "content": "[]"}
+{"key": "f864bf404640d070df4ed5a8c6476e81673945b9083dd064ee3d04de28106831", "content": "[]"}
+{"key": "12888a2e6d192323f6ed29d10fe2a0e4ee182cb99bb17ed8079bdfb2f09771bd", "content": "[]"}
+{"key": "5ac3fa84a6307319ff7babc3014fea75905fffe1840b0b93817c8b043694381e", "content": "[]"}
+{"key": "3231468c3104d2bf88c426a8842ea1c354d3fd3b370175a53da2f70d53f63403", "content": "[]"}
+{"key": "ef29e5378957ac044a2f3201bf2576feb9600d4de31914798c44a7628535abd1", "content": "[]"}
+{"key": "8de2c5c10de5259d5bea333e1688ba978855853900f8b39fc27014afedb44015", "content": "[]"}
+{"key": "aa997b32fdf4d366a2ec528fb24e3a8eb896669fc395aad335438d251a261ffa", "content": "[]"}
+{"key": "4561ef7d577be5bc6ea98ce0e0dfaa79d9b1dbdb5d3a486d815d97d47dd98072", "content": "[]"}
+{"key": "00caf8e0bfdceb09931b06d2d6bab793f440dfe8b05a9047a9e4f1d7d0a5e021", "content": "[]"}
+{"key": "06f15735b9ef5a58db081145673d6aee91894b274264a5fc5f0d82a2affcfa83", "content": "[]"}
+{"key": "55f2ff8ef6190ca0bbd7dd7f990ef41c9c8c6aef24a8a8b35b409114144c5f68", "content": "[]"}
+{"key": "7976ecda0e6875618420a3582981833154a39a2134125e34cc2ca9f4db3714b6", "content": "[]"}
+{"key": "3175947d495ed193c08d0b99c7715846e7ebbf5fe1d059975c51bb35dc0b7bdd", "content": "[]"}
+{"key": "6452115866bac1ebf0b1a43bc45912be11940db64707d7e5ada54d6e059ccffc", "content": "[]"}
+{"key": "33658eedc954fa2ae48bd35bc64b3906619974f5dd43af9836e2e38c94a4227c", "content": "[]"}
+{"key": "d771512734170ddd2473b729d2f79cfee8a6de93a4aebd95e375112cb101c7ef", "content": "[]"}
+{"key": "3527726657d8fee60a5695f947acf80d8a5f33b408335a708a13d79e018fffc3", "content": "[]"}
+{"key": "e2183f6a4f09006ee43c6154157196ac61a3f121bbea142fad6c5d6fbf9707b1", "content": "[]"}
+{"key": "296e1e87cbd2573cbe71ecf916b505cf46cfbc6f0f685f73ff1b8fe837cab9bd", "content": "[]"}
+{"key": "ab2251d9ba2fa0b78b6f8b1bdb212e44362b0bb2fa086e6bb1820862149d8188", "content": "[]"}
+{"key": "84a5ab9b2349d2184997a05ccdf5ad82d8b575217a703af21a502228740c6f05", "content": "[]"}
+{"key": "a880dd3c91b325281c302755dd62bd7d80b3ff9723acbb299642ce14b2f6ddf7", "content": "[]"}
+{"key": "e5c529bf3640c29e0dee45f9043d98431efae97f092a606f5f232c4178913dcf", "content": "[]"}
+{"key": "bbdc76e6427605265249d933443df88e75c9c286c30ec381f81d0f503c2ac11c", "content": "[]"}
+{"key": "cba600d1bfed15b7195ccdacf10bcdf0ac59552895e8b81a78add28dcdefe44c", "content": "[]"}
+{"key": "71427b68900f20dc300d9ab5afea08fd52b6da69edbc0eeb5d8708aac0d9ce87", "content": "[]"}
+{"key": "e07cb4cc11cee2a55746cc02da0ef2fe28af291a88d41dd655ca98b334227d52", "content": "[]"}
+{"key": "aec488a7c9baba206db4ffee94445d13ed219aef5c71cfbebb3e7aacdcc3e1ad", "content": "[]"}
+{"key": "013fc53bc3d95cc63c6a827b4d5e1060a413020c1307a0de83267eeae65cb0a6", "content": "[]"}
+{"key": "f3dc19a046df769d182ca76631ec39e902ff86eac2601e3fae2ec85f1b9512f4", "content": "[]"}
+{"key": "e37b3257943c62ba321113ab2eed36c40ee238f9626bdda29be58282daa87237", "content": "[]"}
+{"key": "767e95faeb625a97932c84fa00c30dd90a80c9eec8eed53aece001d1ef898943", "content": "[{\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/params/aggregator/DefaultArgumentsAccessorTests.java\", \"line\": 172, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The local variable `context` (a mocked ExtensionContext) is now unused since DefaultArgumentsAccessor.create no longer takes a context argument; remove it.\"}]"}
+{"key": "57456da285df26f8f3afe9e5fa7f920206725b4c62c5252c68b774d39ccd4a48", "content": "[]"}
+{"key": "00a017a0e887aa3046f1517f32b0f2bc05359c39530d71e294db09105ddc3edb", "content": "[]"}
+{"key": "83c3ebf8994cd2d48b1b146f285a097aa281eda4a19e932a52ae2063f1c924f2", "content": "[{\"file\": \"jupiter-tests/src/test/kotlin/org/junit/jupiter/params/aggregator/ArgumentsAccessorKotlinTests.kt\", \"line\": 57, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The local `context` (a mocked ExtensionContext) is now unused since DefaultArgumentsAccessor.create no longer takes a context parameter; remove it.\"}]"}
+{"key": "1096a34ad0aa1acb61f7dcf645dc0e4dce282174bc34c99e05ca03a18f89283a", "content": "[]"}
+{"key": "38c3563a53344f55abe457304805b2ff1077e342f9f8dcea1245b005b46a0fee", "content": "[]"}
+{"key": "e8f1dd2ade5f1344ed16194ef4882a705fb15e6ea001b58a7a572370591b1c17", "content": "[]"}
+{"key": "a4a0701290f949882f0e1849580223f68a0e12c123f85740d4b0c756b76a8481", "content": "[{\"file\": \"junit-platform-launcher/src/main/java/org/junit/platform/launcher/core/DiscoveryIssueCollector.java\", \"line\": 91, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"toSource's visibility was narrowed from package-private to private as part of adding the toSourceSafely wrapper. Please confirm no other class in this package (e.g. a test) calls toSource directly, since that would no longer compile.\"}]"}
+{"key": "82206c462ff8db6396dfb548d3048f8f487f25b767a66ae4d0a94bde6629b17e", "content": "[]"}
+{"key": "a9b5a58b5e3bccca4b568d2a952a57ad26ab8435b6ba9078b3953b9ba8d0dc97", "content": "[{\"file\": \"junit-platform-launcher/src/main/java/org/junit/platform/launcher/TestIdentifier.java\", \"line\": 43, \"category\": \"design\", \"severity\": \"high\", \"comment\": \"TestIdentifier drops `implements Serializable` and the pinned `serialPersistentFields`. The class is annotated `@API(status = STABLE, since = \\\"1.0\\\")`, so removing Serializable support is a breaking compatibility change for any consumer that previously serialized TestIdentifier instances (e.g. tools persisting TestPlan snapshots across JVMs/processes).\"}]"}
+{"key": "7640a3b88ce8a3da7634294a4682936bd85da4125d36be90ca2850b93886951a", "content": "[{\"file\": \"junit-platform-launcher/src/main/java/org/junit/platform/launcher/TestIdentifier.java\", \"line\": 261, \"category\": \"question\", \"severity\": \"high\", \"comment\": \"writeObject/readObject and the SerializedForm compatibility shim (which preserved the pre-1.8 field layout for deserialization) are removed here. If TestIdentifier still implements Serializable elsewhere, default serialization would now use the current field layout and would no longer correctly deserialize instances written by older versions -- the exact scenario SerializedForm existed to prevent. Was dropping this backward-compatible serialization support intentional?\"}]"}
+{"key": "b1ffd085dca8efee024812cf68eb982164426d61fb257c0fd1086ec9afa058f2", "content": "[]"}
+{"key": "319c8c9ccb7470be2ececa05629f1b1eca6a315426df010145503b51993020af", "content": "[{\"file\": \"platform-tests/src/test/java/org/junit/platform/launcher/TestIdentifierTests.java\", \"line\": 63, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Method name still implies a serialize/deserialize round-trip, but the body no longer serializes anything -- it rebuilds a TestIdentifier from a fresh TestDescriptor and compares the two. Consider renaming to reflect what's actually verified now.\"}, {\"file\": \"platform-tests/src/test/java/org/junit/platform/launcher/TestIdentifierTests.java\", \"line\": 121, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This test's name (`...CanBeSerializedAndDeserialized`) is now misleading: it no longer performs serialization, it just compares two independently constructed TestIdentifier instances for equality. Consider renaming.\"}]"}
+{"key": "d93b2c826eeb7b4514556fcb2d4cedb407e533931f94a8e36d940ca45a76207a", "content": "[]"}
+{"key": "25473630d078fdb8431045f6d922f867d32a82503ecdb06eb3c44f0938153f34", "content": "[{\"file\": \"junit-platform-commons/src/main/java/org/junit/platform/commons/util/ClasspathFilters.java\", \"line\": 36, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"In SOURCE_MODE, `isNotPackageInfo`/`isNotModuleInfo` still compare against the hardcoded `.class`-suffixed names (`package-info.class`, `module-info.class`), so a `package-info.java` or `module-info.java` file won't be filtered out here and will incorrectly be treated as a candidate class file.\"}]"}
+{"key": "8ae9e990d37bd8d43a453f9cc771616bc27db7dbacc56bcfc9d3b0cedd8e5888", "content": "[]"}
+{"key": "210ea1ead88b82725bd03d3d78f798baf5e5d43842d0fdc6f77ce6ba5763c091", "content": "[]"}
+{"key": "562f9caa8e7426f459e4cea0c05876a4e7fb36b4f57f7cf69770c60ea1c75608", "content": "[]"}
+{"key": "124dae3268a9de89d1f157b8bcff3540e1f3270fc8d74af6a79b68fe602ce760", "content": "[{\"file\": \"junit-platform-commons/src/main/java/org/junit/platform/commons/util/ExceptionUtils.java\", \"line\": 144, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"This new `else if` branch duplicates the body of the following `JUNIT_PLATFORM_LAUNCHER_PACKAGE_PREFIX` branch (`prunedStackTrace.clear();`). Consider combining the two conditions with `||` to avoid the duplication.\"}]"}
+{"key": "e7d66e6a26a8150a1bc1bb79bd44a53f57c85b378c7693b1911a1310b9de145d", "content": "[]"}
+{"key": "e127ba4e180361117d88e6169c5cc5d320efac3440e3d9043012bb26fd4ffe9a", "content": "[]"}
+{"key": "885aaaa2fbd04bdcdf46cb33736091f53022ed7bd3ee02c448090e552044b580", "content": "[]"}
+{"key": "a4a880ff3502cbc9eb906fd4a17250136a30e08f1d174058a7a2db97fd4e8188", "content": "[]"}
+{"key": "53e52cfd3459b596c3772e8f887df3dcf0a7bbb47722e1168ad078c4b4ee95cb", "content": "[]"}
+{"key": "9a40a48038f18e0921c88b3f7abd96433342ee333b6582474227048f25e0afcd", "content": "[{\"file\": \"junit-start/src/main/java/org/junit/start/JUnit.java\", \"line\": 32, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This new public-facing entry point class (`@API(status = EXPERIMENTAL)`) has Javadoc on each method but no class-level Javadoc describing what `JUnit` is/does.\"}]"}
+{"key": "0b56b9a384b410b4474e8a91db66ad1c8c480a3e60902b7134d7eabdab9e1576", "content": "[]"}
+{"key": "9711aeb17036e3beab342343f6557784c9328c194fe75424df889364060f6ffa", "content": "[]"}
+{"key": "1c4ef264eaafadf83968dee0387851f09bcb96ffb0a62d7c652b5a285e7a08d1", "content": "[]"}
+{"key": "aec674d79492a96ee2d830662d828616d0c551e8a9d0d2d1ee47e904d5866bdf", "content": "[]"}
+{"key": "069d8302783ee9b64064ad57fb66b3c8cd7a63a9bf8baa444c2c44de791ab102", "content": "[]"}
+{"key": "1a1530c59db7d826bea86cee6fe3f9398d0426cb21875984dc6a65427fffb6b1", "content": "[{\"file\": \"platform-tooling-support-tests/projects/junit-start/compact/JUnitRunClass.java\", \"line\": 18, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Method name \\\"substraction\\\" is misspelled; should be \\\"subtraction\\\".\"}]"}
+{"key": "73759ff026d42049f6af088e42275c30d3eb5de9cdbfb1982634f09903145e94", "content": "[]"}
+{"key": "f63efd5b58ae42e641edb62aa033203e67fe9eafe1013e1289f275d2dcb04463", "content": "[]"}
+{"key": "e522a8c88c7f4f97ed140c32b98244ee3f3e92a2ae72748eaaf261a7a0cc1120", "content": "[]"}
+{"key": "290a92685e318cceb4e050b3c97a0d9432773a881b93081fa6f60169b2ea6f7f", "content": "[{\"file\": \"platform-tooling-support-tests/src/test/java/platform/tooling/support/HelperTests.java\", \"line\": 39, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"\\\"junit-start\\\" is inserted between \\\"junit-jupiter-params\\\" and \\\"junit-platform-commons\\\", breaking the otherwise strict alphabetical ordering of every other entry in this list. If Helper.loadModuleDirectoryNames() returns names in sorted order, this expected list won't match the actual order and assertLinesMatch will fail; alphabetically \\\"junit-start\\\" belongs after all the junit-platform-* entries, right before junit-vintage-engine.\"}]"}
+{"key": "b889befe428b9544d344bb054385f08b6f5096d48405116643c282bb8c99cce3", "content": "[{\"file\": \"platform-tooling-support-tests/src/test/java/platform/tooling/support/tests/JUnitStartTests.java\", \"line\": 42, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"Projects.JUNIT_start doesn't follow the ALL_CAPS naming convention normally used for Java constant fields. Is the mixed-case name intentional, or should it be JUNIT_START?\"}, {\"file\": \"platform-tooling-support-tests/src/test/java/platform/tooling/support/tests/JUnitStartTests.java\", \"line\": 101, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"\\\"substraction\\\" is a misspelling of \\\"subtraction\\\"; the test method and its assertion should use the correct spelling.\"}, {\"file\": \"platform-tooling-support-tests/src/test/java/platform/tooling/support/tests/JUnitStartTests.java\", \"line\": 106, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The @FilePrefix value \\\"junit-run-Module\\\" breaks the lowercase kebab-case convention used by the other two @FilePrefix values in this class (\\\"junit-run\\\", \\\"junit-run-class\\\"); the capital \\\"M\\\" is inconsistent.\"}]"}
+{"key": "dcb4e31f5fda5294cfce4d3215977b270b04c7bfee01113b5429fc1fb2ef8b49", "content": "[{\"file\": \"platform-tooling-support-tests/src/test/java/platform/tooling/support/tests/Projects.java\", \"line\": 24, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Constant name JUNIT_start doesn't follow the ALL_CAPS naming convention used by every other constant in this class (e.g. JAR_DESCRIBE_MODULE, JUPITER_STARTER, KOTLIN_COROUTINES). Should be JUNIT_START.\"}]"}
+{"key": "d25c05c02fa5bed2b0a5bc106b4e6a2f19c25095c6be92b847b2636b1fe3dde5", "content": "[{\"file\": \"settings.gradle.kts\", \"line\": 82, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"include(\\\"junit-start\\\") is placed before the junit-platform-* includes, breaking the alphabetical ordering used for the rest of this list; alphabetically it belongs after junit-platform-testkit and before junit-vintage-engine.\"}]"}
+{"key": "b61f3c7a431568358c304d3d14807a782e4b6ade77ca667d1206692ceee5bfd3", "content": "[]"}
+{"key": "4453d83466bd6dbb41d63dbafc8aa35d5374ccfcb034b9baf876fb7aa1e6ad82", "content": "[]"}
+{"key": "56dbbd69406805824989f621526b904af62e688c33175b8787d2111a7bb89a49", "content": "[]"}
+{"key": "c85a6eede4ca6471a2628eae923976d2c9ca1037c97b74282250e8ca185b2801", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/Constants.java\", \"line\": 223, \"category\": \"style\", \"severity\": \"medium\", \"comment\": \"This javadoc sentence is incomplete: \\\"The implementation class must provide a parameter of type\\\" trails off without naming the required parameter type, leaving the actual contract for a custom HierarchicalTestExecutorService implementation undocumented on this new EXPERIMENTAL public property.\"}]"}
+{"key": "96b9695431347581caf4fa3248d3d748f4da1b8a11be65968b8bcfde3f1407f9", "content": "[]"}
+{"key": "3096cb315e65124cce3813e62c1809d96f45376d0e98ee90007b121cb46bff64", "content": "[]"}
+{"key": "f98d0a5af709126ccb926d6fa64d3413be44d31a6a2eea184b91385ed29588af", "content": "[]"}
+{"key": "5351869e6c164d6c30efede620f65b2fde70aae1bbf81ae6b92af04391a9f98a", "content": "[]"}
+{"key": "d966d0cc14b9b4cf3eb62585345214c286c5b0ea38d5c48ccb25961f6ddf02b5", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/config/CachingJupiterConfiguration.java\", \"line\": 74, \"category\": \"design\", \"severity\": \"medium\", \"comment\": \"Unlike every other method in this class, createParallelExecutorService() doesn't go through cache.computeIfAbsent(...); it delegates directly, so it will construct a new HierarchicalTestExecutorService on every call. In a class whose whole purpose is caching, this looks like an oversight \\u2014 if this method can be invoked more than once, it will spin up multiple executor services instead of reusing one.\"}]"}
+{"key": "e9a136a84f2a6df5b0c6288868de1425d7780ed289109bd9cf68479f0bfd3291", "content": "[]"}
+{"key": "b5a8bf6e035a0b58327b6b92a51d70ce58c8f5f0e5c7e9a4096435799b1d33d7", "content": "[]"}
+{"key": "214165f90ec24bb29b4e33303db530095f520c5d6e6179e5ae37e9618fa2626e", "content": "[]"}
+{"key": "27adb2b5b4ff15e71e1eccd0d8c256a527f2fdb166ff50b3de7662829a596879", "content": "[]"}
+{"key": "540fc56cc05f38a4ea32958c0c2cf929d8babf862ad774d6cba4873063c8743e", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/config/InstantiatingConfigurationParameterConverter.java\", \"line\": 91, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"instantiate() calls arguments[i].getClass() while matching constructor parameter types. If argumentResolver ever supplies a null element (e.g. an optional dependency that isn't available), this throws NullPointerException instead of a clear, actionable error. Is it guaranteed that resolver arguments are never null?\"}, {\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/config/InstantiatingConfigurationParameterConverter.java\", \"line\": 93, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The Preconditions failure message says \\\"Failed to find unambiguous constructor\\\" even when zero constructors match (not just when multiple match). Consider distinguishing the \\\"no matching constructor\\\" case from the \\\"ambiguous constructor\\\" case for a clearer error message.\"}]"}
+{"key": "bead792f1e2b8e5949c7167801a0b1659cd3a681d86fdea7f75ff42a05e2f261", "content": "[]"}
+{"key": "aa9b2f70e0a0ed2d40699a337e9b712fe8c26f276cd317647437ed618e232fe1", "content": "[]"}
+{"key": "6223e75cb3861edf7bacd07eedf84a51737b8d3edd33141968d557cd6533932e", "content": "[]"}
+{"key": "215145b8295f36a997a04420587f2266bdd72af53a2043e4cfd219b92fd068e6", "content": "[{\"file\": \"junit-platform-engine/src/main/java/org/junit/platform/engine/support/hierarchical/ConcurrentHierarchicalTestExecutorService.java\", \"line\": 382, \"category\": \"bug\", \"severity\": \"high\", \"comment\": \"WorkerThread.runBlocking releases the worker lease before running the blocking action and reacquires it in the finally block. If workerLease.reacquire() itself throws InterruptedException here, the exception is swallowed (just re-interrupts the thread) instead of retried. WorkerLease.reacquisitionToken is left non-null in that case, so the WorkerLease's next release() call becomes a silent no-op and the previously-released semaphore permit is never taken back \\u2014 after any interruption during lease reacquisition, more than the configured `parallelism` workers can end up running concurrently.\"}, {\"file\": \"junit-platform-engine/src/main/java/org/junit/platform/engine/support/hierarchical/ConcurrentHierarchicalTestExecutorService.java\", \"line\": 87, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"submit()'s SAME_THREAD branch runs executeTask(testTask) synchronously and only returns completedFuture(null) afterward, so if the task throws, the exception propagates out of submit() itself rather than being captured in the returned Future \\u2014 unlike the CONCURRENT/enqueued path, where task failures are captured via entry.future.completeExceptionally(). Is this difference in failure-reporting between execution modes intentional for callers of this API?\"}, {\"file\": \"junit-platform-engine/src/main/java/org/junit/platform/engine/support/hierarchical/ConcurrentHierarchicalTestExecutorService.java\", \"line\": 470, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"Entry.incrementAttempts() builds a new Entry via the canonical constructor, which re-registers a future.whenComplete(...) logging callback (line 459) on the same underlying future each time. When a task is stolen and requeued more than once, this leaves duplicate callbacks on the future, producing duplicate \\\"completed normally/exceptionally\\\" trace log lines when it finally completes.\"}]"}
+{"key": "888376b2c91c50f50ed74f4a011b6f4279bbef5fa8827886ed4b0fc04602017a", "content": "[]"}
+{"key": "b3e33311a79b253ee69ccd4e4603cc08a793c10dc0366949fd3eb35c7dda5e8a", "content": "[]"}
+{"key": "cebe084e9386f2e6aa60257a19f27b1e9e922574b857f4cb9022abee6b204d2e", "content": "[]"}
+{"key": "7e71bb125b6c9979f3e9859ebde8f2ad23c946d79e78dd09fbb9e9dc3d5df5e3", "content": "[]"}
+{"key": "2d85ab2e21da0c5f3fc8cb40a3bb9320a62e49fa8ee2eff94d58e29c74358a3a", "content": "[]"}
+{"key": "1110ecfbc7e944a73461731916cb95a8d433b8774bca90edd4ed690270be9d78", "content": "[]"}
+{"key": "53c22ed623031ff8c2988999abd7ee935dda31b957ce06a854c7d58b738b3d9b", "content": "[]"}
+{"key": "6f0de401446df2a1f0c87a4cda09442bd2068da3b0105f589cb1061c645d10c8", "content": "[]"}
+{"key": "2223a7f23999443ea6758ff814ef61c5272b7fabcb625e3eba7039cfe1fc8b02", "content": "[]"}
+{"key": "71797117acb1c00e91dc98760bcc0f2360d7b4078f3b32bd05d26775d7894ba6", "content": "[]"}
+{"key": "a70a52283a094e22dc857c721f6da5bb2c63dbfa79f9c035fa844b7bbfbe150d", "content": "[]"}
+{"key": "34422fe7083c01c81f3d3b4c12cec8a93e54ed76a8b4a600d0c26f4031f06363", "content": "[]"}
+{"key": "2856584b56f84084f29d0cd2692994576aa401693c87ef55f5ec7c960cf744a9", "content": "[]"}
+{"key": "4ae9cdf0de9fd2e4c4259fe8efb9cfdd7c51ecfae43bd04ae1d5975363db9084", "content": "[]"}
+{"key": "202f8440baf20fa7ede3f493e3d840983418b2e6667f5c633f0b050c83f24cb2", "content": "[]"}
+{"key": "3cb7069527d3d9c9d0de506ceeab1519a68981753e86daaa56b9f7bbd5be5b3e", "content": "[]"}
+{"key": "88952128f456b6ea655683cc1654ceb5e7b0c1680f30f6d2ef23a5c58defaeb0", "content": "[]"}
+{"key": "af894a11dd1b6a1a3bde82b8708d035404d82d8642b3615bb328ab239e44c5a1", "content": "[]"}
+{"key": "4374c93cc6d4eafd6703ee071e6d8705fa3be29978b2a5a46d9961df8d535968", "content": "[]"}
+{"key": "b37425cb70ee38ed8a7ff7122f39c9e3c79b4be5be97a4d0f840b000696d5d1c", "content": "[]"}
+{"key": "9b0d4d1ba9d2f7a82c0c3cf5754822120f814ffa3d348919ca2e5805193a8559", "content": "[]"}
+{"key": "5545ab8bb5d6e3763b9923ff5bd015905e070f525a16f7efbb7dadcefc751c09", "content": "[]"}
+{"key": "c9d6a61802459d3c932a9f898b98ec7d89b70523cf1999ac1776c67107907d1a", "content": "[]"}
+{"key": "c7d1afa3c200fe49604313943120ba5996727ab9a69a43d81895a767f9ac6295", "content": "[]"}
+{"key": "6c61975fbc34e776406402b0132fbe5a89281ed7f8d07bf6466eda1e21585405", "content": "[]"}
+{"key": "011f77f9e1e4b671baad669452a058b6b0bc81d9dfc0de6efc4427a74bdc7d87", "content": "[]"}
+{"key": "65eaa60bbcef8c04838e13e6a82c1665ceac31388dd82df47b308d741cc7ad45", "content": "[]"}
+{"key": "170ecec34b472fd2ac2a719707227b6a749fe6811b11a9dabc627cb9b3065a40", "content": "[]"}
+{"key": "631fb3e9749dc73808844ebb99bd282ea199776b0bcc630416a1e37a480edc8f", "content": "[]"}
+{"key": "8d21e1be66938c7104c07ca7ff3023a22f1dd9f24a375f1cc9927634bb0eb85f", "content": "[]"}
+{"key": "ad18c17e311df5548e8f91c8f7ec711e016ae2a1be9fd891b930c088acb75b3c", "content": "[]"}
+{"key": "6f851d2013e36fc2b51d975596fb94e72dc81d8f25b591d606fce5f15889165a", "content": "[]"}
+{"key": "6c6b2512c88a310bdc00db552b732bd6d6afecf703c0e945a60ba3a31a4e86a0", "content": "[]"}
+{"key": "d7757ccfec9b391ee22c924c10d00dc1b4601725eef1f6d1aba9ac6002c11da8", "content": "[]"}
+{"key": "9782b315bdccc339dba0af134a307d1ab6c20c5414153c47da696ddc8ac117c9", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/Constants.java\", \"line\": 211, \"category\": \"design\", \"severity\": \"medium\", \"comment\": \"Unlike every other constant in this class, EXTENSIONS_TIMEOUT_THREAD_DUMP_ENABLED_PROPERTY_NAME was updated to delegate to org.junit.jupiter.api.Constants but didn't get the deprecation treatment: no @deprecated Javadoc tag, @API status left as MAINTAINED instead of DEPRECATED, and no @Deprecated(forRemoval = true, since = \\\"6.1\\\") annotation. Looks like this field was missed when the rest of the class was deprecated.\"}]"}
+{"key": "64c2b1f73f89b1eb5165d72452abd3b6c7eaff7a3c8c3b47c365b56225b0f5e1", "content": "[]"}
+{"key": "6319d5d2bea11d39b51a7a79e2e1502fafb9723032ca2f71382150ef49874930", "content": "[]"}
+{"key": "1ca8ecc9ddc6a51bad9e6a08f7adea31302f4fda2deb07becc5c23a4289db471", "content": "[]"}
+{"key": "fd06dd80779c38eb843ee12afdc0a3fe479ba2f8d991529998160270c208e10b", "content": "[]"}
+{"key": "7ee06e38669df0ffef9f8704ac1caafdeeaa3e81464cab525a1f2f15c386f060", "content": "[]"}
+{"key": "fd04a11f3ac10daf6bffe03a7fe9d8b715d7a6250cc2516bb451403c2134b292", "content": "[]"}
+{"key": "d469949632a15f5d0a3fd869ce43b6e48d354a6993751ce29e806ca85de3147e", "content": "[]"}
+{"key": "5d95f2b23aa34a9825a74e61ffcc2706e25d834d6a6e2335c8733b603f1cd12e", "content": "[]"}
+{"key": "fe013eb0ca735da50dedad644a3c603c6dc7940287b7d6016a1dc76fbe4ebe55", "content": "[]"}
+{"key": "6ddca3d1f4a0a5dd04641c5acd9854f3fdf7887136b6b11fb7680f4f879bcc85", "content": "[]"}
+{"key": "a93d8160c77c4bcf31ea74cccbd0b28d0158fa596e08b871a4d52dbb517b02c5", "content": "[]"}
+{"key": "684e1aa194c28206335ddf0c00941082743dbed94dc15e0fad91adadc1a98669", "content": "[]"}
+{"key": "0c4f8c9d4b2eb8a76405187eb74652f7a1ca2a3453683b10055a1aaca2f8a3c3", "content": "[]"}
+{"key": "18de92da58e6fa793d547339db8a086c7e23c2a7fc0196c70343d43035486e38", "content": "[]"}
+{"key": "48cd21f4260efa6ce6a59ba97d523ead3807487d65287393b4dec9f12332abb7", "content": "[]"}
+{"key": "aba2065752f659e7e329f6c797f23c6a9b69521c530ae4e7edabb5e7d19b41a8", "content": "[]"}
+{"key": "9c8ff117a4592a8305a15d4361a647cfbafde60a90fc72aad42cd60fbe4088a6", "content": "[]"}
+{"key": "5289c08864dbb4b5ccae16363408408739e3e26b774a364b2b98ed65265f475a", "content": "[]"}
+{"key": "6b5564562e3a01d4c74d2771be46b0290af6b897dc8f5b477a9930fb9cc3f4e6", "content": "[]"}
+{"key": "2718bd01d5d6e497f162338d27df88fe2f97797606ea16b5daf57713f1a8b64a", "content": "[]"}
+{"key": "c3281ac4a821ba0aa618886ea0b1d07c875fd8b04d7775e6ee6f9c82e4f10ac4", "content": "[]"}
+{"key": "db8ef0ce5630f580c91d3edad16ff8a22376bb8bd6ecd1fa8fade50333555972", "content": "[]"}
+{"key": "7804c599979890ea1addfcfb7be04945a06f52daae00d6dc63523918c0f429f2", "content": "[]"}
+{"key": "79cf35f14c73ee8f9482ba6186c314ec9ba39df87996d4f39c49e0be6fbd521a", "content": "[]"}
+{"key": "86ab48be9f275b00e74d8b52adfbd7f763d1137c73b6d581cb8fee737eeffa4e", "content": "[]"}
+{"key": "9af750ef2db66ffdb730bf740663ba27aaa32da25cd02952dd1a82eb0187da68", "content": "[]"}
+{"key": "11703bb742b96567b5086188bc24607dd93346bdf4dc92a502b8b369c94e44b0", "content": "[]"}
+{"key": "6d0e13b0424d46a8bea555750acb4b9aeddd227da63b675f2fb250a385a00316", "content": "[]"}
+{"key": "1845cac5194555d344e2e1192776797d625358d7e48ecd41f1d5201215c97105", "content": "[]"}
+{"key": "d7d42132246cbd78349b04e0d3a56c9223b9e6d6c37eddc20a776377e5bd3dc0", "content": "[]"}
+{"key": "172f2c03cacaefb3d1089bf16f6cd3a09371499d4ca4a7e686f126b3527c4ad3", "content": "[]"}
+{"key": "34d8a746c0fcad04a95942570ad7323ba6bc0ddd9fc41deae42f6c94c8bedca7", "content": "[]"}
+{"key": "adf22dbb1a0a259a586ee8d766afc6e66f04e77cc7a50d2dcc90eaf241a30956", "content": "[]"}
+{"key": "b5ed3032cf985f6c00967a80a6176b84ba33acbb3f3e0d15b90e13157d7a7c66", "content": "[]"}
+{"key": "bd6fc28921cd23244ab827aae515920003f48496e0d50b2125f500de532b0cf8", "content": "[]"}
+{"key": "0b006967ff4129ade42bd664b795ebe7b14012dbccdda4d64632be4d6b562e96", "content": "[]"}
+{"key": "d7e07bf31996de9af1b780656334d14255073e0dcfaa4f4de486705ce74a61ca", "content": "[]"}
+{"key": "0480f8eb04c7a1133fa64dd3bbb24152b7e6c4c2cece1b2eda34ea1a01e35f56", "content": "[]"}
+{"key": "ca661e100f967a2f39a3b90b2d81a98818babd484f6f950a5941567c72675499", "content": "[]"}
+{"key": "7c8667cb6f1bbd5d2b7101aaaa4300baef90c3e2ad9ca421a8d4fb9908c5307c", "content": "[]"}
+{"key": "29723764d993f22a4c3bd5f47aefb37d403bb32337c119505fa7c6815899289a", "content": "[]"}
+{"key": "c120a4b332cb601371332356df2be7c9d8cc6aa03b0b412e0272e4f651e204ca", "content": "[]"}
+{"key": "7dea79c0bc07c815d8f16cbe142818f79e774d21efe4692675293a6516f0b7eb", "content": "[{\"file\": \"junit-jupiter-api/src/main/java/org/junit/jupiter/api/io/DefaultDeletionResult.java\", \"line\": 26, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This canonical constructor is written out in full just to defensively copy `failures` via `List.copyOf`; a compact canonical constructor (`DefaultDeletionResult { failures = List.copyOf(failures); }`) would express the same normalization more idiomatically for a record.\"}]"}
+{"key": "ceecc2805302bf091b7321d798ba46f5babc983d940a5230c9480f364e35add0", "content": "[]"}
+{"key": "72c207bf041d281ae76988f0ec536728ee668d7aabe38bcc82701675c7970eb3", "content": "[{\"file\": \"junit-jupiter-api/src/main/java/org/junit/jupiter/api/io/TempDir.java\", \"line\": 154, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The new `deletionStrategy()` attribute has no Javadoc, unlike the sibling `cleanup()` attribute just above it which documents its default and includes an `@since` tag. Consider documenting the default behavior (delegating to the configured default strategy) and adding `@since 6.1`.\"}]"}
+{"key": "92aa6db7a121ab1b67716c4b8a0617e77de0adb2c6de14af3193a420cfb668da", "content": "[]"}
+{"key": "a0dddac2ea449733944c77f0855f0ce8fc907d3cf430e41bd5a1b78bf02e27ec", "content": "[]"}
+{"key": "b95172ea8edf616734a4d3bc1f1f6f5c6e93ac639e4763ae62c8dbb8f1fbcc89", "content": "[]"}
+{"key": "3ef7bfffd3a8c79388a5aca5d8d68d1e82fe81d2b34a4b90ac7db292f949a888", "content": "[]"}
+{"key": "7c35e8f8b6fcd2955e0df7e8329ed4132945ed6832e680576a1f68ec12c57d15", "content": "[]"}
+{"key": "7a4f6cd4724254d2f444f0e8f66cee94f880f786565f2b661a527cab565341d4", "content": "[]"}
+{"key": "d292aaaaa9c24bf7106cd84abb9ca1f061ccf32e9ab06b9e7fa26c42427d19fb", "content": "[]"}
+{"key": "2bf2ea989a3daea7c1f5afaea79643ebdcb91642ffdcaa9c4e2e90f485f656ff", "content": "[]"}
+{"key": "60315dde1953346a7c29fe7198e42368c265afde97851bac3a06028e302d614c", "content": "[]"}
+{"key": "1499975cc1178745cc2d7e163322f56818dfee3feab26410dac898e183fa85d2", "content": "[]"}
+{"key": "76b582f5f3b6b7f9e9aef667d6274f4106fd63f41af1516e8d7030186dbbc03e", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/extension/TempDirectory.java\", \"line\": 76, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"NAMESPACE was previously package-private with a comment noting it existed for testing purposes, alongside the now-removed FILE_OPERATIONS_KEY. It's now private. Was package-level test access to this field intentionally dropped, or could this break tests that relied on it?\"}]"}
+{"key": "f93032b479e7e18331713bccffd7e034909ba7850e561f77e20dce8b2a5fd5e7", "content": "[]"}
+{"key": "42ddbb3e3d39122c569c22d3c4fad707ff3a888ac29bc074c78085a42e954ff4", "content": "[]"}
+{"key": "38f4010eeb710a8db52b3252f284b3fe49c4fe3b6f64a0fbdffeec0b4e34d1a9", "content": "[{\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/api/io/TempDirDeletionStrategyTests.java\", \"line\": 44, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"`assertThat(result.isSuccessful())` never calls a terminal assertion like `.isTrue()`, so this line performs no actual verification \\u2014 the test would still pass even if `isSuccessful()` returned false.\"}]"}
+{"key": "554a53e3fa2d2ce47e2e9308009259bac9d6ccae9d19a40098a8bc6cd9958ccd", "content": "[]"}
+{"key": "7dab7fb83b7f7209d14ba66da18244237199b02d2976e92ab820d8d3d30a41e0", "content": "[]"}
+{"key": "8a156d4b2674c714dc28e3d248716c284676e2f10f873c2187fbbadace130548", "content": "[]"}
+{"key": "fad2796868fa44e0db32cb6fc830a91fcfca8d1cc48fa8ad1fe975abdeefcb3e", "content": "[]"}
+{"key": "7c021e3ed29c649cd9cee764954c44135759c8be5c60fdc85244f3a9ddb83218", "content": "[]"}
+{"key": "28016586d0cb12bfe7d04e8cc302aed2124f1e7cbc2301eec2968149c25f7b47", "content": "[]"}
+{"key": "021569ae9b40dfda18e13fee57b28d4babdb0981a70da50a279f0788c6d27cfd", "content": "[]"}
+{"key": "54f7acae3da3432fc5066a1b48b6cede8889f6e7b57d7c60688465771bf3c366", "content": "[]"}
+{"key": "d69be7c1fff9f78e096f3f9516e7568b85498106a27d2203708f045adbe1c746", "content": "[{\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/engine/extension/TempDirectoryTests.java\", \"line\": 1295, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"UndeletableWithDefaultDeletionStrategyTestCase re-declares both TEMP_DIR and tempDir (and overrides reportTempDir) from UndeletableTestCase instead of reusing them, so two separate @TempDir directories get created per test \\u2014 the parent's with FailingTempDirDeletionStrategy (unused here) and this one with the default strategy. Was shadowing the inherited field intended, or should this subclass reuse it instead?\"}]"}
+{"key": "577a871d24bf2d5c885ea812e85687009678095955c15e6825071602c7b3f981", "content": "[]"}
+{"key": "d60ac50d511976fd590b316f3e177cb2b0cd285da527acc5ddc63286df3eee11", "content": "[]"}
+{"key": "e6afdbf6567ae2fc2a60b6dc685e37d40590a0895559d1267c8311174d8e6b9a", "content": "[]"}
+{"key": "158e64b0673b76a5e842bf3a2a4156c2cdba8bd2dfb36b9e323a094b10b1aad9", "content": "[]"}
+{"key": "594b299ba0348955244502dcf360659f48c2bc336788a40eb8809dbfdb9090cf", "content": "[]"}
+{"key": "c0322e53b0cc841e5b89531b24a5a76c2266924f770cd1b9824e03ce4aeb89d2", "content": "[]"}
+{"key": "849d55ca20fd612ba84cae62d94e36b7c6914633ac1c73a477dab89e635bcfe5", "content": "[]"}
+{"key": "faa8deb183e183b8810558609a360b274473d129068356195e568cdfb50ba581", "content": "[{\"file\": \"subprojects/junit-jupiter/src/test/java/org/mockitousage/InjectMocksTest.java\", \"line\": 35, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"Null-checking constructor arguments with Java's `assert` keyword relies on JVM assertions being enabled (-ea); since they're disabled by default, this check (and the ones at lines 45-46) silently does nothing in a typical run and doesn't actually guard against null mocks.\"}, {\"file\": \"subprojects/junit-jupiter/src/test/java/org/mockitousage/InjectMocksTest.java\", \"line\": 15, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Missing space before the opening brace in class declarations (also lines 23 and 40: `ToBeMocked{`, `TestClassToBeInitiatedViaConstructor{`) \\u2014 inconsistent with standard Java formatting.\"}, {\"file\": \"subprojects/junit-jupiter/src/test/java/org/mockitousage/InjectMocksTest.java\", \"line\": 92, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This test method is declared `public` while the other @Test method above (line 74) is package-private; JUnit 5 doesn't require `public` on test methods, so the inconsistency is unnecessary.\"}]"}
+{"key": "4b5bcacfbde93ab82c568fe55440a3e4f2b503499858c366ae90894dd9c61f8d", "content": "[]"}
+{"key": "0dd1170e6da87df4c93f559516b38842e56f47d6e66f4681002c4c44922f2327", "content": "[]"}
+{"key": "fc93bca90275d4350a3b47305c64276207150a64a6ac575404fc9a5e0c9b24bd", "content": "[]"}
+{"key": "431119b8adef1ca0ee76a02a3598aa8cb472a1dd8f3468d7be132986aa632f20", "content": "[{\"file\": \"src/main/java/org/mockito/Mockito.java\", \"line\": 108, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This new TOC entry reuses href=\\\"#51\\\", the same anchor as the previous entry for item 51, instead of pointing to the new strictness section (the corresponding <h3 id=\\\"52\\\"> heading). Clicking it will jump to the wrong section.\"}]"}
+{"key": "706c9f4a6a99f45725d5ae1fd59ade8c791af7854fdcf44dcb687f0f46965b47", "content": "[]"}
+{"key": "66630d30c8c95ec7f89d7d0f31ca172676068724f3960f72a5c4e9c3d8762624", "content": "[{\"file\": \"src/main/java/org/mockito/internal/configuration/MockAnnotationProcessor.java\", \"line\": 48, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"strictness() is applied first and then unconditionally overridden by lenient() below when annotation.lenient() is true. If a user explicitly sets a non-default strictness (e.g. WARN) together with lenient=true, the explicit strictness is silently discarded in favor of LENIENT \\u2014 is that the intended precedence between the two attributes?\"}]"}
+{"key": "cef7423af950f5ae978cf42abff036721f4e0bb0030ee065637157de743f6d9d", "content": "[]"}
+{"key": "1b30fa3b5939cb41ceddbf477e0a2654461c8b09f0bcc72879b9764d41a0bf3f", "content": "[{\"file\": \"src/main/java/org/mockito/internal/creation/MockSettingsImpl.java\", \"line\": 250, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"this.strictness is assigned before the null check on the next line; if strictness is null, the field is mutated to null before the exception is thrown, leaving this MockSettings instance in an inconsistent state if the exception is caught or ignored by a caller. Validate the argument before assigning it.\"}]"}
+{"key": "d6bc79da63b564c2068cd29cf6f30d2f550250ac94684a6ceb14f544cd3d29d2", "content": "[]"}
+{"key": "541d07279588bbc24af10c3de6338c536b163d22838a716d8e28f59ce0633bf2", "content": "[]"}
+{"key": "e75825ab8bd4b25df8057b16241b4be95d03754837166ce855960c4c467ee416", "content": "[]"}
+{"key": "b21c12b9a79dc4fe157ee8b392d3916c4d676ad66838b72492cc75cd2d908acb", "content": "[]"}
+{"key": "a5adac75c9cd2e2f90eb9ee7c24c35ae3493d286a30b1862bb6da579d1ff477b", "content": "[{\"file\": \"src/main/java/org/mockito/mock/MockCreationSettings.java\", \"line\": 129, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Javadoc says \\\"Sets strictness level for the mock\\\" but this declares the getter getStrictness(), not a setter. Looks copied from the strictness()-setter's doc; it should describe what is returned instead.\"}]"}
+{"key": "56ad8593d994c949c39ac8c9ad3eafe20f70525ccd8e2876e7428ff9cb6185b5", "content": "[]"}
+{"key": "878a6e4c3e41c778cf64eb5456b37ddf99a2a37a6e5530d92c83b02ce812234b", "content": "[]"}
+{"key": "0e572d3a47d71e148b9b04dfff5b7acf62a4de357a6f336bb239761f2fa78046", "content": "[]"}
+{"key": "7351d4ea503aabaf7b44357499add7a6f3e34e713e7da8ab23116cca8b563174", "content": "[{\"file\": \"src/main/java/org/mockito/Mock.java\", \"line\": 151, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The field/accessor name `outer` for the wrapped org.mockito.quality.Strictness value is unclear on first read — it suggests an outer-class reference rather than \\\"the real Strictness this constant maps to\\\". A name like `qualityStrictness` or `delegate` would read more clearly.\"}]"}
+{"key": "a08520ade139cdc8c7e34363a4acbc4b81fdb98cb74cce85aa2eaa07554d8dff", "content": "[{\"file\": \"src/main/java/org/mockito/internal/configuration/MockAnnotationProcessor.java\", \"line\": 52, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"mockSettings.lenient() is applied first, then, if strictness() != NOT_SET, mockSettings.strictness(...) is applied and silently overrides it. If both the deprecated `lenient` and an explicit `strictness` are set on the same @Mock, strictness always wins with no warning — is that the intended precedence, or should conflicting settings be rejected/flagged?\"}]"}
+{"key": "e1c1168450bd7bc1642b5c7aff01f22aa72ebfabd819fa6e3fce749e1ffbacda", "content": "[]"}
+{"key": "883945fe4c19490354396e09a67f7a319e11239eaca713e071a18ca45122420a", "content": "[{\"file\": \"src/main/java/org/mockito/internal/creation/settings/CreationSettings.java\", \"line\": 48, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"The default for `strictness` changes from Strictness.STRICT_STUBS to null. Since this field backs the public getStrictness() accessor, any mock that doesn't explicitly configure strictness will now report null instead of a concrete default — worth confirming every caller of getStrictness() treats null as \\\"unset/inherit\\\" rather than assuming a non-null value.\"}]"}
+{"key": "dee4f8abcc691018ba4ef323557f50064ae369e0071fc37329f4c8d13e91e1bd", "content": "[]"}
+{"key": "a8ad7ff3d3a2606134a802b743858d477ffa930bea9d23e95d277eecb8badef6", "content": "[]"}
+{"key": "348bd50dc7c8cf360633892d12a4b8aa9610ceee6e7b230eee15eb606d341c77", "content": "[]"}
+{"key": "1c5e6577a5ec49992c5510ef2d2b25053d9c558f544b8d5687f8d67c209a5192", "content": "[]"}
+{"key": "2aa3ca09bb21b7642e5adba3c8a481edacd94a60621de059434ba9552304c4d2", "content": "[]"}
+{"key": "c3fe3d966211afe90d0c4d3fd785067b1cf17947f8228a1ae9a034b5d6534eea", "content": "[]"}
+{"key": "3d28b6ae5c5c0dea142687e7434802a29346e9245761c0a558a6d7d85b0c3420", "content": "[]"}
+{"key": "fb7a5086519e9eefdf2ac1e2e036ae47a17356ce1c5af761faaaf08f58c07119", "content": "[]"}
+{"key": "67a24745489088ca7b5d3d60aabcf62c1a93364459f975268d3a9ac4c780e3aa", "content": "[{\"file\": \"src/main/java/org/mockito/internal/hamcrest/HamcrestArgumentMatcher.java\", \"line\": 25, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"isVarargMatcher() is marked @Deprecated but has no Javadoc @deprecated tag pointing callers to a replacement, so IDEs and generated docs won't explain what to use instead.\"}]"}
+{"key": "2424734337b8ac5bde535d3f1e51ab1b61a230a691d8b486b57f1e545be6dbf2", "content": "[{\"file\": \"src/main/java/org/mockito/internal/invocation/MatcherApplicationStrategy.java\", \"line\": 66, \"category\": \"bug\", \"severity\": \"high\", \"comment\": \"The isVararg block now calls lastMatcher() (via lastMatcher().type()) before the `invocation.getArguments().length == matchers.size()` fast path that used to run first and return immediately. For a vararg method invoked with zero arguments (e.g. verify(mock).noArgVarargCall()), matchers is empty and rawArguments.length == matchers.size() == 0 makes isVararg true, so lastMatcher() calls matchers.get(-1) and throws IndexOutOfBoundsException — a case the previous ordering avoided entirely.\"}]"}
+{"key": "0ae95ec7cf1fcd8bf1e0bd4d318f3581f52339d9f9b7b30118b7e116a5eaee18", "content": "[]"}
+{"key": "a8c88444c03982c41ae2ab4ef940d51073b7cf7e22356e1264d2a242ae264e0d", "content": "[]"}
+{"key": "f96f61e18a35f9787fa72679af88549f18120f56788a7b6cd73cc69262281783", "content": "[]"}
+{"key": "dd89b6c723a73f548990ee8e099255228cfda8268cfecf8ecb3f40d1ccaaa948", "content": "[{\"file\": \"src/main/java/org/mockito/internal/matchers/InstanceOf.java\", \"line\": 14, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"clazz's visibility was widened from private to package-private, but VarArgAware is a static nested class of InstanceOf, so it already had access to the private field (its type() override reads clazz directly). The wider visibility looks unnecessary and slightly weakens encapsulation.\"}]"}
+{"key": "bd09c342255be93882eebda4936c2856e2247dedb660beb735a3124b36ef8d69", "content": "[]"}
+{"key": "3ce9a4726ab2d2657fd9cf312566836524459a27679b66313f4662b505b4abd9", "content": "[]"}
+{"key": "b048384e1d4598073426015c10d85a1b9b111c459d78859979029bcdaadc3271", "content": "[{\"file\": \"src/main/java/org/mockito/internal/matchers/VarargMatcher.java\", \"line\": 13, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Typo in the new @deprecated javadoc: \\\"compatability\\\" should be \\\"compatibility\\\".\"}]"}
+{"key": "a8feabae645f0b0806121acaf59a8efd56334df5e58a7f67aad1e3e140256016", "content": "[]"}
+{"key": "8b26e1b7245ea080b4d52bf3b4b6c315ad4d4e263d183d9e85eeaff6c85b1439", "content": "[]"}
+{"key": "e8a461e54ab2b59793910001b95d09a9cdc85cdd9b084c73f59f4bca1247d220", "content": "[]"}
+{"key": "3a02c6cc516b6ad969216e955ef2ae82ec8802c935832f545bc4e229cdfa4271", "content": "[]"}
+{"key": "2f20a7a6b334a66c74ba6b03e389461ad04a9048d21df9c98b2f819502681222", "content": "[]"}
+{"key": "57244fa6cc1491463816688f8314b732da89e073fcf5aa613b3a35d8265da8a3", "content": "[]"}
+{"key": "85537d9b354381025b0e6e907e7bd2632bfbfd9eefcab2d1adf0a000daddecda", "content": "[]"}
+{"key": "f7abd31f497eeaa5081e21d7e2ff994ddcfcd5166224f5dc8680d20d4c92e4d9", "content": "[]"}
+{"key": "783e095909d59159ba8fc1ce69a8491e916b4175f250ad627b4dc79a2f50d804", "content": "[]"}
+{"key": "ea8eda0189a2914f1bfccf4b883cb14ce70c8823cd7c8a095c14825794676e3a", "content": "[]"}
+{"key": "d64ee09d9098e9b7ac16910c72d0381341f3e0f75596d3d87b6d87fa33ae3ab9", "content": "[{\"file\": \"src/main/java/org/mockito/internal/matchers/CapturingMatcher.java\", \"line\": 79, \"category\": \"question\", \"severity\": \"low\", \"comment\": \"captureFrom() now does an unchecked cast of the raw Object argument to T without validating it against clazz (which matches() does check). Because of generic erasure this won't throw here even if the value doesn't actually conform to clazz \\u2014 is it guaranteed callers only invoke captureFrom() after matches() has confirmed compatibility, or could this silently store a mismatched value?\"}]"}
+{"key": "74d19faf4d4464cc52323481e0782a5922c366eb228efac9bc26c2d324f99ae6", "content": "[]"}
+{"key": "344fd2b2be0b002b0de2aa7bcd7a39adcaf0d52ce89550caa1ae0d13b3cf85ab", "content": "[]"}
+{"key": "b3a84bf3d602f42dd5487de76a791bd0b6971ef475b56d56b9aea71d197ce38e", "content": "[]"}
+{"key": "5fdd0afac34959270c6d1b2bde458bed277a6c0ce8b654142b43719b6ec03d60", "content": "[]"}
+{"key": "92afb11a10c91734817ee7719eefece048de6bcda379b631593232ff6d0635d1", "content": "[]"}
+{"key": "d7ff4dbc980716c22ddaf42add295719674ad6a740778ed5eafedc02af8b3738", "content": "[{\"file\": \"src/main/java/org/mockito/internal/debugging/LocationFactory.java\", \"line\": 27, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"This lambda just forwards to the constructor and can be replaced with a method reference: `return LocationImpl::new;`.\"}]"}
+{"key": "6196398b5d24043bddb1022f29971a808c477a664fa21889b950020e2fff42f6", "content": "[]"}
+{"key": "6cbc7a75565e197e9beb0a0cce76b34b7aaf74761738c8001b2ecdb471d27129", "content": "[]"}
+{"key": "2aeb5bd6c2a5fe6d8089b91cf248c67087f3b8d0bc752a72c31a7defbb8a2488", "content": "[{\"file\": \"src/main/java/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java\", \"line\": 109, \"category\": \"design\", \"severity\": \"medium\", \"comment\": \"handleDefaultAnswersForWellKnownTypes only special-cases isEmpty() for Optional/OptionalLong/OptionalDouble/OptionalInt. Other accessor methods on these types (get(), orElse(), ifPresent(), etc.) aren't handled here and will fall through to the generic deep-stub logic, which can return a mock/default value instead of behaving consistently with isEmpty() == true (e.g. get() not throwing NoSuchElementException on an 'empty' stub).\"}]"}
+{"key": "8d29866d909abd1253b2fd224ca5702a36ddd11ade4d0d3eeb504f0b4ad231af", "content": "[]"}
+{"key": "ecb8149547bc356f5d2343995236f3da64e047c2d105a2cde4e82fc99d286a94", "content": "[]"}
+{"key": "c908ca6b0207f30599d7d02a8a77e2b647048368dbbec5bf14e2064d04740782", "content": "[]"}
+{"key": "2d691684b27d1e360bb462645de0dc2f2cd03c07e35254d5fbabacdef3682e7e", "content": "[]"}
+{"key": "b01277c20adfc8bdf8d258e36053cecbc9c764d8edb39e9af2832075278e3124", "content": "[{\"file\": \"src/main/java/org/mockito/plugins/MockitoPlugins.java\", \"line\": 58, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"This adds a new abstract method to a public interface with no default implementation. If any external code implements MockitoPlugins directly, this is a breaking change for them \\u2014 is that acceptable here, or should this get a default method for compatibility?\"}]"}
+{"key": "f42f61a197a12563a18c3f3043d536b7d2eed9f9dcda6c255aef18f3f2323642", "content": "[]"}
+{"key": "969a4fda593ac5df306d80905cc81481871f310f01cbc5e93dcb95a43b832137", "content": "[]"}
+{"key": "bfcf0c4e7caf630cfd769a0a9cd94ac75fde86c4cd8d57b20d89af00fad28cb8", "content": "[{\"file\": \"mockito-core/src/main/java/org/mockito/Mockito.java\", \"line\": 249, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Using <pre> for an inline flag mid-sentence is unusual \\u2014 <pre> is meant for block-level preformatted text and can render oddly inline. Consider <code>-XX:+EnableDynamicAgentLoading</code> instead, consistent with other inline mentions in this javadoc.\"}]"}
+{"key": "2df89a5922b40d672d961408843b4708f8b93464aea18b5facf3bf3ee4d28339", "content": "[{\"file\": \"mockito-core/src/main/java/org/mockito/internal/PremainAttachAccess.java\", \"line\": 21, \"category\": \"bug\", \"severity\": \"medium\", \"comment\": \"The new caching via the volatile `inst` field uses an unsynchronized check-then-act: `if (inst != null) return inst;` at the top, with `inst = instrumentation;` assigned only after the (side-effecting) attach logic runs. If getInstrumentation() is called concurrently from multiple threads before it's first populated, more than one thread can pass the null check and run the self-attach warning / ByteBuddyAgent.install() logic redundantly.\"}]"}

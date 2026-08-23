@@ -1,0 +1,21 @@
+{"key": "b08c714f4cdbd08b0fddb63c4cf3dd6292efe340e17b946ff38c9060a38ec2d8", "content": "[]"}
+{"key": "860688d0bbc9716f1748f7d57fe59ce81697580ff8af9642498cb7423c22e5d0", "content": "[]"}
+{"key": "197136e9d47f7ee0c30c4ccef09b8caddf80505bf7d9fb00956705e5c2f9e624", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/config/CachingJupiterConfiguration.java\", \"line\": 124, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The neighbouring methods pass the cache key as a statically imported constant (e.g. DEFAULT_TEST_INSTANCE_LIFECYCLE_PROPERTY_NAME); this one qualifies it as Constants.DEACTIVATE_CONDITIONS_PATTERN_PROPERTY_NAME. A static import here would keep the file consistent and also let the call fit on a single line again.\"}]"}
+{"key": "8b2052225b8ac48e254924f879489a6d527dbf04ef979a53bb6f9b9dc2178e11", "content": "[]"}
+{"key": "4c7c48c0134266181bd94154c6e5084f435c650c939d4a76928c041e2ca44cea", "content": "[]"}
+{"key": "ec8c2a52222377b7de9377380e7253271ac80985a6d39a3d78f403d0fececce2", "content": "[{\"file\": \"junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/config/DefaultJupiterConfiguration.java\", \"line\": 238, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"The constant used to look up this configuration parameter is renamed from DEFAULT_TEST_INSTANTIATION_EXTENSION_CONTEXT_SCOPE_PROPERTY_NAME to DEFAULT_TEST_CLASS_INSTANCE_CONSTRUCTION_EXTENSION_CONTEXT_SCOPE_PROPERTY_NAME. Does the new constant still hold the same property-name string? If the value changed along with the constant name, existing user configuration for this scope would silently stop taking effect.\"}]"}
+{"key": "e15897ff435a4ddcf7fbf73050b3ebf1bd4f56d4f4d960b88c837c315395ff35", "content": "[]"}
+{"key": "254c1376ff71d245dd220843e7c7c8e5a5620b1c220b9c58793b1be792a6b906", "content": "[]"}
+{"key": "07d01a01e987cdf1243c255850cf903154976b03e3200a252b0f108336fdca75", "content": "[]"}
+{"key": "3cff4428cf0a107356755805a9d3f09283bb120dd5819f3ea0422dd010b9a7fa", "content": "[]"}
+{"key": "6e7761d07fafce7e7638f68df4b27501291aa9d3d8f41c902ee3ad695b541ac8", "content": "[{\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/api/ConstantTests.java\", \"line\": 19, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"JUnit Jupiter does not require test classes to be public; the `public` modifier can be dropped to match the package-private test method below it.\"}, {\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/api/ConstantTests.java\", \"line\": 19, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"The class under test is `Constants`, so `ConstantsTests` (plural) would be the expected name for this test class.\"}, {\"file\": \"jupiter-tests/src/test/java/org/junit/jupiter/api/ConstantTests.java\", \"line\": 22, \"category\": \"design\", \"severity\": \"low\", \"comment\": \"All eight consistency assertions are in one method without assertAll, so the first mismatch masks the remaining ones. Wrapping them in assertAll would surface every inconsistent constant in a single run.\"}]"}
+{"key": "951a77cf1656f254d6895482842722375f1f97e9d6d8e6b7a4d11b435fdaca87", "content": "[]"}
+{"key": "5e52f8af4034f1b5ec902461edc10b5e11b8ab692163493d9ff5a7514eb9a812", "content": "[]"}
+{"key": "3f275417cd90968a2adeff4af9b5a2f6ad11aa4896bf0060bbef37e0cc7735f5", "content": "[]"}
+{"key": "3d7d6f6bc37d68ab34e7771e759bd9118fcb9b349395b25c517a847efdd3be46", "content": "[]"}
+{"key": "0c3b8f95e4353375563997f1a06f95fec93635e44beb1177f3a1b29bb7332928", "content": "[]"}
+{"key": "d6a51107e5e1d38b44185c1fca0c73aac85a43dbc8733cbe7f8daf9afc1f338a", "content": "[]"}
+{"key": "742690be5e1ae72f416cf7ba71a6bf19cf6787b86550168b9648b3aca5f478b2", "content": "[]"}
+{"key": "ad1630f28a681b087496d3dd7f24723b19ae5ce1290eb7b9c4ec15e2835536db", "content": "[]"}
+{"key": "3d822597be3c9922910adf75ebc52bdc1053417d0ca988fc183d404e4f18d250", "content": "[]"}
+{"key": "724c4963cdf0e7dd0ba986e6c38d47bfaea04281b23b3f32e243df40e88d7f49", "content": "[]"}

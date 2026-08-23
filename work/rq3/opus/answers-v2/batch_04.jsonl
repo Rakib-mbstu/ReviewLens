@@ -1,0 +1,21 @@
+{"key": "983ad5cf2549e6e8d842661cd1d0a0fc38fad7093c751850313b529f03824d25", "content": "[]"}
+{"key": "ba2a7757c2c453d5413c198dcf25445c7fd04023b2f552416ca400007ad71e29", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/utils/JavadocUtil.java\", \"line\": 205, \"category\": \"bug\", \"severity\": \"high\", \"comment\": \"The `child != null` guard was dropped from the loop condition. `ast.getFirstChild()` returns null for a childless node, and `child = child.getNextSibling()` returns null once the last sibling is passed, so `child.getType()` throws a NullPointerException whenever the node has no children or none of them is an IDENT. Keep the null check: `while (result == null && child != null && child.getType() != TokenTypes.IDENT)`.\"}]"}
+{"key": "0e1848fef66b6249d660c380e25671d1b8216f6ba2ab0860bf22581761b7e013", "content": "[]"}
+{"key": "33a08b632c4c7461ab49963ee1f1136833c65d304676d6ba155b755630b7aa27", "content": "[]"}
+{"key": "1aacb53fecfd2898b3f502dbb906bff942bbfcef2a83feced7836269f5f1d871", "content": "[]"}
+{"key": "eb0ae8775090228a41b3dc5c4975bae35535e0f012bc77a94c2e243437869e3e", "content": "[]"}
+{"key": "ac3d3b4ef52deea3a5cacbf0c0d0360ab014f6170ed155e73639f09beccb38f6", "content": "[]"}
+{"key": "b652150f2d82965f63d825b053b82e470c8f063291f96558ffdb6cf38fa5114e", "content": "[{\"file\": \"src/main/java/com/puppycrawl/tools/checkstyle/checks/javadoc/WriteTagCheck.java\", \"line\": 58, \"category\": \"question\", \"severity\": \"medium\", \"comment\": \"`MSG_MISSING_TAG` and `MSG_TAG_FORMAT` are public constants whose values are the resource-bundle keys users see and can override in their own messages bundles. Changing `type.missingTag`/`type.tagFormat` to `javadoc.*` silently breaks such overrides and any tooling keyed on the old names. Are the old keys being kept (or the rename noted as a breaking change in the release notes)?\"}]"}
+{"key": "8d3fc4bf0df10a4eeb57e13ee6b4b372ece88f200c808d376fbcd9b9714fe26e", "content": "[]"}
+{"key": "f1faf3121214b75a1a49a3224f92d3690547cdf3f8a51d38e34f262637d5d71e", "content": "[]"}
+{"key": "96e573793f5e6e4a91589be70f0c66969ad50eef38f5763a43c65bd49fce5caf", "content": "[{\"file\": \"src/main/resources/com/puppycrawl/tools/checkstyle/checks/javadoc/messages_es.properties\", \"line\": 15, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Grammar: \\\"El comentario Javadoc falta una etiqueta\\\" is not correct Spanish - `faltar` needs an indirect object here. Suggest \\\"Al comentario Javadoc le falta la etiqueta ''{0}''.\\\"\"}]"}
+{"key": "b8e848c803ce1907bad319f4a785f9f1c5688f136321970ed89c71be506c4960", "content": "[]"}
+{"key": "f10cf44ed00368c779c8b6137b93776b7fbc61263e3993c089585f2c7aaab1e9", "content": "[]"}
+{"key": "e38d20f9784e79feb47d727646bb3eb1a17daf3961e8684be43089e6a39077a6", "content": "[]"}
+{"key": "69b3dab766cc72d532c431648dc7963a35acd6511a2d224eb413d4ffb4bf3acf", "content": "[{\"file\": \"src/main/resources/com/puppycrawl/tools/checkstyle/checks/javadoc/messages_pt.properties\", \"line\": 25, \"category\": \"style\", \"severity\": \"low\", \"comment\": \"Missing the trailing period; every other message in this file ends with one.\"}]"}
+{"key": "ed1b0b927321f2b7903ecb559b02ea1c99b76d13729edc03ff667d3143bfd033", "content": "[]"}
+{"key": "ecd0d9adbb23806c2bf73ad7d477dd616df5ecca046e5f9ea5fd10059d3dda3a", "content": "[]"}
+{"key": "4f32efbdb93383d71611f8aa761d9f219114a5a2c97156f246996742ca8fa608", "content": "[]"}
+{"key": "d33262f2cb12f7242ec02cc011583ef60269736fd0a6d6bc8dfde6ac119f94ff", "content": "[]"}
+{"key": "11a90de3a4d2d4307dd742d94ba2804bc6c8d934f5c50bd832dbbe9a54962e46", "content": "[]"}
+{"key": "432369f7d798b5bd63441c523b7762db863c92bea7340036e3425833357a1bda", "content": "[]"}
