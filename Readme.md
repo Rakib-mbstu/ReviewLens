@@ -4,9 +4,9 @@
 
 ReviewLens is both a working tool and an empirical study. Instead of demonstrating cherry-picked examples, it measures — on PRs that real maintainers reviewed — what fraction of human-flagged issues an LLM catches, what it systematically misses, and how often it hallucinates problems that aren't there.
 
-> **Status (Aug 19, 2026):** the review pipeline is implemented — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, and the review engine with a cached OpenRouter client; **prompt v1 is frozen** as of Aug 12 (`prompts/review_v1.md`, sha256 `3cf6f21e…`) and is never edited in place — a prompt change means a new versioned file. **The corpus is mined:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, which form RQ1's recall denominator. The mining manifest records the selection criteria, per-project skip tallies, and the pinned PR list with pre-review SHAs. **The evaluation harness is now complete end to end:** comment matching (same file, ±3 lines, LLM-judged semantic equivalence), metric computation, and the `reviewlens.eval` CLI, which emits a markdown report plus an auditable per-comment match record. Still outstanding: human-comment categorization (so per-category recall is reported as unavailable rather than as zeros), the manual-verification export, and the manual pass itself.
+> **Status (Aug 24, 2026):** the pipeline is complete end to end — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, the review engine with a cached OpenRouter client, LLM-assisted comment categorization, comment matching, metrics, reporting, a line-window sensitivity sweep, a cross-model comparison, and the manual-verification export. **All three prompts are frozen and never edited in place:** `review_v1` (Aug 12, sha256 `3cf6f21e…`), `match_v1` (Aug 19, `ff170b79…`), `categorize_v1` (Aug 23, `bd5e4f74…`). **The corpus is mined and its pinned PR list is committed:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, all of which now carry a category.
 >
-> **No evaluation has been run, so there are no results yet.** The first review run — the small capability tier, `qwen/qwen3-coder-30b-a3b-instruct` — aborted on Aug 12 after two PRs when the API budget ran out, and its output is not a usable pass. The table below stays empty until real numbers exist.
+> **First results exist and are preliminary.** A full-corpus run of `qwen/qwen3-coder-30b-a3b-instruct` covering 87 of 90 PRs gives **1.6% recall** (5 of 318 human comments). A three-model comparison on a 30-PR subset appears in the table below. **Differences between models are not statistically significant at this sample size**, and the *hallucination rate is not measured* — that requires the manual verification pass, which is the main outstanding work. Numbers here are labelled preliminary and will move.
 
 ## Motivation
 
@@ -78,6 +78,11 @@ See `reports/rq3-comparison-subset30.md`.
 - **Pre-review snapshot reconstruction is approximate** for PRs with force-pushed histories; such PRs are excluded.
 - **No multi-turn review.** Human review is conversational; ReviewLens evaluates only first-pass comments.
 - **A model ID does not pin down who served the request.** OpenRouter routes a model to one of several upstream providers, and they are not interchangeable: two providers were observed returning a billed completion with `content: null` (`finish_reason: "stop"`), which the pipeline would otherwise have recorded as that *model* failing to produce parseable output. Such replies are now retried instead of cached, and every run records which providers answered, so a provider-side defect cannot be read as a model-capability difference in RQ3.
+- **Some models were reached through an agent harness, not the OpenRouter API.** The OpenRouter budget could not fund a Claude pass (a full 90-PR run prices at $5–13 per model), so the Claude arms were driven through Claude Code subagents against the same frozen prompt and the same rendered chunks. They therefore had no temperature control and carried the agent harness's own system prompt. Each run records `via` (`openrouter` or `claude-code-subagent`), and the comparison table prints it: a gap between an API arm and a subagent arm mixes model capability with delivery channel and cannot be attributed to capability alone.
+- **A wrapper instruction can move the result it measures.** While building the subagent arms, an early wrapper restated the frozen prompt's "flag only what you are confident about" rule in its own words. That one redundant sentence cut the model's output rate by ~3x — on comment volume, which feeds the unmatched rate and therefore RQ2. The wrapper was reduced to pure mechanics (which file to read, which to write) and made byte-identical across every batch and both arms. Anyone evaluating an LLM reviewer through an agent should assume their scaffolding is part of the treatment.
+- **Recall is bounded before any model runs.** Two structural ceilings apply equally to every model: on the 30-PR subset, 8% of human comments sit on files the chunker never produced (files removed by the PR, or comments left on files outside its changed set), and the ±3-line matching window bounds the rest. The window was measured rather than assumed — see below.
+- **The ±3-line window is not what produces the low recall.** Re-matching at ±5, ±10 and ±25 makes 77 more human comments reachable (109 → 186 of 255) and costs 228 extra judge calls, and yields **zero** additional matches; recall is flat at 1.57% across an eightfold widening. The models are raising different issues, not the right issues in the wrong place.
+- **Per-category recall is rubric-sensitive, and the categories are LLM-assigned.** Two versions of `categorize_v1` disagreed on 16% of labels (51 of 328). The residual disagreement concentrates on the design/style boundary for small local edits.
 - **Unparseable model replies are counted, not hidden.** Weaker models sometimes return something other than the requested JSON — one observed failure mode is copying the diff's `+`/`-` line markers into the reply. The parser recovers what it safely can; whatever remains unparseable is written to the run's `errors.json` and reported as a per-model parse-failure rate, because a lost chunk depresses measured recall for reasons that have nothing to do with review ability.
 
 ## Scope
@@ -126,6 +131,19 @@ python -m reviewlens.eval --run runs/<model-id>/ --judge-model <model-id> --repo
 
 # 4. Export a reproducible sample of matches and unmatched-model comments for manual verification
 python -m reviewlens.eval.export_verification --run runs/<model-id>/ --out reports/<model-id>-verification.csv
+
+# 5. How much of the measured recall depends on the +/-3 line window?
+#    The rule stays frozen at +/-3 and that is the reported number; the wider
+#    windows are diagnostic, separating "commented elsewhere" from "raised a
+#    different issue".
+python -m reviewlens.eval.sensitivity --run runs/<model-id>/ --judge-model <model-id> \
+    --windows 3,5,10,25 --report reports/<model-id>-sensitivity.md
+
+# 6. Compare several evaluated runs on a shared corpus (RQ3). Refuses to emit a
+#    table unless the runs cover the same PRs, and prints Wilson intervals plus
+#    Fisher exact p-values so a non-significant gap cannot read as a finding.
+python -m reviewlens.eval.compare --runs runs/<model-a>/ runs/<model-b>/ \
+    --judge-model <model-id> --report reports/rq3-comparison.md
 ```
 
 All LLM responses are cached under `cache/`; a full re-run with a warm cache costs $0.

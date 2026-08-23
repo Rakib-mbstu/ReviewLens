@@ -31,6 +31,12 @@ reviewlens/
   eval/     # match model comments to human comments, compute metrics, emit report
 ```
 
+`eval/` also carries the analysis entry points that produced published numbers:
+`eval.categorize` (comment categories + spot-check sample), `eval.sensitivity`
+(how much recall depends on the ±3 window), `eval.compare` (cross-model table
+with Wilson intervals and Fisher exact p-values), and `eval.export_verification`
+(the ≥20% manual-verification sample).
+
 Pipeline invocations (keep these stable — the public README documents them):
 
 ```bash
@@ -51,6 +57,7 @@ If a change would break these commands or their flags, update `README.md` in the
 - **Manual verification:** the pipeline must support sampling **≥20%** of matches/hallucination judgments for manual review — build export for this, don't skip it.
 - **Corpus size:** 50–100 merged Java PRs total across the three projects.
 - **Env vars:** `OPENROUTER_API_KEY` (LLM calls), `GITHUB_TOKEN` (read-only, mining). Never commit keys; never log them.
+- **Models reached outside OpenRouter must be recorded, not hidden.** When budget forces an arm through a different channel (e.g. a Claude Code subagent), drive the *real* engine via `OfflineClient` so the chunks, prompt bytes and parser are identical, and record `via` in `run_meta` so the confound travels with the numbers. Any scaffolding around such a call is part of the treatment: keep it to pure mechanics, byte-identical across arms, and never restate the frozen prompt's review rules in your own words.
 - **Prompt v1 is frozen once locked.** Prompt changes after freeze invalidate comparisons — version prompts explicitly (e.g., `prompts/review_v1.md`) and never edit a frozen version in place.
 
 ## Data and directory conventions
