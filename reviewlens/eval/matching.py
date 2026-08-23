@@ -36,17 +36,24 @@ _CODE_FENCE_RE = re.compile(r"^```(?:json)?\s*\n(.*?)\n```$", re.DOTALL)
 JudgeFn = Callable[[dict, dict], "tuple[bool, str]"]
 
 
-def is_candidate(comment_a: dict, comment_b: dict) -> bool:
+def is_candidate(
+    comment_a: dict, comment_b: dict, line_tolerance: int = LINE_TOLERANCE
+) -> bool:
     """The geometric half of the matching rule: same file, within LINE_TOLERANCE lines.
 
     Pure and network-free by design: this is the cheap pre-filter that keeps
     the (necessarily paid) semantic judge off pairs that could never match
     regardless of what the judge would say. Symmetric in its arguments, so
     the ±3 window means the same thing whichever comment is considered first.
+
+    `line_tolerance` defaults to the frozen rule and exists only so
+    `reviewlens.eval.sensitivity` can report how much of the measured recall
+    depends on the window. Callers that report a headline number must leave
+    it alone: varying it silently would make two runs incomparable.
     """
     return (
         comment_a["file"] == comment_b["file"]
-        and abs(comment_a["line"] - comment_b["line"]) <= LINE_TOLERANCE
+        and abs(comment_a["line"] - comment_b["line"]) <= line_tolerance
     )
 
 
@@ -169,7 +176,10 @@ class MatchResult:
 
 
 def match_comments(
-    human_comments: list[dict], model_comments: list[dict], judge: JudgeFn
+    human_comments: list[dict],
+    model_comments: list[dict],
+    judge: JudgeFn,
+    line_tolerance: int = LINE_TOLERANCE,
 ) -> MatchResult:
     """One-to-one match model comments against human comments.
 
@@ -190,7 +200,8 @@ def match_comments(
         candidates = [
             (model_idx, model)
             for model_idx, model in enumerate(model_comments)
-            if model_idx not in matched_model_indices and is_candidate(human, model)
+            if model_idx not in matched_model_indices
+            and is_candidate(human, model, line_tolerance)
         ]
         candidates.sort(
             key=lambda pair: (abs(pair[1]["line"] - human["line"]), pair[1]["line"], pair[0])
