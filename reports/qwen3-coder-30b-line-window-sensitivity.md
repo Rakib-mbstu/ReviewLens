@@ -6,9 +6,9 @@ Judge model: `google/gemini-2.5-flash-lite`. Run: `qwen/qwen3-coder-30b-a3b-inst
 
 | Window | Reachable | Reachable % | Matched | Recall | Judge calls |
 |---|---|---|---|---|---|
-| ±3 (frozen rule) | 109/255 | 42.7% | 4 | **1.6%** | 126 |
-| ±5 | 123/255 | 48.2% | 4 | **1.6%** | 155 |
-| ±10 | 149/255 | 58.4% | 4 | **1.6%** | 211 |
-| ±25 | 186/255 | 72.9% | 4 | **1.6%** | 354 |
+| ±3 (frozen rule) | 127/318 | 39.9% | 5 | **1.6%** | 146 |
+| ±5 | 151/318 | 47.5% | 5 | **1.6%** | 187 |
+| ±10 | 184/318 | 57.9% | 5 | **1.6%** | 255 |
+| ±25 | 231/318 | 72.6% | 5 | **1.6%** | 430 |
 
 `Reachable` counts human comments with at least one model comment inside the window — the ceiling recall could reach at that tolerance if the judge accepted every pair. The gap between Reachable % and Recall is disagreement about the issue; the gap between 100% and Reachable % is the model commenting somewhere else entirely.

@@ -131,3 +131,38 @@ def test_run_meta_marks_a_finished_run_complete(tmp_path, monkeypatch):
     assert meta["complete"] is True
     assert meta["finished"] is not None
     assert [s["number"] for s in meta["pr_summaries"]] == [1, 2]
+
+
+def test_corpus_with_a_categories_sidecar_is_loadable(tmp_path):
+    """Regression: T8 put categories.json in the corpus directory, and the
+    README runs categorization (step 1b) BEFORE review (step 2), so every
+    reproducer would hit this on their first review run."""
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+    (corpus / "org__repo__1.json").write_text(
+        json.dumps({"repo": "org/repo", "number": 1, "changed_java_files": []}), encoding="utf-8"
+    )
+    (corpus / "categories.json").write_text(
+        json.dumps({"model": "m", "prompt": {}, "categories": {}, "failures": []}),
+        encoding="utf-8",
+    )
+    (corpus / "manifest.json").write_text(json.dumps({"prs": []}), encoding="utf-8")
+
+    entries = _load_corpus_entries(str(corpus))
+
+    assert [e["number"] for e in entries] == [1]
+
+
+def test_a_malformed_pr_file_is_still_fatal(tmp_path):
+    """Skipping the two known sidecars must not become "skip anything odd"."""
+    corpus = tmp_path / "corpus"
+    corpus.mkdir()
+    (corpus / "org__repo__1.json").write_text(
+        json.dumps({"repo": "org/repo", "number": 1}), encoding="utf-8"
+    )
+    (corpus / "broken.json").write_text(json.dumps({"nope": True}), encoding="utf-8")
+
+    with pytest.raises(SystemExit) as excinfo:
+        _load_corpus_entries(str(corpus))
+
+    assert "missing required keys" in str(excinfo.value)

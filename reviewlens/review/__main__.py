@@ -15,6 +15,7 @@ import os
 import sys
 from datetime import datetime, timezone
 
+from reviewlens.eval.corpus import CATEGORIES_FILENAME
 from reviewlens.mine.miner import MANIFEST_FILENAME
 from reviewlens.openrouter import OpenRouterClient
 from reviewlens.review.engine import DEFAULT_CONTEXT_LINES, review_pr
@@ -41,10 +42,11 @@ def _load_corpus_entries(corpus_dir: str) -> list[dict]:
     actionable message, unlike PRExcluded (a specific PR that is unusable at
     review time and is skipped rather than fatal).
 
-    The mining manifest is the one file in a corpus directory that is not a
-    PR entry, so it is skipped by name. Anything else lacking repo/number is
-    still fatal — a corpus with a malformed PR file must not quietly review
-    fewer PRs than the corpus claims to hold.
+    Two files in a corpus directory are not PR entries — the mining manifest
+    and the categories sidecar written by `reviewlens.eval.categorize` — so
+    both are skipped by name. Anything else lacking repo/number is still
+    fatal: a corpus with a malformed PR file must not quietly review fewer
+    PRs than the corpus claims to hold.
     """
     if not os.path.isdir(corpus_dir):
         sys.exit(
@@ -54,7 +56,7 @@ def _load_corpus_entries(corpus_dir: str) -> list[dict]:
     paths = [
         path
         for path in sorted(glob.glob(os.path.join(corpus_dir, "*.json")))
-        if os.path.basename(path) != MANIFEST_FILENAME
+        if os.path.basename(path) not in (MANIFEST_FILENAME, CATEGORIES_FILENAME)
     ]
     if not paths:
         sys.exit(
