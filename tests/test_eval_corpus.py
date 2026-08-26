@@ -5,6 +5,7 @@ import pytest
 from reviewlens.eval.corpus import (
     load_categorization_meta,
     load_corpus,
+    load_error_stats,
     load_eval_inputs,
     load_run_meta,
     normalize_human_comment,
@@ -272,6 +273,118 @@ def test_load_eval_inputs_carries_categorization_metadata(tmp_path):
     assert inputs.categorization is not None
     assert inputs.categorization.categorized_count == 4
     assert inputs.categorization.low_confidence_count == 1
+
+
+# --- parse-error stats: chunk loss vs. malformed items, provider vs. model ---
+
+
+def _error(error, chunk_index, raw_content="{}"):
+    """One errors.json record, in the shape reviewlens.review.engine writes."""
+    return {"error": error, "raw_content": raw_content, "chunk_index": chunk_index}
+
+
+def _model_comment(chunk_index, line=10, comment="ok"):
+    return {"file": "src/Main.java", "line": line, "comment": comment, "chunk_index": chunk_index}
+
+
+def test_missing_errors_json_is_zero_stats(tmp_path):
+    run = tmp_path / "run"
+    (run / "org__repo__1").mkdir(parents=True)
+
+    stats = load_error_stats(str(run), "org__repo__1", model_comments=[])
+
+    assert stats.parse_error_items == 0
+    assert stats.error_chunk_count == 0
+    assert stats.lost_chunk_count == 0
+    assert stats.provider_error_items == 0
+    assert stats.model_error_items == 0
+
+
+def test_two_malformed_items_from_one_chunk_count_as_one_error_chunk(tmp_path):
+    """parse_review_response can reject several elements from one chunk's
+    reply; error_chunk_count must count the chunk once, not once per item."""
+    run = tmp_path / "run"
+    _write(
+        run / "org__repo__1" / "errors.json",
+        [
+            _error("invalid JSON (Expecting value)", chunk_index=5),
+            _error("invalid 'category' (...): 'test'", chunk_index=5),
+        ],
+    )
+
+    stats = load_error_stats(str(run), "org__repo__1", model_comments=[])
+
+    assert stats.parse_error_items == 2
+    assert stats.error_chunk_count == 1
+    assert stats.lost_chunk_count == 1
+
+
+def test_a_chunk_with_an_error_and_a_valid_comment_is_not_lost(tmp_path):
+    """engine.py's parse_review_response returns valid comments and errors
+    for the same chunk together, so an errored chunk that still produced a
+    comment was not lost — only chunks with zero surviving output are."""
+    run = tmp_path / "run"
+    _write(run / "org__repo__1" / "errors.json", [_error("invalid JSON (Expecting value)", chunk_index=5)])
+    model_comments = [_model_comment(chunk_index=5)]
+
+    stats = load_error_stats(str(run), "org__repo__1", model_comments)
+
+    assert stats.error_chunk_count == 1
+    assert stats.lost_chunk_count == 0
+
+
+def test_content_missing_message_classifies_as_provider_caused(tmp_path):
+    """The exact message engine.py:134 writes when the provider returns a
+    null content field despite the model having been billed and having
+    generated tokens."""
+    run = tmp_path / "run"
+    _write(
+        run / "org__repo__1" / "errors.json",
+        [_error("response content was NoneType, not a string", chunk_index=0)],
+    )
+
+    stats = load_error_stats(str(run), "org__repo__1", model_comments=[])
+
+    assert stats.provider_error_items == 1
+    assert stats.model_error_items == 0
+
+
+def test_invalid_json_and_invalid_category_classify_as_model_caused(tmp_path):
+    run = tmp_path / "run"
+    _write(
+        run / "org__repo__1" / "errors.json",
+        [
+            _error("invalid JSON (Expecting value)", chunk_index=0),
+            _error("invalid 'category' (must be one of ['bug']): 'test'", chunk_index=1),
+        ],
+    )
+
+    stats = load_error_stats(str(run), "org__repo__1", model_comments=[])
+
+    assert stats.provider_error_items == 0
+    assert stats.model_error_items == 2
+
+
+def test_load_eval_inputs_carries_error_stats_through_to_evalpr(tmp_path):
+    """End-to-end: load_eval_inputs must actually call load_error_stats and
+    attach its results to each EvalPR, not just parse_error_count/chunk_count."""
+    corpus = tmp_path / "corpus"
+    _write(corpus / "org__repo__1.json", _corpus_record(1, []))
+    run = tmp_path / "run"
+    _write(run / "run_meta.json", _run_meta([_summary(1, chunk_count=3, parse_error_count=1)], corpus))
+    _write(
+        run / "org__repo__1" / "errors.json",
+        [_error("response content was NoneType, not a string", chunk_index=2)],
+    )
+    _write(run / "org__repo__1" / "comments.json", [])
+
+    pr = load_eval_inputs(str(run)).prs[0]
+
+    assert pr.parse_error_items == 1
+    assert pr.error_chunk_count == 1
+    assert pr.lost_chunk_count == 1
+    assert pr.provider_error_items == 1
+    assert pr.model_error_items == 0
 
 
 def test_load_eval_inputs_categorization_is_none_without_categories_json(tmp_path):

@@ -136,13 +136,75 @@ def test_report_tallies_the_upstream_providers_that_served_the_run():
     assert "AlphaProvider (2), BetaProvider (1)" in report
 
 
-def test_parse_failure_rate_is_reported_beside_recall():
-    metrics = _metrics([_human(10, "a")], [_model(10, "a")], chunk_count=10, parse_error_count=2)
+def test_chunk_loss_rate_is_reported_beside_recall():
+    """The headline coverage number: distinct chunks that contributed zero
+    model comments, not a raw item count."""
+    metrics = _metrics(
+        [_human(10, "a")],
+        [_model(10, "a")],
+        chunk_count=10,
+        lost_chunk_count=1,
+    )
 
     report = render_report(metrics, _run_meta(), "test/judge", JUDGE_PROMPT)
 
-    assert "| Parse failures | 2/10 |" in report
-    assert "| Parse-failure rate | 20.0% |" in report
+    assert "| Chunks lost (no output) | 1/10 |" in report
+    assert "| **Chunk loss rate** | **10.0%** |" in report
+
+
+def test_error_chunk_rate_is_distinct_from_chunk_loss_rate():
+    """A chunk can carry a parse error and still contribute a valid comment,
+    so error-chunk count and lost-chunk count must not be conflated."""
+    metrics = _metrics(
+        [_human(10, "a")],
+        [_model(10, "a")],
+        chunk_count=10,
+        error_chunk_count=3,
+        lost_chunk_count=1,
+    )
+
+    report = render_report(metrics, _run_meta(), "test/judge", JUDGE_PROMPT)
+
+    assert "| Chunks with a parse error | 3/10 |" in report
+    assert "| Error-chunk rate | 30.0% |" in report
+    assert "| **Chunk loss rate** | **10.0%** |" in report
+
+
+def test_malformed_items_per_chunk_is_labelled_apart_from_chunk_loss():
+    """This rate counts individual rejected items and can exceed 1 — it must
+    never be presented as a chunk-loss number."""
+    metrics = _metrics(
+        [_human(10, "a")],
+        [_model(10, "a")],
+        chunk_count=10,
+        parse_error_count=2,
+        parse_error_items=2,
+        provider_error_items=1,
+        model_error_items=1,
+    )
+
+    report = render_report(metrics, _run_meta(), "test/judge", JUDGE_PROMPT)
+
+    assert "| Malformed items per chunk | 20.0% |" in report
+    assert "not a chunk-loss rate" in report
+
+
+def test_provider_and_model_error_split_is_rendered_and_not_attributed_to_the_model():
+    metrics = _metrics(
+        [_human(10, "a")],
+        [_model(10, "a")],
+        chunk_count=10,
+        parse_error_count=3,
+        parse_error_items=3,
+        provider_error_items=1,
+        model_error_items=2,
+    )
+
+    report = render_report(metrics, _run_meta(), "test/judge", JUDGE_PROMPT)
+
+    assert "provider-caused | 1/3 |" in report
+    assert "model-caused | 2/3 |" in report
+    assert "not attributable to the model" in report
 
 
 # --- the shipped rubric file must actually load ---
@@ -201,9 +263,11 @@ def test_method_note_states_llm_assisted_and_uses_computed_counts():
     assert "9 assigned at low confidence" in report
     assert "exactly four categories" in report
     assert "rubric-sensitive" in report
-    # The categorization spot check is produced by the categorize CLI, not by
-    # export_verification, which samples match/hallucination judgments instead.
-    assert "reviewlens.eval.categorize --spotcheck-out" in report
+    # The sampled assignments are re-rated by a second model, not by a human.
+    # The note must say so: an agreement rate between two models is not
+    # human validation, and the report is where that gets confused.
+    assert "second, independent model" in report
+    assert "no human validated these labels" in report
     assert "export_verification" not in report
     # The rubric-revision figure is not derivable from a run directory, so
     # it must never appear here — only in the README, where it is measured.
