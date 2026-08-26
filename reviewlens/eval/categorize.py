@@ -25,6 +25,7 @@ from datetime import datetime, timezone
 from reviewlens.eval.corpus import CATEGORIES_FILENAME, load_corpus
 from reviewlens.eval.export_verification import sample_ids
 from reviewlens.openrouter import OpenRouterClient
+from reviewlens.review.offline_client import OfflineClient
 from reviewlens.review.prompt import Prompt, load_prompt
 
 _CATEGORIZE_PROMPT_RELATIVE_PATH = os.path.join("prompts", "categorize_v1.md")
@@ -181,6 +182,22 @@ def write_spotcheck_sample(
     return len(drawn)
 
 
+def _load_only_ids(path: str) -> set:
+    """Read a plain-text file of human-comment ids to restrict categorization to.
+
+    One id per line; blank lines and lines starting with `#` are ignored.
+    Ids are kept as strings since that is how `categories` is keyed.
+    """
+    ids: set = set()
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            ids.add(line)
+    return ids
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="python -m reviewlens.eval.categorize",
@@ -223,16 +240,48 @@ def main(argv: list[str] | None = None) -> None:
         default=20260823,
         help="Seed making the spot-check sample reproducible (default: 20260823).",
     )
+    parser.add_argument(
+        "--offline-requests",
+        default=None,
+        help=(
+            "Drive the run with OfflineClient instead of OpenRouter, recording every "
+            "unanswered chunk request to this JSONL file. Used for RQ3 arms served by a "
+            "model reached outside the OpenRouter API."
+        ),
+    )
+    parser.add_argument(
+        "--offline-answers",
+        default=None,
+        help="JSONL of {key, content} answers to replay (requires --offline-requests).",
+    )
+    parser.add_argument(
+        "--only-ids",
+        default=None,
+        help=(
+            "Plain text file of human-comment ids to categorize, one per line "
+            "(blank lines and lines starting with '#' ignored). Comments whose id "
+            "is not listed are skipped entirely. Default: categorize every comment."
+        ),
+    )
     args = parser.parse_args(argv)
+
+    if args.offline_answers and not args.offline_requests:
+        sys.exit("--offline-answers requires --offline-requests.")
+    offline = args.offline_requests is not None
 
     try:
         corpus = load_corpus(args.corpus)
     except FileNotFoundError as exc:
         sys.exit(str(exc))
 
+    only_ids = _load_only_ids(args.only_ids) if args.only_ids else None
+
     out_path = args.out or os.path.join(args.corpus, CATEGORIES_FILENAME)
     prompt = load_prompt(os.path.join(_repo_root(), _CATEGORIZE_PROMPT_RELATIVE_PATH))
-    llm_client = OpenRouterClient(use_cache=not args.no_cache)
+    if offline:
+        llm_client = OfflineClient(args.offline_requests, args.offline_answers)
+    else:
+        llm_client = OpenRouterClient(use_cache=not args.no_cache)
 
     categories: dict[str, dict] = {}
     # Where each categorized comment came from, so the spot-check sample can
@@ -248,6 +297,8 @@ def main(argv: list[str] | None = None) -> None:
             number = record["number"]
             for comment in record.get("human_comments", []):
                 comment_id = comment.get("id")
+                if only_ids is not None and str(comment_id) not in only_ids:
+                    continue
                 if comment_id is None:
                     failures.append(
                         {"id": comment_id, "repo": repo, "number": number, "error": "comment has no id"}
@@ -286,6 +337,7 @@ def main(argv: list[str] | None = None) -> None:
     output = {
         "categorized_at": datetime.now(timezone.utc).isoformat(),
         "model": args.model,
+        "via": "claude-code-subagent" if offline else "openrouter",
         "prompt": {"name": prompt.name, "version": prompt.version, "sha256": prompt.sha256},
         "categories": categories,
         "failures": failures,
