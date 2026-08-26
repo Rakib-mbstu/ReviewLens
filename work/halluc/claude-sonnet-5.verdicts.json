@@ -1,0 +1,95 @@
+{
+  "judged_at": "2026-08-26T14:40:46.470483+00:00",
+  "model": "claude-code-subagent/fable",
+  "via": "claude-code-subagent",
+  "prompt": {
+    "name": "hallucination_v1",
+    "version": 1,
+    "sha256": "e05ea232e3eacc15c0f12ff1bb68cd9d4cde2b1cecd448fe92e2979259b70c98"
+  },
+  "run": "runs/subset30/claude-sonnet-5/",
+  "sample": "reports/subset30-claude-sonnet-5-verification.csv",
+  "verdicts": {
+    "anthropic__claude-sonnet-5__checkstyle__checkstyle__20537__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 198 visibly capitalizes \"Destructuring\" mid-sentence, inconsistent with the surrounding lowercase prose."
+    },
+    "anthropic__claude-sonnet-5__checkstyle__checkstyle__20537__unmatched_model__2": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 452 visibly reads \"declared in a switch labels and instanceof\", which has the singular/plural mismatch and unclear wording the comment describes."
+    },
+    "anthropic__claude-sonnet-5__checkstyle__checkstyle__20600__unmatched_model__1": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "Whether this check's class really lives directly under checks/ or in a subpackage cannot be determined from this suppressions-file chunk, which shows only other entries' paths."
+    },
+    "anthropic__claude-sonnet-5__checkstyle__checkstyle__20600__unmatched_model__9": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 32 visibly contains a double slash before Example1.java while the config macro at line 25 uses a single slash for the same directory."
+    },
+    "anthropic__claude-sonnet-5__checkstyle__checkstyle__21086__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "Line 25 visibly lacks a trailing period and most messages in the file end with one, but the claim that every other message does is contradicted by lines 22, 26, and 30, and the English source is not shown."
+    },
+    "anthropic__claude-sonnet-5__junit-team__junit5__4609__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The javadoc now visibly says \"Deprecated\" in prose while the package declaration carries only @NullMarked and no @Deprecated annotation, so the suggested change really would apply."
+    },
+    "anthropic__claude-sonnet-5__junit-team__junit5__5042__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The new else-if on lines 144-146 visibly has the identical body (prunedStackTrace.clear();) as the following branch on lines 147-149, so combining the conditions with || would apply."
+    },
+    "anthropic__claude-sonnet-5__junit-team__junit5__5042__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The list is visibly alphabetical apart from \"junit-start\", which sorts after the junit-platform-* entries and before junit-vintage-engine, not where it was inserted."
+    },
+    "anthropic__claude-sonnet-5__junit-team__junit5__5042__unmatched_model__5": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 42 visibly references the statically accessed mixed-case name Projects.JUNIT_start, which departs from the ALL_CAPS constant naming convention."
+    },
+    "anthropic__claude-sonnet-5__junit-team__junit5__5042__unmatched_model__8": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 24's JUNIT_start visibly breaks the ALL_CAPS convention followed by every other constant in the chunk."
+    },
+    "anthropic__claude-sonnet-5__junit-team__junit5__5060__unmatched_model__6": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "incrementAttempts() visibly passes the same future into the canonical constructor, whose compact body (line 459) registers another whenComplete logging callback each time, so repeated requeuing accumulates duplicate trace callbacks."
+    },
+    "anthropic__claude-sonnet-5__mockito__mockito__2603__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The chunk shows null checks implemented with `assert` at lines 35/45-46, and Java asserts are indeed no-ops unless -ea is enabled, though whether this project's test runs enable assertions is not visible."
+    },
+    "anthropic__claude-sonnet-5__mockito__mockito__2659__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The field named `outer` at line 151 does hold the corresponding org.mockito.quality.Strictness value rather than an outer-class reference, so the readability concern applies, though it is a subjective naming preference."
+    },
+    "anthropic__claude-sonnet-5__mockito__mockito__2807__unmatched_model__1": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The reordering and matchers.get(size-1) on an empty list are visible, but whether isVararg can be true with zero matchers depends on Invocation.getRawArguments() semantics for a zero-arg vararg call, which the chunk does not show."
+    },
+    "anthropic__claude-sonnet-5__mockito__mockito__2842__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "captureFrom visibly adds (T) argument with no clazz validation while matches() does validate, so the described gap is real and the caller-ordering question does not change that the stated facts hold."
+    }
+  },
+  "failures": [],
+  "counts": {
+    "founded": 13,
+    "unfounded": 0,
+    "unverifiable": 2
+  }
+}

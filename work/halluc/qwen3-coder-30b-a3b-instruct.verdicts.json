@@ -1,0 +1,835 @@
+{
+  "judged_at": "2026-08-26T14:40:46.571490+00:00",
+  "model": "claude-code-subagent/fable",
+  "via": "claude-code-subagent",
+  "prompt": {
+    "name": "hallucination_v1",
+    "version": 1,
+    "sha256": "e05ea232e3eacc15c0f12ff1bb68cd9d4cde2b1cecd448fe92e2979259b70c98"
+  },
+  "run": "runs/subset30/qwen3-coder-30b-a3b-instruct/",
+  "sample": "reports/subset30-qwen3-coder-30b-a3b-instruct-verification.csv",
+  "verdicts": {
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20351__unmatched_model__10": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The diff at line 432 does show the missing-tag message now quoting the parameter name ('myInt'), which is what the comment states."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20351__unmatched_model__13": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 24 visibly changes the expected message to quote 'value', matching the comment's factual claim; the clarity judgment is opinion on a true change."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20351__unmatched_model__15": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 78's expected violation message visibly changes from @param X to @param 'X', exactly the update the comment describes."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20351__unmatched_model__16": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The chunk really does mix phrasings ('Type Javadoc comment is missing @param ... tag.' at 59/66 vs 'missing @param 'c' tag.' at 82), though the comment misattributes the short form to previous examples."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20351__unmatched_model__8": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 428 visibly changes the expected message to quote 'myList', matching the comment's statement."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20362__unmatched_model__11": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The static field/parameter shadowing description matches the visible code, but whether the resources-noncompilable placement prevents the violation from being validated depends on test infrastructure not in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20362__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The new test methods at lines 686-721 visibly carry no explanatory comments, though they cover compact source files rather than 'compact constructors and records' as the comment says."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20362__unmatched_model__6": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The chunk shows this is a HiddenField test input whose config header and '// 2 violations' marker make the shadowing deliberate, so renaming to 'avoid hidden field issues' flags a problem the fixture intentionally exhibits."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20537__unmatched_model__14": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The visible '// violation, Unused local variable' marker on line 21 shows the unused variable is an intentional test fixture, contradicting the comment's doubt about whether it is intentional."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20537__unmatched_model__17": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "Line 36's explicit violation marker shows 'z' being unused is deliberate fixture content, contradicting the suggestion that it may be unintentional or need renaming."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20537__unmatched_model__9": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The added sentence is ordinary documentation prose; nothing in the visible code exhibits a defect from leaving a doc addition 'unmarked', so the flagged problem is not present."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20554__unmatched_model__0": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The 'violation above' marker on line 76 shows the TODO comment line itself triggers the violation, contradicting the claim that the comment now sits above the triggering line and that the example's expected behavior changed."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20554__unmatched_model__12": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The configured regex (?i)(TODO)|(FIXME) is unanchored, line 35 has no text before FIXME, and line 36's violation marker confirms it matches - all visible facts contradict the claim."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20554__unmatched_model__13": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The box comment still exists as a block comment at lines 18-22; only a separate violation-marker line comment was added, so no comment changed from block to line style."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20554__unmatched_model__17": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The '######' 6-char comment visibly moved (now above method4 at line 52, reworded), which is the comment's checkable claim, though the impact remark is vacuous."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20554__unmatched_model__5": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The shifted line/column expectations (16:14->24:7, 20->27, 22->31, 24->35) are visible in the diff and do reflect changed example file content, as the comment says."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__12": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 32 visibly reads 'multi-line bock comments'; 'bock' is a typo for 'block'."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__15": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible Spanish message already says 'deben comenzar' (the plural of 'debe comenzar'), directly contradicting the claim that it omits the modal."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__21": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The new message visibly matches the capitalization style of every other message in the chunk, so the implied consistency concern is contradicted by the surrounding lines."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__32": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The test does use a one-line lambda with getExpectedThrowable as described, and the suggested refactor is a stylistic option that could apply, though its benefit for so small a lambda is debatable."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__36": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The added exclusion visibly removes MultilineCommentLeadingAsteriskPresence from the missing-XpathRegressionTest assertion, so it does suppress that coverage requirement; whether that is justified lies outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__43": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Lines 37-40 of the comment visibly lack leading asterisks and the four 'violation 5 lines below' markers confirm the check flags exactly those lines."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__46": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 25 ('Line 3') visibly lacks a leading asterisk and the markers at lines 21-22 confirm violations are expected there, matching the comment."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__49": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The claim about the check's requirement is true in itself, but the 'violation 3 lines above' markers show the header comment's violations are deliberate fixture expectations, so prescribing a fix flags a non-problem."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20604__unmatched_model__12": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "disallow-doctype-decl is indeed not set while the visible code disables external DTD/entity features, so the hardening suggestion genuinely applies, though those visible mitigations already blunt the claimed XXE risk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20604__unmatched_model__14": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The nested loops at lines 959-965 visibly compare every AST against every other AST, which is O(n^2), so the observation is correct even if the practical impact is small."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20604__unmatched_model__16": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The visible code already implements the proposed fix: buildModuleSimpleNameIndex is documented as built once into MODULE_SIMPLE_NAME_CACHE precisely to avoid repeated classpath scans, so the comment proposes caching that the code already has, though the field initialization itself is outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20604__unmatched_model__19": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The comment asserts no checkable property of the code, only that readability 'could be improved' without saying what is wrong or how, so there is nothing in the chunk that could confirm or contradict it."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20604__unmatched_model__2": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "PROPERTY_COUNT_CACHE is visibly declared as a ConcurrentMap initialized to a ConcurrentHashMap, which is thread-safe by construction, so the suggestion that thread safety may be unhandled is contradicted by the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20604__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The set visibly contains roughly fifty entries so the size observation is correct, but whether splitting or further documenting it would be an improvement is a subjective judgment the chunk cannot settle."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20604__unmatched_model__9": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The stream at lines 617-622 is materialized via toList() into a list that is only iterated once, so avoiding that intermediate list would technically apply, though the benefit is negligible and the 'more efficient collection type' suggestion has no clear target."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20717__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The test at line 163 visibly has no javadoc comment, so the suggestion to add one is accurate against the chunk, whatever its value given that neighboring tests also lack javadoc."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20752__unmatched_model__10": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "BODY does lack a Javadoc comment, but the chunk shows this is a deliberate test fixture whose marker on line 20 declares the missing Javadoc as the expected violation, so treating it as a clarity defect misreads the visible code."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__14": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The file visibly contains many existing keys with the same camelCase convention (javadoc.duplicateTag, javadoc.expectedTag, javadoc.unclosedHtml), so the claim that javadoc.missingTag deviates from the established naming is contradicted, though it does differ from the javadoc.missing.* pair the comment cites."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__17": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "Whether the javadoc.tagFormat message is actually used depends on Java code and metadata outside this properties-file chunk, so the chunk cannot confirm or refute the concern."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__19": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether the new message follows an established convention for format-related messages depends on project conventions and comparable messages not visible in this chunk, which contains no other format-requirement message to compare against."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__22": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk shows the key swap in the metadata file but whether it aligns with WriteTagCheck's intended validation behavior can only be judged from the check's Java code, which is not visible here."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__25": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff visibly changes the marker text from the type-specific wording to a generic one, so the described change and its loss of the 'Type' qualifier are real, though whether that loss matters hinges on intent the chunk does not fix."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__28": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff at line 283 visibly shows the message text changed from 'Type Javadoc tag @since' to 'Javadoc tag @since', so the described specificity change is real, though its intentionality cannot be settled from the chunk despite the rename being applied uniformly."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__3": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The new key javadoc.tagFormat visibly matches the camelCase pattern of many existing keys in the file such as javadoc.blockTagLocation, javadoc.duplicateTag, and javadoc.writeTag, so the claim is correct."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__30": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff at line 298 visibly shows the message text changed from the type-specific wording to the generic form, so the described change is real, though its intentionality cannot be settled from the chunk despite the rename being applied uniformly."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__35": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff visibly shortens the suppression filter's message pattern by dropping 'Type', so the described change is real, but consistency with error messages elsewhere and the author's intent are outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__38": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The href on line 427 visibly searches for %22javadoc.tagFormat%22 and its link text on line 428 is javadoc.tagFormat, so the claim that this link points to javadoc.writeTag is contradicted by the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__47": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The marker on line 21 already reads 'Javadoc comment is missing @incomplete tag.', exactly the phrasing the comment says the violation should have, so the mismatch it describes is not present in the visible code."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__53": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff at line 42 visibly shows the marker changed from 'Type Javadoc tag @since' to 'Javadoc tag @since', so the described specificity change is real, though its intentionality cannot be settled from the chunk despite the rename being applied uniformly."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__55": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff at line 24 visibly shows the marker changed from the type-specific wording to the generic form, so the described change is real, though its intentionality cannot be settled from the chunk despite the rename being applied uniformly."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__7": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "Many other visible keys (e.g. javadoc.blockTagLocation, javadoc.classInfo, javadoc.writeTag) use the same camelCase convention, so the chunk contradicts the claim that this key deviates from the file's other keys."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__8": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "Visible sibling messages (lines 8, 9, 28, 29) use singular 'tagi' just as the new message does, so the claimed inconsistency is contradicted by the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__11": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 38 visibly contains @Deprecated(since = \"6.0\", forRemoval = true), so the comment's approving claim about what the annotation indicates is accurate."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__12": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The visible javadoc only labels the extensions as deprecated without stating a reason or a recommended alternative, so the suggested addition genuinely applies."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__2": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The chunk shows the deprecation conveyed only by an inline italic '_Deprecated_', so the proposal for a more explicit notice format applies to the visible text."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__39": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The @Deprecated(forRemoval = true) annotation is visibly added as described, but whether all usages have been migrated depends on code outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__40": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether the package's actual contents are deprecated, and thus whether the notice is consistent with them, cannot be checked from this package-info-only chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__41": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The @SuppressWarnings(\"removal\") on line 20 visibly has no explanatory comment and the chunk does not show what warning it addresses, so the suggested clarification applies."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__42": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The chunk shows only an annotation/status change on an INTERNAL-status API, and marking code deprecated is not itself a breaking change, so the asserted breakage is not exhibited by the visible code."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__45": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The visible javadoc contains no @deprecated tag or migration guidance alongside the added @Deprecated, so the stated lack of guidance is real in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__52": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "Both annotations visibly use since = \"6.0\", so the version inconsistency the comment implies does not exist."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__59": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible test method is named resolvesSimpleJUnit4TestClass, which does describe the behavior under test, contradicting the claim that the name lacks a description."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__62": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The added @SuppressWarnings(\"removal\") visibly has no explanatory comment, so the suggested clarification applies."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4609__unmatched_model__71": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The added @SuppressWarnings(\"removal\") visibly has no explanatory comment, so the suggested clarification applies."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4751__unmatched_model__12": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk shows only the import block, so whether requireNonNull is used elsewhere in the file cannot be determined."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4751__unmatched_model__13": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk shows only the import block, so whether TypedArgumentConverter is used elsewhere in the file cannot be determined."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4751__unmatched_model__19": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether the updated call matches DefaultArgumentsAccessor's new signature cannot be checked from this chunk, and the coordinated diff suggests a signature change rather than a defect, so the claimed breakage is not decidable here."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4751__unmatched_model__21": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The new test name literally contains 'Bcp47Format', contradicting the claim that it fails to indicate the format being tested."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4751__unmatched_model__22": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The claim hinges on DefaultArgumentsAccessor.create's new signature, which is not visible in this chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4751__unmatched_model__5": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The context is visibly no longer passed, but whether any conversion functionality relied on it depends on DefaultArgumentConverter internals not shown in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4751__unmatched_model__6": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The chunk shows the ExtensionContext parameter really was removed from the public create signature, so existing call sites using the old form would indeed break."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4913__unmatched_model__3": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "Only the import section is visible, so whether ByteArrayOutputStream is used later in the file cannot be determined."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4913__unmatched_model__4": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "Only the import section is visible, so whether NotSerializableException is used later in the file cannot be determined."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4913__unmatched_model__6": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "Only the import section is visible, so whether Serializable is used later in the file cannot be determined."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__17": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "classFilter::match is visibly applied both to the name stream and to the loaded classes, so the double application the comment questions is really present, even if its redundancy depends on unseen ClassFilter semantics."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__18": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "Line 30 already carries the comment '// due to qualified exports', so the explanation the reviewer asks to add is visibly present."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__25": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "'import module org.junit.start;' is valid Java module-import syntax (standard since Java 25), consistent with the modern-Java example shown, so the claim that it is not standard syntax is false and the proposed 'import org.junit.start;' would itself be invalid."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__27": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible expression \"failure%s\" with (count == 1 ? \"\" : \"s\") correctly yields 'failure' for one and 'failures' otherwise, so the claimed pluralization defect does not exist."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__3": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The visible change really does make classFiles() accept .java files when SOURCE_MODE is set, which is exactly the behavior change the comment describes."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__31": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The chunk shows the 'contains org.junit.platform.console.output' line being removed and only a 'qualified exports' line added, so no duplicate entry exists."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__32": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The file is visibly a pattern-based expected-output template (regexes plus the ${version} placeholder), so the flagged instability is not exhibited and a concrete version would defeat the visible design."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__40": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether module m contains classes needing reflective access cannot be determined from this module-info-only chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__45": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible code already passes 'org.junit.start' to --add-modules, which is exactly what the comment says it should be, so no defect exists."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__11": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "An added import alone does not show a change to the default execution service; what the class does with it lies outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__16": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The flagged check uses isAssignableFrom, which performs no cast and cannot throw ClassCastException, so the named defect is not exhibited (primitive constructor parameters would merely fail to match, a different problem)."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__23": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible tryAcquire uses non-blocking tryLock with release-on-failure, the standard deadlock-avoidance pattern, and other threads acquiring the locks after release causes no inconsistent state."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__27": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "If reacquire() throws InterruptedException in the finally block, the thread continues without holding a worker lease and with a spent ReacquisitionToken, a recovery gap the visible code does not address, though it does deliberately re-interrupt."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__35": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The diff visibly changes the pattern's timestamp precision (SSS to SSSSSS), thread-name padding (%t to %-18t), and logger formatting, exactly as the comment describes."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__5": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The import removal is visible, but whether any remaining code relied on ForkJoinPoolHierarchicalTestExecutorService depends on the rest of the file, which the chunk does not show."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__50": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The declaration and initialization of the 'implementation' field are not in the chunk, so whether it can be null cannot be checked here."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__51": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The return value is indeed ignored, but the immediately following assertTrue(lock.isLocked()) would fail if tryAcquire had not acquired the lock, contradicting the claim that the test could pass incorrectly."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__14": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff visibly reassigns behaviors, resource locks, and latch roles among child2, child3, and child4 and rewrites the corresponding assertions, so the description of a substantive test-logic rearrangement is accurate."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__21": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The preceding assertion at line 519 that container1.executionThread is not equal to test3.executionThread, combined with the containsOnly checks, does verify the tests ran on a different thread, contradicting the claim that stealing is not verified."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__24": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The removed code also asserted child1.executionThread isNotEqualTo child2.executionThread, so the original test did not expect them to be equal as the comment claims."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__4": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The old reverseOrder() sort was removed and a sort by CHILD_COMPARATOR added, but that comparator's ordering is not visible, so whether this is 'normal order' or changes execution semantics cannot be checked from the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__5": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Traversal did change from a reverse listIterator to sorted forward iteration, but whether that causes incorrect ordering or deadlocks depends on CHILD_COMPARATOR and concurrency behavior not visible in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__8": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The code visibly throws IllegalStateException when queue.add returns false, so the failure behavior the comment describes is present, though fail-fast may well be intentional."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__103": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The four added imports from org.junit.jupiter.api.Constants are already contiguous and sorted alongside the other org.junit.jupiter.api imports, so they are visibly grouped as suggested."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__104": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The four added imports from org.junit.jupiter.api.Constants are already contiguous and sorted alongside the other org.junit.jupiter.api imports, so they are visibly grouped as suggested."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__105": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The four added imports from org.junit.jupiter.api.Constants are already contiguous and sorted alongside the other org.junit.jupiter.api imports, so they are visibly grouped as suggested."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__113": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The new Constants imports (lines 22-32) and the Timeout imports (lines 33-34) are already contiguous and alphabetically ordered, so related imports are visibly grouped already."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__115": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether the newly imported Constants class is needed depends on its usages in the rest of the test class, which the chunk does not show."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__117": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The chunk visibly adds 'import org.junit.jupiter.api.Constants;' at line 23, so the removed engine import was already replaced with a substitute, contradicting the comment's premise."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__118": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Only the referenced constant changed, and the string values of DEFAULT_PARALLEL_EXECUTION_MODE and DEFAULT_EXECUTION_MODE_PROPERTY_NAME are not visible, so whether the effective parameter name changed cannot be checked."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__119": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The static imports are alphabetically ordered so same-package imports, including the Constants block at lines 17-23 and the AssertJ import, are already contiguous, contradicting the premise that they are ungrouped."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__121": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The static imports are alphabetically ordered so same-package imports, including the Constants block at lines 17-23 and the AssertJ import, are already contiguous, contradicting the premise that they are ungrouped."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__123": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The static imports are alphabetically ordered so same-package imports, including the Constants block at lines 17-23 and the AssertJ import, are already contiguous, contradicting the premise that they are ungrouped."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__129": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "Line 13 already imports the constant from org.junit.jupiter.api.Constants and the old engine import is removed, so the compilation failure the comment predicts is not present in the visible code."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__16": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The field was previously an alias to a JupiterConfiguration constant and now aliases org.junit.jupiter.api.Constants, but neither constant's value is visible, so a behavioral difference cannot be checked from the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__17": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The constant now references org.junit.jupiter.api.Constants.PARALLEL_CONFIG_STRATEGY_PROPERTY_NAME instead of a concatenated JupiterConfiguration value, but neither value is visible, so a compatibility break cannot be checked from the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__19": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The chunk shows the field's initializer now referencing org.junit.jupiter.api.Constants, but whether that target constant's value or behavior differs from the old JupiterConfiguration-derived value cannot be checked without seeing the target class."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__24": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The chunk shows the initializer now referencing org.junit.jupiter.api.Constants instead of Timeout, but whether the target constant has a different value or behavior cannot be determined without seeing that class."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__28": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The chunk shows the field now aliasing org.junit.jupiter.api.Constants instead of Timeout, but the claimed compatibility risk depends on the target constant's value, which is not visible in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__3": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "Nothing visible states when the deprecated class will be removed (since=\"6.1\" marks the deprecation, not the removal), so the observation is accurate, though @Deprecated itself has no element for a removal version and the timing could only be documented in the Javadoc."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__33": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The chunk shows the initializer now referencing org.junit.jupiter.api.Constants instead of Timeout, but whether that target constant's value or behavior differs cannot be checked from the chunk alone."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__35": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The chunk shows the field now aliasing org.junit.jupiter.api.Constants instead of ClassOrderer, but the claimed compatibility risk hinges on the target constant's value, which the chunk does not show."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__36": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The chunk shows the initializer now referencing org.junit.jupiter.api.Constants instead of Timeout, but whether the target constant behaves differently cannot be determined without seeing that class."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__39": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible import block is already alphabetically sorted with imports from the same package adjacent (e.g. the org.junit.jupiter.engine.* and org.junit.platform.engine.* groups), so the suggested regrouping addresses a problem the code does not exhibit."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__42": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "Related imports are already grouped: the Constants static imports sit consecutively at lines 14-24, followed by the TempDir pair, the java.util block, and alphabetized regular imports, so the code does not exhibit the ungrouped-imports problem."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__44": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible imports are already grouped by origin and sorted (Constants static imports consecutive at lines 14-24, TempDir pair, java.util block, alphabetized regular imports), so the comment flags a problem the code does not exhibit."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__46": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "Related imports are already grouped and sorted in the chunk (all Constants static imports consecutive, TempDir pair together, java.util block, alphabetized regular imports), so the proposed regrouping addresses no visible problem."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__49": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible imports are already grouped by package and alphabetized with blank-line separation, so the proposed grouping improvement does not apply."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__63": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible import block is already grouped by package and strictly alphabetized, so the suggested grouping does not apply."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__65": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible import block is already grouped by package and strictly alphabetized, so the suggested grouping does not apply."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__72": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The import removal and its prior use for the timeout thread-dump property are both visible in the removed lines, though the possible external breakage lies outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__75": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible imports are already grouped by package alphabetically, including the newly added Constants import in its correct position."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__78": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The only visible use of Constants is a Javadoc link where a static import would not help, and any code usage beyond line 31 is not shown."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__89": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "An import change is really present on line 13 (engine.Constants to api.Constants), though the comment's description repeats the same name and omits the actual package difference."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__91": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk shows only the import section, so whether Constants is used elsewhere in the file cannot be determined."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__93": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether the plain Constants import is redundant depends on usages elsewhere in the file not shown, and only line 16 (not 16-18) imports a Constants member."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__10": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The new imports on lines 26 and 45 are inserted in correct alphabetical positions matching the file's existing pattern, so no inconsistency exists."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__11": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The method visibly wraps the delegate call in cache.computeIfAbsent, so the claimed missing cache is contradicted by the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__23": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The new private getPathOrFile overload visibly consolidates the factory, cleanup-mode, and deletion-strategy determination as described."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__25": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The signature change from CleanupMode to Cleanup is real and the visible caller is updated, but the caution about other callers concerns code outside the chunk and would be compiler-enforced anyway."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__3": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The diff shows exactly the wording change from 'How' to 'In which cases' in the cleanup() Javadoc."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__33": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The asserted log message visibly uses the '<root>' placeholder, though the clarity suggestion targets a message format defined in production code."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__39": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether cleanup(ALWAYS) changes or ensures cleanup behavior versus the previous DEFAULT depends on the cleanup() helper and default-mode semantics not visible in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__42": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether cleanup(ALWAYS) changes or ensures cleanup behavior versus the previous DEFAULT depends on the cleanup() helper and default-mode semantics not visible in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__5": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The call site on line 111 passes a two-parameter lambda (path, cause) that matches BiConsumer<Path, Exception>, so no signature inconsistency exists."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__54": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The helper does contain the logic previously inlined and that extraction is visible, though 'duplicates' is inapt since the inline version was removed and the helper is reused at two visible call sites."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__56": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "`_` is Java's standard unnamed lambda parameter (replacing the `__` workaround being removed here), so it is neither an unconventional prefix nor something that can be given a descriptive name meaningfully."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__58": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The comment names no concrete conflicting behavior, and nothing in the chunk can confirm or refute an unspecified side effect."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__8": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "Path.endsWith matches whole trailing path elements rather than substrings, so a path merely containing the string in another context would not match, contradicting the claimed defect in this test fixture."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5708__unmatched_model__1": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "With a public constructor visibly present and required, adding a private constructor would not prevent client subclassing, so the proposed fix would not achieve the stated intent."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2650__unmatched_model__12": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The copy constructor visibly assigns strictness directly (mirroring the removed lenient copy), while the side-effect concern is generic and not checkable here."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2650__unmatched_model__18": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The lenient-mock call visibly has no explicit verification or return-value assertion (its only check is the absence of an exception), though whether that permits false positives depends on ProductionCode, which is not shown."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2659__unmatched_model__10": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "Mock is already imported on line 12, so Mock.Strictness is the idiomatic reference and a fully qualified name would be less, not more, consistent with the visible imports."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2659__unmatched_model__12": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk shows only part of the file, so whether Optional is used elsewhere in the class cannot be determined."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2659__unmatched_model__7": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The diff removes the old assignment before the null check and leaves exactly one assignment on line 253; line 249 is the method signature, so no duplicate assignment exists."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2659__unmatched_model__8": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The diff visibly changes the default strictness from Strictness.STRICT_STUBS to null, which is exactly the behavioral change the comment describes."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 132 does contain the misspelling 'compatability'."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__11": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The chunk shows readLock.lock() followed by an opening try block but ends before showing whether a finally releases the lock, so the claim cannot be checked from the visible code."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__14": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The newly added type() methods visibly have no javadoc, so the proposed improvement applies."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__16": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The field's type visibly changed from raw NotNull to NotNull<Object>, a change that can alter generic type inference for existing callers, though actual breakage depends on usages outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__21": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether other ArgumentMatcher implementations or usage patterns need updating depends on code outside this chunk, which only shows Null itself overriding type()."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__23": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The visible call now passes List.class and the test's assertions check only count and value, not type conformance, though the claimed runtime-error consequence is speculative."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__25": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether a wildcard static import is preferable depends on project import conventions not visible in the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__27": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff visibly shows call sites that previously used a no-arg constructor now passing a Class argument, though whether the old constructor was removed entirely lies outside the chunk."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__31": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The chunk visibly adds vararg and non-vararg overloads of the same method name, a pattern that genuinely can confuse call resolution, though it appears to be a deliberate test fixture."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__36": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The change from isNotNull() to isNotNull(String[].class) is visibly present as described, though the comment's coverage concern is largely a restatement of the diff."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2842__unmatched_model__0": {
+      "verdict": "unfounded",
+      "confidence": "high",
+      "reason": "The visible matches() method performs no cast and only returns boolean assignability checks, so no ClassCastException can arise there."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2842__unmatched_model__12": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The test visibly creates a captor from ArrayList.class while the calls pass Set and List nulls, which is the mismatch the comment describes, though the claimed runtime-error risk is speculative."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2842__unmatched_model__5": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "listCaptor is only declared in this chunk, so whether a more specific type parameter would fit its actual usage cannot be determined from the visible code."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2883__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The diff visibly removes the Java-version check and always uses LocationImpl, though whether that actually breaks older JVMs depends on LocationImpl's unseen implementation."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__3129__unmatched_model__2": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The method visibly changed from private to public with no justification shown in the chunk, though whether the wider visibility is warranted depends on unseen callers."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__3129__unmatched_model__6": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk ends at line 27, so whether InlineByteBuddyMockMaker is used in the rest of the test class cannot be checked."
+    },
+    "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__3551__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The added section visibly contains no links or concrete examples, so the suggested improvement would apply, though its benefit is a matter of judgment."
+    }
+  },
+  "failures": [],
+  "counts": {
+    "founded": 62,
+    "unfounded": 59,
+    "unverifiable": 42
+  }
+}

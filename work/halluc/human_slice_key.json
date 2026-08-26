@@ -1,0 +1,235 @@
+{
+  "seed": 20260826,
+  "picked": [
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__mockito__mockito__2659__unmatched_model__4"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__mockito__mockito__3097__unmatched_model__5"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "sonnet",
+      "judgment_id": "anthropic__claude-sonnet-5__checkstyle__checkstyle__20537__unmatched_model__2"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20537__unmatched_model__4"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20554__unmatched_model__8"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "sonnet",
+      "judgment_id": "anthropic__claude-sonnet-5__checkstyle__checkstyle__21086__unmatched_model__0"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__junit-team__junit5__5379__unmatched_model__6"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20717__unmatched_model__2"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__mockito__mockito__2807__unmatched_model__4"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__junit-team__junit5__5042__unmatched_model__24"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20604__unmatched_model__1"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20600__unmatched_model__8"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__mockito__mockito__2603__unmatched_model__1"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "sonnet",
+      "judgment_id": "anthropic__claude-sonnet-5__junit-team__junit5__5042__unmatched_model__8"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__junit-team__junit5__5042__unmatched_model__17"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20600__unmatched_model__17"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "sonnet",
+      "judgment_id": "anthropic__claude-sonnet-5__junit-team__junit5__5060__unmatched_model__6"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "sonnet",
+      "judgment_id": "anthropic__claude-sonnet-5__junit-team__junit5__5042__unmatched_model__5"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "sonnet",
+      "judgment_id": "anthropic__claude-sonnet-5__mockito__mockito__2603__unmatched_model__0"
+    },
+    {
+      "stratum": "claude-arm founded",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__mockito__mockito__2807__unmatched_model__9"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__49"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20537__unmatched_model__17"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__113"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__31"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__21"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__38"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20600__unmatched_model__15"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__129"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__104"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__75"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5060__unmatched_model__23"
+    },
+    {
+      "stratum": "qwen unfounded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__8"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__23"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20554__unmatched_model__5"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5135__unmatched_model__8"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__14"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20717__unmatched_model__4"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2650__unmatched_model__18"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5042__unmatched_model__17"
+    },
+    {
+      "stratum": "qwen founded",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__20351__unmatched_model__16"
+    },
+    {
+      "stratum": "unverifiable (any)",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__36"
+    },
+    {
+      "stratum": "unverifiable (any)",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2807__unmatched_model__21"
+    },
+    {
+      "stratum": "unverifiable (any)",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__checkstyle__checkstyle__21086__unmatched_model__22"
+    },
+    {
+      "stratum": "unverifiable (any)",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__58"
+    },
+    {
+      "stratum": "unverifiable (any)",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5424__unmatched_model__42"
+    },
+    {
+      "stratum": "unverifiable (any)",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5379__unmatched_model__28"
+    }
+  ]
+}
