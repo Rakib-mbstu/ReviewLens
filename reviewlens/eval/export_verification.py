@@ -31,12 +31,14 @@ import json
 import math
 import os
 import random
+import re
 import sys
 
 MATCHES_FILENAME = "eval_matches.json"
 
 FIELDNAMES = [
     "judgment_id",
+    "run",
     "kind",
     "repo",
     "pr_number",
@@ -63,11 +65,33 @@ def _pr_url(repo: str, number: int) -> str:
     return f"https://github.com/{repo}/pull/{number}"
 
 
-def _judgment_id(repo: str, number: int, kind: str, index: int) -> str:
+def run_slug(model: str) -> str:
+    """Slugify a run's model id for use inside a judgment id.
+
+    Only characters that would make an id awkward to paste, sort, or use as
+    a filename are replaced; the model stays readable so an id still tells a
+    human which arm produced the comment.
+    """
+    return re.sub(r"[^A-Za-z0-9._-]+", "__", model)
+
+
+def _judgment_id(slug: str, repo: str, number: int, kind: str, index: int) -> str:
     """A stable, reconstructable id for one judgment: safe to use as a
-    lookup key and to hand back to the owner as a pointer into the run."""
+    lookup key and to hand back to the owner as a pointer into the run.
+
+    The run's model slug leads the id because (repo, number, kind, index) is
+    NOT unique across runs — two arms that reviewed the same PR produce the
+    same trailing coordinates, so ids built without a run component collide
+    silently the moment several arms' exports are joined on judgment_id, and
+    the colliding rows are dropped rather than flagged.
+
+    Uniqueness contract: an id is unique within a run, and unique across runs
+    of *different* models. Two runs of the SAME model (say a full-corpus pass
+    and a subset pass) still share ids, so the globally safe join key is the
+    (`run`, `judgment_id`) pair — which is why `run` is a column.
+    """
     safe_repo = repo.replace("/", "__")
-    return f"{safe_repo}__{number}__{kind}__{index}"
+    return f"{slug}__{safe_repo}__{number}__{kind}__{index}"
 
 
 def load_eval_matches(run_dir: str) -> list[dict]:
@@ -88,11 +112,12 @@ def load_eval_matches(run_dir: str) -> list[dict]:
         return json.load(f)
 
 
-def _match_row(repo: str, number: int, index: int, entry: dict) -> dict:
+def _match_row(slug: str, run_dir: str, repo: str, number: int, index: int, entry: dict) -> dict:
     human = entry["human"]
     model = entry["model"]
     return {
-        "judgment_id": _judgment_id(repo, number, MATCH_KIND, index),
+        "judgment_id": _judgment_id(slug, repo, number, MATCH_KIND, index),
+        "run": run_dir,
         "kind": MATCH_KIND,
         "repo": repo,
         "pr_number": number,
@@ -112,9 +137,10 @@ def _match_row(repo: str, number: int, index: int, entry: dict) -> dict:
     }
 
 
-def _unmatched_model_row(repo: str, number: int, index: int, model: dict) -> dict:
+def _unmatched_model_row(slug: str, run_dir: str, repo: str, number: int, index: int, model: dict) -> dict:
     return {
-        "judgment_id": _judgment_id(repo, number, UNMATCHED_MODEL_KIND, index),
+        "judgment_id": _judgment_id(slug, repo, number, UNMATCHED_MODEL_KIND, index),
+        "run": run_dir,
         "kind": UNMATCHED_MODEL_KIND,
         "repo": repo,
         "pr_number": number,
@@ -134,7 +160,9 @@ def _unmatched_model_row(repo: str, number: int, index: int, model: dict) -> dic
     }
 
 
-def collect_populations(records: list[dict]) -> tuple[dict[str, dict], dict[str, dict]]:
+def collect_populations(
+    records: list[dict], slug: str, run_dir: str
+) -> tuple[dict[str, dict], dict[str, dict]]:
     """Flatten eval_matches.json into the two judgment populations, keyed by
     judgment_id. A dict (not a list) so sampling can pick ids first and look
     up rows second, keeping the sampling step free of row formatting."""
@@ -144,10 +172,10 @@ def collect_populations(records: list[dict]) -> tuple[dict[str, dict], dict[str,
         repo = pr["repo"]
         number = pr["number"]
         for i, entry in enumerate(pr.get("matches", [])):
-            row = _match_row(repo, number, i, entry)
+            row = _match_row(slug, run_dir, repo, number, i, entry)
             matches[row["judgment_id"]] = row
         for i, model in enumerate(pr.get("unmatched_model", [])):
-            row = _unmatched_model_row(repo, number, i, model)
+            row = _unmatched_model_row(slug, run_dir, repo, number, i, model)
             unmatched_model[row["judgment_id"]] = row
     return matches, unmatched_model
 
@@ -219,7 +247,14 @@ def main(argv: list[str] | None = None) -> None:
     except FileNotFoundError as exc:
         sys.exit(str(exc))
 
-    matches, unmatched_model = collect_populations(records)
+    run_meta_path = os.path.join(args.run, "run_meta.json")
+    try:
+        with open(run_meta_path, encoding="utf-8") as f:
+            model = json.load(f)["model"]
+    except (FileNotFoundError, KeyError) as exc:
+        sys.exit(f"{run_meta_path}: cannot read the run's model, needed to build judgment ids ({exc})")
+
+    matches, unmatched_model = collect_populations(records, run_slug(model), args.run)
 
     sampled_match_ids = sample_ids(list(matches), args.sample_rate, args.seed)
     sampled_unmatched_ids = sample_ids(list(unmatched_model), args.sample_rate, args.seed)

@@ -39,9 +39,21 @@ def _pr_record(repo="org/repo", number=1, matches=None, unmatched_model=None):
     }
 
 
-def _write(run_dir, records):
+DEFAULT_MODEL = "test/reviewer"
+
+
+def _write_run_meta(run_dir, model=DEFAULT_MODEL):
+    run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "run_meta.json").write_text(json.dumps({"model": model}), encoding="utf-8")
+
+
+def _write(run_dir, records, model=DEFAULT_MODEL):
+    """Write eval_matches.json AND run_meta.json: main() now needs the run's
+    model (from run_meta.json) to build judgment ids, so every fixture that
+    exercises the CLI needs both files, not just eval_matches.json."""
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / export_verification.MATCHES_FILENAME).write_text(json.dumps(records), encoding="utf-8")
+    _write_run_meta(run_dir, model=model)
 
 
 def _read_rows(csv_path):
@@ -212,3 +224,71 @@ def test_empty_population_samples_zero(tmp_path):
 
     rows = _read_rows(out_csv)
     assert rows == []
+
+
+def test_run_slug_has_no_slash_and_is_stable():
+    slug = export_verification.run_slug("qwen/qwen3-coder-30b-a3b-instruct")
+
+    assert "/" not in slug
+    assert slug == export_verification.run_slug("qwen/qwen3-coder-30b-a3b-instruct")
+
+
+def test_different_models_over_same_pr_produce_distinct_ids_and_no_dropped_rows():
+    """The defect this change fixes: (repo, number, kind, index) alone is not
+    unique across runs, so two arms (different models) that reviewed the same
+    PR previously produced identical judgment_ids — merging their exports
+    into one dict keyed by judgment_id silently dropped one arm's rows.
+    Leading the id with the run's model slug must prevent that collision."""
+    matches = [_match("src/A.java", 10, "human comment", 10, "model comment")]
+    records = [_pr_record(matches=matches)]
+
+    slug_a = export_verification.run_slug("org/model-a")
+    slug_b = export_verification.run_slug("org/model-b")
+    matches_a, _ = export_verification.collect_populations(records, slug_a, "runs/model-a")
+    matches_b, _ = export_verification.collect_populations(records, slug_b, "runs/model-b")
+
+    assert set(matches_a) & set(matches_b) == set()
+
+    merged = {}
+    merged.update(matches_a)
+    merged.update(matches_b)
+    assert len(merged) == len(matches_a) + len(matches_b) == 2
+
+
+def test_main_exits_with_actionable_message_when_run_meta_json_is_missing(tmp_path):
+    run_dir = tmp_path / "run"
+    _write(run_dir, [_pr_record()])
+    (run_dir / "run_meta.json").unlink()
+    out_csv = tmp_path / "verify.csv"
+
+    with pytest.raises(SystemExit) as excinfo:
+        export_verification.main(["--run", str(run_dir), "--out", str(out_csv)])
+
+    assert "run_meta.json" in str(excinfo.value)
+
+
+def test_main_exits_with_actionable_message_when_run_meta_json_has_no_model_key(tmp_path):
+    run_dir = tmp_path / "run"
+    _write(run_dir, [_pr_record()])
+    (run_dir / "run_meta.json").write_text(json.dumps({"other": "field"}), encoding="utf-8")
+    out_csv = tmp_path / "verify.csv"
+
+    with pytest.raises(SystemExit) as excinfo:
+        export_verification.main(["--run", str(run_dir), "--out", str(out_csv)])
+
+    assert "run_meta.json" in str(excinfo.value)
+
+
+def test_csv_run_column_carries_the_run_directory_that_was_passed(tmp_path):
+    matches = [_match("src/A.java", 10, "human comment", 10, "model comment")]
+    unmatched = [_unmatched_model("src/A.java", 50, "unmatched comment")]
+    run_dir = tmp_path / "run"
+    _write(run_dir, [_pr_record(matches=matches, unmatched_model=unmatched)])
+    out_csv = tmp_path / "verify.csv"
+
+    export_verification.main(["--run", str(run_dir), "--out", str(out_csv), "--sample-rate", "1.0"])
+
+    rows = _read_rows(out_csv)
+    assert len(rows) == 2
+    for row in rows:
+        assert row["run"] == str(run_dir)
