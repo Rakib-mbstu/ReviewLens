@@ -1,0 +1,9 @@
+sheet_id,file,human_line,model_line,verdict_comments_only,verdict_with_code,notes
+M1,src/main/java/org/mockito/plugins/MockitoPlugins.java,58,58,not_equivalent,,
+M2,src/test/java/org/mockitousage/strictness/StrictnessMockAnnotationTest.java,39,38,equivalent,,
+M3,src/main/java/org/mockito/internal/debugging/LocationFactory.java,26,27,equivalent,,
+M4,src/main/java/org/mockito/plugins/MockitoPlugins.java,58,58,equivalent,,
+M5,src/test/java/com/puppycrawl/tools/checkstyle/internal/XdocsExamplesAstConsistencyTest.java,1159,1158,equivalent,,
+M6,junit-platform-launcher/src/main/java/org/junit/platform/launcher/TestIdentifier.java,47,45,equivalent,,
+M7,src/main/java/com/puppycrawl/tools/checkstyle/checks/javadoc/JavadocTypeCheck.java,421,421,equivalent,,
+M8,junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/EnableJUnit4MigrationSupport.java,53,55,equivalent,,

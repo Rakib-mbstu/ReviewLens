@@ -44,7 +44,7 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 - **Matching rule:** a model comment matches a human comment if it targets the same file within ±3 lines *and* addresses the same underlying issue (semantic match, LLM-judged with a written rubric).
 - **Line-window sensitivity:** because the ±3 window could in principle be doing the work the semantic judge is credited with, recall is also measured at ±5, ±10, and ±25 (`python -m reviewlens.eval.sensitivity`). The rule itself stays frozen at ±3 and that is the reported number; the wider windows are diagnostic. They separate two failures the headline figure fuses together — the model commenting somewhere else in the file, versus the model raising a different issue in the same place.
 - **Category assignment:** each human comment's category (bug / design / style / question) is assigned LLM-assisted, one call per comment, against a frozen versioned rubric (`prompts/categorize_v1.md`) that forces a choice among exactly those four — a comment fitting none is recorded at low confidence rather than given a fifth category. A reproducible ≥20% sample of the assignments (66 of 328, fixed seed) is re-rated by a **second, independent model** (`claude-code-subagent/fable`) driven through the same frozen rubric and the same renderer via `OfflineClient`, so the prompt bytes are identical to the first pass. The two raters agree on **81.8%** of labels (54/66, 95% Wilson 70.9–89.3%, Cohen's κ = 0.70); see `reports/categorization-interrater.md`. **No human checked these labels** — the second rater is a model, so this measures inter-model consistency in applying the rubric, not correctness against human judgment. Category assignment is rubric-sensitive: two versions of the rubric disagreed on 16% of labels (51 of 328), and the residual disagreement concentrates on the design/style boundary for small local edits (removing an `else`, dropping a temporary variable), so per-category recall carries more uncertainty than overall recall.
-- **Verification of judgments:** a ≥20% sample of each run's matches and unmatched model comments is exported for verification (`reviewlens.eval.export_verification`, deterministic seed). The unmatched comments in that sample are screened by a second model against frozen `hallucination_v1`; a blind, stratified human slice of those screenings is then hand-checked and the human-vs-model agreement reported. The human slice was completed Aug 31, 2026: **agreement is 20/46 = 43.5%, Cohen's κ = 0.046**, so the screened rates are contradicted rather than confirmed and the screen is not treated as a measurement instrument. The sampled *matches* (RQ1) are not yet verified.
+- **Verification of judgments:** a ≥20% sample of each run's matches and unmatched model comments is exported for verification (`reviewlens.eval.export_verification`, deterministic seed). The unmatched comments in that sample are screened by a second model against frozen `hallucination_v1`; a blind, stratified human slice of those screenings is then hand-checked and the human-vs-model agreement reported. The human slice was completed Aug 31, 2026: **agreement is 20/46 = 43.5%, Cohen's κ = 0.046**, so the screened rates are contradicted rather than confirmed and the screen is not treated as a measurement instrument. The RQ1 *matches* were verified as a **census, not a sample** — all 8 matches across the three arms, blind to both the judge's verdict and the arm: **7 of 8 upheld (87.5%)**, see `reports/match-verification-results.md`. Two of the 8 verdicts were revised after the arms were disclosed; the blind-pass figure was 5/8, and both are reported.
 - **Metrics:**
   - *Recall* of human comments, overall and per category (bug / design / style / question)
   - *Unfounded rate* (RQ2) — model comments making a claim the visible code contradicts, judged against a frozen rubric on exactly the chunk the reviewer saw. This is distinct from the **unmatched rate**, which the matcher alone produces and which is only an *upper bound*: a comment matching no human comment may be a real issue the reviewers never raised. The matcher never separates those two; only a judgment against the code does. The rubric's third verdict, `unverifiable`, keeps "the chunk cannot settle this" out of both buckets rather than letting it flatter or condemn the model.
@@ -59,7 +59,7 @@ differences between arms are **not statistically significant** at this sample si
 |---|---|---|---|---|---|---|
 | `qwen/qwen3-coder-30b-a3b-instruct` | OpenRouter | 816 | 1.0% (1/102) | 0/14 | 0/50 | **36.2%** (59/163) |
 | `anthropic/claude-sonnet-5` | subagent | 76 | 1.0% (1/102) | 0/14 | 1/50 | **0.0%** (0/15) |
-| `claude-code-subagent/opus` | subagent | 249 | 5.9% (6/102) | 0/14 | 3/50 | **2.0%** (1/49) |
+| `claude-code-subagent/opus` | subagent | 249 | 4.9% (5/102) ‡ | 0/14 | 2/50 ‡ | **2.0%** (1/49) |
 
 † **These unfounded rates are retracted and shown only as the judge's raw output.** A
 ≥20% sample of each arm's unmatched comments (227 judgments) was judged against frozen
@@ -70,7 +70,14 @@ and machine agree on 20/46 = 43.5%, Cohen's κ = 0.046** — chance level. In th
 that carries qwen's 36.2%, a seeded draw of 12 from the 59 comments the machine called
 `unfounded`, the human upheld **1**. Do not cite this column.
 
-**Neither recall nor the unfounded rate separates these models.** Recall gives p = 0.119
+‡ **Human-verified.** All 8 matches were hand-checked against the frozen `match_v1`
+rubric; one opus match (category `design`) was rejected, moving opus from 5.9% to 4.9%
+and its design recall from 3/50 to 2/50. qwen and sonnet-5 were unaffected. See
+`reports/match-verification-results.md`, including the provenance caveat: two verdicts
+were revised after the arms were disclosed, and the blind-pass numbers are reported
+alongside the final ones.
+
+**Neither recall nor the unfounded rate separates these models.** Recall gives p = 0.212
 for the largest gap with overlapping intervals. The unfounded rates gave Fisher exact
 p = 3.3×10⁻⁷ (qwen vs opus) and p = 0.0028 (qwen vs sonnet-5), but those p-values are
 computed on judgments that do not survive human verification. Reweighting the human

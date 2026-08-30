@@ -147,8 +147,13 @@ three arms**, for the same reason RQ1 did not.
 ## What this changes
 
 - The claim "RQ2 separates them decisively" is **withdrawn**. Neither RQ1
-  (recall 1.0% / 1.0% / 5.9%, p = 0.119) nor RQ2 distinguishes the three arms
-  at this corpus size.
+  (recall 1.0% / 1.0% / 4.9% after human verification, p = 0.212) nor RQ2
+  distinguishes the three arms at this corpus size.
+- **RQ1's judge survived the same treatment RQ2's did not.** All 8 matches were
+  hand-checked blind and 7 held (`reports/match-verification-results.md`). Two
+  frozen LLM judges, one pipeline: the matcher is usable, the hallucination
+  screen is not. "Frozen and deterministic" is not evidence of correctness for
+  either — only the human check separated them.
 - The volume finding survives only in its weaker form: qwen produced 815
   unmatched comments to opus's 243. The claim that a *larger share* of them are
   unfounded is no longer supported.
