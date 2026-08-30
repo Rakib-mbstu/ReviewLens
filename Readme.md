@@ -4,9 +4,9 @@
 
 ReviewLens is both a working tool and an empirical study. Instead of demonstrating cherry-picked examples, it measures — on PRs that real maintainers reviewed — what fraction of human-flagged issues an LLM catches, what it systematically misses, and how often it hallucinates problems that aren't there.
 
-> **Status (Aug 24, 2026):** the pipeline is complete end to end — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, the review engine with a cached OpenRouter client, LLM-assisted comment categorization, comment matching, metrics, reporting, a line-window sensitivity sweep, a cross-model comparison, and the manual-verification export. **All three prompts are frozen and never edited in place:** `review_v1` (Aug 12, sha256 `3cf6f21e…`), `match_v1` (Aug 19, `ff170b79…`), `categorize_v1` (Aug 23, `bd5e4f74…`). **The corpus is mined and its pinned PR list is committed:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, all of which now carry a category.
+> **Status (Aug 31, 2026):** the pipeline is complete end to end — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, the review engine with a cached OpenRouter client, LLM-assisted comment categorization, comment matching, metrics, reporting, a line-window sensitivity sweep, a cross-model comparison, and the manual-verification export. **All three prompts are frozen and never edited in place:** `review_v1` (Aug 12, sha256 `3cf6f21e…`), `match_v1` (Aug 19, `ff170b79…`), `categorize_v1` (Aug 23, `bd5e4f74…`). **The corpus is mined and its pinned PR list is committed:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, all of which now carry a category.
 >
-> **First results exist and are preliminary.** A full-corpus run of `qwen/qwen3-coder-30b-a3b-instruct` covering 87 of 90 PRs gives **1.6% recall** (5 of 318 human comments). A three-model comparison on a 30-PR subset appears in the table below; **recall differences between models are not statistically significant at this sample size**. The **hallucination rate is now screened** (227 judgments against a frozen rubric) and separates the arms decisively where recall could not — but it was screened *by a model*, and the 46-judgment blind human slice that tests it for self-evaluation bias is still outstanding. Numbers here are labelled preliminary and will move.
+> **First results exist and are preliminary.** A full-corpus run of `qwen/qwen3-coder-30b-a3b-instruct` covering 87 of 90 PRs gives **1.6% recall** (5 of 318 human comments). A three-model comparison on a 30-PR subset appears in the table below; **recall differences between models are not statistically significant at this sample size**. The **hallucination screen was run (227 judgments against a frozen rubric) and then failed its own human check**: on the 46-judgment blind slice, human and machine agree 43.5% of the time (Cohen's κ = 0.046, chance level), so the screen's decisive per-arm separation is **retracted** — see `reports/hallucination-screen.md`. No model arm is currently separated from another on either RQ1 or RQ2. Numbers here are labelled preliminary and will move.
 
 ## Motivation
 
@@ -44,7 +44,7 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 - **Matching rule:** a model comment matches a human comment if it targets the same file within ±3 lines *and* addresses the same underlying issue (semantic match, LLM-judged with a written rubric).
 - **Line-window sensitivity:** because the ±3 window could in principle be doing the work the semantic judge is credited with, recall is also measured at ±5, ±10, and ±25 (`python -m reviewlens.eval.sensitivity`). The rule itself stays frozen at ±3 and that is the reported number; the wider windows are diagnostic. They separate two failures the headline figure fuses together — the model commenting somewhere else in the file, versus the model raising a different issue in the same place.
 - **Category assignment:** each human comment's category (bug / design / style / question) is assigned LLM-assisted, one call per comment, against a frozen versioned rubric (`prompts/categorize_v1.md`) that forces a choice among exactly those four — a comment fitting none is recorded at low confidence rather than given a fifth category. A reproducible ≥20% sample of the assignments (66 of 328, fixed seed) is re-rated by a **second, independent model** (`claude-code-subagent/fable`) driven through the same frozen rubric and the same renderer via `OfflineClient`, so the prompt bytes are identical to the first pass. The two raters agree on **81.8%** of labels (54/66, 95% Wilson 70.9–89.3%, Cohen's κ = 0.70); see `reports/categorization-interrater.md`. **No human checked these labels** — the second rater is a model, so this measures inter-model consistency in applying the rubric, not correctness against human judgment. Category assignment is rubric-sensitive: two versions of the rubric disagreed on 16% of labels (51 of 328), and the residual disagreement concentrates on the design/style boundary for small local edits (removing an `else`, dropping a temporary variable), so per-category recall carries more uncertainty than overall recall.
-- **Verification of judgments:** a ≥20% sample of each run's matches and unmatched model comments is exported for verification (`reviewlens.eval.export_verification`, deterministic seed). The unmatched comments in that sample are screened by a second model against frozen `hallucination_v1`; a blind, stratified human slice of those screenings is then hand-checked and the human-vs-model agreement reported. **The human slice is drawn but not yet filled in**, so no agreement rate exists yet and the screened rates stand unverified. The sampled *matches* (RQ1) are not yet verified either.
+- **Verification of judgments:** a ≥20% sample of each run's matches and unmatched model comments is exported for verification (`reviewlens.eval.export_verification`, deterministic seed). The unmatched comments in that sample are screened by a second model against frozen `hallucination_v1`; a blind, stratified human slice of those screenings is then hand-checked and the human-vs-model agreement reported. The human slice was completed Aug 31, 2026: **agreement is 20/46 = 43.5%, Cohen's κ = 0.046**, so the screened rates are contradicted rather than confirmed and the screen is not treated as a measurement instrument. The sampled *matches* (RQ1) are not yet verified.
 - **Metrics:**
   - *Recall* of human comments, overall and per category (bug / design / style / question)
   - *Unfounded rate* (RQ2) — model comments making a claim the visible code contradicts, judged against a frozen rubric on exactly the chunk the reviewer saw. This is distinct from the **unmatched rate**, which the matcher alone produces and which is only an *upper bound*: a comment matching no human comment may be a real issue the reviewers never raised. The matcher never separates those two; only a judgment against the code does. The rubric's third verdict, `unverifiable`, keeps "the chunk cannot settle this" out of both buckets rather than letting it flatter or condemn the model.
@@ -55,37 +55,42 @@ The LLM client is a thin swappable wrapper over [OpenRouter](https://openrouter.
 **Preliminary — 30-PR subset, 102 human comments.** Not the full 90-PR corpus, and
 differences between arms are **not statistically significant** at this sample size.
 
-| Model | Via | Comments | Recall (overall) | Recall (bug) | Recall (design) | Unfounded rate † |
+| Model | Via | Comments | Recall (overall) | Recall (bug) | Recall (design) | Unfounded rate — machine screen, **retracted** † |
 |---|---|---|---|---|---|---|
 | `qwen/qwen3-coder-30b-a3b-instruct` | OpenRouter | 816 | 1.0% (1/102) | 0/14 | 0/50 | **36.2%** (59/163) |
 | `anthropic/claude-sonnet-5` | subagent | 76 | 1.0% (1/102) | 0/14 | 1/50 | **0.0%** (0/15) |
 | `claude-code-subagent/opus` | subagent | 249 | 5.9% (6/102) | 0/14 | 3/50 | **2.0%** (1/49) |
 
-† **Machine-screened, not human-verified.** A ≥20% sample of each arm's unmatched
-comments (227 judgments) was judged against frozen `hallucination_v1` by a second model,
-which saw exactly the diff chunk the reviewer saw and nothing else. `unfounded` means the
-comment makes a claim the visible code contradicts. A third verdict, `unverifiable`, is
-excluded from these rates and used 55/227 times — see `reports/hallucination-screen.md`
-for both denominators.
+† **These unfounded rates are retracted and shown only as the judge's raw output.** A
+≥20% sample of each arm's unmatched comments (227 judgments) was judged against frozen
+`hallucination_v1` by a second model, which saw exactly the diff chunk the reviewer saw
+and nothing else. A blind, stratified 46-judgment human slice was then hand-checked
+against the same rubric and the same chunks, with the machine's verdict hidden. **Human
+and machine agree on 20/46 = 43.5%, Cohen's κ = 0.046** — chance level. In the stratum
+that carries qwen's 36.2%, a seeded draw of 12 from the 59 comments the machine called
+`unfounded`, the human upheld **1**. Do not cite this column.
 
-**Recall does not separate these models; the unfounded rate does.** Recall gives
-p = 0.119 for the largest gap with overlapping intervals — treat that ordering as
-unconfirmed. The unfounded rates give Fisher exact **p = 3.3×10⁻⁷** (qwen vs opus) and
-**p = 0.0028** (qwen vs sonnet-5); the two Claude arms are indistinguishable from each
-other (p = 1.0).
+**Neither recall nor the unfounded rate separates these models.** Recall gives p = 0.119
+for the largest gap with overlapping intervals. The unfounded rates gave Fisher exact
+p = 3.3×10⁻⁷ (qwen vs opus) and p = 0.0028 (qwen vs sonnet-5), but those p-values are
+computed on judgments that do not survive human verification. Reweighting the human
+labels back onto each arm gives roughly 12% / 11% / 14% (qwen / opus / sonnet-5) with
+intervals that cover each other — indicative only, on 6–14 draws per cell, and not a
+replacement result.
 
-Two confounds travel with this table and neither is resolved. The subagent arms were
-reached through an agent harness rather than the OpenRouter API — no temperature control,
-and the harness's own system prompt wrapped each call. And **the screening judge is a
-Claude model while two of the three arms are Claude models**, which is exactly the shape
-self-evaluation bias would take; a blind, stratified 46-judgment human slice
-(`reports/hallucination-human-slice.md`) is drawn to test that and is not yet filled in.
-See `reports/rq3-comparison-subset30.md` and `reports/hallucination-screen.md`.
+Two confounds travel with this table. The subagent arms were reached through an agent
+harness rather than the OpenRouter API — no temperature control, and the harness's own
+system prompt wrapped each call. And **the screening judge is a Claude model while two of
+the three arms are Claude models**, which is exactly the shape self-evaluation bias would
+take; the human slice was drawn to test that, and both of its pre-registered bias
+directions moved as predicted (the judge over-credited the Claude arms and over-condemned
+qwen), though the asymmetry alone is not statistically significant. See
+`reports/rq3-comparison-subset30.md` and `reports/hallucination-screen.md`.
 
 ## Limitations (stated up front)
 
 - **Human comments are not ground truth for *all* issues.** Reviewers miss things too; recall against human comments measures *agreement with humans*, not absolute defect detection.
-- **The hallucination screen has not been human-verified, and its judge shares a family with two of the three arms judged.** The unfounded rates were produced by one model applying a frozen rubric to three models' comments. The two Claude arms scored far better than the OpenRouter arm — a result equally consistent with a real capability gap and with self-evaluation bias, which the screen alone cannot separate. A blind 46-judgment human slice, stratified toward the two verdicts where a biased judge would do the most damage, is drawn and pending. Until it is filled in, every hallucination number here is provisional. `sonnet-5`'s 0% is 0-of-15 with a 95% upper bound of 20% — undetected, not absent.
+- **The hallucination screen failed human verification and its headline is retracted.** The unfounded rates were produced by one model applying a frozen rubric to three models' comments, and its judge shares a family with two of the three arms judged. A blind 46-judgment human slice, stratified toward the two verdicts where a biased judge would do the most damage, was completed Aug 31, 2026: **agreement 20/46 = 43.5%, Cohen's κ = 0.046** — chance level, and κ = −0.008 on the 27 judgments where both sides were decisive. The judge's `high`-confidence verdicts agree with the human only 50% of the time. So RQ2 currently has **no verified per-arm hallucination rate**; what it has is a negative result about LLM-as-judge for this task. The verification is itself limited: one rater, no adjudication, 6–14 draws per cell, and the Claude arms' `unverifiable` judgments went unsampled entirely. `sonnet-5`'s screened 0% was 0-of-15 with a 95% upper bound of 20% — undetected, not absent — and the human found an unfounded comment among its 6 sampled `founded` verdicts.
 - **The category labels were never validated by a human.** Categories are assigned by one model and re-rated by a second; agreement between two models on a shared rubric bounds self-consistency, not accuracy — both raters can misread the same rubric the same way. The first rater is also poorly calibrated: it marked 63 of 66 sampled assignments `high` confidence, and those `high`-confidence labels agree with the second rater only 84% of the time, so the `confidence` field on the 328 published assignments is not a reliability signal. Disagreement concentrates on the `design`/`style` boundary (7 of 12), and the first rater over-assigned `bug` and `question` — the two categories in which no model arm matched anything, so the study's most striking result rests on its least stable denominators. A human pass over the sample was started and abandoned after 9 of 66; its labels are preserved but unscored, because they used a vocabulary outside the frozen four.
 - **Semantic matching is partly LLM-judged.** Mitigated by a written rubric and manual verification on a sample, but subjectivity remains.
 - **Java only, mid-size OSS projects only.** Results may not transfer to other languages, proprietary codebases, or very large monorepos.
