@@ -541,9 +541,13 @@ verdicts override the judge's on the match judgments they cover, and the table
 reports how much of each arm carries a human verdict. Without the flag the
 table says in plain text that no human verified it.
 
-All LLM responses are cached under `cache/`; a warm re-run costs $0. 257 unit
-tests cover chunking boundaries, the matching rule, cache-key stability, metric
-computation and the verification join; none of them call a live API.
+All LLM responses are cached under `cache/`; a warm re-run costs $0 **and needs
+no API key** — the client defers its key check to the first call that misses the
+cache, so a published run replays for anyone without an OpenRouter account. The
+one stage that still needs credentials is ingestion, which fetches each PR's
+pre-review diff from GitHub. 258 unit tests cover chunking boundaries, the
+matching rule, cache-key stability, metric computation and the verification
+join; none of them call a live API.
 
 ### Artifact index
 
