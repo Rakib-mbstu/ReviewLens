@@ -115,10 +115,28 @@ def test_network_errors_exhaust_into_transient_error(tmp_path):
         client.complete("some/model", MESSAGES)
 
 
-def test_missing_api_key_fails_loudly(tmp_path, monkeypatch):
+def test_missing_api_key_fails_loudly_on_a_call_that_needs_the_network(tmp_path, monkeypatch):
     monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    client = OpenRouterClient(cache_dir=str(tmp_path / "cache"), transport=ok_transport())
+
     with pytest.raises(AuthError, match="OPENROUTER_API_KEY"):
-        OpenRouterClient(cache_dir=str(tmp_path / "cache"))
+        client.complete("some/model", MESSAGES)
+
+
+def test_a_warm_cache_replays_without_an_api_key(tmp_path, monkeypatch):
+    """The cache is documented to make a warm re-run free. Requiring a key to
+    spend nothing would put every published run out of reach of anyone without
+    an OpenRouter account."""
+    monkeypatch.setenv("OPENROUTER_API_KEY", "k")
+    cache = str(tmp_path / "cache")
+    OpenRouterClient(cache_dir=cache, transport=ok_transport()).complete("some/model", MESSAGES)
+
+    monkeypatch.delenv("OPENROUTER_API_KEY")
+    transport = ok_transport()
+    replayed = OpenRouterClient(cache_dir=cache, transport=transport).complete("some/model", MESSAGES)
+
+    assert replayed["choices"][0]["message"]["content"]
+    assert transport.requests == 0
 
 
 # --- billed-but-empty responses (provider-side serialization bug) ---

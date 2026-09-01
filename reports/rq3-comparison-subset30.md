@@ -4,13 +4,15 @@ All arms reviewed the **same 30 PRs** carrying **102 human review comments**, th
 
 ## Recall
 
-| Arm | Via | Model comments | Matched | Recall | 95% CI | p vs lowest |
-|---|---|---|---|---|---|---|
-| `qwen/qwen3-coder-30b-a3b-instruct` | openrouter | 816 | 1 | **1.0%** | [0.2%, 5.3%] | — |
-| `anthropic/claude-sonnet-5` | claude-code-subagent | 76 | 1 | **1.0%** | [0.2%, 5.3%] | 1.000 (n.s.) |
-| `claude-code-subagent/opus` | claude-code-subagent | 249 | 6 | **5.9%** | [2.7%, 12.2%] | 0.119 (n.s.) |
+| Arm | Via | Model comments | Matched | Recall | 95% CI | p vs lowest | Human-checked |
+|---|---|---|---|---|---|---|---|
+| `qwen/qwen3-coder-30b-a3b-instruct` | openrouter | 816 | 1 | **1.0%** | [0.2%, 5.3%] | — | 1/1 checked, 0 rejected |
+| `anthropic/claude-sonnet-5` | claude-code-subagent | 76 | 1 | **1.0%** | [0.2%, 5.3%] | 1.000 (n.s.) | 1/1 checked, 0 rejected |
+| `claude-code-subagent/opus` | claude-code-subagent | 249 | 5 | **4.9%** | [2.1%, 11.0%] | 0.212 (n.s.) | 6/6 checked, 1 rejected |
 
 A gap marked **n.s.** is not evidence of an ordering. On a corpus this size recall rests on single-digit match counts, and the intervals overlap.
+
+**The `Matched` column is human-corrected.** Every match is first proposed by an LLM judge applying the frozen rubric; where a human ruled on that judgment, the human's verdict is the one counted, and a rejected match is removed from the numerator. `Human-checked` says how much of each arm's matched count carries a human verdict — an arm reading `none` is scored by the judge alone. This matters because the same pipeline's *other* frozen LLM judge agreed with a human at chance level, so a judge-only count states more than it knows.
 
 ## Efficiency and reach
 
@@ -18,7 +20,7 @@ A gap marked **n.s.** is not evidence of an ordering. On a corpus this size reca
 |---|---|---|---|---|
 | `qwen/qwen3-coder-30b-a3b-instruct` | 1.97 | 0.1% | 36/102 (35.3%) | 5/414 |
 | `anthropic/claude-sonnet-5` | 0.18 | 1.3% | 8/102 (7.8%) | 0/414 |
-| `claude-code-subagent/opus` | 0.60 | 2.4% | 28/102 (27.5%) | 0/414 |
+| `claude-code-subagent/opus` | 0.60 | 2.0% | 28/102 (27.5%) | 0/414 |
 
 `Reachable` counts human comments with at least one model comment inside the ±3 window — the ceiling recall could reach if the judge accepted every pair it saw. A low recall with high reachability means the model looked in the right place and raised a different issue; a low recall with low reachability means it never looked.
 

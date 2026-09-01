@@ -41,9 +41,11 @@ being ambiguous — but nothing here establishes that rater 2 is right.
   `(Example) null` cast" (a trivial local edit that still changes the code).
 - Rater 1 over-assigned the two rarest categories: 6 `bug` against rater 2's
   4, and 8 `question` against 5. Both surpluses drained into `design`.
-  Because **no model arm matched a single `bug` or `question` comment in any
-  run**, the denominators of the two categories carrying the study's most
-  striking result are also the two least stable ones.
+  Because **no arm on the 30-PR subset matched a single `bug` or `question`
+  comment** (0/14 `bug` for all three), the denominators of the two categories
+  carrying that subset's most striking result are also the two least stable
+  ones. The full-corpus qwen run is the exception: 2 of its 5 matches are
+  `bug` and 1 is `question`.
 
 ## Confidence is not calibrated — the main finding
 
