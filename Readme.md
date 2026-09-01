@@ -131,8 +131,8 @@ qwen), though the asymmetry alone is not statistically significant. See
 ## Reproducing the evaluation
 
 ```bash
-git clone https://github.com/Rakib-mbstu/reviewlens
-cd reviewlens
+git clone https://github.com/Rakib-mbstu/ReviewLens
+cd ReviewLens
 pip install -r requirements.txt
 
 export OPENROUTER_API_KEY=...   # any OpenRouter-supported model works
@@ -181,11 +181,25 @@ python -m reviewlens.eval.compare --runs runs/<model-a>/ runs/<model-b>/ \
 #    plain text that no human verified it.
 ```
 
-All LLM responses are cached under `cache/`; a full re-run with a warm cache costs $0.
+All LLM responses are cached under `cache/`; a full re-run with a warm cache costs $0 **and needs no OpenRouter account** — the client only demands a key on a call that actually reaches the network.
+
+**That cache is not in this repo, and neither is the mined corpus.** `runs/`, `cache/` and `data/corpus*/`'s PR files are gitignored: the first two are build products, and the corpus is 90 PRs of raw GitHub data that a pinned PR list plus a mining script records better than a git blob. So a fresh clone can run the tests but cannot replay a single number. The artifacts ship as a 3.1MB checksummed bundle on the [v0.1.0 release](https://github.com/Rakib-mbstu/ReviewLens/releases/tag/v0.1.0):
+
+```bash
+bash work/demo/fetch_artifacts.sh   # fetches runs/, cache/ and data/, verifies sha256
+```
+
+Step 2 above (the review stage) is the only one that still needs credentials, because it fetches each PR's pre-review diff from GitHub. Everything else — matching, metrics, the sensitivity sweep, the cross-model comparison — replays offline and byte-identical.
 
 ## Related work
 
-ReviewLens sits in the AI4SE / LLM4Code literature on automated code review (e.g., work on review comment generation and review automation benchmarks). The distinguishing choice here is evaluating against *historical human comments on real merged PRs* rather than synthetic benchmarks, with hallucination rate treated as a first-class metric. A short related-work discussion appears in [the technical report](reports/technical-report.md).
+ReviewLens sits in the AI4SE / LLM4Code literature on automated code review — review comment generation, review automation benchmarks, and the growing body of work that uses LLMs to evaluate other LLMs. Two choices distinguish it.
+
+**The evaluation target is historical human comments on real merged PRs**, not a synthetic benchmark or a curated defect set. That makes the metric harder to game and harder to interpret in equal measure: the low recall is partly a property of the target, not only of the reviewers.
+
+**The judges are themselves treated as objects of study.** Hallucination rate was meant to be this project's first-class metric. The instrument built to measure it produced a clean, decisive, highly significant separation between models — and then agreed with a human rater at chance level, so the number is retracted and the instrument is the result. Two frozen LLM judges from one pipeline, built to the same standard and the same freeze discipline, were checked against a human and came apart: one upheld on 7 of its 8 decisions, the other at κ = 0.046. LLM-as-judge is routine in this literature and usually reported with an agreement statistic if at all; the gap between those two judges is invisible without the human slice.
+
+A fuller discussion is in [the technical report](reports/technical-report.md#11-related-work).
 
 ## About
 

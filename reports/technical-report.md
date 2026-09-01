@@ -541,13 +541,27 @@ verdicts override the judge's on the match judgments they cover, and the table
 reports how much of each arm carries a human verdict. Without the flag the
 table says in plain text that no human verified it.
 
-All LLM responses are cached under `cache/`; a warm re-run costs $0 **and needs
-no API key** — the client defers its key check to the first call that misses the
-cache, so a published run replays for anyone without an OpenRouter account. The
-one stage that still needs credentials is ingestion, which fetches each PR's
-pre-review diff from GitHub. 258 unit tests cover chunking boundaries, the
-matching rule, cache-key stability, metric computation and the verification
-join; none of them call a live API.
+**Replaying this study needs no API key and no money, but it does need the
+artifacts.** `runs/`, `cache/` and the mined corpus under `data/` are gitignored
+— the first two are build products and the third is 90 PRs of raw GitHub data
+that a pinned PR list plus a mining script records better than a git blob — so a
+clone alone cannot replay anything. They ship as a 3.1MB bundle on the v0.1.0
+release, checksummed and fetched by:
+
+```bash
+bash work/demo/fetch_artifacts.sh
+```
+
+With that in place the evaluation replays offline: every judge and reviewer call
+these runs made is in the cache, and the client defers its API-key check to the
+first call that misses it, so the whole eval runs byte-identical with no
+OpenRouter account. The one stage still needing credentials is ingestion, which
+fetches each PR's pre-review diff from GitHub and therefore wants a read-only
+`GITHUB_TOKEN`.
+
+258 unit tests cover chunking boundaries, the matching rule, cache-key
+stability, metric computation and the verification join; none of them call a
+live API, and they need no artifacts.
 
 ### Artifact index
 

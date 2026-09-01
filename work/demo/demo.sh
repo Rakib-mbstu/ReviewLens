@@ -2,13 +2,20 @@
 # ReviewLens demo — the pipeline and the honesty machinery, in about 90 seconds.
 #
 # Everything here runs against the warm LLM cache, so it costs $0 and needs no
-# OPENROUTER_API_KEY. The one step that does need credentials is the review
-# stage, which fetches the PR's pre-review diff from GitHub; it is skipped with
-# a visible note when GITHUB_TOKEN is unset, so the demo never silently
-# pretends to have run something it did not.
+# OPENROUTER_API_KEY. Two things it does need, both handled visibly rather than
+# silently:
+#
+#   * The artifacts (runs/, cache/, the mined corpus under data/) are gitignored,
+#     so a fresh clone has none of them. They are fetched from the v0.1.0 release
+#     on first run; if that fails the dependent steps print SKIPPED.
+#   * The review stage fetches each PR's pre-review diff from GitHub, so it needs
+#     a read-only GITHUB_TOKEN and prints SKIPPED without one.
+#
+# The demo never silently pretends to have run something it did not.
 #
 # Usage:  bash work/demo/demo.sh            # from the repo root
 #         PAUSE=0 bash work/demo/demo.sh    # no pauses, for CI or a quick check
+#         DEMO_NO_FETCH=1 bash …            # never touch the network
 set -uo pipefail
 
 PY=${PY:-.venv/bin/python}
@@ -23,6 +30,16 @@ run()  { printf '\033[2m$ %s\033[0m\n' "$*"; sleep 0.4; "$@"; sleep "$PAUSE"; }
 step "ReviewLens — an LLM code reviewer, and the evaluation that grades it"
 run head -c 400 Readme.md
 
+ARTIFACTS=1
+if ! bash work/demo/fetch_artifacts.sh --check; then
+  if [ -n "${DEMO_NO_FETCH:-}" ]; then
+    ARTIFACTS=0
+  else
+    step "0. Fetching the evaluation artifacts (gitignored; ~3MB, one time)"
+    bash work/demo/fetch_artifacts.sh || ARTIFACTS=0
+  fi
+fi
+
 step "1. Frozen prompts. A prompt change means a new version, never an edit."
 $PY - <<'PYEOF'
 import hashlib, glob, re, os
@@ -34,7 +51,7 @@ for path in sorted(glob.glob("prompts/*.md")):
 PYEOF
 sleep "$PAUSE"
 
-if [ -n "${GITHUB_TOKEN:-}" ]; then
+if [ "$ARTIFACTS" = 1 ] && [ -n "${GITHUB_TOKEN:-}" ]; then
   step "2. Review one PR on its PRE-REVIEW state (warm cache: no API key, \$0)"
   mkdir -p "$TMP/corpus"
   cp "data/corpus-subset30/$DEMO_PR.json" "data/corpus-subset30/categories.json" "$TMP/corpus/"
@@ -47,11 +64,26 @@ json.dump(manifest, open(f"{out}/manifest.json", "w", encoding="utf-8"), indent=
 PYEOF
   run env -u OPENROUTER_API_KEY "$PY" -m reviewlens.review \
       --corpus "$TMP/corpus" --model qwen/qwen3-coder-30b-a3b-instruct --out "$TMP/run"
-else
+elif [ "$ARTIFACTS" = 1 ]; then
   step "2. Review step SKIPPED — GITHUB_TOKEN unset (it fetches the pre-review diff)"
   printf '   Set a read-only GITHUB_TOKEN to include it. Everything below is offline.\n'
   sleep "$PAUSE"
 fi
+
+if [ "$ARTIFACTS" != 1 ]; then
+  step "Steps 2-5 SKIPPED — no evaluation artifacts"
+  cat <<'MSG'
+   runs/, cache/ and the mined corpus are gitignored build products, so a fresh
+   clone cannot replay them. Fetch them and re-run:
+
+       bash work/demo/fetch_artifacts.sh
+
+   Step 6 below reads a committed report and works either way.
+MSG
+  sleep "$PAUSE"
+fi
+
+if [ "$ARTIFACTS" = 1 ]; then
 
 step "3. Match model comments to what the humans actually said (±3 lines + semantic judge)"
 run env -u OPENROUTER_API_KEY "$PY" -m reviewlens.eval \
@@ -73,6 +105,8 @@ run env -u OPENROUTER_API_KEY "$PY" -m reviewlens.eval.compare \
     --judge-model google/gemini-2.5-flash-lite \
     --report "$TMP/rq3-unverified.md"
 run grep -m1 "No human verified" "$TMP/rq3-unverified.md"
+
+fi
 
 step "6. The other LLM judge in this pipeline did NOT survive its human check"
 run head -9 reports/hallucination-screen.md
