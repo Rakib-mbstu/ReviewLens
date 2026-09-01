@@ -131,8 +131,8 @@ qwen), though the asymmetry alone is not statistically significant. See
 ## Reproducing the evaluation
 
 ```bash
-git clone https://github.com/Rakib-mbstu/reviewlens
-cd reviewlens
+git clone https://github.com/Rakib-mbstu/ReviewLens
+cd ReviewLens
 pip install -r requirements.txt
 
 export OPENROUTER_API_KEY=...   # any OpenRouter-supported model works

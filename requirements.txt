@@ -1,2 +1,25 @@
-httpx>=0.27
-pytest>=8.0
+# Pinned exactly, not floated. This project's central finding is that a
+# reproducible pipeline is not thereby a correct one — which is an argument for
+# taking reproducibility seriously, not for treating it as sufficient. Floating
+# deps would undercut the half of that claim the study still relies on.
+#
+# Direct dependencies are httpx (the OpenRouter client) and pytest (the suite).
+# Everything else is the transitive closure as resolved on 2026-09-02 under
+# CPython 3.9.6, the interpreter every number in reports/ was produced on.
+
+httpx==0.28.1
+pytest==8.4.2
+
+# --- transitive, recorded so the environment is reconstructable -------------
+anyio==4.12.1
+certifi==2026.7.22
+exceptiongroup==1.3.1
+h11==0.16.0
+httpcore==1.0.9
+idna==3.18
+iniconfig==2.1.0
+packaging==26.2
+pluggy==1.6.0
+Pygments==2.20.0
+tomli==2.4.1
+typing_extensions==4.16.0

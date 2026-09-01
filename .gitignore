@@ -27,3 +27,6 @@ __pycache__/
 # Neither is a record of what a model was actually sent or answered.
 work/*/batches/
 work/halluc/backups/
+
+# macOS
+.DS_Store
