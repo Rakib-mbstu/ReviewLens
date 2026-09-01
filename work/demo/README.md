@@ -10,9 +10,18 @@ PAUSE=0 bash work/demo/demo.sh  # no pauses, for a quick check or CI
 
 **It costs $0 and needs no `OPENROUTER_API_KEY`**: every LLM call it makes is a
 cache hit, and the client only demands a key on a call that actually reaches the
-network. The review stage is the exception — it fetches each PR's pre-review
-diff from GitHub — so it runs only when `GITHUB_TOKEN` is set and prints a
-visible SKIPPED banner otherwise, rather than quietly dropping a step.
+network.
+
+**It does need the artifacts.** `runs/`, `cache/` and the mined corpus under
+`data/` are gitignored, so a fresh clone has none of them. The demo fetches the
+3.1MB bundle from the v0.1.0 release on first run (`DEMO_NO_FETCH=1` suppresses
+that), verifies its sha256, and prints SKIPPED for the dependent steps if the
+fetch fails. `bash work/demo/fetch_artifacts.sh` does it on its own and is
+idempotent.
+
+The review stage needs credentials on top of that — it fetches each PR's
+pre-review diff from GitHub — so it runs only when `GITHUB_TOKEN` is set and
+prints a visible SKIPPED banner otherwise, rather than quietly dropping a step.
 
 Step 3 re-runs `reviewlens.eval` on `runs/subset30/claude-opus/` and rewrites
 that run's `eval_matches.json`. The replay is deterministic from the cache, so

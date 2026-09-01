@@ -181,7 +181,15 @@ python -m reviewlens.eval.compare --runs runs/<model-a>/ runs/<model-b>/ \
 #    plain text that no human verified it.
 ```
 
-All LLM responses are cached under `cache/`; a full re-run with a warm cache costs $0.
+All LLM responses are cached under `cache/`; a full re-run with a warm cache costs $0 **and needs no OpenRouter account** — the client only demands a key on a call that actually reaches the network.
+
+**That cache is not in this repo, and neither is the mined corpus.** `runs/`, `cache/` and `data/corpus*/`'s PR files are gitignored: the first two are build products, and the corpus is 90 PRs of raw GitHub data that a pinned PR list plus a mining script records better than a git blob. So a fresh clone can run the tests but cannot replay a single number. The artifacts ship as a 3.1MB checksummed bundle on the [v0.1.0 release](https://github.com/Rakib-mbstu/ReviewLens/releases/tag/v0.1.0):
+
+```bash
+bash work/demo/fetch_artifacts.sh   # fetches runs/, cache/ and data/, verifies sha256
+```
+
+Step 2 above (the review stage) is the only one that still needs credentials, because it fetches each PR's pre-review diff from GitHub. Everything else — matching, metrics, the sensitivity sweep, the cross-model comparison — replays offline and byte-identical.
 
 ## Related work
 
