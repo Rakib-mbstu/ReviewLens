@@ -78,7 +78,8 @@ def _setup_corpus(tmp_path, comments):
 
 
 def _run_cli(monkeypatch, corpus, out=None, replies=None, default_category="bug",
-             spotcheck_out=None, spotcheck_rate=None, seed=None):
+             spotcheck_out=None, spotcheck_rate=None, seed=None, only_ids=None,
+             offline_requests=None, offline_answers=None):
     client = FakeCategorizeClient(replies=replies, default_category=default_category)
     monkeypatch.setattr(cli, "OpenRouterClient", lambda **kwargs: client)
     args = ["--corpus", str(corpus), "--model", "test/categorizer"]
@@ -90,6 +91,12 @@ def _run_cli(monkeypatch, corpus, out=None, replies=None, default_category="bug"
         args += ["--spotcheck-rate", str(spotcheck_rate)]
     if seed is not None:
         args += ["--seed", str(seed)]
+    if only_ids is not None:
+        args += ["--only-ids", str(only_ids)]
+    if offline_requests is not None:
+        args += ["--offline-requests", str(offline_requests)]
+    if offline_answers is not None:
+        args += ["--offline-answers", str(offline_answers)]
     cli.main(args)
     return client
 
@@ -352,3 +359,72 @@ def test_spotcheck_sample_preserves_a_comment_body_with_a_newline_and_comma(tmp_
     _run_cli(monkeypatch, corpus, spotcheck_out=out)
 
     assert _read_spotcheck(out)[0]["comment"] == body
+
+
+# --- offline mode / --only-ids / via ---
+
+
+def test_offline_answers_without_offline_requests_exits_with_error(tmp_path, monkeypatch):
+    corpus = _setup_corpus(tmp_path, [_mined_comment(1, 10, "this can NPE")])
+    answers = tmp_path / "answers.jsonl"
+    answers.write_text("", encoding="utf-8")
+    client = FakeCategorizeClient()
+    monkeypatch.setattr(cli, "OpenRouterClient", lambda **kwargs: client)
+
+    with pytest.raises(SystemExit, match="--offline-answers requires --offline-requests"):
+        cli.main(
+            [
+                "--corpus", str(corpus),
+                "--model", "test/categorizer",
+                "--offline-answers", str(answers),
+            ]
+        )
+
+
+def test_only_ids_restricts_which_comments_are_categorized(tmp_path, monkeypatch):
+    comments = [
+        _mined_comment(1, 10, "this can NPE"),
+        _mined_comment(2, 20, "please rename this variable"),
+    ]
+    corpus = _setup_corpus(tmp_path, comments)
+    only_ids = tmp_path / "only_ids.txt"
+    only_ids.write_text("# comment to keep\n1\n\n", encoding="utf-8")
+
+    client = _run_cli(monkeypatch, corpus, only_ids=only_ids)
+
+    assert client.calls == 1
+    output = json.loads((corpus / CATEGORIES_FILENAME).read_text(encoding="utf-8"))
+    assert list(output["categories"]) == ["1"]
+    assert output["failures"] == []
+
+
+def test_via_is_openrouter_by_default(tmp_path, monkeypatch):
+    corpus = _setup_corpus(tmp_path, [_mined_comment(1, 10, "this can NPE")])
+
+    _run_cli(monkeypatch, corpus)
+
+    output = json.loads((corpus / CATEGORIES_FILENAME).read_text(encoding="utf-8"))
+    assert output["via"] == "openrouter"
+
+
+def test_via_is_claude_code_subagent_in_offline_mode(tmp_path, monkeypatch):
+    corpus = _setup_corpus(tmp_path, [_mined_comment(1, 10, "this can NPE")])
+    requests_path = tmp_path / "requests.jsonl"
+
+    # No FakeCategorizeClient/OpenRouterClient patch needed: --offline-requests
+    # makes the CLI build a real (network-free) OfflineClient itself.
+    cli.main(
+        [
+            "--corpus", str(corpus),
+            "--model", "test/categorizer",
+            "--offline-requests", str(requests_path),
+        ]
+    )
+
+    output = json.loads((corpus / CATEGORIES_FILENAME).read_text(encoding="utf-8"))
+    assert output["via"] == "claude-code-subagent"
+    # Pass 1: no answers yet, so the request was recorded and the reply
+    # (content: None) is an unparseable failure rather than a fabricated category.
+    assert output["categories"] == {}
+    assert len(output["failures"]) == 1
+    assert requests_path.exists()

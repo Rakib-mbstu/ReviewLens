@@ -107,17 +107,19 @@ class OpenRouterClient:
         transport: httpx.BaseTransport | None = None,
     ):
         self._api_key = api_key or os.environ.get(API_KEY_ENV_VAR)
-        if not self._api_key:
-            raise AuthError(
-                f"No API key: pass api_key or set the {API_KEY_ENV_VAR} environment variable."
-            )
+        # A missing key is fatal at the first call that needs the network, not
+        # at construction: the cache is documented to make a warm re-run free,
+        # and demanding a key to spend nothing would make a published run
+        # unreproducible by anyone without an account. Deferring rather than
+        # dropping the check keeps a forgotten key a loud error for anyone whose
+        # run actually has to reach OpenRouter.
         self._cache_dir = cache_dir
         self._use_cache = use_cache
         self._max_retries = max_retries
         self._backoff_base = backoff_base
         self._http = httpx.Client(
             base_url=base_url,
-            headers={"Authorization": f"Bearer {self._api_key}"},
+            headers=({"Authorization": f"Bearer {self._api_key}"} if self._api_key else {}),
             timeout=timeout,
             transport=transport,
         )
@@ -140,6 +142,13 @@ class OpenRouterClient:
         if self._use_cache and os.path.exists(cache_path):
             with open(cache_path, encoding="utf-8") as f:
                 return json.load(f)
+
+        if not self._api_key:
+            raise AuthError(
+                f"No API key: pass api_key or set the {API_KEY_ENV_VAR} environment "
+                f"variable. (This call missed the cache at {self._cache_dir}/, so it "
+                "needs the network; a fully warm cache replays without a key.)"
+            )
 
         payload = {"model": model, "messages": messages, **params}
         for _ in range(max(1, self._max_retries)):

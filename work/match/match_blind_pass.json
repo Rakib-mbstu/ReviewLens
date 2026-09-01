@@ -1,0 +1,14 @@
+{
+  "note": "Verdicts as first recorded, before the sheet ids were joined to the key and the arms disclosed. reports/match-verification.csv was then edited in place, so the blind pass survives only here. See the 'Provenance of the verdicts' section of reports/match-verification-results.md: all three blind rejections were opus, and after that was disclosed M7 and M8 were revised to equivalent.",
+  "recorded": "2026-08-31",
+  "verdicts": {
+    "M1": "not_equivalent",
+    "M2": "equivalent",
+    "M3": "equivalent",
+    "M4": "equivalent",
+    "M5": "equivalent",
+    "M6": "equivalent",
+    "M7": "not_equivalent",
+    "M8": "not_equivalent"
+  }
+}

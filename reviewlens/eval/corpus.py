@@ -26,6 +26,9 @@ RUN_META_FILENAME = "run_meta.json"
 # Written by reviewlens.eval.categorize, keyed by human comment id. Not a PR
 # record, so load_corpus must skip it exactly like the mining manifest.
 CATEGORIES_FILENAME = "categories.json"
+# Per-PR malformed-item log written by reviewlens.review.engine.review_pr.
+# Absent when a PR had zero parse errors — that is not an error condition.
+ERRORS_FILENAME = "errors.json"
 
 
 @dataclass
@@ -36,8 +39,21 @@ class EvalPR:
     number: int
     human_comments: list[dict]
     model_comments: list[dict]
+    # From run_meta's pr_summaries (engine.py's own len(errors) / chunk count
+    # at review time). Kept as-is for compatibility with existing callers;
+    # `parse_error_items` below is the same count re-derived from errors.json
+    # so it can be cross-checked and, unlike this field, decomposed by cause
+    # and by distinct chunk.
     parse_error_count: int = 0
     chunk_count: int = 0
+    # The fields below are derived from errors.json by `load_error_stats` and
+    # distinguish "a malformed item was rejected" from "a chunk contributed
+    # nothing" — see that function's docstring for why.
+    parse_error_items: int = 0
+    error_chunk_count: int = 0
+    lost_chunk_count: int = 0
+    provider_error_items: int = 0
+    model_error_items: int = 0
 
 
 @dataclass
@@ -104,6 +120,74 @@ def normalize_human_comment(raw: dict, categories: dict | None = None) -> dict:
         if entry is not None:
             normalized["category"] = entry["category"]
     return normalized
+
+
+@dataclass
+class ErrorStats:
+    """Derived counts for one PR's errors.json, split by chunk and by cause."""
+
+    parse_error_items: int = 0
+    error_chunk_count: int = 0
+    lost_chunk_count: int = 0
+    provider_error_items: int = 0
+    model_error_items: int = 0
+
+
+def _is_provider_error(message: str) -> bool:
+    """True when an error's message is the engine's content-missing case.
+
+    THE ONE PLACE this predicate is evaluated — engine.py writes this exact
+    message shape at reviewlens/review/engine.py:134
+    (`f"response content was {type(content).__name__}, not a string"`) when
+    the model was billed and generated tokens but the provider returned a
+    null content field. Every other error message (invalid JSON, invalid
+    'category', invalid 'file', malformed response structure) reflects the
+    model's own output and is classified 'model'. Matched structurally
+    (prefix/suffix) rather than against one hardcoded `type(content).__name__`
+    value, since `content` can be `None`, a `dict`, a `list`, etc.
+    """
+    return message.startswith("response content was ") and message.endswith(", not a string")
+
+
+def load_error_stats(run_dir: str, key: str, model_comments: list[dict]) -> ErrorStats:
+    """Derive one PR's parse-error stats from errors.json and its comments.
+
+    errors.json (see engine.py's review_pr) has never recorded *why* an item
+    was rejected — only a human-readable message — and the run directories
+    already on disk were not produced with a cause field, so re-running the
+    review pass to backfill one is not an option here (LLM calls are not
+    free and the study's budget is capped). Cause is instead recovered after
+    the fact by matching the message's shape via `_is_provider_error`.
+
+    Distinct chunk counts, not raw item counts, are what the report needs:
+    `parse_review_response` can reject several items from one chunk reply,
+    and (per engine.py) a chunk with a rejected item can still have
+    contributed valid comments for that same chunk_index — such a chunk was
+    not "lost". A chunk counts as lost only when its chunk_index carries an
+    error AND contributes no entry in `model_comments`.
+
+    Returns all-zero stats when the PR has no errors.json — that means zero
+    parse errors, not a missing/broken run.
+    """
+    path = os.path.join(run_dir, key, ERRORS_FILENAME)
+    if not os.path.isfile(path):
+        return ErrorStats()
+    with open(path, encoding="utf-8") as f:
+        errors = json.load(f)
+
+    error_chunks = {e["chunk_index"] for e in errors}
+    comment_chunks = {c["chunk_index"] for c in model_comments}
+    lost_chunks = error_chunks - comment_chunks
+
+    provider_items = sum(1 for e in errors if _is_provider_error(e.get("error", "")))
+
+    return ErrorStats(
+        parse_error_items=len(errors),
+        error_chunk_count=len(error_chunks),
+        lost_chunk_count=len(lost_chunks),
+        provider_error_items=provider_items,
+        model_error_items=len(errors) - provider_items,
+    )
 
 
 def pr_key(repo: str, number: int) -> str:
@@ -249,6 +333,8 @@ def load_eval_inputs(run_dir: str, corpus_dir: str | None = None) -> EvalInputs:
         if record is None:
             missing_from_corpus.append(key)
             continue
+        model_comments = load_model_comments(run_dir, key)
+        error_stats = load_error_stats(run_dir, key, model_comments)
         prs.append(
             EvalPR(
                 repo=summary["repo"],
@@ -257,9 +343,14 @@ def load_eval_inputs(run_dir: str, corpus_dir: str | None = None) -> EvalInputs:
                     normalize_human_comment(c, categories)
                     for c in record.get("human_comments", [])
                 ],
-                model_comments=load_model_comments(run_dir, key),
+                model_comments=model_comments,
                 parse_error_count=summary.get("parse_error_count", 0),
                 chunk_count=summary.get("chunk_count", 0),
+                parse_error_items=error_stats.parse_error_items,
+                error_chunk_count=error_stats.error_chunk_count,
+                lost_chunk_count=error_stats.lost_chunk_count,
+                provider_error_items=error_stats.provider_error_items,
+                model_error_items=error_stats.model_error_items,
             )
         )
 

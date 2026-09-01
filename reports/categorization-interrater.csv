@@ -1,0 +1,254 @@
+comment_id,repo,pr_number,comment_url,file,line,comment,rater1_category,rater1_confidence,rater2_category,rater2_confidence,rater2_reason,raters_agree,partial_human_label,partial_human_agrees
+694931396,mockito/mockito,2402,https://github.com/mockito/mockito/pull/2402#discussion_r694931396,src/test/java/org/mockitousage/spies/MockCreationShouldNotAffectSpyTest.java,25,"I guess we can't reinstate the test as-is, but I think we can if we remove this particular line?",design,low,design,low,"It tentatively proposes reinstating a test by removing a line, changing what test code exists, but is so dependent on surrounding discussion that question is also defensible.",yes,,
+807045878,mockito/mockito,2549,https://github.com/mockito/mockito/pull/2549#discussion_r807045878,subprojects/inline/src/test/java/org/mockitoinline/InOrderVerificationTest.java,24,"Nice tests! Can we also have a test where we invoke `inOrder` with a different class? E.g. I would expect the following use case to be illegal:
+
+```java
+// Declaring `Bar` here rather than `Foo`
+InOrder inOrder = inOrder(Bar.class);
+
+mocked.when(Foo::firstMethod).thenReturn(""first"");
+mocked.when(Foo::secondMethod).thenReturn(""second"");
+
+assertEquals(""first"", Foo.firstMethod());
+assertEquals(""second"", Foo.secondMethod());
+
+// Execution verification on `Foo`, while `inOrder` was created with `Bar`
+inOrder.verify(mocked, Foo::firstMethod, times(1));
+inOrder.verify(mocked, Foo::secondMethod, atLeastOnce());
+```",bug,high,design,low,"It requests adding a new test method for an expected-illegal use case, changing what test code exists, though it borders on bug as missing edge-case coverage.",no,,
+827454303,mockito/mockito,2593,https://github.com/mockito/mockito/pull/2593#discussion_r827454303,src/main/java/org/mockito/internal/invocation/InvocationsFinder.java,129,Let's refactor this to an `List<Invocation>` so that we can use `Collectors.toList()` like the rest of the usages.,design,high,design,high,"It asks to change the declared type to List<Invocation> and use a different collector, altering types and the shape of the code.",yes,,
+882659012,mockito/mockito,2650,https://github.com/mockito/mockito/pull/2650#discussion_r882659012,src/test/java/org/mockitousage/strictness/StrictnessWithSettingsTest.java,41,"Same here, let's have 3 separate 3 test cases here.",design,high,design,high,"Splitting one test into three separate test cases changes the shape of the test code, the canonical design example.",yes,,
+884447378,mockito/mockito,2650,https://github.com/mockito/mockito/pull/2650#discussion_r884447378,src/test/java/org/mockitousage/strictness/StrictnessWithSettingsTest.java,43,"Quick Q - was it intentional for this to change mocks defined by `mock(Blah.class)`  i.e with no rule/Junit `MockitoSettings` to strict by default?
+
+I believe the previous behaviour was lenient by default?",question,high,question,low,"The reviewer is asking whether a behavior change to strict-by-default was intentional, though the implied unintended regression sits on the boundary with bug.",yes,,
+915145345,mockito/mockito,2701,https://github.com/mockito/mockito/pull/2701#discussion_r915145345,src/main/java/org/mockito/internal/util/MockUtil.java,47,Nit: remove the else so that the return is on the same level as the if,style,high,style,high,Removing a redundant else so the return aligns with the if is a syntax convention tweak that leaves the same logic in the same place.,yes,,
+944847830,mockito/mockito,2723,https://github.com/mockito/mockito/pull/2723#discussion_r944847830,src/main/java/org/mockito/internal/debugging/LocationFactory.java,16,Nit: remove `lFactory` and directly assign to `factory`,style,high,style,low,"Dropping an intermediate local variable and assigning directly is a trivial local cleanup, but it sits on the style/design boundary since inlining slightly changes the code's shape.",yes,,
+944849660,mockito/mockito,2723,https://github.com/mockito/mockito/pull/2723#discussion_r944849660,src/test/java/org/mockitousage/internal/debugging/LocationFactoryTest.java,20,"Nit: can we put this as a test in https://github.com/mockito/mockito/tree/main/subprojects/memory-test/src/test/java/org/mockito/memorytest instead (and can you also re-enable `ShouldNotStarveMemoryOnLargeStackTraceInvocationsTest.java`, since that is assumed to be passing once again now?)",design,high,design,high,"It asks to move the test into a different subproject and re-enable another test, changing where code lives.",yes,,
+944852973,mockito/mockito,2723,https://github.com/mockito/mockito/pull/2723#discussion_r944852973,src/main/java/org/mockito/internal/debugging/Java9PlusLocationImpl.java,101,Same here. Let's make this a `MockitoException`,design,high,design,high,"Changing the thrown exception to a MockitoException changes the type used, altering the code's shape.",yes,,
+956772061,mockito/mockito,2701,https://github.com/mockito/mockito/pull/2701#discussion_r956772061,src/main/java/org/mockito/internal/configuration/SpyAnnotationEngine.java,86,"Yes, but let's file a separate GitHub issue for that and link it here: https://github.com/mockito/mockito/issues/2740",question,low,design,low,"This is a process note about filing and linking a separate GitHub issue rather than a request to change the code, so no category truly fits and design is the least-bad fit for the deferred change.",no,,YES
+1050560005,mockito/mockito,2779,https://github.com/mockito/mockito/pull/2779#discussion_r1050560005,src/main/java/org/mockito/Mockito.java,1933,"Too late, I know, but shouldn't it have been:
+```suggestion
+     * @since 4.10.0
+```
+?",style,high,style,low,"It suggests correcting a javadoc @since version tag, a documentation-wording change, though phrased as a question and arguably a doc-accuracy defect.",yes,Doc,Yes
+1052577511,mockito/mockito,2807,https://github.com/mockito/mockito/pull/2807#discussion_r1052577511,src/main/java/org/mockito/ArgumentMatcher.java,165,"With just 1 method, `ArgumentMatcher` automatically qualifies as a `FunctionalInterface`. E.g. it can be written as a clean lambda. With the addition of this method, can users still write an `ArgumentMatcher` as a lambda? In case we remove the default implementation, is that also true?
+
+If that is not possible, we can consider splitting up the argument matchers into two. We can keep `ArgumentMatcher` as is, but we define a new interface `ArgumentMatcherWithType` that extends `ArgumentMatcher`, but does not define a default implementation. Then we can implement this interface in all our internal matchers, but external users can keep on using `ArgumentMatcher` as-is.
+
+In the logic below, we would then still check if the `ArgumentMatcher` we have is also `ArgumentMatcherWithType` and apply the logic there. WDYT?",design,high,design,low,"It proposes splitting the matcher into a new ArgumentMatcherWithType interface to preserve lambda usage, an API-structure change, but it is framed as open questions ending in WDYT.",yes,Design,Yes
+1054530605,mockito/mockito,2807,https://github.com/mockito/mockito/pull/2807#discussion_r1054530605,src/main/java/org/mockito/internal/matchers/VarargMatcher.java,22,"With this new solution, I think we can remove this interface now and include it in Mockito 5",design,high,design,high,"Removing the interface entirely for Mockito 5 changes what code exists, a clear structural/API change.",yes,Practise,No
+1059065109,mockito/mockito,2842,https://github.com/mockito/mockito/pull/2842#discussion_r1059065109,src/main/java/org/mockito/internal/matchers/CapturingMatcher.java,35,"Nit: I think we can change `Object` to `T` here as well? It doesn't change the implementation of the method, but since we are `ArgumentMatcher<T>` here I think that should be safe. However, this is okay for now and we can consider this as part of the follow-up as well.",style,high,design,high,"Changing the parameter type from Object to T is a signature/type change, even if deferred to a follow-up.",no,Practise,No
+1119362735,mockito/mockito,2923,https://github.com/mockito/mockito/pull/2923#discussion_r1119362735,subprojects/junit-jupiter/src/test/java/org/mockitousage/GenericTypeMockTest.java,63,"If you are already asserting equals here, then you can remove the `assertNotNull` before",design,high,design,low,"Removing a redundant assertNotNull is a small redundancy-removal that changes which statements exist, though it borders on a style nit.",yes,Practise,No
+1405377838,mockito/mockito,3167,https://github.com/mockito/mockito/pull/3167#discussion_r1405377838,src/main/java/org/mockito/internal/stubbing/defaultanswers/ReturnsDeepStubs.java,83,"Rather than swallowing the exception here, I would prefer to always throw the exception and let the user to decide what to return. E.g. you can use `DEEP_STUBS` as default answer and then override this one stub to specify the enum you expect to return. I don't think defaulting to the first value is expected behavior from users.",design,high,design,low,"It argues for a different error-handling contract (always throw instead of defaulting to the first enum value), an API behavior decision that borders on a wrong-behavior bug concern.",yes,Design,Yes
+1730306134,mockito/mockito,3424,https://github.com/mockito/mockito/pull/3424#discussion_r1730306134,src/main/java/org/mockito/MockitoFramework.java,150,"I don't think we should introduce a new API for the behavior here. The feature for `clearInlineMocks` isn't widely used, but we also don't promise the behavior of mocks after clearing of inline mocks. Therefore, I propose we integrate your improvement (good suggestion, I like it!) into `clearInlineMocks`.
+
+In other words: we don't introduce a new API, but instead change the implementation of the existing `clearInlineMocks` and add corresponding tests. This does not pollute our API surface, while improving the usability of this specific API.",design,high,design,high,"It rejects adding a new API and asks to fold the improvement into the existing clearInlineMocks, a clear API-surface decision.",yes,Design,Yes
+1743569117,mockito/mockito,3424,https://github.com/mockito/mockito/pull/3424#discussion_r1743569117,src/main/java/org/mockito/internal/framework/DisabledMockException.java,17,"Nit: since the `MockHandler` throws the exception, I think this should be reversed. E.g. `public class DisabledMockHandler implements MockHandler {}` and the `DisabledMockException` should be the inner class. Then we can still have `public static DisabledMockHandler HANDLER = new DisabledMockHandler();`
+
+Another nit: `DisabledMockException extends MockitoException` as we mark all our exceptions as `MockitoException`",design,high,design,high,Reversing the class nesting and changing the exception to extend MockitoException restructures classes and types.,yes,Design,Yes
+1744361831,mockito/mockito,3437,https://github.com/mockito/mockito/pull/3437#discussion_r1744361831,src/main/java/org/mockito/internal/creation/bytebuddy/InlineDelegateByteBuddyMockMaker.java,116,"I wonder if we should print a message when JVM is >= 21, that mockito should be explicitly added as a Java agent in the JVM running the tests due to https://openjdk.org/jeps/451.",design,high,design,low,"It tentatively proposes adding a warning message for JVM >= 21, new behavior that changes what code exists, but the 'I wonder if' framing makes question also defensible.",yes,Design,Yes
+1744531544,mockito/mockito,3437,https://github.com/mockito/mockito/pull/3437#discussion_r1744531544,src/main/java/org/mockito/internal/creation/bytebuddy/InlineDelegateByteBuddyMockMaker.java,152,"**suggestion:** I wonder if we can use the try with resources there, something like
+
+```
+try (JarOutputStream outputStream = new JarOutputStream(new FileOutputStream(boot))) {
+```",design,high,design,low,"Rewriting the stream handling as try-with-resources restructures resource management in place, sitting between a style idiom and an implicit resource-leak concern.",yes,,
+1744537566,mockito/mockito,3437,https://github.com/mockito/mockito/pull/3437#discussion_r1744537566,src/main/java/org/mockito/internal/creation/bytebuddy/InlineDelegateByteBuddyMockMaker.java,116,"**issue:** Re-reading the code I think there's an issue there, the temporary boot jar with the dispatcher is not not set-up in this branch. I believe this may cause a class not found later on.",bug,high,bug,high,"The reviewer identifies that the temporary boot jar is not set up in this branch, likely causing a ClassNotFound at runtime, a clear correctness defect.",yes,,
+2121181569,junit-team/junit5,4609,https://github.com/junit-team/junit-framework/pull/4609#discussion_r2121181569,junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/rules/adapter/AbstractTestRuleAdapter.java,31,"Normally we would not declare `@Deprecated` without also declaring `@deprecated` with textual details.
+
+Also, I wonder if we really need to switch the `@API` status from `INTERNAL` to `DEPRECATED`. Perhaps leaving it ""internal"" and not deprecating it is sufficient?
+
+WDYT?
+
+(note that the this applies to all ""internal"" components in this module)",design,high,design,low,"The comment concerns the API deprecation status and @Deprecated/@deprecated conventions across the module, but it is framed as 'WDYT?' so it sits on the boundary with question.",yes,,
+2131527692,junit-team/junit5,4606,https://github.com/junit-team/junit-framework/pull/4606#discussion_r2131527692,junit-jupiter-params/src/main/java/org/junit/jupiter/params/provider/CsvArgumentsProvider.java,90,You should either call `getFields()` only once (as it constructs new objects internally) or (preferably) use the methods `getFieldCount()` and `getField(int)`.,design,high,design,low,"The reviewer asks to switch to different API methods (getFieldCount/getField) or hoist the getFields() call, changing call sites, though the underlying inefficiency concern borders on bug.",yes,,
+2131912504,junit-team/junit5,4629,https://github.com/junit-team/junit-framework/pull/4629#discussion_r2131912504,junit-platform-engine/src/main/java/org/junit/platform/engine/support/descriptor/FileSource.java,71,"invoking `direct` here is redundant. There are now precondition checks for essentially the same thing.
+
+```suggestion
+		return new FileSource(source.file, filePosition);
+```",design,high,design,high,"Removing the redundant 'direct' invocation because precondition checks now cover it changes the call structure, a duplication-removal change to what code exists.",yes,,
+2182356053,junit-team/junit5,4718,https://github.com/junit-team/junit-framework/pull/4718#discussion_r2182356053,junit-jupiter-engine/src/main/java/org/junit/jupiter/engine/discovery/MethodOrderingVisitor.java,55,"```suggestion
+				String message = """"""
+						Ineffective @Order annotation on method '%s'. \
+						It will not be applied because MethodOrderer.OrderAnnotation is not in use. \
+						Note that the annotation may be either directly present or meta-present on the method.""""""//
+						.formatted(testDescriptor.getTestMethod().toGenericString());
+```
+
+I would use a text block here, too.
+
+Please note that I reordered the last two sentences and slightly modified the wording.",style,high,style,high,Switching the string to a text block and rewording/reordering the message sentences changes only the syntax and wording while the same code stays in place.,yes,,
+2198796397,junit-team/junit5,4751,https://github.com/junit-team/junit-framework/pull/4751#discussion_r2198796397,junit-jupiter-params/src/main/java/org/junit/jupiter/params/converter/DefaultArgumentConverter.java,54,"Now that there is no need for constructor parameters, would you like to have again a singleton, like it was before #4492?",design,high,design,low,"Restoring the singleton is a structural change to how the class is instantiated, but it is phrased as 'would you like to', putting it on the boundary with question.",yes,,
+2198805002,junit-team/junit5,4751,https://github.com/junit-team/junit-framework/pull/4751#discussion_r2198805002,junit-jupiter-params/src/main/java/org/junit/jupiter/params/converter/DefaultArgumentConverter.java,89,"Considering that this PR delivers a breaking change anyway, what about fully removing the `Locale` handling from here and updating `StringToCommonJavaTypesConverter` instead?
+
+https://github.com/junit-team/junit-framework/blob/eaf5ae996cf3638f88667da8d253d7018c513b24/junit-platform-commons/src/main/java/org/junit/platform/commons/support/conversion/StringToCommonJavaTypesConverter.java#L41
+
+Otherwise, `DefaultArgumentConverter.convert` will now use BCP 47, but `ConversionSupport.convert` will continue using ISO 639.",design,high,design,low,"It proposes moving the Locale handling into a different class, but the motivation is an inconsistency between BCP 47 and ISO 639 behavior, putting it on the design/bug boundary.",yes,,
+2200663863,junit-team/junit5,4751,https://github.com/junit-team/junit-framework/pull/4751#discussion_r2200663863,jupiter-tests/src/test/java/org/junit/jupiter/params/converter/DefaultArgumentConverterTests.java,98,"Nitpicking, now that `DefaultArgumentConverter` doesn't have a type-specific logic, is keeping a `Locale` test case valuable?",design,high,design,low,"It implicitly suggests removing a now-redundant test case (changing what code exists), but it is phrased as a genuine question, so it sits on the design/question boundary.",yes,,
+2266331443,junit-team/junit5,4822,https://github.com/junit-team/junit-framework/pull/4822#discussion_r2266331443,junit-platform-suite-engine/src/main/java/org/junit/platform/suite/engine/SuiteTestDescriptor.java,153,"I think it would be better to address this in one place by changing `getSuiteDisplayName` above to the following:
+
+```java
+private static String getSuiteDisplayName(Class<?> suiteClass, DiscoveryIssueReporter issueReporter) {
+	var nonBlank = issueReporter.createReportingCondition(StringUtils::isNotBlank, __ -> {
+		String message = ""@SuiteDisplayName on %s must be declared with a non-blank value."".formatted(
+			suiteClass.getName());
+		return DiscoveryIssue.builder(Severity.WARNING, message) //
+				.source(ClassSource.from(suiteClass)) //
+				.build();
+	}).toPredicate();
+	return findAnnotation(suiteClass, SuiteDisplayName.class) //
+			.map(SuiteDisplayName::value) //
+			.filter(nonBlank) //
+			.orElse(suiteClass.getSimpleName());
+}
+```",design,high,design,high,"It proposes restructuring the code so the concern is handled in one place by rewriting getSuiteDisplayName, changing the shape and location of the logic.",yes,,
+2329308339,junit-team/junit5,4913,https://github.com/junit-team/junit-framework/pull/4913#discussion_r2329308339,platform-tests/src/test/java/org/junit/platform/launcher/TestIdentifierTests.java,64,"I think we should parameterize this test with the number of tags so serialization is tested with 0, 1, and 2 tags to ensure `copyOf()` actually always returns `Serializable` implementations of `Set`. I can do it as a follow-up, though.",design,high,design,high,"It asks to parameterize the test over tag counts, which restructures the test into a different shape.",yes,,
+2410083281,junit-team/junit5,4985,https://github.com/junit-team/junit-framework/pull/4985#discussion_r2410083281,platform-tests/src/test/java/org/junit/platform/commons/support/ResourceSupportTests.java,188,"Please also add a test for the preconditions of the `findAllResourcesInModule(Module, ...)` version.",design,high,design,high,"It requests adding a new test method for another overload's preconditions, changing what test code exists.",yes,,
+2448408714,junit-team/junit5,5042,https://github.com/junit-team/junit-framework/pull/5042#discussion_r2448408714,junit-start/src/main/java/org/junit/start/JUnit.java,61,"This doesn't follow the `NO_COLOR` environment variable.
+
+And will this look good on Windows? (I haven't used it in ages, I have no clue if it supports ANSI yet)
+",bug,high,bug,high,"It asserts the code incorrectly ignores the NO_COLOR environment variable and may misbehave on Windows, which are behavioral defects.",yes,,
+2465371974,junit-team/junit5,5096,https://github.com/junit-team/junit-framework/pull/5096#discussion_r2465371974,platform-tests/src/test/java/org/junit/platform/reporting/open/xml/OpenTestReportGeneratingListenerTests.java,367,"Is the `latch` needed or could we instead wait on the thread?
+
+```suggestion
+			assertThat(serverThread.join(Duration.ofSeconds(10))).isTrue();
+```",question,high,design,low,"It suggests replacing the latch with waiting on the thread, a structural simplification, but it is phrased as a question so it borders on question.",no,,
+2486891293,junit-team/junit5,5060,https://github.com/junit-team/junit-framework/pull/5060#discussion_r2486891293,junit-platform-engine/src/main/java/org/junit/platform/engine/support/hierarchical/WorkerThreadPoolHierarchicalTestExecutorService.java,85,"This reads like a flow of consciousness.
+
+I'd suggest rewriting it to `<objective>  <action>` format.
+
+```
+		This implementation is based on a regular thread pool and a work queue shared among all worker threads.
+
+		Each worker thread scans the shared work queue for tasks to run. Since the tasks represent hierarchically
+		structured tests, container tasks will call `submit(TestTask)` or `invokeAll(List<TestTask>)` for their
+		children, recursively.
+		
+		To maintain the desired parallelism -- regardless whether the user code performs any blocking operations --
+		a fixed number of worker leases is configured. Whenever a task is submitted to the work queue to be executed
+		concurrently, an attempt is made to acquire a worker lease. If a worker lease was acquired, a worker thread is
+		started. Each worker thread attempts to ""steal"" queue entries for its children and execute them itself prior to waiting
+		for its children to finish.
+		 
+		To optimize CPU utilization, whenever a worker thread does need to block, it temporarily gives up its worker
+		lease and attempts to start another worker thread to compensate for the reduced `parallelism`. If the max pool size does 
+		not permit starting another thread, the attempt is ignored in case there are still other active worker threads.
+		
+		The same happens in case a resource lock needs to be acquired.
+		
+		To minimize the number of idle workers, worker threads will prefer to steal top level tasks, while working
+		through their own task hierarchy in a depth first fashion. Furthermore, child tasks with execution mode
+		`CONCURRENT` are submitted to the shared queue be prior to executing those with execution mode `SAME_THREAD`
+		directly.
+```",style,high,style,high,"It asks only to reword and restructure the prose of a documentation comment, leaving the code itself untouched.",yes,,
+2690743210,junit-team/junit5,5281,https://github.com/junit-team/junit-framework/pull/5281#discussion_r2690743210,platform-tests/src/test/java/org/junit/platform/launcher/core/LauncherPreconditionTests.java,67,"Rather than checking several assertions in one method, consider one method for each assertion and using [Parameterized test Class](https://docs.junit.org/6.0.2/writing-tests/parameterized-classes-and-tests.html) to inject the `Launcher`.
+
+",design,high,design,high,"It asks to split one method with several assertions into separate parameterized test methods, changing the test structure.",yes,,
+2690747911,junit-team/junit5,5281,https://github.com/junit-team/junit-framework/pull/5281#discussion_r2690747911,platform-tests/src/test/java/org/junit/platform/launcher/core/LauncherPreconditionTests.java,81,"Instead of calling `nullValue(Example.class)`, this can be simplified by using casting a null `(Example) null`.",style,high,design,low,"Replacing the nullValue(Example.class) call with a cast null changes the actual code rather than just its appearance, but it is a trivial local simplification near the style boundary.",no,,
+2708291879,junit-team/junit5,5281,https://github.com/junit-team/junit-framework/pull/5281#discussion_r2708291879,junit-platform-launcher/src/main/java/org/junit/platform/launcher/core/DelegatingLauncher.java,48,"For consistency, please rename method parameters to match the message. Preferably to match the name in the Launcher interface.",style,high,style,high,"Renaming method parameters for naming consistency changes wording only, with the code's structure and behavior intact.",yes,,
+2708963848,junit-team/junit5,5281,https://github.com/junit-team/junit-framework/pull/5281#discussion_r2708963848,junit-platform-launcher/src/main/java/org/junit/platform/launcher/core/DefaultLauncher.java,122,"Note to self: These are nouns, not parameter names.",style,high,style,low,"It is a note the reviewer left for themselves rather than a request for change, so no category truly fits and style (a naming observation) is the least-bad choice.",yes,,
+2809329876,junit-team/junit5,5379,https://github.com/junit-team/junit-framework/pull/5379#discussion_r2809329876,junit-jupiter-api/src/main/java/org/junit/jupiter/api/Constants.java,100,"While we're at it, I think I'd go ahead and _group_ together all constants related to `junit.jupiter.extensions.*` so that they are adjacent within the source code.
+
+Obviously not a big deal, but it seems more logical. 😉 ",design,high,style,low,"Grouping related constants adjacently only reorders declarations within the same file without changing methods, types, or call sites, though ordering sits near the style/design boundary.",no,,
+2947610128,junit-team/junit5,5424,https://github.com/junit-team/junit-framework/pull/5424#discussion_r2947610128,junit-jupiter-api/src/main/java/org/junit/jupiter/api/io/TempDirDeletionStrategy.java,85,"Because this is tied to `isSuccessful` I would expect optional-like semantics.
+
+Something like 
+
+```
+result.toException().ifPresent(exception -> {
+    LOGGER.warn(exception, exception::getMessage);
+});
+```
+",design,high,design,high,"It proposes giving the result an Optional-returning toException() API and rewriting the call site around it, a change to types and API shape.",yes,,
+3044390964,junit-team/junit5,5588,https://github.com/junit-team/junit-framework/pull/5588#discussion_r3044390964,junit-platform-launcher/src/main/java/org/junit/platform/launcher/core/MemoryCleanupListener.java,49,Guard this stream-based logic with a `!testDescriptor.getDescendants().isEmpty()` check?,bug,high,design,low,"It suggests adding a guard around the stream logic, a structural change, but the terse question phrasing makes the intent (optimization vs. correctness vs. inquiry) ambiguous.",no,,
+3050546162,junit-team/junit5,5588,https://github.com/junit-team/junit-framework/pull/5588#discussion_r3050546162,junit-platform-launcher/src/main/java/org/junit/platform/launcher/listeners/MutableTestExecutionSummary.java,64,The description could be made part of the `DefaultFailure`. ,design,high,design,high,"It suggests moving the description into the DefaultFailure class, relocating where that data lives.",yes,,
+3325607256,junit-team/junit5,5708,https://github.com/junit-team/junit-framework/pull/5708#discussion_r3325607256,junit-jupiter-params/src/main/java/org/junit/jupiter/params/provider/AnnotationBasedArgumentsProvider.java,33,"Looks good. Like my other comments, I think it would be even better with a header like this: 
+
+```
+ * <h2>Extensibility</h2>
+ *
+ * <p>This class is designed for extension.
+```",style,high,style,high,"It asks only to add a header to the javadoc, a documentation wording change with the code untouched.",yes,,
+3407585339,junit-team/junit5,5765,https://github.com/junit-team/junit-framework/pull/5765#discussion_r3407585339,junit-jupiter-api/src/main/java/org/junit/jupiter/api/DisplayNameGenerator.java,53,"It's worth giving this paragraph its own header so that users don't confuse configuration for extension. Something like this: 
+
+```
+ * <h2>Configuration</h2>
+ * 
+ * <p>A {@link DisplayNameGenerator} can be configured <em>globally</em> for the
+ ...
+```",style,high,style,high,"It asks to add a header to a javadoc paragraph, changing documentation presentation only.",yes,,
+3407595741,junit-team/junit5,5765,https://github.com/junit-team/junit-framework/pull/5765#discussion_r3407595741,junit-jupiter-params/src/main/java/org/junit/jupiter/params/aggregator/SimpleArgumentsAggregator.java,29,"The public `aggregateArguments` methods in this class have to [document](https://github.com/junit-team/junit-framework/issues/938#issue-242019121) that they call the protected abstract `aggregateArguments` method, as that method is technically overridable.",style,high,style,low,"It requests a javadoc addition, which is documentation wording, though the underlying concern about the overridable-method contract leans toward design.",yes,,
+3449141966,checkstyle/checkstyle,20378,https://github.com/checkstyle/checkstyle/pull/20378#discussion_r3449141966,src/main/java/com/puppycrawl/tools/checkstyle/checks/coding/UnusedLocalVariableCheck.java,186," In Java terminology, ""switch rule"" or ""switch labels"" is more common working here. I didn't see ""arms"" before. Have you seen it?",question,high,style,low,"The reviewer suggests replacing the term 'arms' with the more common 'switch rule' or 'switch labels' wording, a terminology-only change, but the trailing 'Have you seen it?' puts it on the boundary with question.",no,,
+3458769563,junit-team/junit5,5765,https://github.com/junit-team/junit-framework/pull/5765#discussion_r3458769563,junit-jupiter-api/src/main/java/org/junit/jupiter/api/DynamicNode.java,32,"@jbduncan in what category does classes fall that are public, but have a package private constructor?",question,high,question,high,"The reviewer is asking another person for clarification about how such classes are categorized, not asserting any change.",yes,,
+3473246247,checkstyle/checkstyle,20435,https://github.com/checkstyle/checkstyle/pull/20435#discussion_r3473246247,src/xdocs-examples/resources/com/puppycrawl/tools/checkstyle/checks/sizes/parameternumber/Example4.java,18,It's a bit weird to have these Annotations have an empty line after them. Can we get rid of that?,style,high,style,high,Removing an empty line after annotations is a pure whitespace/formatting change with the code shape untouched.,yes,,
+3487251863,checkstyle/checkstyle,20432,https://github.com/checkstyle/checkstyle/pull/20432#discussion_r3487251863,src/test/resources/com/puppycrawl/tools/checkstyle/checks/coding/unusedlocalvariable/InputUnusedLocalVariableNestedClasses3.java,36,"this comment is good and located in right place.
+Do you see problem in xpath expression of this this rule ? that make this violation.",question,high,question,low,"The reviewer is asking whether the author sees a problem in the xpath expression rather than asserting a change, though the implied defect puts it on the boundary with bug.",yes,,
+3523271967,checkstyle/checkstyle,20554,https://github.com/checkstyle/checkstyle/pull/20554#discussion_r3523271967,src/xdocs-examples/resources/com/puppycrawl/tools/checkstyle/checks/todocomment/Example2.java,14,"this line confusing in html rendring, it is due to inlined config.
+lets move this line above `// xdoc section -- start`",design,high,style,low,"Moving a comment/config line above the xdoc section marker only changes how the example renders in HTML, not the code's shape, though the 'move this line' phrasing sits near the design boundary.",no,,
+3538181653,mockito/mockito,3840,https://github.com/mockito/mockito/pull/3840#discussion_r3538181653,mockito-core/src/testFixtures/java/org/mockitoutil/TestBase5.java,71,Let's remove all the stuff that isn't used yet.,design,high,design,high,"Removing unused code changes what code exists, a maintainability/structure request.",yes,,
+3541030394,checkstyle/checkstyle,20600,https://github.com/checkstyle/checkstyle/pull/20600#discussion_r3541030394,src/test/java/com/puppycrawl/tools/checkstyle/api/BeforeExecutionFileFilterSetTest.java,125,"Please revert changes related to this new Check.
+I am not sure why Google do this weird style.
+Please suppress by placing  ignore severity all violations, we don't need to follow Google style here.
+It is not first Check that has severity ignore.",style,high,design,low,"The reviewer asks to revert the changes and suppress the new Check with ignore severity, a decision about what code/config exists, but it is largely a project-policy call so no category fits cleanly.",no,,
+3564187763,checkstyle/checkstyle,20599,https://github.com/checkstyle/checkstyle/pull/20599#discussion_r3564187763,src/main/java/com/puppycrawl/tools/checkstyle/checks/imports/UnusedImportsCheck.java,369,"Can we simplify this by removing the outer condition? We are checking the same startsWith conditions again inside it.
+
+
+```suggestion
+String currentType = type;
+if (currentType.startsWith(WILDCARD_EXTENDS_PREFIX)) { 
+currentType = currentType.substring(WILDCARD_EXTENDS_PREFIX.length()); 
+} else if (currentType.startsWith(WILDCARD_SUPER_PREFIX)) { currentType = currentType.substring(WILDCARD_SUPER_PREFIX.length()); 
+} else {
+ currentType = stripTrailingParameterName(currentType); 
+ }
+```",design,high,design,high,"The reviewer proposes restructuring the conditional logic to remove a redundant outer condition, changing the shape of the code rather than just its appearance.",yes,,
+3573359822,checkstyle/checkstyle,20725,https://github.com/checkstyle/checkstyle/pull/20725#discussion_r3573359822,src/test/resources-noncompilable/com/puppycrawl/tools/checkstyle/checks/coding/emptystatement/compact/InputEmptyStatementCompactSourceFile.java,9,"please create issue on this and put comment above `// ok until ....url to issue...`
+see child issues of https://github.com/checkstyle/checkstyle/issues/19971 for example",design,low,style,low,"The request is mostly process/coordination (file an issue) plus adding a conventional '// ok until' tracking comment, so no category truly fits and a comment-wording change is the least-bad fit.",no,,
+3588685271,checkstyle/checkstyle,20666,https://github.com/checkstyle/checkstyle/pull/20666#discussion_r3588685271,src/it/resources/com/openjdk/checkstyle/test/chapterformatting/rulebraces/InputBracesLeftCurlyInValid.java,3,"lets just accept violations on such file , just place `violation` comment.
+Lets not make big noisy blocks in our Inputs.
+We should have this header only in Inputs for this chapter, all other Inputs has `violation`  ",style,high,design,low,"Replacing noisy header blocks with functional 'violation' comments changes what the test input file contains per project convention, but it sits on the boundary with style since it mostly concerns file appearance.",no,,
+3591265668,checkstyle/checkstyle,20717,https://github.com/checkstyle/checkstyle/pull/20717#discussion_r3591265668,src/test/resources-noncompilable/com/puppycrawl/tools/checkstyle/checks/design/innertypelast/InputInnerTypeLastEmpty.java,7,"can you check why it is not-compileable ?
+see ""same"" at https://github.com/checkstyle/checkstyle/blob/master/src/test/resources/com/puppycrawl/tools/checkstyle/checks/design/onetoplevelclass/InputOneTopLevelClassEmpty.java",question,high,question,high,The reviewer is asking the author to investigate and explain why the file is non-compilable rather than asserting a specific change.,yes,,
+3599066941,checkstyle/checkstyle,20752,https://github.com/checkstyle/checkstyle/pull/20752#discussion_r3599066941,src/test/resources/com/puppycrawl/tools/checkstyle/checks/javadoc/javadocvariable/InputJavadocVariableTagsEnums.java,76,"`/** Javadoc for enum is valid, but violations are for enum 2 values*/`
+
+as I was triggered on why enum type has problem with javadoc.
+
+ please add below:
+```
+private static enum PathStatus { 
+     INVALID, CHECKED }; // 2 violations
+```
+to make it more clear on position of violaiton.",design,high,design,low,"The reviewer asks to add a new enum snippet to the test input to clarify violation positions, which adds code, but it borders on style since the aim is clarity of the example.",yes,,
+3604528235,checkstyle/checkstyle,20810,https://github.com/checkstyle/checkstyle/pull/20810#discussion_r3604528235,src/test/resources/com/puppycrawl/tools/checkstyle/checks/whitespace/genericwhitespace/InputGenericWhitespaceParameterizedRecordPattern.java,23,"`// violation ''>' is followed by whitespace.'`
+
+same update for others.
+
+Please make indentaion on file by +2, it will givemore  space for violation comment in future",style,high,style,high,Adjusting the file's indentation by +2 and updating violation comment text is pure formatting with the code structure unchanged.,yes,,
+3610989364,checkstyle/checkstyle,20842,https://github.com/checkstyle/checkstyle/pull/20842#discussion_r3610989364,src/xdocs-examples/resources/com/puppycrawl/tools/checkstyle/checks/whitespace/nolinewrap/Example1.java,20,I do not understand ... why this violation is gone? ,question,high,question,low,"The reviewer is asking why the violation disappeared rather than asserting a change, though the implied possible regression puts it on the boundary with bug.",yes,,
+3619775257,checkstyle/checkstyle,20839,https://github.com/checkstyle/checkstyle/pull/20839#discussion_r3619775257,src/main/java/com/puppycrawl/tools/checkstyle/api/JavadocCommentsTokenTypes.java,84,"update this to have `/***`
+
+we always thought that `*` after `/*` is marker of javadoc type of multi-line comment https://checkstyle.org/writingjavadocchecks.html#What_is_Javadoc_comment
+
+lets have it example to see how it is parsed.  
+
+it is from:
+https://checkstyle-diff-reports.s3.us-east-2.amazonaws.com/edd77ad547936d5592707212a213f271a6596b1c_2026124436/reports/diff/openjdk25/index.html#A1
+
+
+",style,high,style,low,"The request is to change an example comment to use '/***', a content/wording tweak, but the motivation of seeing how it is parsed and the linked diff report make it heavily dependent on surrounding discussion.",yes,,
+3646289239,checkstyle/checkstyle,20957,https://github.com/checkstyle/checkstyle/pull/20957#discussion_r3646289239,src/test/resources/com/puppycrawl/tools/checkstyle/filters/suppresswithnearbycommentfilter/InputSuppressWithNearbyCommentFilterUnmatchedInfluenceGroup.java,25,"please put violation message, we doing crazy hard efforts to make all files have violation message ",style,high,style,low,"Adding the violation message text to the test input comment follows a project convention about comment content, but such messages are checked by the test harness so it borders on design.",yes,,
+3677731064,checkstyle/checkstyle,21008,https://github.com/checkstyle/checkstyle/pull/21008#discussion_r3677731064,src/main/java/com/puppycrawl/tools/checkstyle/site/ExampleMacro.java,161,"you use path to print good exception, but we just need to throw IllegalArgumentExeption 
+and let code that calls getConfigSnippet catch all exceptions  and wrap it to MacroExecutionException and put path there.",design,high,design,high,"The reviewer proposes moving exception-wrapping responsibility to the caller and throwing a plain IllegalArgumentException, restructuring the error-handling across methods.",yes,,
+3678124720,checkstyle/checkstyle,20990,https://github.com/checkstyle/checkstyle/pull/20990#discussion_r3678124720,src/test/java/com/puppycrawl/tools/checkstyle/checks/imports/CustomImportOrderCheckTest.java,789,"I am sorry, no pure unit test at all. 
+We are very strong on this.
+All should be by Input file. if there is very very very good reasons that make it impossible to make testing by Inputs, .... I do no think we need this modernization.",design,high,design,high,"The reviewer rejects pure unit tests and requires the testing to be restructured around Input files, a change to how and where the test code exists.",yes,,
+3682273475,junit-team/junit5,5930,https://github.com/junit-team/junit-framework/pull/5930#discussion_r3682273475,junit-platform-console/src/main/java/org/junit/platform/console/output/VerboseTreePrintingListener.java,177,"While it is likely that the root of a test plan is also a test identifier without a parent, it would be more accurate for the loop condition to halt when current node has no parent.
+
+Typically this would be written like this:
+
+```
+while ((parent = testPlan.getParent().orElse(null)) != null) {
+```
+",bug,high,bug,low,"It flags that the loop condition is not strictly accurate and could misbehave if the root assumption fails, though the reviewer concedes current behavior is likely correct, making it a robustness concern near the design boundary.",yes,,
+3683218554,junit-team/junit5,5930,https://github.com/junit-team/junit-framework/pull/5930#discussion_r3683218554,platform-tests/src/test/java/org/junit/platform/console/output/VerboseTreePrintingListenerTests.java,253,This doesn't look right. There should be no reason to discard output from the tests. Rather you can update the existing tests to include the new output.,bug,high,bug,high,"It objects that the change wrongly discards test output, meaning the tests would no longer verify what they should.",yes,,
+3714331739,checkstyle/checkstyle,21086,https://github.com/checkstyle/checkstyle/pull/21086#discussion_r3714331739,src/main/java/com/puppycrawl/tools/checkstyle/checks/javadoc/WriteTagCheck.java,70,"Please use prefix `writetag.`
+To make it clear that it is message of specific Check.",style,high,style,low,"Adding the 'writetag.' prefix is essentially a naming-convention change for a message key, though renaming a key that is referenced elsewhere sits near the design boundary.",yes,,

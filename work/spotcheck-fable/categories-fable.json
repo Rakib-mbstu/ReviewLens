@@ -1,0 +1,343 @@
+{
+  "categorized_at": "2026-08-26T07:52:20.869396+00:00",
+  "model": "claude-code-subagent/fable",
+  "via": "claude-code-subagent",
+  "prompt": {
+    "name": "categorize_v1",
+    "version": 1,
+    "sha256": "bd5e4f74bd473858073e63899ab62827ccbe5fc3984933afdd2892a7ee8a5657"
+  },
+  "categories": {
+    "3449141966": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "The reviewer suggests replacing the term 'arms' with the more common 'switch rule' or 'switch labels' wording, a terminology-only change, but the trailing 'Have you seen it?' puts it on the boundary with question."
+    },
+    "3487251863": {
+      "category": "question",
+      "confidence": "low",
+      "reason": "The reviewer is asking whether the author sees a problem in the xpath expression rather than asserting a change, though the implied defect puts it on the boundary with bug."
+    },
+    "3473246247": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "Removing an empty line after annotations is a pure whitespace/formatting change with the code shape untouched."
+    },
+    "3523271967": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "Moving a comment/config line above the xdoc section marker only changes how the example renders in HTML, not the code's shape, though the 'move this line' phrasing sits near the design boundary."
+    },
+    "3564187763": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer proposes restructuring the conditional logic to remove a redundant outer condition, changing the shape of the code rather than just its appearance."
+    },
+    "3541030394": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "The reviewer asks to revert the changes and suppress the new Check with ignore severity, a decision about what code/config exists, but it is largely a project-policy call so no category fits cleanly."
+    },
+    "3588685271": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "Replacing noisy header blocks with functional 'violation' comments changes what the test input file contains per project convention, but it sits on the boundary with style since it mostly concerns file appearance."
+    },
+    "3591265668": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking the author to investigate and explain why the file is non-compilable rather than asserting a specific change."
+    },
+    "3573359822": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "The request is mostly process/coordination (file an issue) plus adding a conventional '// ok until' tracking comment, so no category truly fits and a comment-wording change is the least-bad fit."
+    },
+    "3599066941": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "The reviewer asks to add a new enum snippet to the test input to clarify violation positions, which adds code, but it borders on style since the aim is clarity of the example."
+    },
+    "3604528235": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "Adjusting the file's indentation by +2 and updating violation comment text is pure formatting with the code structure unchanged."
+    },
+    "3619775257": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "The request is to change an example comment to use '/***', a content/wording tweak, but the motivation of seeing how it is parsed and the linked diff report make it heavily dependent on surrounding discussion."
+    },
+    "3610989364": {
+      "category": "question",
+      "confidence": "low",
+      "reason": "The reviewer is asking why the violation disappeared rather than asserting a change, though the implied possible regression puts it on the boundary with bug."
+    },
+    "3646289239": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "Adding the violation message text to the test input comment follows a project convention about comment content, but such messages are checked by the test harness so it borders on design."
+    },
+    "3678124720": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer rejects pure unit tests and requires the testing to be restructured around Input files, a change to how and where the test code exists."
+    },
+    "3677731064": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "The reviewer proposes moving exception-wrapping responsibility to the caller and throwing a plain IllegalArgumentException, restructuring the error-handling across methods."
+    },
+    "3714331739": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "Adding the 'writetag.' prefix is essentially a naming-convention change for a message key, though renaming a key that is referenced elsewhere sits near the design boundary."
+    },
+    "2131527692": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "The reviewer asks to switch to different API methods (getFieldCount/getField) or hoist the getFields() call, changing call sites, though the underlying inefficiency concern borders on bug."
+    },
+    "2121181569": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "The comment concerns the API deprecation status and @Deprecated/@deprecated conventions across the module, but it is framed as 'WDYT?' so it sits on the boundary with question."
+    },
+    "2131912504": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Removing the redundant 'direct' invocation because precondition checks now cover it changes the call structure, a duplication-removal change to what code exists."
+    },
+    "2182356053": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "Switching the string to a text block and rewording/reordering the message sentences changes only the syntax and wording while the same code stays in place."
+    },
+    "2198796397": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "Restoring the singleton is a structural change to how the class is instantiated, but it is phrased as 'would you like to', putting it on the boundary with question."
+    },
+    "2198805002": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It proposes moving the Locale handling into a different class, but the motivation is an inconsistency between BCP 47 and ISO 639 behavior, putting it on the design/bug boundary."
+    },
+    "2200663863": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It implicitly suggests removing a now-redundant test case (changing what code exists), but it is phrased as a genuine question, so it sits on the design/question boundary."
+    },
+    "2266331443": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It proposes restructuring the code so the concern is handled in one place by rewriting getSuiteDisplayName, changing the shape and location of the logic."
+    },
+    "2329308339": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It asks to parameterize the test over tag counts, which restructures the test into a different shape."
+    },
+    "2410083281": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It requests adding a new test method for another overload's preconditions, changing what test code exists."
+    },
+    "2448408714": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "It asserts the code incorrectly ignores the NO_COLOR environment variable and may misbehave on Windows, which are behavioral defects."
+    },
+    "2486891293": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "It asks only to reword and restructure the prose of a documentation comment, leaving the code itself untouched."
+    },
+    "2465371974": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It suggests replacing the latch with waiting on the thread, a structural simplification, but it is phrased as a question so it borders on question."
+    },
+    "2690743210": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It asks to split one method with several assertions into separate parameterized test methods, changing the test structure."
+    },
+    "2690747911": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "Replacing the nullValue(Example.class) call with a cast null changes the actual code rather than just its appearance, but it is a trivial local simplification near the style boundary."
+    },
+    "2708291879": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "Renaming method parameters for naming consistency changes wording only, with the code's structure and behavior intact."
+    },
+    "2708963848": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "It is a note the reviewer left for themselves rather than a request for change, so no category truly fits and style (a naming observation) is the least-bad choice."
+    },
+    "2809329876": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "Grouping related constants adjacently only reorders declarations within the same file without changing methods, types, or call sites, though ordering sits near the style/design boundary."
+    },
+    "2947610128": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It proposes giving the result an Optional-returning toException() API and rewriting the call site around it, a change to types and API shape."
+    },
+    "3044390964": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It suggests adding a guard around the stream logic, a structural change, but the terse question phrasing makes the intent (optimization vs. correctness vs. inquiry) ambiguous."
+    },
+    "3050546162": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It suggests moving the description into the DefaultFailure class, relocating where that data lives."
+    },
+    "3325607256": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "It asks only to add a header to the javadoc, a documentation wording change with the code untouched."
+    },
+    "3407585339": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "It asks to add a header to a javadoc paragraph, changing documentation presentation only."
+    },
+    "3407595741": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "It requests a javadoc addition, which is documentation wording, though the underlying concern about the overridable-method contract leans toward design."
+    },
+    "3458769563": {
+      "category": "question",
+      "confidence": "high",
+      "reason": "The reviewer is asking another person for clarification about how such classes are categorized, not asserting any change."
+    },
+    "3682273475": {
+      "category": "bug",
+      "confidence": "low",
+      "reason": "It flags that the loop condition is not strictly accurate and could misbehave if the root assumption fails, though the reviewer concedes current behavior is likely correct, making it a robustness concern near the design boundary."
+    },
+    "3683218554": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "It objects that the change wrongly discards test output, meaning the tests would no longer verify what they should."
+    },
+    "694931396": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It tentatively proposes reinstating a test by removing a line, changing what test code exists, but is so dependent on surrounding discussion that question is also defensible."
+    },
+    "807045878": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It requests adding a new test method for an expected-illegal use case, changing what test code exists, though it borders on bug as missing edge-case coverage."
+    },
+    "827454303": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It asks to change the declared type to List<Invocation> and use a different collector, altering types and the shape of the code."
+    },
+    "882659012": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Splitting one test into three separate test cases changes the shape of the test code, the canonical design example."
+    },
+    "884447378": {
+      "category": "question",
+      "confidence": "low",
+      "reason": "The reviewer is asking whether a behavior change to strict-by-default was intentional, though the implied unintended regression sits on the boundary with bug."
+    },
+    "915145345": {
+      "category": "style",
+      "confidence": "high",
+      "reason": "Removing a redundant else so the return aligns with the if is a syntax convention tweak that leaves the same logic in the same place."
+    },
+    "956772061": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "This is a process note about filing and linking a separate GitHub issue rather than a request to change the code, so no category truly fits and design is the least-bad fit for the deferred change."
+    },
+    "944847830": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "Dropping an intermediate local variable and assigning directly is a trivial local cleanup, but it sits on the style/design boundary since inlining slightly changes the code's shape."
+    },
+    "944849660": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It asks to move the test into a different subproject and re-enable another test, changing where code lives."
+    },
+    "944852973": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Changing the thrown exception to a MockitoException changes the type used, altering the code's shape."
+    },
+    "1050560005": {
+      "category": "style",
+      "confidence": "low",
+      "reason": "It suggests correcting a javadoc @since version tag, a documentation-wording change, though phrased as a question and arguably a doc-accuracy defect."
+    },
+    "1052577511": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It proposes splitting the matcher into a new ArgumentMatcherWithType interface to preserve lambda usage, an API-structure change, but it is framed as open questions ending in WDYT."
+    },
+    "1054530605": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Removing the interface entirely for Mockito 5 changes what code exists, a clear structural/API change."
+    },
+    "1059065109": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Changing the parameter type from Object to T is a signature/type change, even if deferred to a follow-up."
+    },
+    "1119362735": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "Removing a redundant assertNotNull is a small redundancy-removal that changes which statements exist, though it borders on a style nit."
+    },
+    "1405377838": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It argues for a different error-handling contract (always throw instead of defaulting to the first enum value), an API behavior decision that borders on a wrong-behavior bug concern."
+    },
+    "1730306134": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "It rejects adding a new API and asks to fold the improvement into the existing clearInlineMocks, a clear API-surface decision."
+    },
+    "1743569117": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Reversing the class nesting and changing the exception to extend MockitoException restructures classes and types."
+    },
+    "1744361831": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "It tentatively proposes adding a warning message for JVM >= 21, new behavior that changes what code exists, but the 'I wonder if' framing makes question also defensible."
+    },
+    "1744531544": {
+      "category": "design",
+      "confidence": "low",
+      "reason": "Rewriting the stream handling as try-with-resources restructures resource management in place, sitting between a style idiom and an implicit resource-leak concern."
+    },
+    "1744537566": {
+      "category": "bug",
+      "confidence": "high",
+      "reason": "The reviewer identifies that the temporary boot jar is not set up in this branch, likely causing a ClassNotFound at runtime, a clear correctness defect."
+    },
+    "3538181653": {
+      "category": "design",
+      "confidence": "high",
+      "reason": "Removing unused code changes what code exists, a maintainability/structure request."
+    }
+  },
+  "failures": []
+}

@@ -1,0 +1,77 @@
+{
+  "seed": 20260831,
+  "picked": [
+    {
+      "sheet_id": "M1",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__mockito__mockito__3129__match__0",
+      "repo": "mockito/mockito",
+      "number": 3129,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify the same issue: adding a new abstract method to a published interface will break existing implementers, and suggest a default implementation as a solution."
+    },
+    {
+      "sheet_id": "M2",
+      "arm": "qwen",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2650__match__0",
+      "repo": "mockito/mockito",
+      "number": 2650,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments suggest using a lambda expression instead of an anonymous inner class for improved readability on the same test code."
+    },
+    {
+      "sheet_id": "M3",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__mockito__mockito__2883__match__0",
+      "repo": "mockito/mockito",
+      "number": 2883,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify that the `LocationFactory` class and its associated indirection are no longer necessary and can be removed due to simplification."
+    },
+    {
+      "sheet_id": "M4",
+      "arm": "sonnet",
+      "judgment_id": "anthropic__claude-sonnet-5__mockito__mockito__3129__match__0",
+      "repo": "mockito/mockito",
+      "number": 3129,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify the same issue: adding a new abstract method to a public interface without a default implementation creates a breaking change for downstream consumers."
+    },
+    {
+      "sheet_id": "M5",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20604__match__0",
+      "repo": "checkstyle/checkstyle",
+      "number": 20604,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify that unrelated formatting changes, specifically re-indentation, are being included in the commit and suggest reverting them to keep the diff clean."
+    },
+    {
+      "sheet_id": "M6",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__junit-team__junit5__4913__match__0",
+      "repo": "junit-team/junit5",
+      "number": 4913,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify the same issue: the `/* final */` markers are now redundant and should be removed because the fields can be declared as `final`."
+    },
+    {
+      "sheet_id": "M7",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__checkstyle__checkstyle__20351__match__0",
+      "repo": "checkstyle/checkstyle",
+      "number": 20351,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify that the apostrophe characters used for quoting are being concatenated at the call site, suggesting that they should instead be part of the message property for better maintainability."
+    },
+    {
+      "sheet_id": "M8",
+      "arm": "opus",
+      "judgment_id": "claude-code-subagent__opus__junit-team__junit5__4609__match__0",
+      "repo": "junit-team/junit5",
+      "number": 4609,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify the same issue: the missing `@deprecated` Javadoc tag for an annotation that is marked for removal."
+    }
+  ]
+}

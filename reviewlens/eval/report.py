@@ -116,8 +116,11 @@ def render_report(
                 "given a fifth category. Category assignment is rubric-sensitive: "
                 "a revision of the rubric changed a substantial share of labels, "
                 "so per-category recall carries more uncertainty than overall "
-                "recall. Assignments are spot-checked by hand against a reproducible "
-                "sample, written by `reviewlens.eval.categorize --spotcheck-out`."
+                "recall. A reproducible sample of the assignments is re-rated by a "
+                "second, independent model against the same frozen rubric (see "
+                "`reports/categorization-interrater.md`); no human validated these "
+                "labels, so that check measures inter-model consistency in applying "
+                "the rubric, not correctness."
             )
     else:
         lines.append(
@@ -152,14 +155,37 @@ def render_report(
     lines.append("|---|---|")
     lines.append(f"| Chunks reviewed | {metrics.chunk_count} |")
     lines.append(
-        f"| Parse failures | {_fraction(metrics.parse_error_count, metrics.chunk_count)} |"
+        f"| Chunks lost (no output) | "
+        f"{_fraction(metrics.lost_chunk_count, metrics.chunk_count)} |"
     )
-    lines.append(f"| Parse-failure rate | {_pct(metrics.parse_failure_rate)} |")
+    lines.append(f"| **Chunk loss rate** | **{_pct(metrics.chunk_loss_rate)}** |")
+    lines.append(
+        f"| Chunks with a parse error | "
+        f"{_fraction(metrics.error_chunk_count, metrics.chunk_count)} |"
+    )
+    lines.append(f"| Error-chunk rate | {_pct(metrics.error_chunk_rate)} |")
+    lines.append(
+        f"| Malformed items per chunk | {_pct(metrics.parse_failure_rate)} |"
+    )
+    lines.append(
+        f"| &nbsp;&nbsp;— of which provider-caused | "
+        f"{_fraction(metrics.provider_error_items, metrics.parse_error_items)} |"
+    )
+    lines.append(
+        f"| &nbsp;&nbsp;— of which model-caused | "
+        f"{_fraction(metrics.model_error_items, metrics.parse_error_items)} |"
+    )
     lines.append("")
     lines.append(
-        "A chunk whose reply could not be parsed contributes no model comments, "
-        "so it depresses recall for reasons unrelated to review ability. The rate "
-        "is reported next to recall so the two are read together."
+        "**Chunk loss rate** is the headline coverage number: a lost chunk "
+        "contributed zero model comments, so it depresses recall for reasons "
+        "unrelated to review ability, and is reported next to recall so the two "
+        "are read together. **Malformed items per chunk** counts individual "
+        "rejected items rather than lost chunks — a chunk can carry a malformed "
+        "item and still contribute other, valid comments — so this rate is not a "
+        "chunk-loss rate and can exceed 1. Provider-caused failures are delivery "
+        "faults (the model was billed and generated tokens, but the provider "
+        "returned a null content field) and are not attributable to the model."
     )
     lines.append("")
 

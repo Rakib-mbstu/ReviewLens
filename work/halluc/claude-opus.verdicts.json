@@ -1,0 +1,265 @@
+{
+  "judged_at": "2026-08-26T14:40:46.396734+00:00",
+  "model": "claude-code-subagent/fable",
+  "via": "claude-code-subagent",
+  "prompt": {
+    "name": "hallucination_v1",
+    "version": 1,
+    "sha256": "e05ea232e3eacc15c0f12ff1bb68cd9d4cde2b1cecd448fe92e2979259b70c98"
+  },
+  "run": "runs/subset30/claude-opus/",
+  "sample": "reports/subset30-claude-opus-verification.csv",
+  "verdicts": {
+    "claude-code-subagent__opus__checkstyle__checkstyle__20351__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 82 visibly uses the shortened 'missing @param 'c' tag.' while line 66 keeps the full 'Type Javadoc comment is missing' form, so the inconsistency the comment describes is present."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20362__unmatched_model__2": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The unguarded dereferences are visible, but whether MODIFIERS and IDENT are guaranteed present on every VARIABLE_DEF reachable here (and whether findFirstToken can return null in this context) depends on AST API guarantees the chunk does not show."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20537__unmatched_model__10": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 42's switch and its closing brace are visibly indented at 4 spaces while other method bodies in the file (e.g. line 21) sit at 8, matching the comment's description."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20537__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Lines 1104 and 1130 visibly capitalize 'Destructuring' mid-sentence, so the flagged style issue is present."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20537__unmatched_model__5": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The javadoc visibly says 'forced-name pattern variable' while the registrar, accessor, and backing field remain 'namedPatternVar' (lines 1106-1107, 1135-1136), so the described mismatch is real."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20554__unmatched_model__8": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The diff visibly shows the removed comment carried '(only 6 chars - below 9-char threshold)' while new line 52 keeps only '(only 6 chars)', and the {8,} regex at line 6 confirms the dropped parenthetical explained the negative case."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20600__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 321's files attribute is visibly indented deeper (12 spaces) than the 9-space alignment used by every other suppress entry in the chunk."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20600__unmatched_model__13": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The mismatch between the test name and the Javadoc input filename is visible, but whether the test actually verifies that Javadoc comments are ignored depends on the input file's content, which the chunk does not show."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20600__unmatched_model__17": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Lines 5-6 visibly declare two expected violations pointing into the config header block (lines 1-4) of a file named Correct whose code comments all carry leading asterisks, exactly as the comment states."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20600__unmatched_model__8": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "Line 44 visibly lacks a leading asterisk yet is labelled 'Line with leading asterisk' and is where the violation points, so the example is contradictory, though the claim that neither line has one is debatable for the opening line 43."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20604__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The entries at lines 195-216 are visibly indented 12 spaces while the adjacent set's entries at lines 136-186 use 8, as the comment states."
+    },
+    "claude-code-subagent__opus__checkstyle__checkstyle__20717__unmatched_model__2": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Lines 150 and 159 visibly load inputs from 'compact/' while line 167 loads from the parent directory, so the observed inconsistency is real."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__4609__unmatched_model__3": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The class visibly implements AfterEachCallback while the deprecation tag recommends AfterTestExecutionCallback, but whether those callbacks differ in ordering relative to @AfterEach teardown depends on JUnit lifecycle semantics not shown in the chunk."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__4751__unmatched_model__0": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The removal of the iso_639 note is visible, but the claim that it was the only place describing that format, and whether migration guidance exists elsewhere in the guide, cannot be checked from this chunk."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__4751__unmatched_model__2": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "Whether the delegated convert(...)/ConversionSupport path already handles Locale the same way is exactly what the chunk does not show, so the question cannot be settled here."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__4751__unmatched_model__5": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "After the change at line 59 the mocked context created at line 57 is visibly unused anywhere in the function, so the removal suggestion applies."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5042__unmatched_model__17": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 18 visibly spells the method 'substraction' while the message on line 19 spells 'Subtraction' correctly, so the typo claim is accurate."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5042__unmatched_model__18": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The module is visibly named just 'm', so the readability observation holds, though the referenced package 'p' is not visible in this chunk."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5042__unmatched_model__24": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Lines 76, 91, and 106 visibly show 'junit-run', 'junit-run-class', and 'junit-run-Module', so the capitalization inconsistency is real."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5042__unmatched_model__6": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 259 visibly uses an exact equals match while line 260 uses endsWith on the full name, which would also match a class name merely ending in that text, so both the asymmetry and the risk are present."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5060__unmatched_model__0": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "Whether ConcurrentHierarchicalTestExecutorService honors the fixed-strategy settings and whether the switch is intentional depend on the executor implementation and intent, neither of which the chunk shows."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5060__unmatched_model__14": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The chunk visibly shows executeTask swallowing InterruptedException without running the task (lines 279-281) while executeEntry's finally block completes the future normally (line 263), so an interrupted task is reported as finished without ever running."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5060__unmatched_model__18": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 43 visibly discards tryAcquire()'s return value under the ResultOfMethodCallIgnored suppression on line 35, so asserting the result is a real, applicable improvement."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5060__unmatched_model__2": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Lines 217-218 visibly read 'the fully qualified class name {@link ...} implementation to use', which is missing 'of the' exactly as the comment says."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5060__unmatched_model__24": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "Whether junit.jupiter.execution.parallel.executor is a recognized parameter cannot be determined from this properties file, and the stated premise about the config. prefix is only partially accurate for the visible keys."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5060__unmatched_model__4": {
+      "verdict": "unfounded",
+      "confidence": "low",
+      "reason": "The claim that every other override memoizes is contradicted by the visible getRawConfigurationParameter override (lines 62-65), which also delegates without caching, though the executor-service method being uncached is itself real."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5135__unmatched_model__3": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 724 visibly has child3 counting down the child2Started latch after the swap, so the latch name no longer describes its signaler."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5379__unmatched_model__5": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk shows only the imports; whether a Constants type exists in org.junit.jupiter.engine or how unqualified references resolve in this file cannot be checked from these lines."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5379__unmatched_model__6": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The inconsistency is visible (neighbouring methods use bare statically imported constants while line 124 qualifies with Constants.), though whether a static import is possible without a name collision is not shown in the chunk."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5424__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The canonical constructor at lines 26-29 visibly re-declares the parameter list only to assign rootDir unchanged, and the proposed compact constructor is an equivalent simplification."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5424__unmatched_model__10": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 44 visibly calls assertThat(result.isSuccessful()) with no terminal assertion, which under AssertJ (imported at line 13) verifies nothing, so the flagged defect is present."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5424__unmatched_model__14": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 1297 visibly re-declares TEMP_DIR with the same name and value as line 1270, and the tempDir field and reportTempDir method visibly duplicate the inherited members, so the described hiding is present."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5424__unmatched_model__5": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The delegate call on line 81 is not wrapped in try/catch and the method declares throws IOException, so an exception thrown by the delegate visibly propagates instead of being ignored."
+    },
+    "claude-code-subagent__opus__junit-team__junit5__5424__unmatched_model__7": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The anonymous visitor could capture the enclosing method's fileOperations (line 214 shows it already does), so the parameter on line 189 visibly shadows the captured variable and every call site just passes it back in."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2603__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The assert on line 35 is the only null check, and since the constructor hardcodes new instances with identifier 42 the test's assertions would still pass if assertions were disabled and null were injected."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2650__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Both lenient() and the new strictness() attribute are visible in the chunk and the added javadoc says nothing about how the two interact, so the documentation gap the comment describes is really present."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2650__unmatched_model__17": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The single test visibly asserts three separate expectations (lenient mock passes, regular mock throws, strict mock throws), so the proposed split really would apply."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2650__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 108's entry for section 52 visibly links to href=\"#51\", the same anchor as the preceding entry, instead of #52."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2659__unmatched_model__0": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The chunk covers only lines 3-55, so whether remaining Strictness references and {@link} tags elsewhere in the file resolve after the import removal cannot be checked from what is shown."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2659__unmatched_model__2": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The nested enum is visibly named Strictness and every reference to org.mockito.quality.Strictness in the chunk is fully qualified, which the shadowing name forces; a different name would avoid that."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2659__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "low",
+      "reason": "The code visibly applies lenient() first and then strictness() with no check rejecting the combination, though whether the later strictness call actually overrides lenient depends on MockSettings semantics not shown here."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2807__unmatched_model__15": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The test name contains \"MatchesAny\" and the variable is named any while the matcher under test is visibly an InstanceOf.VarArgAware, so the naming mismatch the comment describes is present."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2807__unmatched_model__4": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 786's @see on isNotNull(Class) visibly points at the no-arg #isNull() even though the matching isNull(Class) overload exists at line 713."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2807__unmatched_model__9": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The VarArgAware override on lines 53-56 returns clazz exactly as the inherited InstanceOf.type() on lines 33-36 does, so it is visibly redundant."
+    },
+    "claude-code-subagent__opus__mockito__mockito__2842__unmatched_model__0": {
+      "verdict": "unverifiable",
+      "confidence": "high",
+      "reason": "The parameter order of Primitives.isAssignableFromWrapper is not visible in the chunk, so whether the arguments on line 41 are reversed cannot be determined from the code shown."
+    },
+    "claude-code-subagent__opus__mockito__mockito__3097__unmatched_model__5": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The normal-mock Optional test visibly calls assertIsNoMock (line 65) while the OptionalLong/Double/Int variants (lines 68-84) only compare to empty(), exactly as the comment says."
+    },
+    "claude-code-subagent__opus__mockito__mockito__3129__unmatched_model__3": {
+      "verdict": "unverifiable",
+      "confidence": "low",
+      "reason": "The test_ prefix is visible, but the cited behaviour-describing naming convention elsewhere in the class (e.g. provides_plugins) lies outside this chunk, so the inconsistency claim cannot be checked here."
+    },
+    "claude-code-subagent__opus__mockito__mockito__3551__unmatched_model__0": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "Line 249 visibly uses the block-level <pre> element in the middle of a sentence, where inline <code> would be the appropriate markup for a flag."
+    },
+    "claude-code-subagent__opus__mockito__mockito__3551__unmatched_model__1": {
+      "verdict": "founded",
+      "confidence": "high",
+      "reason": "The code visibly resolves getInputArguments on runtimeMXBean.getClass(), the JDK-internal implementation type, which under the module system can throw an access error, unlike resolving it on the public RuntimeMXBean interface."
+    }
+  },
+  "failures": [],
+  "counts": {
+    "founded": 37,
+    "unfounded": 1,
+    "unverifiable": 11
+  }
+}

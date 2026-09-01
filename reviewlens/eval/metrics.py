@@ -49,6 +49,13 @@ class Metrics:
     parse_error_count: int
     by_category: list[CategoryMetrics] = field(default_factory=list)
     categories_available: bool = False
+    # Derived from errors.json (see reviewlens.eval.corpus.load_error_stats):
+    # distinct-chunk and cause-split counts, aggregated across PRs.
+    parse_error_items: int = 0
+    error_chunk_count: int = 0
+    lost_chunk_count: int = 0
+    provider_error_items: int = 0
+    model_error_items: int = 0
 
     @property
     def recall(self) -> float | None:
@@ -69,14 +76,39 @@ class Metrics:
 
     @property
     def parse_failure_rate(self) -> float | None:
-        """Fraction of chunks whose reply could not be parsed.
+        """Malformed *items* rejected per chunk reviewed — NOT a chunk-loss rate.
 
-        Reported because a lost chunk depresses recall for reasons unrelated
-        to review ability, so it has to be visible next to the recall number.
+        `parse_error_count` counts individual rejected items
+        (`parse_review_response` can reject several from one chunk's reply,
+        and a chunk with a rejected item can still have contributed other,
+        valid comments — see engine.py). So this ratio can legitimately
+        exceed 1, and it does not say how many chunks contributed zero
+        comments. For that, see `chunk_loss_rate`.
         """
         if self.chunk_count == 0:
             return None
         return self.parse_error_count / self.chunk_count
+
+    @property
+    def chunk_loss_rate(self) -> float | None:
+        """Fraction of chunks that contributed NO model comments due to a parse error.
+
+        The honest "coverage actually lost" number: a lost chunk depresses
+        recall for reasons unrelated to review ability, so it belongs next
+        to the recall number. Unlike `parse_failure_rate`, this counts
+        distinct chunks, not items, and excludes chunks that had an error
+        but still contributed a valid comment.
+        """
+        if self.chunk_count == 0:
+            return None
+        return self.lost_chunk_count / self.chunk_count
+
+    @property
+    def error_chunk_rate(self) -> float | None:
+        """Fraction of chunks carrying at least one parse error (lost or not)."""
+        if self.chunk_count == 0:
+            return None
+        return self.error_chunk_count / self.chunk_count
 
 
 def compute_metrics(per_pr_results: list[tuple[object, object]]) -> Metrics:
@@ -93,6 +125,11 @@ def compute_metrics(per_pr_results: list[tuple[object, object]]) -> Metrics:
     unmatched_model_total = 0
     chunk_total = 0
     parse_error_total = 0
+    parse_error_items_total = 0
+    error_chunk_total = 0
+    lost_chunk_total = 0
+    provider_error_items_total = 0
+    model_error_items_total = 0
 
     category_totals: dict[str, int] = {}
     category_matched: dict[str, int] = {}
@@ -105,6 +142,11 @@ def compute_metrics(per_pr_results: list[tuple[object, object]]) -> Metrics:
         unmatched_model_total += len(result.unmatched_model)
         chunk_total += pr.chunk_count
         parse_error_total += pr.parse_error_count
+        parse_error_items_total += pr.parse_error_items
+        error_chunk_total += pr.error_chunk_count
+        lost_chunk_total += pr.lost_chunk_count
+        provider_error_items_total += pr.provider_error_items
+        model_error_items_total += pr.model_error_items
 
         # `match_comments` returns the very dicts it was given, so object
         # identity is what distinguishes two human comments that happen to
@@ -136,6 +178,11 @@ def compute_metrics(per_pr_results: list[tuple[object, object]]) -> Metrics:
         unmatched_model_count=unmatched_model_total,
         chunk_count=chunk_total,
         parse_error_count=parse_error_total,
+        parse_error_items=parse_error_items_total,
+        error_chunk_count=error_chunk_total,
+        lost_chunk_count=lost_chunk_total,
+        provider_error_items=provider_error_items_total,
+        model_error_items=model_error_items_total,
         by_category=by_category,
         # A partially categorized corpus would silently report recall over a
         # subset of the denominator, so the breakdown counts as available

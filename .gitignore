@@ -21,3 +21,9 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
+
+# Subagent relay scratch: batches/ are mechanical splits of the committed
+# *.requests.jsonl, backups/ are pre-regeneration copies of committed CSVs.
+# Neither is a record of what a model was actually sent or answered.
+work/*/batches/
+work/halluc/backups/
