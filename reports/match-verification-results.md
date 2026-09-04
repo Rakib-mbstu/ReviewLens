@@ -81,7 +81,7 @@ not be presented as one. **Both rows above are reported; the blind row is the
 one with the stronger provenance, and the final row is the rater's considered
 judgment.** A reader should be able to see which is which.
 
-## Unresolved rater inconsistency (`M1` / `M4`)
+## Rater inconsistency (`M1` / `M4`) — left split, deliberately
 
 `M1` and `M4` are **the same human comment** — mockito#3129 line 58, where the
 PR adds `MockMaker getMockMaker(String mockMaker);` to the public
@@ -98,9 +98,23 @@ grounds for `not_equivalent` ("even if worded differently or proposing
 different fixes"). The rater elected to keep the two split after the
 inconsistency was raised.
 
-The disagreement is recorded, not resolved. Its size: if `M1` were
-`equivalent`, the matcher upheld 8/8 and opus stays at 5.9%; if `M4` were
-`not_equivalent`, sonnet-5 drops to 0/102.
+**It stays split by decision, and the reason is worth stating.** The
+inconsistency was raised and adjudicated on 2026-08-31, with the arms already
+disclosed. Harmonizing the pair at that point would have been a third post-hoc
+revision made with the arms known — the same defect that already costs the
+87.5% its blind provenance (`M7`, `M8` above), applied this time for no reason
+better than removing a visible blemish. And harmonizing is not neutral
+bookkeeping in either direction: if `M1` were `equivalent`, the matcher upheld
+8/8 and opus stays at 5.9%; if `M4` were `not_equivalent`, sonnet-5 drops to
+0/102. Each choice moves a published number.
+
+So the pair is kept as recorded. `M1` / `M4` was included as a built-in
+consistency check on the rater, it is the only such check the study ran, and it
+returned a real result: on the hardest case in the set, a single rater is not
+self-consistent. Overwriting that to make the table agree with itself would
+discard the one measurement of rater reliability this study has — and it is a
+measurement that argues, independently of the κ = 0.046 finding, for the second
+rater recommended in the technical report.
 
 ## What this check cannot tell you
 

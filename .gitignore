@@ -28,5 +28,10 @@ __pycache__/
 work/*/batches/
 work/halluc/backups/
 
+# Apple Numbers working copy of the category spot-check. The committed
+# artifact is the .csv; the .numbers was never resolved and is not a record
+# of anything (reports/technical-report.md §8).
+reports/*.numbers
+
 # macOS
 .DS_Store

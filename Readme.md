@@ -2,6 +2,9 @@
 
 **An LLM-based Java pull request reviewer, evaluated against real human review comments.**
 
+[![tests](https://github.com/Rakib-mbstu/ReviewLens/actions/workflows/tests.yml/badge.svg)](https://github.com/Rakib-mbstu/ReviewLens/actions/workflows/tests.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 ReviewLens is both a working tool and an empirical study. Instead of demonstrating cherry-picked examples, it measures — on PRs that real maintainers reviewed — what fraction of human-flagged issues an LLM catches, what it systematically misses, and how often it hallucinates problems that aren't there.
 
 > **Status (Sep 2, 2026):** the pipeline is complete end to end — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, the review engine with a cached OpenRouter client, LLM-assisted comment categorization, comment matching, metrics, reporting, a line-window sensitivity sweep, a cross-model comparison, and the manual-verification export. **All four prompts are frozen and never edited in place:** `review_v1` (Aug 12, sha256 `3cf6f21e…`), `match_v1` (Aug 19, `ff170b79…`), `categorize_v1` (Aug 23, `bd5e4f74…`), `hallucination_v1` (Aug 26, `e05ea232…`). **The corpus is mined and its pinned PR list is committed:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, all of which now carry a category.
@@ -10,7 +13,7 @@ ReviewLens is both a working tool and an empirical study. Instead of demonstrati
 
 **► Full write-up: [`reports/technical-report.md`](reports/technical-report.md)** — method, results, the judge-validation result, threats to validity, and what I would do differently.
 
-**► Demo:** `bash work/demo/demo.sh` walks the pipeline and the evaluation in ~90 seconds. It runs off the warm cache, so it costs $0 and needs no `OPENROUTER_API_KEY`. See [`work/demo/README.md`](work/demo/README.md) for recording the GIF.
+**► Demo:** `bash work/demo/demo.sh` walks the pipeline and the evaluation in ~90 seconds. It runs off the warm cache, so it costs $0 and needs no `OPENROUTER_API_KEY`. No recorded GIF ships with this repo; [`work/demo/README.md`](work/demo/README.md) has the `vhs` instructions if you want one.
 
 ## Motivation
 
@@ -121,12 +124,34 @@ qwen), though the asymmetry alone is not statistically significant. See
 
 **Out (future work):** auto-fixing, multi-turn review conversations, IDE plugins, model fine-tuning, non-Java languages.
 
-## Roadmap
+## Status and what's next
 
-- **Jul 2026** — ingestion + chunking + review engine on live PRs; prompt v1 frozen
-- **Aug 1–15, 2026** — PR mining complete; matching pipeline; first recall numbers on one model
-- **Aug 16–31, 2026** — multi-model comparison (2–3 models via OpenRouter); manual verification pass; results table, technical report, demo GIF
-- **Hard feature freeze: Aug 15.** Anything not in scope goes to future work.
+**Feature-frozen.** The freeze was planned for Aug 15, 2026 and did not hold on
+that date: the last new code landed Aug 26 (the RQ2 hallucination screen), and
+everything since has been verification, correction and writing. Nothing in
+**Out (future work)** above was built.
+
+| milestone | planned | delivered |
+|---|---|---|
+| Pipeline end to end, prompt v1 frozen | Jul 2026 | **Aug 12** — ahead of the freeze gate |
+| Corpus mined, matching pipeline, first recall numbers | Aug 1–15 | **Aug 23** — 11 days late; the run that would have produced August's numbers died when the OpenRouter key expired |
+| Multi-model comparison, verification pass, report | Aug 16–31 | **Aug 24 – Sep 2** — RQ3 ran on a 30-PR subset rather than the full corpus, because the budget could not fund three full runs |
+
+**Where it stopped, and why.** As of Sep 2, 2026 there will be **no further
+human verification**. That is a decision, not a queue: the full-corpus run's 5
+unverified matches, the category spot-check's 66 unfilled rows, the match
+sheet's second pass, and the hallucination slice's `unverifiable` coverage gap
+are permanent limitations of this study. They are listed as such in
+[§8 of the technical report](reports/technical-report.md), which also says
+which published numbers are judge-only.
+
+**If it is picked back up,** two changes would do the most, in order:
+
+1. **Run the Claude arms over the full 90-PR corpus.** The 30-PR subset cannot
+   separate 1% recall from 5% (Fisher exact p = 0.212), and it is the only
+   shared denominator the three arms have.
+2. **Add a second human rater and an adjudication pass.** κ = 0.046 establishes
+   that the hallucination screen is unreliable — not which side of it was right.
 
 ## Reproducing the evaluation
 
