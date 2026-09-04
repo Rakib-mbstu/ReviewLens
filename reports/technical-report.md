@@ -336,8 +336,8 @@ reconsideration on the merits — `M8`'s model comment does name the missing
 so 87.5% is not a blind measurement and is not presented as one. The blind row
 has the stronger provenance; the final row is the rater's considered judgment.
 
-**One unresolved rater inconsistency.** `M1` and `M4` are the *same human
-comment* — mockito#3129 line 58, where the PR adds an abstract method to the
+**One rater inconsistency, left split deliberately.** `M1` and `M4` are the
+*same human comment* — mockito#3129 line 58, where the PR adds an abstract method to the
 published `MockitoPlugins` interface — matched independently by opus and by
 sonnet-5, and included as a built-in consistency check on the rater. They
 received opposite verdicts: `M1` (opus) `not_equivalent`, `M4` (sonnet-5)
@@ -345,9 +345,16 @@ received opposite verdicts: `M1` (opus) `not_equivalent`, `M4` (sonnet-5)
 interface breaking downstream implementors, and both propose a default method;
 `match_v1` treats differing wording and differing proposed fixes as *not*
 grounds for rejection. The rater elected to keep them split after the
-inconsistency was raised. It is recorded, not resolved. If `M1` were
+inconsistency was raised on 2026-08-31, and that is a decision rather than an
+omission: harmonizing the pair with the arms already disclosed would have been a
+third post-hoc revision of exactly the kind that already costs 87.5% its blind
+provenance, and it is not neutral in either direction — if `M1` were
 `equivalent` the matcher upheld 8/8 and opus stays at 5.9%; if `M4` were
-`not_equivalent`, sonnet-5 drops to 0/102.
+`not_equivalent`, sonnet-5 drops to 0/102. The pair was the only built-in check
+on rater consistency this study ran, and it returned a real result: on the
+hardest case in the set, one rater is not self-consistent. That is kept as data,
+and it argues for a second rater independently of κ = 0.046. See
+`reports/match-verification-results.md`.
 
 **What this check cannot tell you.** All 8 are judge-`equivalent` verdicts, so
 it measures **precision, not agreement** — a non-match never becomes a match,
@@ -468,25 +475,36 @@ unreliable; it does not establish which side is right.
 
 ---
 
-## 8. What is not done
+## 8. What is not done, and what was decided against
 
-Stated plainly rather than left for a reader to discover.
+Stated plainly rather than left for a reader to discover. Most of what follows
+is **deferred by decision, not pending**. On 2026-09-02 the verification effort
+was stopped: the items marked † were each within reach — their tooling is
+committed and their procedure is written up in §5 — and were closed unfilled
+anyway. They are permanent properties of these results rather than work in
+progress, and what each one costs the study is stated with it.
 
-- **The full-corpus 1.6% has no human verification.** Its 5 matches were never
-  checked; only the 30-PR subset's 8 were.
-- **The category spot-check has no human labels.** 66 rows exported, 0 filled.
-  The second rater is a model.
+- † **The full-corpus 1.6% has no human verification.** Its 5 matches were never
+  checked; only the 30-PR subset's 8 were. This is the study's most-quoted
+  number and the only headline resting on a judge alone.
+- † **The category spot-check has no human labels.** 66 rows exported, 0 filled.
+  The second rater is a model, so every per-category recall figure inherits an
+  unchecked model-vs-model labelling.
 - **RQ2 has no verified per-arm rate.** It has a retracted machine estimate, an
   indicative reweighting marked do-not-cite, and a negative result about the
-  instrument.
-- **Pass 2 of the match verification** (does the *code* support the match, not
-  just the two comments) was designed and exported but not rated.
-- **The hallucination slice has a coverage gap**: the `unverifiable` stratum's 6
-  draws all landed on qwen.
+  instrument. Closing this needs a second rater, not more of the same one.
+- † **Pass 2 of the match verification** (does the *code* support the match, not
+  just the two comments) was designed and exported but not rated. The 87.5%
+  therefore says the two comments agree, not that either is right about the code.
+- † **The hallucination slice has a coverage gap**: the `unverifiable` stratum's 6
+  draws all landed on qwen, so the Claude arms' `unverifiable` verdicts went
+  unsampled entirely — which is why the reweighted rates are marked do-not-cite.
 - **`usefulness score` is not implemented.** It appears in the metrics design
   and was never built.
 - **Only one model ran the full corpus.** The 30-PR subset cannot separate 1%
-  from 5%, and it is the only shared denominator the three arms have.
+  from 5%, and it is the only shared denominator the three arms have. This one
+  is not the verification decision — it is orchestration cost, and it is the
+  single change that would most improve the study.
 
 ---
 
