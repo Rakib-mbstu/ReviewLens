@@ -42,6 +42,58 @@ pre-regeneration copies of committed CSVs — neither is a record of what a mode
 was actually sent or answered, so committing them would add weight without
 adding evidence.
 
+## The two match-verification sheets
+
+`build_match_sheet.py` and `join_verdicts.py` both default to the **subset30**
+census (8 matches, rated 2026-08-31, published as
+`reports/match-verification*.md`). Running either with no arguments regenerates
+that census byte-for-byte; the builder refuses to redraw a sheet whose CSV
+already carries verdicts, so this is safe.
+
+The same scripts also draw the **full-corpus** census — the 5 matches behind the
+1.6% headline, which the 2026-09-02 decision originally left unverified and
+which was reopened on 2026-09-04:
+
+```bash
+python work/match/build_match_sheet.py \
+    --runs runs/qwen/qwen3-coder-30b-a3b-instruct \
+    --prefix match-verification-full87 \
+    --key work/match/match_full87_key.json \
+    --corpus-label "the 87-PR full-corpus qwen run" --seed 20260904
+```
+
+Rate `verdict_comments_only` in `reports/match-verification-full87.csv` from
+the sheet, then join and score:
+
+```bash
+python work/match/join_verdicts.py \
+    --key work/match/match_full87_key.json \
+    --sheet reports/match-verification-full87.csv \
+    --out reports/match-verification-full87-joined.csv --blind none
+
+python -m reviewlens.eval.compare --runs runs/qwen/qwen3-coder-30b-a3b-instruct \
+    --judge-model google/gemini-2.5-flash-lite \
+    --verified reports/match-verification-full87-joined.csv \
+    --report reports/qwen3-coder-30b-a3b-instruct-full87-verified.md
+```
+
+`--blind none` is deliberate. The subset30 sheet emits a second `-blind` CSV
+only because its verdicts were revised after the arms were disclosed; a single
+pass that is never revised has the stronger provenance and needs one file. This
+census has one arm, so there is nothing to unblind and no reason to revise.
+
+**Rated 2026-09-04: 5 of 5 upheld.** Recall is unchanged at 5/318 = 1.6% and is
+no longer judge-only; see `reports/match-verification-results.md`. The commands
+above are the ones that produced
+`reports/qwen3-coder-30b-a3b-instruct-full87-verified.md`, and they replay from
+the committed CSVs.
+
+`--run-dir` is not needed here: a key written by the current
+`build_match_sheet.py` records each match's run directory, because two runs of
+the same model share both the arm label and the judgment ids, so the label alone
+cannot tell them apart. The published subset30 key predates that field, which is
+why the label map is kept as a fallback.
+
 ## A warning about `work/halluc/build_human_slice.py`
 
 It rewrites `reports/hallucination-human-slice.csv` **blank** on every run and

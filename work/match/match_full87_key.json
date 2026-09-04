@@ -1,0 +1,55 @@
+{
+  "seed": 20260904,
+  "picked": [
+    {
+      "sheet_id": "M1",
+      "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__3506__match__0",
+      "repo": "mockito/mockito",
+      "number": 3506,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify that a NullPointerException could be thrown and suggest improving the error handling with a more descriptive message."
+    },
+    {
+      "sheet_id": "M2",
+      "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5930__match__0",
+      "repo": "junit-team/junit5",
+      "number": 5930,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify the same issue: the loop condition in the `nestingLevel` method should be based on the presence of a parent rather than assuming the root has no parent."
+    },
+    {
+      "sheet_id": "M3",
+      "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2650__match__0",
+      "repo": "mockito/mockito",
+      "number": 2650,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments suggest using a lambda expression instead of an anonymous inner class for improved readability on the same test code."
+    },
+    {
+      "sheet_id": "M4",
+      "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5096__match__0",
+      "repo": "junit-team/junit5",
+      "number": 5096,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments question why an exception is being caught and handled with `fail(e)` instead of being rethrown, indicating the same concern about exception propagation in the test."
+    },
+    {
+      "sheet_id": "M5",
+      "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
+      "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4842__match__0",
+      "repo": "junit-team/junit5",
+      "number": 4842,
+      "judge_verdict": "equivalent",
+      "judge_reason": "Both comments identify that the 'Default' class is missing from the list of built-in implementations in the Javadoc, despite being documented elsewhere."
+    }
+  ]
+}

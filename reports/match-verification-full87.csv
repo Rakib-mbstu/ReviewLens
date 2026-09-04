@@ -1,0 +1,6 @@
+sheet_id,file,human_line,model_line,verdict_comments_only,verdict_with_code,notes
+M1,mockito-core/src/main/java/org/mockito/internal/stubbing/InvocationContainerImpl.java,88,86,equivalent,,
+M2,junit-platform-console/src/main/java/org/junit/platform/console/output/VerboseTreePrintingListener.java,177,177,equivalent,,
+M3,src/test/java/org/mockitousage/strictness/StrictnessMockAnnotationTest.java,39,38,equivalent,,
+M4,platform-tests/src/test/java/org/junit/platform/reporting/open/xml/OpenTestReportGeneratingListenerTests.java,353,352,equivalent,,
+M5,junit-jupiter-api/src/main/java/org/junit/jupiter/api/ClassOrderer.java,58,56,equivalent,,

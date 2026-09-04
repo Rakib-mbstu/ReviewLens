@@ -150,9 +150,13 @@ By category: `bug` 2/34 (5.9%), `question` 1/52 (1.9%), `style` 1/82 (1.2%),
 `design` 1/150 (0.7%). Five matches spread over four categories is not a
 per-category result; it is four numerators of ≤2.
 
-**None of these 5 matches has been checked by a human.** The verification pass
-in §5.2 covered the 30-PR subset only. The 1.6% headline is a judge-only
-number, and this report does not claim otherwise.
+**All 5 of these matches were checked by a human, and all 5 held** (2026-09-04,
+census not sample, blind to the judge's verdict and reason;
+`reports/match-verification-full87.csv`). The 1.6% is therefore not a judge-only
+number: 5/5 upheld, 100% [56.6–100] Wilson, so recall is unchanged at 5/318.
+The interval is what n = 5 allows — this establishes the matcher is not
+producing spurious matches at any appreciable rate on this run, not that its
+precision is 100%. §5.2 has the limits, which are real.
 
 ### 4.2 RQ3 — three models, shared 30-PR subset
 
@@ -356,12 +360,56 @@ hardest case in the set, one rater is not self-consistent. That is kept as data,
 and it argues for a second rater independently of κ = 0.046. See
 `reports/match-verification-results.md`.
 
-**What this check cannot tell you.** All 8 are judge-`equivalent` verdicts, so
-it measures **precision, not agreement** — a non-match never becomes a match,
-there is nothing to compute a κ against, and **false negatives are entirely
-unbounded**. Human comments the matcher wrongly declined would push recall *up*,
-and nothing in this study bounds how many there are. n = 8, and 6 of the 8 are
-opus, so this is close to a check on one arm.
+**The full-corpus census, added 2026-09-04.** The paragraphs above cover the
+30-PR subset. The full 87-PR qwen run has its own 5 matches — the ones behind
+the 1.6% headline — and they were left unverified by the 2026-09-02 decision.
+That decision was reopened for this item alone and the same procedure was run
+again: census not sample, seed 20260904, blind to the judge's verdict and
+reason, pass 1 showing only the two comments and their lines.
+
+**Result: 5 of 5 upheld, 100% [56.6–100].** Recall is unchanged at 5/318 =
+1.6%, and it is no longer a judge-only number. Across both censuses 12 of 13
+verdicts were upheld, on 12 distinct comment pairs — the two sheets overlap by
+one, see below.
+
+Three things this second census does **not** inherit from the first, and one it
+adds:
+
+- **There was no arm to blind.** One run, one model. The judge's verdict and
+  reason were still withheld, which is the blind that makes human-vs-judge
+  agreement mean anything, but the arm-blinding that gave the subset30 sheet
+  its provenance has no analogue here.
+- **No verdict was revised.** The subset30 figure needs two rows (blind 5/8,
+  final 7/8) because two verdicts changed after unblinding. This pass was taken
+  once and never revisited, so one number is the whole record — the stronger
+  provenance of the two.
+- **n = 5, and the interval runs from 56.6% to 100%.** It establishes the
+  matcher is not producing spurious matches at any appreciable rate on this
+  run. It does not pin its precision, and like the subset30 census it measures
+  precision only: every one of the 5 is a judge-`equivalent` verdict, so
+  **false negatives remain entirely unbounded**.
+- **It contains an accidental repeat, and the repeat was consistent.** Sheet id
+  `M3` here (mockito#2650, `StrictnessMockAnnotationTest.java`, human line 39,
+  model line 38) is the *same comment pair* as `M2` in the subset30 sheet —
+  the same PR appears in both the subset and the full corpus, and qwen produced
+  the same comment on it. It was rated `equivalent` on 2026-08-31 and
+  `equivalent` again on 2026-09-04, unprompted and five days apart. That is the
+  study's second unplanned rater-consistency check, and unlike `M1`/`M4` it came
+  out consistent. One hit and one miss on two repeats is not a reliability
+  estimate; it is two data points, and they disagree with each other about
+  whether the rater is self-consistent.
+
+Both censuses share the limits that matter most: **a single rater, who is the
+study's author, and no adjudication.** Neither figure is an inter-rater
+agreement, and neither can be.
+
+**What this check cannot tell you.** All 8 subset30 verdicts and all 5
+full-corpus verdicts are judge-`equivalent`, so both censuses measure
+**precision, not agreement** — a non-match never becomes a match, there is
+nothing to compute a κ against, and **false negatives are entirely unbounded**.
+Human comments the matcher wrongly declined would push recall *up*, and nothing
+in this study bounds how many there are. On the subset30 sheet n = 8 and 6 of
+the 8 are opus, so that one is close to a check on a single arm.
 
 ### 5.3 `categorize_v1` — checked against a model, never against a human
 
@@ -481,12 +529,19 @@ Stated plainly rather than left for a reader to discover. Most of what follows
 is **deferred by decision, not pending**. On 2026-09-02 the verification effort
 was stopped: the items marked † were each within reach — their tooling is
 committed and their procedure is written up in §5 — and were closed unfilled
-anyway. They are permanent properties of these results rather than work in
-progress, and what each one costs the study is stated with it.
+anyway. They are properties of these results rather than work in progress, and
+what each one costs the study is stated with it.
 
-- † **The full-corpus 1.6% has no human verification.** Its 5 matches were never
-  checked; only the 30-PR subset's 8 were. This is the study's most-quoted
-  number and the only headline resting on a judge alone.
+One item was reopened. On 2026-09-04 the full-corpus census was run after all,
+on the argument that the 1.6% was the most-quoted number in the study and the
+only headline with no human check, and that five rows is an hour rather than an
+afternoon. The rest of the 2026-09-02 decision stands.
+
+- ~~**The full-corpus 1.6% has no human verification.**~~ **Closed 2026-09-04.**
+  The 2026-09-02 decision was reopened for this one item and the census was
+  run: all 5 matches checked, all 5 upheld (§5.2). The headline no longer rests
+  on a judge alone. What remains is the size of the check — n = 5, one rater,
+  no adjudication, and pass 2 still unrated.
 - † **The category spot-check has no human labels.** 66 rows exported, 0 filled.
   The second rater is a model, so every per-category recall figure inherits an
   unchecked model-vs-model labelling.
@@ -585,14 +640,17 @@ live API, and they need no artifacts.
 
 | file | what it holds |
 |---|---|
-| `reports/qwen3-coder-30b-a3b-instruct-full87.md` | RQ1, full corpus, one model |
+| `reports/qwen3-coder-30b-a3b-instruct-full87.md` | RQ1, full corpus, one model — the judge's own counts |
+| `reports/qwen3-coder-30b-a3b-instruct-full87-verified.md` | the same run with the 5 human verdicts applied |
 | `reports/rq3-comparison-subset30.md` | RQ3 table, human-corrected |
 | `reports/qwen3-coder-30b-line-window-sensitivity.md` | ±3/5/10/25 sweep |
 | `reports/hallucination-screen.md` | RQ2 screen and its retraction |
 | `reports/hallucination-human-slice.{md,csv}` | the 46 human verdicts |
-| `reports/match-verification-results.md` | the 8-match census |
-| `reports/match-verification.{md,csv}` | the blind sheet and its verdicts |
-| `reports/match-verification-joined{,-blind}.csv` | final and blind passes, joined |
+| `reports/match-verification-results.md` | both matcher censuses, 13 verdicts |
+| `reports/match-verification.{md,csv}` | subset30 blind sheet and its verdicts |
+| `reports/match-verification-joined{,-blind}.csv` | subset30 final and blind passes, joined |
+| `reports/match-verification-full87.{md,csv}` | full-corpus blind sheet and its verdicts |
+| `reports/match-verification-full87-joined.csv` | full-corpus pass, joined |
 | `reports/categorization-interrater.md` | two models on the category rubric |
 | `prompts/*.md` | the four frozen prompts, with freeze dates and hashes |
 
