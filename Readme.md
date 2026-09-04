@@ -13,7 +13,11 @@ ReviewLens is both a working tool and an empirical study. Instead of demonstrati
 
 **► Full write-up: [`reports/technical-report.md`](reports/technical-report.md)** — method, results, the judge-validation result, threats to validity, and what I would do differently.
 
-**► Demo:** `bash work/demo/demo.sh` walks the pipeline and the evaluation in ~90 seconds. It runs off the warm cache, so it costs $0 and needs no `OPENROUTER_API_KEY`. No recorded GIF ships with this repo; [`work/demo/README.md`](work/demo/README.md) has the `vhs` instructions if you want one.
+**► Demo:**
+
+![ReviewLens walking the pipeline and the evaluation, ending on the judge that failed its human check](docs/demo.gif)
+
+That is `bash work/demo/demo.sh`, unedited and in real time. It runs off the warm cache, so it costs $0 and needs no `OPENROUTER_API_KEY`; [`work/demo/demo.tape`](work/demo/demo.tape) pins the terminal, so the recording is reproducible rather than dependent on whoever made it.
 
 ## Motivation
 
