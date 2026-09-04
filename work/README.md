@@ -42,6 +42,50 @@ pre-regeneration copies of committed CSVs — neither is a record of what a mode
 was actually sent or answered, so committing them would add weight without
 adding evidence.
 
+## The two match-verification sheets
+
+`build_match_sheet.py` and `join_verdicts.py` both default to the **subset30**
+census (8 matches, rated 2026-08-31, published as
+`reports/match-verification*.md`). Running either with no arguments regenerates
+that census byte-for-byte; the builder refuses to redraw a sheet whose CSV
+already carries verdicts, so this is safe.
+
+The same scripts also draw the **full-corpus** census — the 5 matches behind the
+1.6% headline, which the 2026-09-02 decision originally left unverified and
+which was reopened on 2026-09-04:
+
+```bash
+python work/match/build_match_sheet.py \
+    --runs runs/qwen/qwen3-coder-30b-a3b-instruct \
+    --prefix match-verification-full87 \
+    --key work/match/match_full87_key.json \
+    --corpus-label "the 87-PR full-corpus qwen run" --seed 20260904
+```
+
+Rate `verdict_comments_only` in `reports/match-verification-full87.csv` from
+the sheet, then join and score:
+
+```bash
+python work/match/join_verdicts.py \
+    --key work/match/match_full87_key.json \
+    --sheet reports/match-verification-full87.csv \
+    --out reports/match-verification-full87-joined.csv --blind none \
+    --run-dir qwen3-coder-30b-a3b-instruct=runs/qwen/qwen3-coder-30b-a3b-instruct/
+
+python -m reviewlens.eval.compare --runs runs/qwen/qwen3-coder-30b-a3b-instruct \
+    --judge-model google/gemini-2.5-flash-lite \
+    --verified reports/match-verification-full87-joined.csv \
+    --report reports/qwen3-coder-30b-a3b-instruct-full87-verified.md
+```
+
+`--blind none` is deliberate. The subset30 sheet emits a second `-blind` CSV
+only because its verdicts were revised after the arms were disclosed; a single
+pass that is never revised has the stronger provenance and needs one file. This
+census has one arm, so there is nothing to unblind and no reason to revise.
+
+**Until that CSV is rated, nothing in `reports/` may say the 1.6% is verified.**
+The sheet being committed is not a claim that it was filled in.
+
 ## A warning about `work/halluc/build_human_slice.py`
 
 It rewrites `reports/hallucination-human-slice.csv` **blank** on every run and
