@@ -18,6 +18,7 @@ produce every report are in the README's "Reproducing the evaluation" section.
 | `spotcheck-fable/` | The second rater's pass over the category spot-check. |
 | `rq3/` | The subagent relay for the Claude arms of the model comparison. |
 | `rebuild_run_meta.py` | One-off repair of run metadata after the `judgment_id` fix. |
+| `zenodo.md` | The deferred DOI deposit: why it stalled, the files to upload and how to rebuild them, and the metadata to paste. |
 
 ## Why the relay directories exist at all
 
