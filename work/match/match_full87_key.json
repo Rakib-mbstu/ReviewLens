@@ -4,6 +4,7 @@
     {
       "sheet_id": "M1",
       "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
       "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__3506__match__0",
       "repo": "mockito/mockito",
       "number": 3506,
@@ -13,6 +14,7 @@
     {
       "sheet_id": "M2",
       "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
       "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5930__match__0",
       "repo": "junit-team/junit5",
       "number": 5930,
@@ -22,6 +24,7 @@
     {
       "sheet_id": "M3",
       "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
       "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__mockito__mockito__2650__match__0",
       "repo": "mockito/mockito",
       "number": 2650,
@@ -31,6 +34,7 @@
     {
       "sheet_id": "M4",
       "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
       "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__5096__match__0",
       "repo": "junit-team/junit5",
       "number": 5096,
@@ -40,6 +44,7 @@
     {
       "sheet_id": "M5",
       "arm": "qwen",
+      "run_dir": "runs/qwen/qwen3-coder-30b-a3b-instruct/",
       "judgment_id": "qwen__qwen3-coder-30b-a3b-instruct__junit-team__junit5__4842__match__0",
       "repo": "junit-team/junit5",
       "number": 4842,

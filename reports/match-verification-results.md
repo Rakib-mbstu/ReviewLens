@@ -1,8 +1,15 @@
-# RQ1 — human verification of the matcher (census, all 8 matches)
+# RQ1 — human verification of the matcher (two censuses, 13 verdicts)
 
-**Result: 7 of 8 matches upheld (87.5%, 95% Wilson 52.9–97.8).** One opus match
-was rejected. Subset-30 recall moves from 5.9% to **4.9%** for opus; qwen and
-sonnet-5 are unchanged at 1.0%.
+**Subset30 (2026-08-31): 7 of 8 matches upheld (87.5%, 95% Wilson 52.9–97.8).**
+One opus match was rejected. Subset-30 recall moves from 5.9% to **4.9%** for
+opus; qwen and sonnet-5 are unchanged at 1.0%.
+
+**Full corpus (2026-09-04): 5 of 5 matches upheld (100%, 95% Wilson 56.6–100).**
+The 1.6% headline is unchanged at 5/318 and is no longer judge-only. See
+[the full-corpus census](#the-full-corpus-census-2026-09-04) below.
+
+Most of this document describes the subset30 census, which came first and is
+the more intricate of the two.
 
 Unlike the hallucination screen, **the matcher survived its check.** That
 contrast is the point of running both: `match_v1` and `hallucination_v1` are
@@ -127,9 +134,69 @@ rater recommended in the technical report.
   matcher is not chance-level; it does not pin down its precision.
 - **Six of the 8 are opus**, because those are the only matches that exist. This
   is close to a check on one arm.
-- **The full-corpus qwen run is not covered.** `runs/qwen` (87 PRs, 318 human
-  comments, recall 1.6%, 5/318) is a different run with its own 5 matches, none
-  of them verified. The 1.6% headline is unchecked.
+- **The full-corpus qwen run is covered by a separate census**, run 2026-09-04
+  and reported below — not by the 8 verdicts above. `runs/qwen` (87 PRs, 318
+  human comments, recall 1.6%, 5/318) is a different run with its own 5
+  matches. The two sheets overlap by exactly one comment pair.
 - **Pass 2 was not completed.** `verdict_with_code` is empty for all 8; the M1
   chunk was consulted during adjudication but no with-code verdicts were
   recorded.
+
+---
+
+## The full-corpus census (2026-09-04)
+
+The 2026-09-02 decision closed all further human verification. It was reopened
+for this item alone: 1.6% (5/318) was the study's most-quoted number and the
+only headline with no human check, the procedure and tooling already existed,
+and the population is five rows.
+
+**Result: 5 of 5 upheld, 100% [56.6–100] Wilson.** Recall is unchanged at
+5/318 = 1.6%. Nothing moved; what changed is that the number is now checked.
+
+| | subset30 | full corpus |
+|---|---|---|
+| run | 3 arms × 30 PRs (102 human comments) | qwen only, 87 PRs (318 human comments) |
+| matches | 8 | 5 |
+| upheld | 7 (87.5%) | **5 (100%)** |
+| 95% Wilson | [52.9–97.8] | [56.6–100] |
+| seed | 20260831 | 20260904 |
+| blind to the arm | yes | n/a — one run |
+| blind to the judge | yes | yes |
+| verdicts revised after the fact | 2 (`M7`, `M8`) | none |
+| rated | 2026-08-31 | 2026-09-04 |
+
+Reproduce with the commands in `work/README.md`; the rated sheet is
+`reports/match-verification-full87.csv` and the join is
+`reports/match-verification-full87-joined.csv`.
+
+### The accidental repeat
+
+`M3` here — mockito#2650, `StrictnessMockAnnotationTest.java`, human line 39,
+model line 38 — is **the same comment pair** as `M2` in the subset30 sheet. That
+PR is in both the subset and the full corpus, and qwen produced the same comment
+on it both times. The rater was not told, and five days separate the two
+verdicts.
+
+Both came out `equivalent`. Set against `M1`/`M4`, which are also the same
+comment pair and came out opposite, the study now has two unplanned repeats and
+they disagree about whether the rater is self-consistent. Two data points is not
+a reliability estimate. It is, however, a better argument for the second rater
+than either point alone.
+
+### What it does not establish
+
+- **n = 5.** The interval runs to 56.6% at the bottom. This says the matcher is
+  not producing spurious matches at any appreciable rate on this run; it does
+  not pin its precision.
+- **Precision only, again.** All 5 are judge-`equivalent` verdicts, so there is
+  no κ to compute and **false negatives stay entirely unbounded** — human
+  comments the matcher wrongly declined would push recall *up*, and nothing in
+  this study bounds how many there are.
+- **One rater, who is the study's author, and no adjudication.** Same as the
+  subset30 census. Neither is an inter-rater agreement.
+- **Pass 2 was not rated here either.** `verdict_with_code` is empty for all 5;
+  `reports/match-verification-full87-chunks.md` was generated and not used.
+- **The rest of the 2026-09-02 decision stands.** The category spot-check, the
+  match sheets' pass 2 and the hallucination slice's coverage gap are still
+  closed by decision, not by completion.

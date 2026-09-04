@@ -9,7 +9,7 @@ ReviewLens is both a working tool and an empirical study. Instead of demonstrati
 
 > **Status (Sep 2, 2026):** the pipeline is complete end to end — pre-review-state ingestion (force-pushed PRs excluded), diff chunking, the review engine with a cached OpenRouter client, LLM-assisted comment categorization, comment matching, metrics, reporting, a line-window sensitivity sweep, a cross-model comparison, and the manual-verification export. **All four prompts are frozen and never edited in place:** `review_v1` (Aug 12, sha256 `3cf6f21e…`), `match_v1` (Aug 19, `ff170b79…`), `categorize_v1` (Aug 23, `bd5e4f74…`), `hallucination_v1` (Aug 26, `e05ea232…`). **The corpus is mined and its pinned PR list is committed:** 90 merged PRs (30 each from JUnit 5, Mockito, Checkstyle) carrying **328 top-level human review comments**, all of which now carry a category.
 >
-> **First results exist and are preliminary.** A full-corpus run of `qwen/qwen3-coder-30b-a3b-instruct` covering 87 of 90 PRs gives **1.6% recall** (5 of 318 human comments). A three-model comparison on a 30-PR subset appears in the table below; **recall differences between models are not statistically significant at this sample size**. The **hallucination screen was run (227 judgments against a frozen rubric) and then failed its own human check**: on the 46-judgment blind slice, human and machine agree 43.5% of the time (Cohen's κ = 0.046, chance level), so the screen's decisive per-arm separation is **retracted** — see `reports/hallucination-screen.md`. No model arm is currently separated from another on either RQ1 or RQ2. Numbers here are labelled preliminary and will move.
+> **First results exist and are preliminary.** A full-corpus run of `qwen/qwen3-coder-30b-a3b-instruct` covering 87 of 90 PRs gives **1.6% recall** (5 of 318 human comments); **all 5 of those matches were checked by a human and all 5 held** (census, 2026-09-04), so the headline is not a judge-only number. A three-model comparison on a 30-PR subset appears in the table below; **recall differences between models are not statistically significant at this sample size**. The **hallucination screen was run (227 judgments against a frozen rubric) and then failed its own human check**: on the 46-judgment blind slice, human and machine agree 43.5% of the time (Cohen's κ = 0.046, chance level), so the screen's decisive per-arm separation is **retracted** — see `reports/hallucination-screen.md`. No model arm is currently separated from another on either RQ1 or RQ2. Numbers here are labelled preliminary and will move.
 
 **► Full write-up: [`reports/technical-report.md`](reports/technical-report.md)** — method, results, the judge-validation result, threats to validity, and what I would do differently.
 
@@ -141,13 +141,16 @@ everything since has been verification, correction and writing. Nothing in
 | Corpus mined, matching pipeline, first recall numbers | Aug 1–15 | **Aug 23** — 11 days late; the run that would have produced August's numbers died when the OpenRouter key expired |
 | Multi-model comparison, verification pass, report | Aug 16–31 | **Aug 24 – Sep 2** — RQ3 ran on a 30-PR subset rather than the full corpus, because the budget could not fund three full runs |
 
-**Where it stopped, and why.** As of Sep 2, 2026 there will be **no further
-human verification**. That is a decision, not a queue: the full-corpus run's 5
-unverified matches, the category spot-check's 66 unfilled rows, the match
-sheet's second pass, and the hallucination slice's `unverifiable` coverage gap
-are permanent limitations of this study. They are listed as such in
-[§8 of the technical report](reports/technical-report.md), which also says
-which published numbers are judge-only.
+**Where it stopped, and why.** Verification was halted on Sep 2, 2026 as a
+decision rather than a queue: the category spot-check's 66 unfilled rows, the
+match sheets' second pass, and the hallucination slice's `unverifiable`
+coverage gap are permanent limitations of this study, listed as such in
+[§8 of the technical report](reports/technical-report.md).
+
+**One item was reopened.** On Sep 4 the full-corpus run's 5 matches — the only
+headline in the study with no human check — were censused after all, and all 5
+held. That closes the last judge-only number. The rest of the Sep 2 decision
+stands, and §8 still says which limitations are permanent.
 
 **If it is picked back up,** two changes would do the most, in order:
 

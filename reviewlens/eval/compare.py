@@ -208,13 +208,31 @@ def render_comparison(rows: list[dict], judge_model: str) -> str:
 
     baseline = min(rows, key=lambda r: (numerator(r) / r["human_comments"] if r["human_comments"] else 0))
     human_total = rows[0]["human_comments"]
+    # One run is not a comparison. The tool is reused for a single arm because
+    # it is the only entry point that folds human verdicts into recall, and a
+    # report that called that "RQ3 — cross-model comparison" would misdescribe
+    # itself to anyone who opened it.
+    if len(rows) == 1:
+        heading = "# RQ1 — recall on one run, with human verdicts applied"
+        preamble = (
+            f"One arm over {len(rows[0]['prs'])} PRs carrying "
+            f"**{human_total} human review comments**, through the frozen prompt, "
+            f"the chunker, and the matcher (same file, ±{LINE_TOLERANCE} lines, "
+            f"semantic equivalence judged by `{judge_model}`). There is nothing to "
+            f"compare it against here; the cross-model table is a separate report."
+        )
+    else:
+        heading = "# RQ3 — cross-model comparison"
+        preamble = (
+            f"All arms reviewed the **same {len(rows[0]['prs'])} PRs** carrying "
+            f"**{human_total} human review comments**, through the same frozen prompt, "
+            f"the same chunker, and the same matcher (same file, ±{LINE_TOLERANCE} lines, "
+            f"semantic equivalence judged by `{judge_model}`)."
+        )
     lines = [
-        "# RQ3 — cross-model comparison",
+        heading,
         "",
-        f"All arms reviewed the **same {len(rows[0]['prs'])} PRs** carrying "
-        f"**{human_total} human review comments**, through the same frozen prompt, "
-        f"the same chunker, and the same matcher (same file, ±{LINE_TOLERANCE} lines, "
-        f"semantic equivalence judged by `{judge_model}`).",
+        preamble,
         "",
         "## Recall",
         "",

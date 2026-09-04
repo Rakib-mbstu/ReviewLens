@@ -219,8 +219,12 @@ with open(SHEET_CSV, "w", newline="") as f:
                     "human_line": r["human"]["line"], "model_line": r["model"]["line"],
                     "verdict_comments_only": "", "verdict_with_code": "", "notes": ""})
 
+# run_dir is recorded per record, not inferred downstream from the arm label:
+# two runs of the same model share both the label and the judgment ids, so the
+# label alone cannot say which run a match came from.
 json.dump({"seed": args.seed,
            "picked": [{"sheet_id": r["sheet_id"], "arm": r["arm"],
+                       "run_dir": r["run_dir"].rstrip("/") + "/",
                        "judgment_id": r["judgment_id"], "repo": r["repo"],
                        "number": r["number"], "judge_verdict": "equivalent",
                        "judge_reason": r["judge_reason"]} for r in records]},

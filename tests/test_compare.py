@@ -201,3 +201,23 @@ def test_a_verification_csv_that_joins_nothing_is_refused(tmp_path, monkeypatch)
         ])
 
     assert "no human verdict" in str(excinfo.value)
+
+
+def test_a_single_run_is_not_titled_a_cross_model_comparison():
+    """The tool is reused for one arm because it is the only entry point that
+    folds human verdicts into recall. A report that still called itself a
+    cross-model comparison would misdescribe itself to whoever opened it."""
+    out = render_comparison([_row("solo", 5, 318, 2356)], "test/judge")
+
+    assert out.startswith("# RQ1 — recall on one run, with human verdicts applied")
+    assert "cross-model comparison" not in out.splitlines()[0]
+    assert "All arms reviewed" not in out
+
+
+def test_several_runs_keep_the_cross_model_heading():
+    """The single-run wording must not leak into the RQ3 report it shares code
+    with."""
+    out = render_comparison([_row("a", 1, 102, 800), _row("b", 6, 102, 250)], "test/judge")
+
+    assert out.startswith("# RQ3 — cross-model comparison")
+    assert "All arms reviewed the **same 2 PRs**" in out

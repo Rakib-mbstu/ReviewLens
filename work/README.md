@@ -69,8 +69,7 @@ the sheet, then join and score:
 python work/match/join_verdicts.py \
     --key work/match/match_full87_key.json \
     --sheet reports/match-verification-full87.csv \
-    --out reports/match-verification-full87-joined.csv --blind none \
-    --run-dir qwen3-coder-30b-a3b-instruct=runs/qwen/qwen3-coder-30b-a3b-instruct/
+    --out reports/match-verification-full87-joined.csv --blind none
 
 python -m reviewlens.eval.compare --runs runs/qwen/qwen3-coder-30b-a3b-instruct \
     --judge-model google/gemini-2.5-flash-lite \
@@ -83,8 +82,17 @@ only because its verdicts were revised after the arms were disclosed; a single
 pass that is never revised has the stronger provenance and needs one file. This
 census has one arm, so there is nothing to unblind and no reason to revise.
 
-**Until that CSV is rated, nothing in `reports/` may say the 1.6% is verified.**
-The sheet being committed is not a claim that it was filled in.
+**Rated 2026-09-04: 5 of 5 upheld.** Recall is unchanged at 5/318 = 1.6% and is
+no longer judge-only; see `reports/match-verification-results.md`. The commands
+above are the ones that produced
+`reports/qwen3-coder-30b-a3b-instruct-full87-verified.md`, and they replay from
+the committed CSVs.
+
+`--run-dir` is not needed here: a key written by the current
+`build_match_sheet.py` records each match's run directory, because two runs of
+the same model share both the arm label and the judgment ids, so the label alone
+cannot tell them apart. The published subset30 key predates that field, which is
+why the label map is kept as a fallback.
 
 ## A warning about `work/halluc/build_human_slice.py`
 

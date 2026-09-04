@@ -30,9 +30,7 @@ full-corpus qwen census is:
     python work/match/join_verdicts.py \\
         --key work/match/match_full87_key.json \\
         --sheet reports/match-verification-full87.csv \\
-        --out reports/match-verification-full87-joined.csv \\
-        --blind none \\
-        --run-dir qwen3-coder-30b-a3b-instruct=runs/qwen/qwen3-coder-30b-a3b-instruct/
+        --out reports/match-verification-full87-joined.csv --blind none
 """
 import argparse
 import csv
@@ -89,7 +87,11 @@ def main() -> None:
     if missing:
         sys.exit("Unrated sheet ids: %s. Fill the sheet before joining."
                  % ", ".join(missing))
-    unmapped = sorted({key[r["sheet_id"]]["arm"] for r in sheet} - set(run_dirs))
+    # A key written by a current build_match_sheet.py names each match's run
+    # directly. Older keys (the published subset30 one) only carry an arm
+    # label, so fall back to the map for those.
+    unmapped = sorted({key[r["sheet_id"]]["arm"] for r in sheet
+                       if not key[r["sheet_id"]].get("run_dir")} - set(run_dirs))
     if unmapped:
         sys.exit("No run directory for arm(s): %s. Pass --run-dir ARM=PATH."
                  % ", ".join(unmapped))
@@ -115,7 +117,7 @@ def main() -> None:
                 )
                 writer.writerow({
                     "judgment_id": k["judgment_id"],
-                    "run": run_dirs[k["arm"]],
+                    "run": k.get("run_dir") or run_dirs[k["arm"]],
                     "kind": MATCH_KIND,
                     "sheet_id": sid,
                     "arm": k["arm"],
