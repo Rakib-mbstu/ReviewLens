@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reviewlens"
-version = "0.1.0"
+version = "0.1.1"
 description = "An LLM-based Java pull request reviewer, evaluated against real human review comments on merged PRs."
 readme = "Readme.md"
 requires-python = ">=3.9"
