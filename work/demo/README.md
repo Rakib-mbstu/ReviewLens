@@ -27,6 +27,40 @@ Step 3 re-runs `reviewlens.eval` on `runs/subset30/claude-opus/` and rewrites
 that run's `eval_matches.json`. The replay is deterministic from the cache, so
 the file comes back byte-identical; `git status` after a demo should be clean.
 
+## The social preview image
+
+`docs/social-preview.png` (1280x640, 692KB) is GitHub's Open Graph card — what
+renders when the repo link is pasted into an email, Slack or a tweet. Without
+one, that link renders as a grey default box.
+
+**It has to be uploaded by hand**: Settings -> General -> Social preview. GitHub
+does not expose this through the REST API or `gh`, so it cannot be scripted, and
+committing the file does not set it. The file is committed so it can be
+re-uploaded without being rebuilt.
+
+It is a crop of the demo's final frame — the RQ3 recall table with its
+`Human-checked` column, through to the kappa = 0.046 line that retracts the
+hallucination screen. Rebuild it from the GIF with:
+
+```bash
+ffmpeg -ss 16 -i docs/demo.gif -frames:v 1 /tmp/frame.png -y
+ffmpeg -i /tmp/frame.png -vf "crop=1400:700:0:50,\
+drawbox=x=0:y=0:w=1400:h=9:color=0x1c1c2c:t=fill,\
+drawbox=x=0:y=686:w=1400:h=14:color=0x1c1c2c:t=fill,\
+scale=1280:640:flags=lanczos" -y docs/social-preview.png
+```
+
+The two `drawbox` fills paint the terminal's own background (`#1c1c2c`, the
+Catppuccin Mocha base the tape pins) over the part-lines the crop leaves at the
+top and bottom edges, so the image ends on a clean line instead of a row of
+sliced glyphs.
+
+**Known trade-off:** it is a terminal frame, so the text does not stay legible
+when a card renders it at thumbnail size. It reads as "real output from a real
+tool", and the repo description carries the words. A composed title card — name,
+one-line hook, the three headline numbers — would read better small, at the cost
+of no longer being a screenshot of anything.
+
 ## Re-recording the GIF
 
 `docs/demo.gif` is recorded and linked from the README. Recorded 2026-09-04
