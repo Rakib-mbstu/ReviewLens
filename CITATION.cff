@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this software, its corpus, or its findings, please cite it as below."
+title: "ReviewLens: an LLM Java code reviewer, and a human check on the judges that score it"
+abstract: >-
+  ReviewLens is an LLM-based Java pull request reviewer and an empirical study
+  of its own evaluation. It reviews merged pull requests from JUnit 5, Mockito
+  and Checkstyle at their pre-review state and measures recall against the
+  review comments real maintainers left on them (328 comments across 90 PRs).
+  Recall for the one model run over the full corpus is 1.6% (5 of 318 human
+  comments on the 87 PRs it covered); all five of those matches were verified
+  by a human. Two frozen LLM judges score the pipeline and both were checked
+  against a human rater: the matcher held, with 12 of 13 verdicts upheld across
+  two censuses, while the hallucination screen agreed at chance level (Cohen's
+  kappa = 0.046) and its per-arm result is retracted. That contrast — a frozen,
+  deterministic, rubric-driven judge is not thereby a correct one — is the
+  study's primary finding.
+type: software
+authors:
+  # Verify this name split before minting a DOI: it decides how every citation
+  # renders. Add `orcid:` and `email:` here if you want them public.
+  - given-names: "Mir Rakibul"
+    family-names: "Islam"
+version: 0.1.1
+date-released: 2026-09-04
+license: MIT
+repository-code: "https://github.com/Rakib-mbstu/ReviewLens"
+url: "https://github.com/Rakib-mbstu/ReviewLens/blob/main/reports/technical-report.md"
+keywords:
+  - ai4se
+  - empirical-software-engineering
+  - code-review
+  - llm-as-a-judge
+  - llm-evaluation
+  - reproducible-research
+  - java
+# After Zenodo mints the DOI, add it here so the citation resolves to the
+# archived snapshot rather than to whatever the repo looks like later:
+#
+# identifiers:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
+#     description: "Archived snapshot of v0.1.1"
