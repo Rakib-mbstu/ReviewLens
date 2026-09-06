@@ -20,6 +20,29 @@ ASSET=reviewlens-artifacts-v0.1.0.tar.gz
 URL="https://github.com/Rakib-mbstu/ReviewLens/releases/download/$TAG/$ASSET"
 SHA256=6803efe5d3f8c4a6bb5f6289f66be55d1dae26fc30de85e5e090749e6ca85b26
 
+# Releases whose tree is artifact-identical to that bundle. v0.1.1 added
+# CITATION.cff and a version bump and touched nothing under runs/, cache/ or the
+# corpus, so the pinned bundle still replays every number this repo cites. A
+# checkout outside this list may have regenerated the artifacts, and replaying
+# the old ones against it would produce numbers that silently disagree with the
+# committed reports — so say so rather than fetch quietly.
+BUNDLE_VERSIONS="0.1.0 0.1.1"
+
+version_warning() {
+  local version
+  version=$(sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml 2>/dev/null | head -1)
+  [ -n "$version" ] || return 0                       # not at the repo root; say nothing
+  case " $BUNDLE_VERSIONS " in *" $version "*) return 0 ;; esac
+  cat >&2 <<MSG
+WARNING: this checkout is version $version, but the artifacts are pinned to the
+  $TAG bundle, which is known to match 0.1.0 and 0.1.1 only. If runs/, cache/ or
+  the corpus were regenerated after that, these are the older artifacts and the
+  reports in this clone may not replay from them. Check whether a newer release
+  carries an artifact bundle; if it does, move TAG, ASSET and SHA256 in this
+  script to it.
+MSG
+}
+
 # Three markers, one per directory, because a partial extraction is worse than
 # no extraction: a missing corpus file surfaces as an empty denominator rather
 # than an error.
@@ -30,6 +53,8 @@ present() {
 }
 
 if [ "${1:-}" = "--check" ]; then present; exit $?; fi
+
+version_warning
 
 if present; then
   echo "Artifacts already present — nothing to fetch."
