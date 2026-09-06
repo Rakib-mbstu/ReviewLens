@@ -1,8 +1,10 @@
 # Zenodo — deferred, with everything needed to finish it
 
-**Status: not done.** Parked 2026-09-04 after the GitHub authorization step did
-not go through. Nothing in the repo depends on this; it is the last item on the
-pre-outreach list (T23) and it is polish, not a blocker. The repo already has a
+**Status: not done — but no longer blocked by anything but the manual upload.**
+Parked 2026-09-04 after the GitHub authorization step did not go through; the
+`v0.1.1` release it was waiting on was published 2026-09-06. Nothing in the
+repo depends on this; it is the last item on the pre-outreach list (T23) and it
+is polish, not a blocker. The repo already has a
 working link, green CI, the technical report, a recorded demo, a LICENSE, pinned
 dependencies, and a `CITATION.cff` that renders GitHub's **Cite this
 repository** button today.
@@ -128,12 +130,19 @@ Related identifiers:
 
 ## Order of operations
 
-1. **If using the GitHub integration:** enable Zenodo's switch for the repo
-   **before** publishing a GitHub Release. Zenodo only captures releases
-   published *after* the switch is on — publish first and the DOI silently does
-   not mint.
-2. `v0.1.1` is **tagged but has no GitHub Release**, deliberately, so that
-   ordering is still open.
+1. ~~**If using the GitHub integration:** enable Zenodo's switch for the repo
+   **before** publishing a GitHub Release.~~ Zenodo only captures releases
+   published *after* the switch is on, and **the `v0.1.1` release was published
+   2026-09-06** — so for this version that ordering is spent and the integration
+   would not mint against it. This costs nothing that was actually available:
+   the switch could not be turned on anyway (the authorization above never went
+   through), and the manual path is the better one here regardless, because it
+   carries the artifact bundle the integration would drop.
+2. **`v0.1.1` is released:**
+   https://github.com/Rakib-mbstu/ReviewLens/releases/tag/v0.1.1 — notes only,
+   no asset, because the artifacts stay pinned to the `v0.1.0` asset URL. The
+   manual upload below needs the release only as the thing the DOI points at,
+   and it does not care when it was published.
 3. **Never retag `v0.1.0`.** Its asset URL is baked into
    `work/demo/fetch_artifacts.sh`.
 4. After minting: uncomment the `identifiers:` block at the bottom of

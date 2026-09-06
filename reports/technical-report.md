@@ -632,7 +632,7 @@ OpenRouter account. The one stage still needing credentials is ingestion, which
 fetches each PR's pre-review diff from GitHub and therefore wants a read-only
 `GITHUB_TOKEN`.
 
-258 unit tests cover chunking boundaries, the matching rule, cache-key
+260 unit tests cover chunking boundaries, the matching rule, cache-key
 stability, metric computation and the verification join; none of them call a
 live API, and they need no artifacts.
 
